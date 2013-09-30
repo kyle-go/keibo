@@ -7,12 +7,25 @@
 //
 
 #import "KSAppDelegate.h"
+#import "KSViewController.h"
 
 @implementation KSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    KSViewController *mainPage = [[KSViewController alloc] init];
+    
+    UITabBarController *tab = [[UITabBarController alloc] init];
+    NSArray *viewControllers = [NSArray arrayWithObjects:mainPage, nil];
+    [tab setViewControllers:viewControllers];
+    
+    [[self window] setRootViewController:tab];
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 							
