@@ -21,6 +21,7 @@
 		2748FCF117F8738000A3B9ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD317F8738000A3B9ED /* UIKit.framework */; };
 		2748FCF917F8738000A3B9ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2748FCF717F8738000A3B9ED /* InfoPlist.strings */; };
 		2748FCFB17F8738000A3B9ED /* KeiboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2748FCFA17F8738000A3B9ED /* KeiboTests.m */; };
+		274C4A8D17FB1A3D00D231E8 /* KSNewWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C4A8C17FB1A3D00D231E8 /* KSNewWeiboViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		2748FCF617F8738000A3B9ED /* KeiboTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KeiboTests-Info.plist"; sourceTree = "<group>"; };
 		2748FCF817F8738000A3B9ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2748FCFA17F8738000A3B9ED /* KeiboTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeiboTests.m; sourceTree = "<group>"; };
+		274C4A8B17FB1A3D00D231E8 /* KSNewWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSNewWeiboViewController.h; sourceTree = "<group>"; };
+		274C4A8C17FB1A3D00D231E8 /* KSNewWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSNewWeiboViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,7 @@
 		2748FCD517F8738000A3B9ED /* Keibo */ = {
 			isa = PBXGroup;
 			children = (
+				274C4A8A17FB1A0A00D231E8 /* NewWeibo */,
 				2748FCDE17F8738000A3B9ED /* KSAppDelegate.h */,
 				2748FCDF17F8738000A3B9ED /* KSAppDelegate.m */,
 				2748FCE117F8738000A3B9ED /* Main.storyboard */,
@@ -150,6 +154,15 @@
 				2748FCF717F8738000A3B9ED /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		274C4A8A17FB1A0A00D231E8 /* NewWeibo */ = {
+			isa = PBXGroup;
+			children = (
+				274C4A8B17FB1A3D00D231E8 /* KSNewWeiboViewController.h */,
+				274C4A8C17FB1A3D00D231E8 /* KSNewWeiboViewController.m */,
+			);
+			name = NewWeibo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +265,7 @@
 			files = (
 				2748FCE617F8738000A3B9ED /* KSViewController.m in Sources */,
 				2748FCE017F8738000A3B9ED /* KSAppDelegate.m in Sources */,
+				274C4A8D17FB1A3D00D231E8 /* KSNewWeiboViewController.m in Sources */,
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +475,7 @@
 				2748FD0017F8738000A3B9ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2748FD0117F8738000A3B9ED /* Build configuration list for PBXNativeTarget "KeiboTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +484,7 @@
 				2748FD0317F8738000A3B9ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

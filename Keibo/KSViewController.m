@@ -17,10 +17,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UITabBarItem *barItem = [self tabBarItem];
-    [barItem setTitle:@"首页"];
-    UIImage *image = [UIImage imageNamed:@"HomePageIcon"];
-    [barItem setImage:image];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
