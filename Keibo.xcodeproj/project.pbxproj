@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2732285717FC6F040030ECC0 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2732285417FC6F040030ECC0 /* libWeiboSDK.a */; };
+		2732285817FC6F040030ECC0 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2732285517FC6F040030ECC0 /* WeiboSDK.bundle */; };
 		2748FCD017F8738000A3B9ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCCF17F8738000A3B9ED /* Foundation.framework */; };
 		2748FCD217F8738000A3B9ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD117F8738000A3B9ED /* CoreGraphics.framework */; };
 		2748FCD417F8738000A3B9ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD317F8738000A3B9ED /* UIKit.framework */; };
@@ -35,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2732285417FC6F040030ECC0 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		2732285517FC6F040030ECC0 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		2732285617FC6F040030ECC0 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 		2748FCCC17F8738000A3B9ED /* Keibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2748FCCF17F8738000A3B9ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2748FCD117F8738000A3B9ED /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,6 +71,7 @@
 				2748FCD217F8738000A3B9ED /* CoreGraphics.framework in Frameworks */,
 				2748FCD417F8738000A3B9ED /* UIKit.framework in Frameworks */,
 				2748FCD017F8738000A3B9ED /* Foundation.framework in Frameworks */,
+				2732285717FC6F040030ECC0 /* libWeiboSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +88,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2732285317FC6F040030ECC0 /* libWeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				2732285417FC6F040030ECC0 /* libWeiboSDK.a */,
+				2732285517FC6F040030ECC0 /* WeiboSDK.bundle */,
+				2732285617FC6F040030ECC0 /* WeiboSDK.h */,
+			);
+			path = libWeiboSDK;
+			sourceTree = "<group>";
+		};
 		2748FCC317F8738000A3B9ED = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +138,7 @@
 				2748FCE417F8738000A3B9ED /* KSViewController.h */,
 				2748FCE517F8738000A3B9ED /* KSViewController.m */,
 				2748FCE717F8738000A3B9ED /* Images.xcassets */,
+				2732285317FC6F040030ECC0 /* libWeiboSDK */,
 				2748FCD617F8738000A3B9ED /* Supporting Files */,
 			);
 			path = Keibo;
@@ -245,6 +262,7 @@
 				2748FCE817F8738000A3B9ED /* Images.xcassets in Resources */,
 				2748FCDA17F8738000A3B9ED /* InfoPlist.strings in Resources */,
 				2748FCE317F8738000A3B9ED /* Main.storyboard in Resources */,
+				2732285817FC6F040030ECC0 /* WeiboSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +414,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keibo/Keibo-Prefix.pch";
 				INFOPLIST_FILE = "Keibo/Keibo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kyle/Documents/GitHub/keibo/Keibo/libWeiboSDK,
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -409,6 +432,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keibo/Keibo-Prefix.pch";
 				INFOPLIST_FILE = "Keibo/Keibo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kyle/Documents/GitHub/keibo/Keibo/libWeiboSDK,
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
