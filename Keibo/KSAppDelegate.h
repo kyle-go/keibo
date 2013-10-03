@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WeiboSDK.h"
 
-@interface KSAppDelegate : UIResponder <UIApplicationDelegate>
+@interface KSAppDelegate : UIResponder <UIApplicationDelegate,WeiboSDKDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong) NSString* wbtoken;
 
 @end
