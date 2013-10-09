@@ -1,4 +1,4 @@
 Keibo
 =====
 
-a simple weibo client.
+A simple weibo app for iOS.
