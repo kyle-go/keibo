@@ -10,8 +10,6 @@
 		271EA35817FD5E830069B2C9 /* KSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 271EA35717FD5E830069B2C9 /* KSLoginViewController.m */; };
 		271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35917FD88B20069B2C9 /* Security.framework */; };
 		271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */; };
-		2732285717FC6F040030ECC0 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2732285417FC6F040030ECC0 /* libWeiboSDK.a */; };
-		2732285817FC6F040030ECC0 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2732285517FC6F040030ECC0 /* WeiboSDK.bundle */; };
 		2748FCD017F8738000A3B9ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCCF17F8738000A3B9ED /* Foundation.framework */; };
 		2748FCD217F8738000A3B9ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD117F8738000A3B9ED /* CoreGraphics.framework */; };
 		2748FCD417F8738000A3B9ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD317F8738000A3B9ED /* UIKit.framework */; };
@@ -27,6 +25,8 @@
 		2748FCF917F8738000A3B9ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2748FCF717F8738000A3B9ED /* InfoPlist.strings */; };
 		2748FCFB17F8738000A3B9ED /* KeiboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2748FCFA17F8738000A3B9ED /* KeiboTests.m */; };
 		274C4A8D17FB1A3D00D231E8 /* KSNewWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C4A8C17FB1A3D00D231E8 /* KSNewWeiboViewController.m */; };
+		2772E94E181D730C00975628 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2772E94B181D730C00975628 /* libWeiboSDK.a */; };
+		2772E94F181D730C00975628 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2772E94C181D730C00975628 /* WeiboSDK.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +44,6 @@
 		271EA35717FD5E830069B2C9 /* KSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSLoginViewController.m; sourceTree = "<group>"; };
 		271EA35917FD88B20069B2C9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		2732285417FC6F040030ECC0 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
-		2732285517FC6F040030ECC0 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
-		2732285617FC6F040030ECC0 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 		2748FCCC17F8738000A3B9ED /* Keibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2748FCCF17F8738000A3B9ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2748FCD117F8738000A3B9ED /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -68,6 +65,9 @@
 		2748FCFA17F8738000A3B9ED /* KeiboTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeiboTests.m; sourceTree = "<group>"; };
 		274C4A8B17FB1A3D00D231E8 /* KSNewWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSNewWeiboViewController.h; sourceTree = "<group>"; };
 		274C4A8C17FB1A3D00D231E8 /* KSNewWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSNewWeiboViewController.m; sourceTree = "<group>"; };
+		2772E94B181D730C00975628 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		2772E94C181D730C00975628 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		2772E94D181D730C00975628 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,11 +76,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */,
+				2772E94E181D730C00975628 /* libWeiboSDK.a in Frameworks */,
 				271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */,
 				2748FCD217F8738000A3B9ED /* CoreGraphics.framework in Frameworks */,
 				2748FCD417F8738000A3B9ED /* UIKit.framework in Frameworks */,
 				2748FCD017F8738000A3B9ED /* Foundation.framework in Frameworks */,
-				2732285717FC6F040030ECC0 /* libWeiboSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,16 +104,6 @@
 				271EA35717FD5E830069B2C9 /* KSLoginViewController.m */,
 			);
 			name = Login;
-			sourceTree = "<group>";
-		};
-		2732285317FC6F040030ECC0 /* libWeiboSDK */ = {
-			isa = PBXGroup;
-			children = (
-				2732285417FC6F040030ECC0 /* libWeiboSDK.a */,
-				2732285517FC6F040030ECC0 /* WeiboSDK.bundle */,
-				2732285617FC6F040030ECC0 /* WeiboSDK.h */,
-			);
-			path = libWeiboSDK;
 			sourceTree = "<group>";
 		};
 		2748FCC317F8738000A3B9ED = {
@@ -158,8 +148,8 @@
 				2748FCE117F8738000A3B9ED /* Main.storyboard */,
 				2748FCE417F8738000A3B9ED /* KSViewController.h */,
 				2748FCE517F8738000A3B9ED /* KSViewController.m */,
+				2772E94A181D730C00975628 /* libWeiboSDK */,
 				2748FCE717F8738000A3B9ED /* Images.xcassets */,
-				2732285317FC6F040030ECC0 /* libWeiboSDK */,
 				2748FCD617F8738000A3B9ED /* Supporting Files */,
 			);
 			path = Keibo;
@@ -201,6 +191,16 @@
 				274C4A8C17FB1A3D00D231E8 /* KSNewWeiboViewController.m */,
 			);
 			name = NewWeibo;
+			sourceTree = "<group>";
+		};
+		2772E94A181D730C00975628 /* libWeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				2772E94B181D730C00975628 /* libWeiboSDK.a */,
+				2772E94C181D730C00975628 /* WeiboSDK.bundle */,
+				2772E94D181D730C00975628 /* WeiboSDK.h */,
+			);
+			path = libWeiboSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,7 +283,7 @@
 				2748FCE817F8738000A3B9ED /* Images.xcassets in Resources */,
 				2748FCDA17F8738000A3B9ED /* InfoPlist.strings in Resources */,
 				2748FCE317F8738000A3B9ED /* Main.storyboard in Resources */,
-				2732285817FC6F040030ECC0 /* WeiboSDK.bundle in Resources */,
+				2772E94F181D730C00975628 /* WeiboSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,10 +436,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keibo/Keibo-Prefix.pch";
 				INFOPLIST_FILE = "Keibo/Keibo-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/kyle/Documents/GitHub/keibo/Keibo/libWeiboSDK,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "\"$(SRCROOT)/keibo/libWeiboSDK\"";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -454,10 +452,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keibo/Keibo-Prefix.pch";
 				INFOPLIST_FILE = "Keibo/Keibo-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/kyle/Documents/GitHub/keibo/Keibo/libWeiboSDK,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "\"$(SRCROOT)/keibo/libWeiboSDK\"";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
