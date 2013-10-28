@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "WeiboSDK.h"
+#import "DataModel.h"
 
 @implementation AppDelegate
 
@@ -47,18 +48,15 @@
                                               otherButtonTitles:nil];
         [alert show];
     } else if ([response isKindOfClass:[WBAuthorizeResponse class]]) {
-        NSString *title = @"认证结果";
         NSString *message = [NSString stringWithFormat:@"响应状态: %d\nresponse.userId: %@\nresponse.accessToken: %@\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",
-                             response.statusCode, [(WBAuthorizeResponse *)response userID], [(WBAuthorizeResponse *)response accessToken], response.userInfo, response.requestUserInfo];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil];
+                             response.statusCode,
+                             [(WBAuthorizeResponse *)response userID],
+                             [(WBAuthorizeResponse *)response accessToken],
+                             response.userInfo,
+                             response.requestUserInfo];
+        NSLog(@"%@", message);
         
-        self.wbtoken = [(WBAuthorizeResponse *)response accessToken];
-        
-        [alert show];
+        [DataModel saveAccessToken:[(WBAuthorizeResponse *)response accessToken]];
     }
 }
 

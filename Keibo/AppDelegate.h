@@ -13,6 +13,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong) NSString* wbtoken;
-
 @end

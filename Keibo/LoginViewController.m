@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "WeiboSDK.h"
+#import "DataModel.h"
 
 @interface LoginViewController ()
 
@@ -43,6 +44,13 @@
     request.scope = @"email,direct_messages_write";
     request.userInfo = @{@"SSO_From": @"LoginViewController"};
     [WeiboSDK sendRequest:request];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSString * accessToken = [DataModel getAccessToken];
+    if (accessToken) {
+    }
 }
 
 @end
