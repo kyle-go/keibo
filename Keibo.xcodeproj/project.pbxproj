@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		271EA35817FD5E830069B2C9 /* KSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 271EA35717FD5E830069B2C9 /* KSLoginViewController.m */; };
+		271EA35817FD5E830069B2C9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 271EA35717FD5E830069B2C9 /* LoginViewController.m */; };
 		271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35917FD88B20069B2C9 /* Security.framework */; };
 		271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */; };
 		2748FCD017F8738000A3B9ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCCF17F8738000A3B9ED /* Foundation.framework */; };
@@ -24,7 +24,7 @@
 		2748FCF117F8738000A3B9ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD317F8738000A3B9ED /* UIKit.framework */; };
 		2748FCF917F8738000A3B9ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2748FCF717F8738000A3B9ED /* InfoPlist.strings */; };
 		2748FCFB17F8738000A3B9ED /* KeiboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2748FCFA17F8738000A3B9ED /* KeiboTests.m */; };
-		274C4A8D17FB1A3D00D231E8 /* KSNewWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C4A8C17FB1A3D00D231E8 /* KSNewWeiboViewController.m */; };
+		274C4A8D17FB1A3D00D231E8 /* NewWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C4A8C17FB1A3D00D231E8 /* NewWeiboViewController.m */; };
 		2772E94E181D730C00975628 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2772E94B181D730C00975628 /* libWeiboSDK.a */; };
 		2772E94F181D730C00975628 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2772E94C181D730C00975628 /* WeiboSDK.bundle */; };
 /* End PBXBuildFile section */
@@ -40,8 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		271EA35617FD5E830069B2C9 /* KSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSLoginViewController.h; sourceTree = "<group>"; };
-		271EA35717FD5E830069B2C9 /* KSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSLoginViewController.m; sourceTree = "<group>"; };
+		271EA35617FD5E830069B2C9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		271EA35717FD5E830069B2C9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		271EA35917FD88B20069B2C9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2748FCCC17F8738000A3B9ED /* Keibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,8 +63,8 @@
 		2748FCF617F8738000A3B9ED /* KeiboTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KeiboTests-Info.plist"; sourceTree = "<group>"; };
 		2748FCF817F8738000A3B9ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2748FCFA17F8738000A3B9ED /* KeiboTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeiboTests.m; sourceTree = "<group>"; };
-		274C4A8B17FB1A3D00D231E8 /* KSNewWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSNewWeiboViewController.h; sourceTree = "<group>"; };
-		274C4A8C17FB1A3D00D231E8 /* KSNewWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSNewWeiboViewController.m; sourceTree = "<group>"; };
+		274C4A8B17FB1A3D00D231E8 /* NewWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewWeiboViewController.h; sourceTree = "<group>"; };
+		274C4A8C17FB1A3D00D231E8 /* NewWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewWeiboViewController.m; sourceTree = "<group>"; };
 		2772E94B181D730C00975628 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		2772E94C181D730C00975628 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		2772E94D181D730C00975628 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
@@ -100,8 +100,8 @@
 		271EA35517FD5E5E0069B2C9 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				271EA35617FD5E830069B2C9 /* KSLoginViewController.h */,
-				271EA35717FD5E830069B2C9 /* KSLoginViewController.m */,
+				271EA35617FD5E830069B2C9 /* LoginViewController.h */,
+				271EA35717FD5E830069B2C9 /* LoginViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -187,8 +187,8 @@
 		274C4A8A17FB1A0A00D231E8 /* NewWeibo */ = {
 			isa = PBXGroup;
 			children = (
-				274C4A8B17FB1A3D00D231E8 /* KSNewWeiboViewController.h */,
-				274C4A8C17FB1A3D00D231E8 /* KSNewWeiboViewController.m */,
+				274C4A8B17FB1A3D00D231E8 /* NewWeiboViewController.h */,
+				274C4A8C17FB1A3D00D231E8 /* NewWeiboViewController.m */,
 			);
 			name = NewWeibo;
 			sourceTree = "<group>";
@@ -302,10 +302,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				271EA35817FD5E830069B2C9 /* KSLoginViewController.m in Sources */,
+				271EA35817FD5E830069B2C9 /* LoginViewController.m in Sources */,
 				2748FCE617F8738000A3B9ED /* ViewController.m in Sources */,
 				2748FCE017F8738000A3B9ED /* AppDelegate.m in Sources */,
-				274C4A8D17FB1A3D00D231E8 /* KSNewWeiboViewController.m in Sources */,
+				274C4A8D17FB1A3D00D231E8 /* NewWeiboViewController.m in Sources */,
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

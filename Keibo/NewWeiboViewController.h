@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KSNewWeiboViewController : UIViewController
+@interface NewWeiboViewController : UIViewController
 
 -(IBAction)close;
 

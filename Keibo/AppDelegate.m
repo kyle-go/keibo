@@ -35,7 +35,7 @@
 
 - (void)didReceiveWeiboResponse:(WBBaseResponse *)response
 {
-    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
+    if ([response isKindOfClass:[WBSendMessageToWeiboResponse class]])
     {
         NSString *title = @"发送结果";
         NSString *message = [NSString stringWithFormat:@"响应状态: %d\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",
@@ -46,7 +46,7 @@
                                               cancelButtonTitle:@"确定"
                                               otherButtonTitles:nil];
         [alert show];
-    } else if ([response isKindOfClass:WBAuthorizeResponse.class]) {
+    } else if ([response isKindOfClass:[WBAuthorizeResponse class]]) {
         NSString *title = @"认证结果";
         NSString *message = [NSString stringWithFormat:@"响应状态: %d\nresponse.userId: %@\nresponse.accessToken: %@\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",
                              response.statusCode, [(WBAuthorizeResponse *)response userID], [(WBAuthorizeResponse *)response accessToken], response.userInfo, response.requestUserInfo];

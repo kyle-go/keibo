@@ -1,19 +1,18 @@
 //
-//  KSLoginViewController.m
+//  KSNewWeiboViewController.m
 //  Keibo
 //
-//  Created by kyle on 13-10-3.
+//  Created by kyle on 13-10-1.
 //  Copyright (c) 2013年 kyle. All rights reserved.
 //
 
-#import "KSLoginViewController.h"
-#import "WeiboSDK.h"
+#import "NewWeiboViewController.h"
 
-@interface KSLoginViewController ()
+@interface NewWeiboViewController ()
 
 @end
 
-@implementation KSLoginViewController
+@implementation NewWeiboViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,13 +35,10 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)login
+
+-(IBAction)close
 {
-    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-    request.redirectURI = kRedirectURI;
-    request.scope = @"email,direct_messages_write";
-    request.userInfo = @{@"SSO_From": @"KSLoginViewController"};
-    [WeiboSDK sendRequest:request];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

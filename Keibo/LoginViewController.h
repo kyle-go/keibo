@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KSLoginViewController : UIViewController
+@interface LoginViewController : UIViewController
 
 -(IBAction)login;
 

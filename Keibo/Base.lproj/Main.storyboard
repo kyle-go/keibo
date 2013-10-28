@@ -156,7 +156,7 @@
         <!--Login View Controller-->
         <scene sceneID="HOD-gt-1h9">
             <objects>
-                <viewController id="vf5-mQ-bhK" customClass="KSLoginViewController" sceneMemberID="viewController">
+                <viewController id="vf5-mQ-bhK" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hGy-pO-S8K"/>
                         <viewControllerLayoutGuide type="bottom" id="1G1-25-mlU"/>
@@ -197,7 +197,7 @@
         <!--New Weibo View Controller-->
         <scene sceneID="fEb-IZ-VpZ">
             <objects>
-                <viewController id="RBf-kp-fMF" customClass="KSNewWeiboViewController" sceneMemberID="viewController">
+                <viewController id="RBf-kp-fMF" customClass="NewWeiboViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ACt-ai-Rov"/>
                         <viewControllerLayoutGuide type="bottom" id="5Hs-dK-mfs"/>
