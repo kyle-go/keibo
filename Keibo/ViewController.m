@@ -6,13 +6,13 @@
 //  Copyright (c) 2013年 kyle. All rights reserved.
 //
 
-#import "KSViewController.h"
+#import "ViewController.h"
 
-@interface KSViewController ()
+@interface ViewController ()
 
 @end
 
-@implementation KSViewController
+@implementation ViewController
 
 - (void)viewDidLoad
 {

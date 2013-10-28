@@ -15,9 +15,9 @@
 		2748FCD417F8738000A3B9ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD317F8738000A3B9ED /* UIKit.framework */; };
 		2748FCDA17F8738000A3B9ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2748FCD817F8738000A3B9ED /* InfoPlist.strings */; };
 		2748FCDC17F8738000A3B9ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2748FCDB17F8738000A3B9ED /* main.m */; };
-		2748FCE017F8738000A3B9ED /* KSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2748FCDF17F8738000A3B9ED /* KSAppDelegate.m */; };
+		2748FCE017F8738000A3B9ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2748FCDF17F8738000A3B9ED /* AppDelegate.m */; };
 		2748FCE317F8738000A3B9ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2748FCE117F8738000A3B9ED /* Main.storyboard */; };
-		2748FCE617F8738000A3B9ED /* KSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2748FCE517F8738000A3B9ED /* KSViewController.m */; };
+		2748FCE617F8738000A3B9ED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2748FCE517F8738000A3B9ED /* ViewController.m */; };
 		2748FCE817F8738000A3B9ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2748FCE717F8738000A3B9ED /* Images.xcassets */; };
 		2748FCEF17F8738000A3B9ED /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCEE17F8738000A3B9ED /* XCTest.framework */; };
 		2748FCF017F8738000A3B9ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCCF17F8738000A3B9ED /* Foundation.framework */; };
@@ -52,11 +52,11 @@
 		2748FCD917F8738000A3B9ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2748FCDB17F8738000A3B9ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2748FCDD17F8738000A3B9ED /* Keibo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Keibo-Prefix.pch"; sourceTree = "<group>"; };
-		2748FCDE17F8738000A3B9ED /* KSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSAppDelegate.h; sourceTree = "<group>"; };
-		2748FCDF17F8738000A3B9ED /* KSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSAppDelegate.m; sourceTree = "<group>"; };
+		2748FCDE17F8738000A3B9ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2748FCDF17F8738000A3B9ED /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2748FCE217F8738000A3B9ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2748FCE417F8738000A3B9ED /* KSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSViewController.h; sourceTree = "<group>"; };
-		2748FCE517F8738000A3B9ED /* KSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSViewController.m; sourceTree = "<group>"; };
+		2748FCE417F8738000A3B9ED /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2748FCE517F8738000A3B9ED /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2748FCE717F8738000A3B9ED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2748FCED17F8738000A3B9ED /* KeiboTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeiboTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2748FCEE17F8738000A3B9ED /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -143,11 +143,11 @@
 			children = (
 				271EA35517FD5E5E0069B2C9 /* Login */,
 				274C4A8A17FB1A0A00D231E8 /* NewWeibo */,
-				2748FCDE17F8738000A3B9ED /* KSAppDelegate.h */,
-				2748FCDF17F8738000A3B9ED /* KSAppDelegate.m */,
+				2748FCDE17F8738000A3B9ED /* AppDelegate.h */,
+				2748FCDF17F8738000A3B9ED /* AppDelegate.m */,
 				2748FCE117F8738000A3B9ED /* Main.storyboard */,
-				2748FCE417F8738000A3B9ED /* KSViewController.h */,
-				2748FCE517F8738000A3B9ED /* KSViewController.m */,
+				2748FCE417F8738000A3B9ED /* ViewController.h */,
+				2748FCE517F8738000A3B9ED /* ViewController.m */,
 				2772E94A181D730C00975628 /* libWeiboSDK */,
 				2748FCE717F8738000A3B9ED /* Images.xcassets */,
 				2748FCD617F8738000A3B9ED /* Supporting Files */,
@@ -303,8 +303,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				271EA35817FD5E830069B2C9 /* KSLoginViewController.m in Sources */,
-				2748FCE617F8738000A3B9ED /* KSViewController.m in Sources */,
-				2748FCE017F8738000A3B9ED /* KSAppDelegate.m in Sources */,
+				2748FCE617F8738000A3B9ED /* ViewController.m in Sources */,
+				2748FCE017F8738000A3B9ED /* AppDelegate.m in Sources */,
 				274C4A8D17FB1A3D00D231E8 /* KSNewWeiboViewController.m in Sources */,
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,
 			);

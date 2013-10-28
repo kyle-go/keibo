@@ -6,10 +6,10 @@
 //  Copyright (c) 2013年 kyle. All rights reserved.
 //
 
-#import "KSAppDelegate.h"
+#import "AppDelegate.h"
 #import "WeiboSDK.h"
 
-@implementation KSAppDelegate
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
