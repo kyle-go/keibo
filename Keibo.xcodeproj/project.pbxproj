@@ -36,6 +36,7 @@
 		FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE8E181F948100FF9331 /* AFURLResponseSerialization.m */; };
 		FB4FDE99181F948100FF9331 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE90181F948100FF9331 /* AFURLSessionManager.m */; };
 		FB54789F181EA37800501B7A /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB54789E181EA37800501B7A /* DataModel.m */; };
+		FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,8 @@
 		FB4FDE90181F948100FF9331 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		FB54789D181EA37800501B7A /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
 		FB54789E181EA37800501B7A /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
+		FB75BF96181FF851006CA582 /* AFTextResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTextResponseSerializer.h; sourceTree = "<group>"; };
+		FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTextResponseSerializer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +230,8 @@
 		FB4FDE7D181F948100FF9331 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
+				FB75BF96181FF851006CA582 /* AFTextResponseSerializer.h */,
+				FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */,
 				FB4FDE7E181F948100FF9331 /* AFHTTPRequestOperation.h */,
 				FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */,
 				FB4FDE80181F948100FF9331 /* AFHTTPRequestOperationManager.h */,
@@ -358,6 +363,7 @@
 				FB4FDE97181F948100FF9331 /* AFURLRequestSerialization.m in Sources */,
 				274C4A8D17FB1A3D00D231E8 /* NewWeiboViewController.m in Sources */,
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,
+				FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */,
 				FB54789F181EA37800501B7A /* DataModel.m in Sources */,
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,

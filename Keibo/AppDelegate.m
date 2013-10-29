@@ -10,43 +10,7 @@
 #import "WeiboSDK.h"
 #import "DataModel.h"
 #import "AFNetworking.h"
-
-static NSString* form_urlencode_HTTP5_String(NSString* s) {
-    CFStringRef charactersToLeaveUnescaped = CFSTR(" ");
-    CFStringRef legalURLCharactersToBeEscaped = CFSTR("!$&'()+,/:;=?@~");
-    
-    NSString *result = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                                 kCFAllocatorDefault,
-                                                                                 (__bridge CFStringRef)s,
-                                                                                 charactersToLeaveUnescaped,
-                                                                                 legalURLCharactersToBeEscaped,
-                                                                                 kCFStringEncodingUTF8));
-    return [result stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-}
-
-static NSString* form_urlencode_HTTP5_Parameters(NSDictionary* parameters)
-{
-    NSMutableString* result = [[NSMutableString alloc] init];
-    BOOL isFirst = YES;
-    for (NSString* name in parameters) {
-        if (!isFirst) {
-            [result appendString:@"&"];
-        }
-        isFirst = NO;
-        assert([name isKindOfClass:[NSString class]]);
-        NSString* value = parameters[name];
-        assert([value isKindOfClass:[NSString class]]);
-        
-        NSString* encodedName = form_urlencode_HTTP5_String(name);
-        NSString* encodedValue = form_urlencode_HTTP5_String(value);
-        
-        [result appendString:encodedName];
-        [result appendString:@"="];
-        [result appendString:encodedValue];
-    }
-    
-    return [result copy];
-}
+#import "AFTextResponseSerializer.h"
 
 @implementation AppDelegate
 
@@ -68,7 +32,7 @@ static NSString* form_urlencode_HTTP5_Parameters(NSDictionary* parameters)
     //取access_token
     NSString *accessToken = [DataModel getAccessToken];
     if (!accessToken) {
-        [self login];
+        //[self login];
     } else {
         //获取token是否过期成功回调
         void (^success_callback) (AFHTTPRequestOperation *operation, id responseObject) =
@@ -85,15 +49,8 @@ static NSString* form_urlencode_HTTP5_Parameters(NSDictionary* parameters)
         
         //判断token是否过期
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        //just for https
-        manager.requestSerializer.queryStringSerializationWithBlock =
-        ^NSString*(NSURLRequest *request,
-                   NSDictionary *parameters,
-                   NSError *__autoreleasing *error) {
-            NSString* encodedParams = form_urlencode_HTTP5_Parameters(parameters);
-            return encodedParams;
-        };
-        NSDictionary *param = @{@"access_token":@"2.00vVnMpD2ecKNB39f2d04fb1wt3v1D"};
+        [manager setResponseSerializer:[AFTextResponseSerializer serializer]];
+        NSDictionary *param = @{@"access_token":accessToken};
         [manager POST:@"https://api.weibo.com/oauth2/get_token_info" parameters:param success:success_callback failure:failure_callback];
     }
     return YES;
