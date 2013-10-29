@@ -14,45 +14,11 @@
 
 @implementation AppDelegate
 
-#pragma mark ----- private method---------------
-- (void)login
-{
-    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-    request.redirectURI = kRedirectURI;
-    request.scope = @"email,direct_messages_write";
-    request.userInfo = @{@"keibo微博客户端": @"keibo微博客户端"};
-    [WeiboSDK sendRequest:request];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [WeiboSDK registerApp:kAppKey];
     [WeiboSDK enableDebugMode:YES];
     
-    //取access_token
-    NSString *accessToken = [DataModel getAccessToken];
-    if (!accessToken) {
-        //[self login];
-    } else {
-        //获取token是否过期成功回调
-        void (^success_callback) (AFHTTPRequestOperation *operation, id responseObject) =
-        ^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-        };
-        
-        //获取token是否过期失败回调
-        void (^failure_callback)(AFHTTPRequestOperation *operation, NSError *error) =
-        ^(AFHTTPRequestOperation *operation, NSError *error){
-            NSLog(@"Error: %@", error);
-            [self login];
-        };
-        
-        //判断token是否过期
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager setResponseSerializer:[AFTextResponseSerializer serializer]];
-        NSDictionary *param = @{@"access_token":accessToken};
-        [manager POST:@"https://api.weibo.com/oauth2/get_token_info" parameters:param success:success_callback failure:failure_callback];
-    }
     return YES;
 }
 
@@ -94,6 +60,7 @@
         NSLog(@"%@", message);
         
         [DataModel saveAccessToken:[(WBAuthorizeResponse *)response accessToken]];
+        //[self performSegueWithIdentifier:@"authorize" sender:nil];
     }
 }
 
@@ -105,7 +72,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
