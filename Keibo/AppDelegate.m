@@ -9,13 +9,93 @@
 #import "AppDelegate.h"
 #import "WeiboSDK.h"
 #import "DataModel.h"
+#import "AFNetworking.h"
+
+static NSString* form_urlencode_HTTP5_String(NSString* s) {
+    CFStringRef charactersToLeaveUnescaped = CFSTR(" ");
+    CFStringRef legalURLCharactersToBeEscaped = CFSTR("!$&'()+,/:;=?@~");
+    
+    NSString *result = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                 kCFAllocatorDefault,
+                                                                                 (__bridge CFStringRef)s,
+                                                                                 charactersToLeaveUnescaped,
+                                                                                 legalURLCharactersToBeEscaped,
+                                                                                 kCFStringEncodingUTF8));
+    return [result stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+}
+
+static NSString* form_urlencode_HTTP5_Parameters(NSDictionary* parameters)
+{
+    NSMutableString* result = [[NSMutableString alloc] init];
+    BOOL isFirst = YES;
+    for (NSString* name in parameters) {
+        if (!isFirst) {
+            [result appendString:@"&"];
+        }
+        isFirst = NO;
+        assert([name isKindOfClass:[NSString class]]);
+        NSString* value = parameters[name];
+        assert([value isKindOfClass:[NSString class]]);
+        
+        NSString* encodedName = form_urlencode_HTTP5_String(name);
+        NSString* encodedValue = form_urlencode_HTTP5_String(value);
+        
+        [result appendString:encodedName];
+        [result appendString:@"="];
+        [result appendString:encodedValue];
+    }
+    
+    return [result copy];
+}
 
 @implementation AppDelegate
+
+#pragma mark ----- private method---------------
+- (void)login
+{
+    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
+    request.redirectURI = kRedirectURI;
+    request.scope = @"email,direct_messages_write";
+    request.userInfo = @{@"keibo微博客户端": @"keibo微博客户端"};
+    [WeiboSDK sendRequest:request];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [WeiboSDK registerApp:kAppKey];
     [WeiboSDK enableDebugMode:YES];
+    
+    //取access_token
+    NSString *accessToken = [DataModel getAccessToken];
+    if (!accessToken) {
+        [self login];
+    } else {
+        //获取token是否过期成功回调
+        void (^success_callback) (AFHTTPRequestOperation *operation, id responseObject) =
+        ^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON: %@", responseObject);
+        };
+        
+        //获取token是否过期失败回调
+        void (^failure_callback)(AFHTTPRequestOperation *operation, NSError *error) =
+        ^(AFHTTPRequestOperation *operation, NSError *error){
+            NSLog(@"Error: %@", error);
+            [self login];
+        };
+        
+        //判断token是否过期
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        //just for https
+        manager.requestSerializer.queryStringSerializationWithBlock =
+        ^NSString*(NSURLRequest *request,
+                   NSDictionary *parameters,
+                   NSError *__autoreleasing *error) {
+            NSString* encodedParams = form_urlencode_HTTP5_Parameters(parameters);
+            return encodedParams;
+        };
+        NSDictionary *param = @{@"access_token":@"2.00vVnMpD2ecKNB39f2d04fb1wt3v1D"};
+        [manager POST:@"https://api.weibo.com/oauth2/get_token_info" parameters:param success:success_callback failure:failure_callback];
+    }
     return YES;
 }
 

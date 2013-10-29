@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		271EA35817FD5E830069B2C9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 271EA35717FD5E830069B2C9 /* LoginViewController.m */; };
 		271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35917FD88B20069B2C9 /* Security.framework */; };
 		271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */; };
 		2748FCD017F8738000A3B9ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCCF17F8738000A3B9ED /* Foundation.framework */; };
@@ -50,8 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		271EA35617FD5E830069B2C9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		271EA35717FD5E830069B2C9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		271EA35917FD88B20069B2C9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2748FCCC17F8738000A3B9ED /* Keibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,15 +125,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		271EA35517FD5E5E0069B2C9 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				271EA35617FD5E830069B2C9 /* LoginViewController.h */,
-				271EA35717FD5E830069B2C9 /* LoginViewController.m */,
-			);
-			name = Login;
-			sourceTree = "<group>";
-		};
 		2748FCC317F8738000A3B9ED = {
 			isa = PBXGroup;
 			children = (
@@ -173,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				FB4FDE7D181F948100FF9331 /* AFNetworking */,
-				271EA35517FD5E5E0069B2C9 /* Login */,
 				274C4A8A17FB1A0A00D231E8 /* NewWeibo */,
 				2748FCDE17F8738000A3B9ED /* AppDelegate.h */,
 				2748FCDF17F8738000A3B9ED /* AppDelegate.m */,
@@ -363,7 +350,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB4FDE99181F948100FF9331 /* AFURLSessionManager.m in Sources */,
-				271EA35817FD5E830069B2C9 /* LoginViewController.m in Sources */,
 				2748FCE617F8738000A3B9ED /* ViewController.m in Sources */,
 				FB4FDE94181F948100FF9331 /* AFNetworkReachabilityManager.m in Sources */,
 				2748FCE017F8738000A3B9ED /* AppDelegate.m in Sources */,
