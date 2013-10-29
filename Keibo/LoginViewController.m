@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "WeiboSDK.h"
 #import "DataModel.h"
+#import "AFNetworking.h"
 
 @interface LoginViewController ()
 
@@ -48,8 +49,26 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    //获取好友列表成功回调
+    void (^success_callback) (AFHTTPRequestOperation *operation, id responseObject) =
+    ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    };
+    
+    //获取好友列表失败回调
+    void (^failure_callback)(AFHTTPRequestOperation *operation, NSError *error) =
+    ^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"Error: %@", error);
+    };
+    
     NSString * accessToken = [DataModel getAccessToken];
     if (accessToken) {
+        //判断token是否过期
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *url = [[NSString alloc] initWithFormat:@"https://api.weibo.com/oauth2/get_token_info?access_token=%@", accessToken];
+        [manager GET:url parameters:nil success:success_callback failure:failure_callback];
+    } else {
+        [self performSegueWithIdentifier:@"login_jump" sender:self];
     }
 }
 

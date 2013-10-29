@@ -174,14 +174,14 @@
                                 </state>
                                 <connections>
                                     <action selector="login" destination="vf5-mQ-bhK" eventType="touchUpInside" id="akP-BH-iz4"/>
-                                    <segue destination="EgL-gh-yIW" kind="modal" id="qTC-6z-eHL"/>
+                                    <segue destination="EgL-gh-yIW" kind="modal" identifier="login_jump" id="qTC-6z-eHL"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="您还未登陆哦" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBh-Bx-L7x">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="您还未登陆" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBh-Bx-L7x">
                                 <rect key="frame" x="97" y="93" width="126" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="BanglaSangamMN" family="Bangla Sangam MN" pointSize="21"/>
-                                <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.83042464717741937" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="shadowColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
