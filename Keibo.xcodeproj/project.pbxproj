@@ -38,6 +38,7 @@
 		FB4FDE99181F948100FF9331 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE90181F948100FF9331 /* AFURLSessionManager.m */; };
 		FB54789F181EA37800501B7A /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB54789E181EA37800501B7A /* DataModel.m */; };
 		FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */; };
+		FBA977801820E37B00E8E2F1 /* WeiboInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA9777F1820E37B00E8E2F1 /* WeiboInstance.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,8 @@
 		FB54789E181EA37800501B7A /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
 		FB75BF96181FF851006CA582 /* AFTextResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTextResponseSerializer.h; sourceTree = "<group>"; };
 		FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTextResponseSerializer.m; sourceTree = "<group>"; };
+		FBA9777E1820E37B00E8E2F1 /* WeiboInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboInstance.h; sourceTree = "<group>"; };
+		FBA9777F1820E37B00E8E2F1 /* WeiboInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboInstance.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +173,8 @@
 				274C4A8A17FB1A0A00D231E8 /* NewWeibo */,
 				2768E4141820159200896288 /* Authorize */,
 				2748FCE117F8738000A3B9ED /* Main.storyboard */,
+				FBA9777E1820E37B00E8E2F1 /* WeiboInstance.h */,
+				FBA9777F1820E37B00E8E2F1 /* WeiboInstance.m */,
 				2748FCDE17F8738000A3B9ED /* AppDelegate.h */,
 				2748FCDF17F8738000A3B9ED /* AppDelegate.m */,
 				2748FCE417F8738000A3B9ED /* ViewController.h */,
@@ -383,6 +388,7 @@
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,
 				2768E4131820158000896288 /* AuthorizeViewController.m in Sources */,
 				FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */,
+				FBA977801820E37B00E8E2F1 /* WeiboInstance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
