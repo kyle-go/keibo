@@ -18,7 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"主页";
+        self.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"主页" image:[UIImage imageNamed:@"demo"] tag:0];
     }
     return self;
 }

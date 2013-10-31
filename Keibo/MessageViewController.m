@@ -18,7 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"私信";
+        self.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"私信" image:[UIImage imageNamed:@"demo"] tag:0];
     }
     return self;
 }
