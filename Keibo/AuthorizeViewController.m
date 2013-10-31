@@ -35,8 +35,7 @@
     //取access_token
     NSString *accessToken = [DataModel getAccessToken];
     if (!accessToken) {
-        [self login];
-        //[self performSelector:@selector(login) withObject:nil afterDelay:0];
+        [self performSelector:@selector(login) withObject:nil afterDelay:0];
     } else {
         //获取token是否过期成功回调
         void (^success_callback) (AFHTTPRequestOperation *operation, id responseObject) =
@@ -48,8 +47,8 @@
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
             NSNumber *expire = [json objectForKey:@"expire_in"];
             
-            //已经过期或者离过期时间不足半小时则重新认证
-            if ([expire intValue] <= 1800) {
+            //已经过期则重新认证
+            if ([expire intValue] <= 0) {
                 [self performSelector:@selector(login) withObject:nil afterDelay:0];
             }
             [self closeSelf];

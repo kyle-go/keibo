@@ -9,12 +9,43 @@
 #import "AppDelegate.h"
 #import "WeiboSDK.h"
 #import "WeiboInstance.h"
+#import "MMDrawerController.h"
+#import "LeftViewController.h"
+#import "MainPageViewController.h"
+#import "MessageViewController.h"
+#import "PersonViewController.h"
+#import "SettingViewController.h"
+
 
 @implementation AppDelegate
 
+MMDrawerController *drawerController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    MainPageViewController *mainViewController = [[MainPageViewController alloc] init];
+    MessageViewController *messageViewController = [[MessageViewController alloc] init];
+    PersonViewController *personViewController = [[PersonViewController alloc] init];
+    SettingViewController *settingViewController = [[SettingViewController alloc] init];
+    [tabBarController setViewControllers:[[NSArray alloc] initWithObjects:mainViewController, messageViewController, personViewController, settingViewController, nil]];
+    
+    drawerController = [[MMDrawerController alloc]
+                                            initWithCenterViewController:tabBarController
+                                            leftDrawerViewController:[[LeftViewController alloc] init]];
+    [drawerController setShouldStretchDrawer:NO];
+    [drawerController setMaximumLeftDrawerWidth:250];
+    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    
+    self.window.rootViewController = drawerController;
+    [self.window makeKeyAndVisible];
+    
     [WeiboInstance weiboInstance];
+    
     return YES;
 }
 
@@ -54,6 +85,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void) changeLeftViewController:(UIViewController *)viewController
+{
+    
 }
 
 @end
