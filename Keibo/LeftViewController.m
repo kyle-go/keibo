@@ -42,7 +42,6 @@
 }
 
 #pragma mark -- table View Data Source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [sectionNames count];
 }
@@ -63,7 +62,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"left-view-identifier";
+    static NSString *cellIdentifier = @"cellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];

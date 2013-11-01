@@ -24,18 +24,24 @@ MMDrawerController *drawerController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    //set status bar style
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
     MainPageViewController *mainViewController = [[MainPageViewController alloc] init];
     MessageViewController *messageViewController = [[MessageViewController alloc] init];
     PersonViewController *personViewController = [[PersonViewController alloc] init];
     SettingViewController *settingViewController = [[SettingViewController alloc] init];
+
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController setViewControllers:[[NSArray alloc] initWithObjects:mainViewController, messageViewController, personViewController, settingViewController, nil]];
     
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+    
     drawerController = [[MMDrawerController alloc]
-                                            initWithCenterViewController:tabBarController
+                                            initWithCenterViewController:navigationController
                                             leftDrawerViewController:[[LeftViewController alloc] init]];
+    
     [drawerController setShouldStretchDrawer:NO];
     [drawerController setMaximumLeftDrawerWidth:250];
     [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];

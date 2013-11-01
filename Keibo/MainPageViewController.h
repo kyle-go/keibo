@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainPageViewController : UIViewController
+@interface MainPageViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

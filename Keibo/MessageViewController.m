@@ -18,15 +18,20 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"私信" image:[UIImage imageNamed:@"demo"] tag:0];
+        [self.tabBarItem setImage:[UIImage imageNamed:@"demo"]];
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.tabBarController.title = self.title;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.title = @"私信";
 }
 
 - (void)didReceiveMemoryWarning
