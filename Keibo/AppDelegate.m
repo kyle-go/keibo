@@ -37,6 +37,7 @@ MMDrawerController *drawerController;
     [tabBarController setViewControllers:[[NSArray alloc] initWithObjects:mainViewController, messageViewController, personViewController, settingViewController, nil]];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+    [navigationController.navigationBar setBarTintColor:[UIColor darkGrayColor]];
     
     drawerController = [[MMDrawerController alloc]
                                             initWithCenterViewController:navigationController
