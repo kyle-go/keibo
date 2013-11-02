@@ -19,6 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self.tabBarItem setImage:[UIImage imageNamed:@"demo"]];
+        self.title = @"主页";
     }
     return self;
 }
@@ -31,7 +32,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"主页";
 }
 
 - (void)didReceiveMemoryWarning

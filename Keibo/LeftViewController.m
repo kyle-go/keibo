@@ -23,7 +23,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        defaultSectionNames = [[NSArray alloc] initWithObjects: @"全部微博", @"私信", @"提到我", @"评论", @"收藏", @"搜索", nil];
+        defaultSectionNames = [[NSArray alloc] initWithObjects: @"全部微博", @"提到我", @"评论", @"私信", @"收藏", @"搜索", nil];
         sectionNames = [[NSArray alloc] initWithObjects:@"", @"分组", @"话题", nil];
     }
     return self;

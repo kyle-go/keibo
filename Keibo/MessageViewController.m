@@ -18,6 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.title = @"消息";
         [self.tabBarItem setImage:[UIImage imageNamed:@"demo"]];
     }
     return self;
@@ -31,7 +32,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"私信";
 }
 
 - (void)didReceiveMemoryWarning
