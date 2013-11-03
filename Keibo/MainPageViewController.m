@@ -26,18 +26,21 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    self.tabBarController.title = self.title;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"程序猿卡尔";
+    
     //添加左按钮
     self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc]
-                                             initWithTarget:self action:@selector(showLeftView)];
+                                             initWithTarget:self
+                                             action:@selector(showLeftView)];
+    //添加右按钮
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                              target:self
+                                              action:@selector(newWeibo)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,5 +87,10 @@
 
 - (void)showLeftView {
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
+
+- (void)newWeibo
+{
+    
 }
 @end
