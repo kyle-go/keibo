@@ -7,6 +7,8 @@
 //
 
 #import "MainPageViewController.h"
+#import "MMDrawerBarButtonItem.h"
+#import "UIViewController+MMDrawerController.h"
 
 @interface MainPageViewController ()
 
@@ -32,6 +34,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //添加左按钮
+    self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc]
+                                             initWithTarget:self action:@selector(showLeftView)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,4 +82,7 @@
     return 0.001;
 }
 
+- (void)showLeftView {
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
 @end

@@ -32,15 +32,24 @@ MMDrawerController *drawerController;
     MessageViewController *messageViewController = [[MessageViewController alloc] init];
     PersonViewController *personViewController = [[PersonViewController alloc] init];
     SettingViewController *settingViewController = [[SettingViewController alloc] init];
-
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [tabBarController setViewControllers:[[NSArray alloc] initWithObjects:mainViewController, messageViewController, personViewController, settingViewController, nil]];
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tabBarController];
-    [navigationController.navigationBar setBarTintColor:[UIColor darkGrayColor]];
+    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    [mainNav.navigationBar setBarTintColor:[UIColor darkGrayColor]];
+    
+    UINavigationController *messageNav = [[UINavigationController alloc] initWithRootViewController:messageViewController];
+    [messageNav.navigationBar setBarTintColor:[UIColor darkGrayColor]];
+    
+    UINavigationController *personNav = [[UINavigationController alloc] initWithRootViewController:personViewController];
+    [personNav.navigationBar setBarTintColor:[UIColor darkGrayColor]];
+    
+    UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController:settingViewController];
+    [settingNav.navigationBar setBarTintColor:[UIColor darkGrayColor]];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    [tabBarController setViewControllers:[[NSArray alloc] initWithObjects:mainNav, messageNav, personNav, settingNav, nil]];
     
     drawerController = [[MMDrawerController alloc]
-                                            initWithCenterViewController:navigationController
+                                            initWithCenterViewController:tabBarController
                                             leftDrawerViewController:[[LeftViewController alloc] init]];
     
     [drawerController setShouldStretchDrawer:NO];
