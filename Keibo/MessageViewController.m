@@ -14,7 +14,12 @@
 
 @end
 
-@implementation MessageViewController
+@implementation MessageViewController {
+    UIView *currentView;
+    UITableView *viewMe;
+    UITableView *viewComments;
+    UITableView *viewMails;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,11 +46,27 @@
 								   nil];
 	UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
 	segmentedControl.selectedSegmentIndex = 0;
-	segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	segmentedControl.frame = CGRectMake(0, 0, 400, 30);
+	segmentedControl.frame = CGRectMake(0, 0, 160, 30);
 	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     
 	self.navigationItem.titleView = segmentedControl;
+    
+    //init table views
+    viewMe = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, 456)];
+    viewMe.backgroundColor = [UIColor blackColor];
+    viewComments = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, 456)];
+    viewComments.backgroundColor = [UIColor redColor];
+    viewMails = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, 456)];
+    viewMails.backgroundColor = [UIColor grayColor];
+    
+    currentView = viewMe;
+    //[self.view addSubview:currentView];
+    
+    [self performSelector:@selector(delayAddSubView_Bug:) withObject:currentView afterDelay:0];
+}
+
+- (void)delayAddSubView_Bug:(UIView*)view {
+    [self.view addSubview:view];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,13 +75,38 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)segmentAction:(UISegmentedControl *)seg
-{
-    NSLog(@"%d", seg.selectedSegmentIndex);
-}
-
 - (void)showLeftView {
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
+
+- (void)segmentAction:(UISegmentedControl *)seg
+{
+    [currentView removeFromSuperview];
+    switch (seg.selectedSegmentIndex) {
+        case 0:
+            currentView = viewMe;
+            break;
+        case 1:
+            currentView = viewComments;
+            break;
+        case 2:
+            currentView = viewMails;
+            break;
+        default:
+            break;
+    }
+    //[self.view addSubview:currentView];
+    [self performSelector:@selector(delayAddSubView_Bug:) withObject:currentView afterDelay:0];
+}
+
+#pragma mark -- table view delegate
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
 }
 
 @end
