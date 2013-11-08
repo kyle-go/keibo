@@ -15,7 +15,9 @@
     #import <Foundation/Foundation.h>
 
 #import "WeiboSDK.h"
+
 #define kAppKey         @"1110757053"
 #define kRedirectURI    @"http://www.sina.com"
+#define kAuthorToken    @"2.00o7XHoB2ecKNBee8092a772ACQFID"
 
 #endif
