@@ -141,6 +141,7 @@
 		FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTextResponseSerializer.m; sourceTree = "<group>"; };
 		FBA9777E1820E37B00E8E2F1 /* WeiboInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboInstance.h; sourceTree = "<group>"; };
 		FBA9777F1820E37B00E8E2F1 /* WeiboInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboInstance.m; sourceTree = "<group>"; };
+		FBBDEE8F182CCE6000067D6E /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +235,7 @@
 				2748FCD817F8738000A3B9ED /* InfoPlist.strings */,
 				2748FCDB17F8738000A3B9ED /* main.m */,
 				2748FCDD17F8738000A3B9ED /* Keibo-Prefix.pch */,
+				FBBDEE8F182CCE6000067D6E /* macro.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
