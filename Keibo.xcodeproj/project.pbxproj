@@ -239,7 +239,6 @@
 				FB255BDB18228B3400A0008B /* More */,
 				274C4A8A17FB1A0A00D231E8 /* NewWeibo */,
 				FB255BFA18228D6900A0008B /* LeftWindow */,
-				FBE8C1F5182CE47F0062CDAE /* TableCells */,
 				FBA9777E1820E37B00E8E2F1 /* WeiboInstance.h */,
 				FBA9777F1820E37B00E8E2F1 /* WeiboInstance.m */,
 				2748FCDE17F8738000A3B9ED /* AppDelegate.h */,
@@ -316,6 +315,9 @@
 		FB255BD818228A7300A0008B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				FB6CEAD3182CE62000C07414 /* WeiboTableCell.h */,
+				FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */,
+				FB6CEAD6182CE63A00C07414 /* WeiboTableCell.xib */,
 				FB255BD318228A6C00A0008B /* MainPageViewController.h */,
 				FB255BD418228A6C00A0008B /* MainPageViewController.m */,
 				FB255BD518228A6C00A0008B /* MainPageViewController.xib */,
@@ -432,16 +434,6 @@
 				FB6CEAD9182CEAF600C07414 /* codeMonkey.png */,
 			);
 			name = images;
-			sourceTree = "<group>";
-		};
-		FBE8C1F5182CE47F0062CDAE /* TableCells */ = {
-			isa = PBXGroup;
-			children = (
-				FB6CEAD3182CE62000C07414 /* WeiboTableCell.h */,
-				FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */,
-				FB6CEAD6182CE63A00C07414 /* WeiboTableCell.xib */,
-			);
-			name = TableCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
