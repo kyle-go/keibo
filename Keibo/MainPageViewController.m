@@ -20,8 +20,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self.tabBarItem setImage:[UIImage imageNamed:@"demo"]];
-        self.title = @"主页";
+        [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_home"]];
+        self.title = @"首页";
     }
     return self;
 }

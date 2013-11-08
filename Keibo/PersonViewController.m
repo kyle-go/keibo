@@ -19,6 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"我";
+        [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_me"]];
     }
     return self;
 }

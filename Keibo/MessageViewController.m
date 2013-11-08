@@ -26,7 +26,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"消息";
-        [self.tabBarItem setImage:[UIImage imageNamed:@"demo"]];
+        [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_message"]];
     }
     return self;
 }

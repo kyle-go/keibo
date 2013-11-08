@@ -14,7 +14,7 @@
 #import "MainPageViewController.h"
 #import "MessageViewController.h"
 #import "PersonViewController.h"
-#import "SettingViewController.h"
+#import "MoreViewController.h"
 
 
 @implementation AppDelegate
@@ -31,7 +31,7 @@ MMDrawerController *drawerController;
     MainPageViewController *mainViewController = [[MainPageViewController alloc] init];
     MessageViewController *messageViewController = [[MessageViewController alloc] init];
     PersonViewController *personViewController = [[PersonViewController alloc] init];
-    SettingViewController *settingViewController = [[SettingViewController alloc] init];
+    MoreViewController *settingViewController = [[MoreViewController alloc] init];
     
     UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     [mainNav.navigationBar setBarTintColor:[UIColor darkGrayColor]];

@@ -6,19 +6,20 @@
 //  Copyright (c) 2013年 kyle. All rights reserved.
 //
 
-#import "SettingViewController.h"
+#import "MoreViewController.h"
 
-@interface SettingViewController ()
+@interface MoreViewController ()
 
 @end
 
-@implementation SettingViewController
+@implementation MoreViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"设置";
+        [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_more"]];
     }
     return self;
 }
