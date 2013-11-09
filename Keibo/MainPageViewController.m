@@ -9,12 +9,15 @@
 #import "MainPageViewController.h"
 #import "MMDrawerBarButtonItem.h"
 #import "UIViewController+MMDrawerController.h"
+#import "WeiboTableCell.h"
 
 @interface MainPageViewController ()
 
 @end
 
-@implementation MainPageViewController
+@implementation MainPageViewController {
+    NSMutableArray *weiboArray;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,6 +25,7 @@
     if (self) {
         [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_home"]];
         self.title = @"首页";
+        weiboArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -41,11 +45,22 @@
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                               target:self
                                               action:@selector(newWeibo)];
+    
+    //先造一些假数据
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)showLeftView {
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
+
+- (void)newWeibo {
+    
 }
 
 #pragma mark -- table View Data Source
@@ -85,12 +100,4 @@
     return 0.001;
 }
 
-- (void)showLeftView {
-    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
-}
-
-- (void)newWeibo
-{
-    
-}
 @end
