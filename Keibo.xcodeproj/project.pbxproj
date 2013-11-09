@@ -26,6 +26,8 @@
 		2768E4131820158000896288 /* AuthorizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2768E4121820158000896288 /* AuthorizeViewController.m */; };
 		2772E94E181D730C00975628 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2772E94B181D730C00975628 /* libWeiboSDK.a */; };
 		2772E94F181D730C00975628 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2772E94C181D730C00975628 /* WeiboSDK.bundle */; };
+		FB0136E5182E70970006DFB9 /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = FB0136E3182E70970006DFB9 /* comments.png */; };
+		FB0136E6182E70970006DFB9 /* comments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB0136E4182E70970006DFB9 /* comments@2x.png */; };
 		FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BD418228A6C00A0008B /* MainPageViewController.m */; };
 		FB255BD718228A6C00A0008B /* MainPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BD518228A6C00A0008B /* MainPageViewController.xib */; };
 		FB255BE018228C0700A0008B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BDE18228C0700A0008B /* MessageViewController.m */; };
@@ -104,6 +106,8 @@
 		2772E94B181D730C00975628 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		2772E94C181D730C00975628 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		2772E94D181D730C00975628 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		FB0136E3182E70970006DFB9 /* comments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments.png; sourceTree = "<group>"; };
+		FB0136E4182E70970006DFB9 /* comments@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments@2x.png"; sourceTree = "<group>"; };
 		FB255BD318228A6C00A0008B /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		FB255BD418228A6C00A0008B /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 		FB255BD518228A6C00A0008B /* MainPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageViewController.xib; sourceTree = "<group>"; };
@@ -430,6 +434,8 @@
 				FB6CEAF6182D2EB300C07414 /* tabbar_me@2x.png */,
 				FB6CEAF9182D2EF000C07414 /* tabbar_more.png */,
 				FB6CEAFA182D2EF000C07414 /* tabbar_more@2x.png */,
+				FB0136E3182E70970006DFB9 /* comments.png */,
+				FB0136E4182E70970006DFB9 /* comments@2x.png */,
 				FB6CEADB182CEE6D00C07414 /* superman.png */,
 				FB6CEAD9182CEAF600C07414 /* codeMonkey.png */,
 			);
@@ -514,10 +520,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB6CEAFB182D2EF000C07414 /* tabbar_more.png in Resources */,
+				FB0136E5182E70970006DFB9 /* comments.png in Resources */,
 				FB6CEAF3182D2E9300C07414 /* tabbar_message.png in Resources */,
 				2748FCE817F8738000A3B9ED /* Images.xcassets in Resources */,
 				FB6CEAD7182CE63A00C07414 /* WeiboTableCell.xib in Resources */,
 				FB255BFF18228D9B00A0008B /* LeftViewController.xib in Resources */,
+				FB0136E6182E70970006DFB9 /* comments@2x.png in Resources */,
 				FB6CEAF4182D2E9300C07414 /* tabbar_message@2x.png in Resources */,
 				2748FCDA17F8738000A3B9ED /* InfoPlist.strings in Resources */,
 				FB6CEAF8182D2EB300C07414 /* tabbar_me@2x.png in Resources */,
