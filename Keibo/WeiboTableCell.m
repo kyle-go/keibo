@@ -10,6 +10,8 @@
 
 @implementation WeiboTableCell
 
+//remember IndexpathsForVisibleCells
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -24,6 +26,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)updateWithWeiboData:(WeiboCellData *)data
+{
+
 }
 
 @end

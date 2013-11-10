@@ -25,6 +25,7 @@
 
 @property (assign, nonatomic)NSInteger originWeiboId;   //原微博唯一标识
 @property (strong, nonatomic)NSString *originName;      //原微博发送者
+@property (strong, nonatomic)NSString *originFeedComeFrom;//来自哪
 @property (strong, nonatomic)NSString *originContent;   //原微博内容
 @property (assign, nonatomic)NSInteger originReposts;   //转发数
 @property (assign, nonatomic)NSInteger originComments;  //评论数

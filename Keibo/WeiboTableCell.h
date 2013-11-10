@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class WeiboCellData;
 
 @interface WeiboTableCell : UITableViewCell
+
+- (void)updateWithWeiboData:(WeiboCellData *)data;
 
 @end

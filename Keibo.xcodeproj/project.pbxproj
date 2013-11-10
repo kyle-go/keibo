@@ -53,6 +53,8 @@
 		FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE8E181F948100FF9331 /* AFURLResponseSerialization.m */; };
 		FB4FDE99181F948100FF9331 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE90181F948100FF9331 /* AFURLSessionManager.m */; };
 		FB54789F181EA37800501B7A /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB54789E181EA37800501B7A /* DataModel.m */; };
+		FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D10C6182F7497006E1D01 /* KUnits.m */; };
+		FB5D10CA182F7940006E1D01 /* NotificationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D10C9182F7940006E1D01 /* NotificationObject.m */; };
 		FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */; };
 		FB6CEAD7182CE63A00C07414 /* WeiboTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAD6182CE63A00C07414 /* WeiboTableCell.xib */; };
 		FB6CEADA182CEAF600C07414 /* codeMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAD9182CEAF600C07414 /* codeMonkey.png */; };
@@ -156,6 +158,10 @@
 		FB4FDE90181F948100FF9331 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		FB54789D181EA37800501B7A /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
 		FB54789E181EA37800501B7A /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
+		FB5D10C5182F7497006E1D01 /* KUnits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KUnits.h; sourceTree = "<group>"; };
+		FB5D10C6182F7497006E1D01 /* KUnits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KUnits.m; sourceTree = "<group>"; };
+		FB5D10C8182F7940006E1D01 /* NotificationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationObject.h; sourceTree = "<group>"; };
+		FB5D10C9182F7940006E1D01 /* NotificationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationObject.m; sourceTree = "<group>"; };
 		FB6CEAD3182CE62000C07414 /* WeiboTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTableCell.h; sourceTree = "<group>"; };
 		FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboTableCell.m; sourceTree = "<group>"; };
 		FB6CEAD6182CE63A00C07414 /* WeiboTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboTableCell.xib; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 		2748FCD517F8738000A3B9ED /* Keibo */ = {
 			isa = PBXGroup;
 			children = (
+				FB5D10C4182F7443006E1D01 /* KUnits */,
 				FB255BDC18228B4B00A0008B /* external */,
 				FB255BD818228A7300A0008B /* Main */,
 				2768E4141820159200896288 /* Authorize */,
@@ -323,6 +330,8 @@
 			children = (
 				FB54789D181EA37800501B7A /* DataModel.h */,
 				FB54789E181EA37800501B7A /* DataModel.m */,
+				FB5D10C8182F7940006E1D01 /* NotificationObject.h */,
+				FB5D10C9182F7940006E1D01 /* NotificationObject.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -434,6 +443,15 @@
 				FB4FDE90181F948100FF9331 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		FB5D10C4182F7443006E1D01 /* KUnits */ = {
+			isa = PBXGroup;
+			children = (
+				FB5D10C5182F7497006E1D01 /* KUnits.h */,
+				FB5D10C6182F7497006E1D01 /* KUnits.m */,
+			);
+			name = KUnits;
 			sourceTree = "<group>";
 		};
 		FB6CEAD8182CEAE900C07414 /* images */ = {
@@ -580,6 +598,7 @@
 				FB0136E9182E73570006DFB9 /* WeiboCellData.m in Sources */,
 				FB4FDE96181F948100FF9331 /* AFURLConnectionOperation.m in Sources */,
 				FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */,
+				FB5D10CA182F7940006E1D01 /* NotificationObject.m in Sources */,
 				FB4FDE97181F948100FF9331 /* AFURLRequestSerialization.m in Sources */,
 				274C4A8D17FB1A3D00D231E8 /* NewWeiboViewController.m in Sources */,
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,
@@ -589,6 +608,7 @@
 				FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */,
 				FB255BE018228C0700A0008B /* MessageViewController.m in Sources */,
 				FB54789F181EA37800501B7A /* DataModel.m in Sources */,
+				FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */,
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,

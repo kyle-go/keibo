@@ -10,6 +10,7 @@
 
 @interface DataModel : NSObject
 
++ (instancetype)DMInstance;
 + (NSString *)getAccessToken;
 + (void)saveAccessToken:(NSString *)accessToken;
 
