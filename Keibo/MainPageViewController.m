@@ -53,6 +53,7 @@
     a.avatarUrl = @"http://tp2.sinaimg.cn/1496915057/50/40020993740/1";
     a.name = @"OnlySwan";
     a.feedComeFrom = @"vivo X3";
+    a.date = [NSDate date];
     a.content = @"未来世界[挖鼻屎]//@珏铭:腾讯WE，一直不知道有这个活动。。 //@D狐狸：腾讯？ //@珏铭:[挖鼻屎]真好， @HaichunZ";
     a.reposts = 1;
     a.content = 0;
@@ -73,6 +74,7 @@
     b.avatarUrl = @"http://tp1.sinaimg.cn/1496850204/50/1283204010/1";
     b.name = @"封新城";
     b.feedComeFrom = @"iPad客户端";
+    b.date = [NSDate date];
     b.content = @"//@陈晓阳改革: 难怪日本这一AV大国日比较长寿呢[哈哈]懂了！";
     b.reposts = 1;
     b.content = 0;

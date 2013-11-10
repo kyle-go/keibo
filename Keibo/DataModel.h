@@ -11,7 +11,9 @@
 @interface DataModel : NSObject
 
 + (instancetype)DMInstance;
+
 + (NSString *)getAccessToken;
 + (void)saveAccessToken:(NSString *)accessToken;
 
+- (NSString *)translateUrlToLocalPath:(NSString *)url notificationName:(NSString *)name customObj:(id)obj;
 @end

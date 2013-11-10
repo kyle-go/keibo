@@ -55,7 +55,7 @@
 }
 
 //url 转化为本地图片路径
-- (NSString *)TranslateUrlToLocalPath:(NSString *)url notificationName:(NSString *)name customObj:(id)obj
+- (NSString *)translateUrlToLocalPath:(NSString *)url notificationName:(NSString *)name customObj:(id)obj
 {
     //1.检查是否 存在dictionary表中且本地存在此文件
     id value = [imageDictionary objectForKey:url];
@@ -79,6 +79,7 @@
         
         if (!error) {
             notify.resultValue = [filePath path];
+            [imageDictionary setObject:url forKey:notify.resultValue];
         } else {
             notify.resultValue = nil;
             NSLog(@"downloaded %@ failed. error=%@", filePath, error);
