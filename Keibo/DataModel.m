@@ -74,14 +74,16 @@
         NSString *file = [[NSString alloc] initWithFormat:@"%@/%@", filePath, [KUnits generateUuidString]];
         return [NSURL fileURLWithPath:file isDirectory:NO];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NotificationObject *notify = [[NotificationObject alloc] init];
+        notify.customObj = obj;
+        
         if (!error) {
-            NotificationObject *notify = [[NotificationObject alloc] init];
-            notify.retValue = [filePath path];
-            notify.custonObj = obj;
-            [[NSNotificationCenter defaultCenter] postNotificationName:name object:notify];
+            notify.resultValue = [filePath path];
         } else {
+            notify.resultValue = nil;
             NSLog(@"downloaded %@ failed. error=%@", filePath, error);
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:name object:notify];
     }];
     [downloadTask resume];
     
