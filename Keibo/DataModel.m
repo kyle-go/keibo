@@ -55,7 +55,7 @@
 }
 
 //url 转化为本地图片路径
-- (NSString *)TranslateUrlToLocalPath:(NSString *)url notificationName:(NSString *)name
+- (NSString *)TranslateUrlToLocalPath:(NSString *)url notificationName:(NSString *)name customObj:(id)obj
 {
     //1.检查是否 存在dictionary表中且本地存在此文件
     id value = [imageDictionary objectForKey:url];
@@ -65,20 +65,20 @@
         }
     }
     
-    __block NSString *uuid = [KUnits generateUuidString];
-    
     //从网络上下载此文件
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        return [[NSURL alloc] initWithString:uuid];
+        NSString *filePath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:@"images"];
+        NSString *file = [[NSString alloc] initWithFormat:@"%@/%@", filePath, [KUnits generateUuidString]];
+        return [NSURL fileURLWithPath:file isDirectory:NO];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         if (!error) {
-            NotificationObject *obj = [[NotificationObject alloc] init];
-            obj.retValue = [filePath absoluteString];
-            [[NSNotificationCenter defaultCenter] postNotificationName:name object:obj];
+            NotificationObject *notify = [[NotificationObject alloc] init];
+            notify.retValue = [filePath path];
+            notify.custonObj = obj;
+            [[NSNotificationCenter defaultCenter] postNotificationName:name object:notify];
         } else {
             NSLog(@"downloaded %@ failed. error=%@", filePath, error);
         }

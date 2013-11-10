@@ -10,6 +10,7 @@
 
 @interface NotificationObject : NSObject
 
+@property (strong, nonatomic)id custonObj;
 @property (strong, nonatomic)NSString *retValue;
 
 @end
