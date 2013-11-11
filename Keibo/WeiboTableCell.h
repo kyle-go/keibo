@@ -15,10 +15,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *comeFromLabel;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property (weak, nonatomic) IBOutlet UILabel *repostLabel;
-@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
-@property (weak, nonatomic) IBOutlet UILabel *likeLabel;
 
+@property (assign, nonatomic)NSInteger repost;
+@property (assign, nonatomic)NSInteger comment;
+@property (assign, nonatomic)NSInteger like;
+
+@property (assign, nonatomic) CGFloat webViewHeight;
 - (IBAction)btnMoreAction:(id)sender;
 
 - (void)updateWithWeiboData:(WeiboCellData *)data;

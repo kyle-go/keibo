@@ -134,6 +134,12 @@
     return cell;
 }
 
+//取消选中状态
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
 //隐藏section头部
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -147,7 +153,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 123 + 60;
+    WeiboTableCell *cell = (WeiboTableCell *)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
+    return cell.webViewHeight + 160;
 }
 
 @end
