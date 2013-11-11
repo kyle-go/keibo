@@ -9,6 +9,7 @@
 #import "WeiboTableCell.h"
 #import "WeiboCellData.h"
 #import "DataModel.h"
+#import "KUnits.h"
 
 @implementation WeiboTableCell
 
@@ -77,10 +78,9 @@
     self.webView.scrollView.scrollEnabled = NO;
     self.webView.scrollView.bounces = NO;
     self.webView.opaque = NO;
-    NSString *temp_path = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/weibo.html"];
-    NSData *tmp_data = [[NSFileManager defaultManager] contentsAtPath:temp_path];
-    NSString *webContent = [[NSString alloc] initWithData:tmp_data encoding:NSUTF8StringEncoding];
-    [self.webView loadHTMLString:webContent baseURL:nil];
+    
+    NSString *htmlString = [KUnits weiboFormat:data.content repost:data.hasOriginWeibo? data.originContent:nil];
+    [self.webView loadHTMLString:htmlString baseURL:nil];
 }
 
 @end

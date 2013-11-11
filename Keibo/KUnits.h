@@ -12,4 +12,6 @@
 
 + (NSString *)generateUuidString;
 
++ (NSString *)weiboFormat:(NSString *)content repost:(NSString *)repostContent;
+
 @end
