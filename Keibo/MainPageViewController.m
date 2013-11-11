@@ -66,8 +66,6 @@
     a.originComments = 0;
     a.originLikes = 8;
     
-    [weiboArray addObject:a];
-    
     WeiboCellData *b = [[WeiboCellData alloc] init];
     b.weiboId = 1002;
     b.avatarUrl = @"http://tp1.sinaimg.cn/1496850204/50/1283204010/1";
@@ -86,7 +84,27 @@
     b.originComments = 0;
     b.originLikes = 8;
     
+    WeiboCellData *c = [[WeiboCellData alloc] init];
+    c.weiboId = 1001;
+    c.avatarUrl = @"http://tp2.sinaimg.cn/1496915057/50/40020993740/1";
+    c.name = @"OnlySwan";
+    c.feedComeFrom = @"vivo X3";
+    c.date = [NSDate date];
+    c.content = @"未来世界[挖鼻屎]//@珏铭:腾讯WE，一直不知道有这个活动。。 //@D狐狸：腾讯？ //@珏铭:[挖鼻屎]真好， @HaichunZ";
+    c.reposts = 1;
+    c.likes = 3;
+    c.hasOriginWeibo = YES;
+    c.originWeiboId = 100;
+    c.originName = @"大亨heng";
+    c.originContent = @"位置太好了吧，第二排～";
+    c.originFeedComeFrom = @"新浪微博";
+    c.originReposts = 2;
+    c.originComments = 0;
+    c.originLikes = 8;
+    
     [weiboArray addObject:b];
+    [weiboArray addObject:a];
+    [weiboArray addObject:c];
 }
 
 - (void)didReceiveMemoryWarning
@@ -152,7 +170,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WeiboTableCell *cell = (WeiboTableCell *)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-    return cell.webViewHeight + 160;
+    return cell.webViewHeight + 220;
 }
 
 @end
