@@ -128,6 +128,7 @@
         cell = [[WeiboTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
+    cell.webView.delegate = cell;
     [cell updateWithWeiboData:[weiboArray objectAtIndex:indexPath.row]];
     
     return cell;
@@ -146,7 +147,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 123;
+    return 123 + 60;
 }
 
 @end

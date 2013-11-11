@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class WeiboCellData;
 
-@interface WeiboTableCell : UITableViewCell
+@interface WeiboTableCell : UITableViewCell <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;

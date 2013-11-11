@@ -71,6 +71,7 @@
 		FB6CEAFC182D2EF000C07414 /* tabbar_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAFA182D2EF000C07414 /* tabbar_more@2x.png */; };
 		FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */; };
 		FBA977801820E37B00E8E2F1 /* WeiboInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA9777F1820E37B00E8E2F1 /* WeiboInstance.m */; };
+		FBE452C71830851200DB43FF /* weibo.html in Resources */ = {isa = PBXBuildFile; fileRef = FBE452C61830851200DB43FF /* weibo.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +185,7 @@
 		FBA9777E1820E37B00E8E2F1 /* WeiboInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboInstance.h; sourceTree = "<group>"; };
 		FBA9777F1820E37B00E8E2F1 /* WeiboInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboInstance.m; sourceTree = "<group>"; };
 		FBBDEE8F182CCE6000067D6E /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
+		FBE452C61830851200DB43FF /* weibo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = weibo.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,7 +267,7 @@
 				2748FCE517F8738000A3B9ED /* ViewController.m */,
 				2748FCE717F8738000A3B9ED /* Images.xcassets */,
 				FB0136EA182E74110006DFB9 /* Model */,
-				FB6CEAD8182CEAE900C07414 /* images */,
+				FBE452C5183084C400DB43FF /* Resources */,
 				2748FCD617F8738000A3B9ED /* Supporting Files */,
 			);
 			path = Keibo;
@@ -479,6 +481,15 @@
 			name = images;
 			sourceTree = "<group>";
 		};
+		FBE452C5183084C400DB43FF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FBE452C61830851200DB43FF /* weibo.html */,
+				FB6CEAD8182CEAE900C07414 /* images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -575,6 +586,7 @@
 				2772E94F181D730C00975628 /* WeiboSDK.bundle in Resources */,
 				FB255BD718228A6C00A0008B /* MainPageViewController.xib in Resources */,
 				FB6CEAFC182D2EF000C07414 /* tabbar_more@2x.png in Resources */,
+				FBE452C71830851200DB43FF /* weibo.html in Resources */,
 				FB255BEB18228C2900A0008B /* MoreViewController.xib in Resources */,
 				FB6CEAF7182D2EB300C07414 /* tabbar_me.png in Resources */,
 				FB6CEADA182CEAF600C07414 /* codeMonkey.png in Resources */,

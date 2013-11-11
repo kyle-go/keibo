@@ -14,24 +14,22 @@
 
 //remember IndexpathsForVisibleCells
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
 - (IBAction)btnMoreAction:(id)sender {
     
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    CGFloat height = self.webView.scrollView.contentSize.height;
+    self.webView.frame = CGRectMake(0, 57, 320, height);
+    
+    //移动按钮位置
 }
 
 - (void)updateWithWeiboData:(WeiboCellData *)data
@@ -51,8 +49,14 @@
     self.repostLabel.text = [[NSString alloc] initWithFormat:@"%d", data.reposts];
     self.commentLabel.text = [[NSString alloc] initWithFormat:@"%d", data.comments];
     self.likeLabel.text = [[NSString alloc] initWithFormat:@"%d", data.likes];
-    
-    //self.webView
+
+    //set webview content
+    self.webView.scrollView.scrollEnabled = NO;
+    self.webView.scrollView.bounces = NO;
+    NSString *temp_path = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/weibo.html"];
+    NSData *tmp_data = [[NSFileManager defaultManager] contentsAtPath:temp_path];
+    NSString *webContent = [[NSString alloc] initWithData:tmp_data encoding:NSUTF8StringEncoding];
+    [self.webView loadHTMLString:webContent baseURL:nil];
 }
 
 @end
