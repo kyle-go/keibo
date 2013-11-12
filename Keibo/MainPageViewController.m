@@ -170,7 +170,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WeiboTableCell *cell = (WeiboTableCell *)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-    return cell.webViewHeight + 220;
+    return cell.webViewHeight + 250;
 }
 
 @end
