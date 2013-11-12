@@ -79,7 +79,7 @@
         
         if (!error) {
             notify.resultValue = [filePath path];
-            [imageDictionary setObject:url forKey:notify.resultValue];
+            [imageDictionary setObject:notify.resultValue forKey:url];
         } else {
             notify.resultValue = nil;
             NSLog(@"downloaded %@ failed. error=%@", filePath, error);
