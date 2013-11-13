@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AuthorizeViewController : UIViewController <UIWebViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

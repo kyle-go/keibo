@@ -19,4 +19,10 @@
 //格式化一个http连接
 + (NSURL*)generateURL:(NSString*)baseURL params:(NSDictionary*)params;
 
+//从一个字符串中查找子字符串的值
+//  string = "access_token=2.00vVnMpDjoxjvDbc593cb4eft_exCE&remind_in=556237&expires_in=556237&uid=3505041903"
+//  sub = "access_token="
+//  return = "2.00vVnMpDjoxjvDbc593cb4eft_exCE"
++ (NSString *)getSubSplitString:(NSString *)string sub:(NSString *)key;
+
 @end

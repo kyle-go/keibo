@@ -12,6 +12,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
--(void) changeLeftViewController:(UIViewController *)viewController;
-
 @end

@@ -73,4 +73,21 @@
 	}
 }
 
++ (NSString *)getSubSplitString:(NSString *)string sub:(NSString *)key
+{
+    NSArray * array = [string componentsSeparatedByString:@"&"];
+    if ([array count] == 0) {
+        array = [[NSArray alloc] initWithObjects:string, nil];
+    }
+    
+    for (NSString *subString in array) {
+         NSRange range = [subString rangeOfString:key options:NSCaseInsensitiveSearch];
+        if (range.location != NSNotFound) {
+            return [subString substringFromIndex:range.location + range.length];
+        }
+    }
+    
+    return nil;
+}
+
 @end

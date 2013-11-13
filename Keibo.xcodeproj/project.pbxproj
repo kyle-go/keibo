@@ -40,6 +40,7 @@
 		FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BF518228D0E00A0008B /* UIViewController+MMDrawerController.m */; };
 		FB255BFE18228D9B00A0008B /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BFC18228D9B00A0008B /* LeftViewController.m */; };
 		FB255BFF18228D9B00A0008B /* LeftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BFD18228D9B00A0008B /* LeftViewController.xib */; };
+		FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3135741833869C00AFF3BC /* WeiboNetWork.m */; };
 		FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */; };
 		FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE81181F948100FF9331 /* AFHTTPRequestOperationManager.m */; };
 		FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE83181F948100FF9331 /* AFHTTPSessionManager.m */; };
@@ -134,6 +135,8 @@
 		FB255BFB18228D9B00A0008B /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
 		FB255BFC18228D9B00A0008B /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
 		FB255BFD18228D9B00A0008B /* LeftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftViewController.xib; sourceTree = "<group>"; };
+		FB3135731833869C00AFF3BC /* WeiboNetWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboNetWork.h; sourceTree = "<group>"; };
+		FB3135741833869C00AFF3BC /* WeiboNetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboNetWork.m; sourceTree = "<group>"; };
 		FB4FDE7E181F948100FF9331 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		FB4FDE80181F948100FF9331 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -439,6 +442,8 @@
 			children = (
 				FB5D10C5182F7497006E1D01 /* KUnits.h */,
 				FB5D10C6182F7497006E1D01 /* KUnits.m */,
+				FB3135731833869C00AFF3BC /* WeiboNetWork.h */,
+				FB3135741833869C00AFF3BC /* WeiboNetWork.m */,
 			);
 			name = KUnits;
 			sourceTree = "<group>";
@@ -613,6 +618,7 @@
 				FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */,
 				FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */,
 				FB255BE018228C0700A0008B /* MessageViewController.m in Sources */,
+				FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */,
 				FB54789F181EA37800501B7A /* DataModel.m in Sources */,
 				FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */,
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,

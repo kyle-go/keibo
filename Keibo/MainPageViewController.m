@@ -38,10 +38,6 @@
 {
     [super viewDidLoad];
     
-    //show登陆窗口
-    AuthorizeViewController *authController = [[AuthorizeViewController alloc] init];
-    [self addChildViewController:authController];
-    
     self.navigationItem.title = @"程序猿卡尔";
     
     //添加左按钮

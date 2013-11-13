@@ -7,70 +7,22 @@
 //
 
 #import "AppDelegate.h"
-#import "MMDrawerController.h"
-#import "LeftViewController.h"
-#import "MainPageViewController.h"
-#import "MessageViewController.h"
-#import "PersonViewController.h"
-#import "MoreViewController.h"
-
+#import "AuthorizeViewController.h"
 
 @implementation AppDelegate
-
-MMDrawerController *drawerController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [[AuthorizeViewController alloc] init];
     
     //set status bar style
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    MainPageViewController *mainViewController = [[MainPageViewController alloc] init];
-    MessageViewController *messageViewController = [[MessageViewController alloc] init];
-    PersonViewController *personViewController = [[PersonViewController alloc] init];
-    MoreViewController *settingViewController = [[MoreViewController alloc] init];
-    
-    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    [mainNav.navigationBar setBarTintColor:[UIColor darkGrayColor]];
-    
-    UINavigationController *messageNav = [[UINavigationController alloc] initWithRootViewController:messageViewController];
-    [messageNav.navigationBar setBarTintColor:[UIColor darkGrayColor]];
-    
-    UINavigationController *personNav = [[UINavigationController alloc] initWithRootViewController:personViewController];
-    [personNav.navigationBar setBarTintColor:[UIColor darkGrayColor]];
-    
-    UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController:settingViewController];
-    [settingNav.navigationBar setBarTintColor:[UIColor darkGrayColor]];
-    
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [tabBarController setViewControllers:[[NSArray alloc] initWithObjects:mainNav, messageNav, personNav, settingNav, nil]];
-    
-    drawerController = [[MMDrawerController alloc]
-                                            initWithCenterViewController:tabBarController
-                                            leftDrawerViewController:[[LeftViewController alloc] init]];
-    
-    [drawerController setShouldStretchDrawer:NO];
-    [drawerController setMaximumLeftDrawerWidth:250];
-    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-    
-    self.window.rootViewController = drawerController;
     [self.window makeKeyAndVisible];
     
     return YES;
 }
-
-//-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-//{
-//    return [WeiboSDK handleOpenURL:url delegate:[WeiboInstance weiboInstance]];
-//}
-//
-//-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-//{
-//    return [WeiboSDK handleOpenURL:url delegate:[WeiboInstance weiboInstance]];
-//}
-
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -97,11 +49,6 @@ MMDrawerController *drawerController;
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
--(void) changeLeftViewController:(UIViewController *)viewController
-{
-    
 }
 
 @end
