@@ -12,5 +12,10 @@
 
 + (instancetype)storageInstance;
 
+//根据当前帐号id，初始化数据库
+- (void)initStorage:(NSString *)userId;
+
+
 - (NSString *)translateUrlToLocalPath:(NSString *)url notificationName:(NSString *)name customObj:(id)obj;
+
 @end

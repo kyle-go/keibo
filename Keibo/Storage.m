@@ -37,6 +37,20 @@
     return self;
 }
 
+//根据当前帐号id，初始化数据库
+- (void)initStorage:(NSString *)userId
+{
+    if ([userId length] == 0) {
+        NSLog(@"initStorage userId = nil.");
+        abort();
+        return;
+    }
+    //用userId初始化数据库
+    
+    //创建各种表
+}
+
+
 //url 转化为本地图片路径
 - (NSString *)translateUrlToLocalPath:(NSString *)url notificationName:(NSString *)name customObj:(id)obj
 {
