@@ -14,6 +14,7 @@
 #import "PersonViewController.h"
 #import "MoreViewController.h"
 #import "KUnits.h"
+#import "WeiboNetWork.h"
 
 @interface AuthorizeViewController ()
 
@@ -33,8 +34,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.webView.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenExpired) name:@"accessTokenExpired" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenNoExpired) name:@"accessTokenNoExpired" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenNetWorkFailure) name:@"accessTokenNetWorkFailure" object:nil];
+    
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+    if (!accessToken) {
+        [self Login];
+        return;
+    }
+    [WeiboNetWork checkAccessToken:accessToken];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)Login {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    kAppKey,                         @"client_id",       //申请的appkey
 								   @"token",                        @"response_type",   //access_token
@@ -47,19 +66,31 @@
 	[self.webView loadRequest:request];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark ------ net working callback ------
+- (void)accessTokenExpired
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    //已经过期，重新登陆
+    [self Login];
+}
+
+- (void)accessTokenNoExpired
+{
+    //没过期，显示主界面
+    [self forMainView];
+}
+
+- (void)accessTokenNetWorkFailure
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请检查网络" message:@"验证token失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alertView show];
 }
 
 #pragma mark ---- UIWebViewDelegate ---------
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSURL *url = [request URL];
-    NSLog(@"webview's url = %@",url);
+    NSLog(@"webview's url = %@", [request URL]);
     
-	NSArray *array = [[url absoluteString] componentsSeparatedByString:@"#"];
+	NSArray *array = [[[request URL] absoluteString] componentsSeparatedByString:@"#"];
     if ([array count] <= 1) {
         return YES;
     }
@@ -79,11 +110,9 @@
         [[NSUserDefaults standardUserDefaults] setObject:uid forKey:kUserId];
         [[NSUserDefaults standardUserDefaults] setObject:expires_in forKey:kExpirseIn];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        //获取个人资料
 
-        //取消本view的显示
-        [self showMainView];
+        //显示主界面
+        [self forMainView];
     } else {
         //error%3A=appkey%20permission%20denied&error_code%3A=21337
         NSRange range = (range1.location == NSNotFound? range2 : range1);
@@ -96,8 +125,12 @@
     
 }
 
-- (void)showMainView
+- (void)forMainView
 {
+    //获取登录者个人资料
+    
+    
+    //显示主界面
     MainPageViewController *mainViewController = [[MainPageViewController alloc] init];
     MessageViewController *messageViewController = [[MessageViewController alloc] init];
     PersonViewController *personViewController = [[PersonViewController alloc] init];

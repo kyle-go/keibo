@@ -13,6 +13,6 @@
 //过期 发送一个 “accessTokenExpired”广播
 //未过期 发送一个 “accessTokenNoExpired”广播
 //网络故障 发送一个 “accessTokenNetWorkFailure”广
-+ (void)checkAccessToken;
++ (void)checkAccessToken:(NSString *)accessToken;
 
 @end
