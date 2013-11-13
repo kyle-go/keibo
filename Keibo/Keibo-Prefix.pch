@@ -15,7 +15,6 @@
     #import <Foundation/Foundation.h>
 
 #import "macro.h"
-#import "WeiboSDK.h"
 
 #define kAppKey         @"1110757053"
 #define kRedirectURI    @"http://www.sina.com"

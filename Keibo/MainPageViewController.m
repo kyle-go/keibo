@@ -7,6 +7,7 @@
 //
 
 #import "MainPageViewController.h"
+#import "AuthorizeViewController.h"
 #import "MMDrawerBarButtonItem.h"
 #import "UIViewController+MMDrawerController.h"
 #import "WeiboTableCell.h"
@@ -36,6 +37,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //show登陆窗口
+    AuthorizeViewController *authController = [[AuthorizeViewController alloc] init];
+    [self addChildViewController:authController];
     
     self.navigationItem.title = @"程序猿卡尔";
     

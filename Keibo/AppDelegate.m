@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "WeiboSDK.h"
-#import "WeiboInstance.h"
 #import "MMDrawerController.h"
 #import "LeftViewController.h"
 #import "MainPageViewController.h"
@@ -60,20 +58,18 @@ MMDrawerController *drawerController;
     self.window.rootViewController = drawerController;
     [self.window makeKeyAndVisible];
     
-    [WeiboInstance weiboInstance];
-    
     return YES;
 }
 
--(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return [WeiboSDK handleOpenURL:url delegate:[WeiboInstance weiboInstance]];
-}
-
--(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    return [WeiboSDK handleOpenURL:url delegate:[WeiboInstance weiboInstance]];
-}
+//-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+//{
+//    return [WeiboSDK handleOpenURL:url delegate:[WeiboInstance weiboInstance]];
+//}
+//
+//-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+//{
+//    return [WeiboSDK handleOpenURL:url delegate:[WeiboInstance weiboInstance]];
+//}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application

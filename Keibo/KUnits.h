@@ -10,8 +10,13 @@
 
 @interface KUnits : NSObject
 
+//获取一个uuid字符串
 + (NSString *)generateUuidString;
 
+//格式化一条微博，repostContent为nil说明没有被转发原微博
 + (NSString *)weiboFormat:(NSString *)content repost:(NSString *)repostContent;
+
+//格式化一个http连接
++ (NSURL*)generateURL:(NSString*)baseURL params:(NSDictionary*)params;
 
 @end
