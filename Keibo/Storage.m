@@ -15,7 +15,7 @@
     NSMutableDictionary *imageDictionary;
 }
 
-+ (instancetype)DMInstance
++ (instancetype)storageInstance
 {
     static id instance;
     static dispatch_once_t once;
