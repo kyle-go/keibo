@@ -41,6 +41,12 @@
 		FB255BFE18228D9B00A0008B /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BFC18228D9B00A0008B /* LeftViewController.m */; };
 		FB255BFF18228D9B00A0008B /* LeftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BFD18228D9B00A0008B /* LeftViewController.xib */; };
 		FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3135741833869C00AFF3BC /* WeiboNetWork.m */; };
+		FB4C01231833CE8B00EC97B1 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C011A1833CE8B00EC97B1 /* FMDatabase.m */; };
+		FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C011C1833CE8B00EC97B1 /* FMDatabaseAdditions.m */; };
+		FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C011E1833CE8B00EC97B1 /* FMDatabasePool.m */; };
+		FB4C01261833CE8B00EC97B1 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C01201833CE8B00EC97B1 /* FMDatabaseQueue.m */; };
+		FB4C01271833CE8B00EC97B1 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C01221833CE8B00EC97B1 /* FMResultSet.m */; };
+		FB4C01291833CE9F00EC97B1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4C01281833CE9F00EC97B1 /* libsqlite3.dylib */; };
 		FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */; };
 		FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE81181F948100FF9331 /* AFHTTPRequestOperationManager.m */; };
 		FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE83181F948100FF9331 /* AFHTTPSessionManager.m */; };
@@ -50,7 +56,7 @@
 		FB4FDE97181F948100FF9331 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE8C181F948100FF9331 /* AFURLRequestSerialization.m */; };
 		FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE8E181F948100FF9331 /* AFURLResponseSerialization.m */; };
 		FB4FDE99181F948100FF9331 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE90181F948100FF9331 /* AFURLSessionManager.m */; };
-		FB54789F181EA37800501B7A /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB54789E181EA37800501B7A /* DataModel.m */; };
+		FB54789F181EA37800501B7A /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = FB54789E181EA37800501B7A /* Storage.m */; };
 		FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D10C6182F7497006E1D01 /* KUnits.m */; };
 		FB5D10CA182F7940006E1D01 /* NotificationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D10C9182F7940006E1D01 /* NotificationObject.m */; };
 		FB5D10CF182FAD6F006E1D01 /* avatar-1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5D10CD182FAD6F006E1D01 /* avatar-1.png */; };
@@ -137,6 +143,17 @@
 		FB255BFD18228D9B00A0008B /* LeftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftViewController.xib; sourceTree = "<group>"; };
 		FB3135731833869C00AFF3BC /* WeiboNetWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboNetWork.h; sourceTree = "<group>"; };
 		FB3135741833869C00AFF3BC /* WeiboNetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboNetWork.m; sourceTree = "<group>"; };
+		FB4C01191833CE8B00EC97B1 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		FB4C011A1833CE8B00EC97B1 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		FB4C011B1833CE8B00EC97B1 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		FB4C011C1833CE8B00EC97B1 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		FB4C011D1833CE8B00EC97B1 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		FB4C011E1833CE8B00EC97B1 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		FB4C011F1833CE8B00EC97B1 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		FB4C01201833CE8B00EC97B1 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		FB4C01211833CE8B00EC97B1 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		FB4C01221833CE8B00EC97B1 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		FB4C01281833CE9F00EC97B1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		FB4FDE7E181F948100FF9331 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		FB4FDE80181F948100FF9331 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -156,8 +173,8 @@
 		FB4FDE8E181F948100FF9331 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		FB4FDE8F181F948100FF9331 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		FB4FDE90181F948100FF9331 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		FB54789D181EA37800501B7A /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
-		FB54789E181EA37800501B7A /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
+		FB54789D181EA37800501B7A /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
+		FB54789E181EA37800501B7A /* Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storage.m; sourceTree = "<group>"; };
 		FB5D10C5182F7497006E1D01 /* KUnits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KUnits.h; sourceTree = "<group>"; };
 		FB5D10C6182F7497006E1D01 /* KUnits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KUnits.m; sourceTree = "<group>"; };
 		FB5D10C8182F7940006E1D01 /* NotificationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationObject.h; sourceTree = "<group>"; };
@@ -192,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB4C01291833CE9F00EC97B1 /* libsqlite3.dylib in Frameworks */,
 				271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */,
 				271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */,
 				2748FCD217F8738000A3B9ED /* CoreGraphics.framework in Frameworks */,
@@ -235,6 +253,7 @@
 		2748FCCE17F8738000A3B9ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FB4C01281833CE9F00EC97B1 /* libsqlite3.dylib */,
 				271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */,
 				271EA35917FD88B20069B2C9 /* Security.framework */,
 				2748FCCF17F8738000A3B9ED /* Foundation.framework */,
@@ -321,8 +340,8 @@
 		FB0136EA182E74110006DFB9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FB54789D181EA37800501B7A /* DataModel.h */,
-				FB54789E181EA37800501B7A /* DataModel.m */,
+				FB54789D181EA37800501B7A /* Storage.h */,
+				FB54789E181EA37800501B7A /* Storage.m */,
 				FB5D10C8182F7940006E1D01 /* NotificationObject.h */,
 				FB5D10C9182F7940006E1D01 /* NotificationObject.m */,
 			);
@@ -377,6 +396,7 @@
 		FB255BDC18228B4B00A0008B /* external */ = {
 			isa = PBXGroup;
 			children = (
+				FB4C01181833CE8B00EC97B1 /* fmdb */,
 				FB255BEC18228D0E00A0008B /* MMDrawerController */,
 				FB4FDE7D181F948100FF9331 /* AFNetworking */,
 			);
@@ -407,6 +427,23 @@
 				FB255BFD18228D9B00A0008B /* LeftViewController.xib */,
 			);
 			name = LeftWindow;
+			sourceTree = "<group>";
+		};
+		FB4C01181833CE8B00EC97B1 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				FB4C01191833CE8B00EC97B1 /* FMDatabase.h */,
+				FB4C011A1833CE8B00EC97B1 /* FMDatabase.m */,
+				FB4C011B1833CE8B00EC97B1 /* FMDatabaseAdditions.h */,
+				FB4C011C1833CE8B00EC97B1 /* FMDatabaseAdditions.m */,
+				FB4C011D1833CE8B00EC97B1 /* FMDatabasePool.h */,
+				FB4C011E1833CE8B00EC97B1 /* FMDatabasePool.m */,
+				FB4C011F1833CE8B00EC97B1 /* FMDatabaseQueue.h */,
+				FB4C01201833CE8B00EC97B1 /* FMDatabaseQueue.m */,
+				FB4C01211833CE8B00EC97B1 /* FMResultSet.h */,
+				FB4C01221833CE8B00EC97B1 /* FMResultSet.m */,
+			);
+			path = fmdb;
 			sourceTree = "<group>";
 		};
 		FB4FDE7D181F948100FF9331 /* AFNetworking */ = {
@@ -608,6 +645,7 @@
 				FBD2C00D18334FD000BBE4AF /* AuthorizeViewController.m in Sources */,
 				FB0136E9182E73570006DFB9 /* WeiboCellData.m in Sources */,
 				FB4FDE96181F948100FF9331 /* AFURLConnectionOperation.m in Sources */,
+				FB4C01271833CE8B00EC97B1 /* FMResultSet.m in Sources */,
 				FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */,
 				FB5D10CA182F7940006E1D01 /* NotificationObject.m in Sources */,
 				FB4FDE97181F948100FF9331 /* AFURLRequestSerialization.m in Sources */,
@@ -615,18 +653,22 @@
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,
 				FB255BFE18228D9B00A0008B /* LeftViewController.m in Sources */,
 				FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */,
+				FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */,
 				FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */,
 				FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */,
 				FB255BE018228C0700A0008B /* MessageViewController.m in Sources */,
 				FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */,
-				FB54789F181EA37800501B7A /* DataModel.m in Sources */,
+				FB4C01231833CE8B00EC97B1 /* FMDatabase.m in Sources */,
+				FB54789F181EA37800501B7A /* Storage.m in Sources */,
 				FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */,
+				FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */,
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,
 				FB255BE518228C1B00A0008B /* PersonViewController.m in Sources */,
 				FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */,
 				FB255BEA18228C2900A0008B /* MoreViewController.m in Sources */,
+				FB4C01261833CE8B00EC97B1 /* FMDatabaseQueue.m in Sources */,
 				FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */,
 				FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */,
 			);

@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 kyle. All rights reserved.
 //
 
-#import "DataModel.h"
+#import "Storage.h"
 #import "KUnits.h"
 #import "NotificationObject.h"
 #import "AFNetworking.h"
 
-@implementation DataModel {
+@implementation Storage {
     NSMutableDictionary *imageDictionary;
 }
 
@@ -35,23 +35,6 @@
     [[NSFileManager defaultManager] createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:&error];
 
     return self;
-}
-
-+ (NSString *)getAccessToken
-{
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    return [ud objectForKey:@"accessToken"];
-}
-
-+ (void)saveAccessToken:(NSString *)accessToken
-{
-    if (!accessToken) {
-        return;
-    }
-    
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject:accessToken forKey:@"accessToken"];
-    [ud synchronize];
 }
 
 //url 转化为本地图片路径

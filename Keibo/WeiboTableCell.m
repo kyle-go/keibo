@@ -8,7 +8,7 @@
 
 #import "WeiboTableCell.h"
 #import "WeiboCellData.h"
-#import "DataModel.h"
+#import "Storage.h"
 #import "KUnits.h"
 
 @implementation WeiboTableCell {
@@ -77,7 +77,7 @@
 - (void)updateWithWeiboData:(WeiboCellData *)data
 {
     cellData = data;
-    DataModel *model = [DataModel DMInstance];
+    Storage *model = [Storage storageInstance];
     NSString *localFile = [model translateUrlToLocalPath:data.avatarUrl notificationName:nil customObj:nil];
     
     if ([localFile length] == 0) {

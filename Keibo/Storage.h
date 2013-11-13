@@ -8,12 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataModel : NSObject
+@interface Storage : NSObject
 
-+ (instancetype)DMInstance;
-
-+ (NSString *)getAccessToken;
-+ (void)saveAccessToken:(NSString *)accessToken;
++ (instancetype)storageInstance;
 
 - (NSString *)translateUrlToLocalPath:(NSString *)url notificationName:(NSString *)name customObj:(id)obj;
 @end

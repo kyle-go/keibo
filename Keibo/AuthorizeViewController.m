@@ -129,7 +129,6 @@
 {
     //获取登录者个人资料
     
-    
     //显示主界面
     MainPageViewController *mainViewController = [[MainPageViewController alloc] init];
     MessageViewController *messageViewController = [[MessageViewController alloc] init];
