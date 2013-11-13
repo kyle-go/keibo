@@ -18,6 +18,7 @@
 
 @implementation MainPageViewController {
     NSMutableArray *weiboArray;
+    NSMutableDictionary *weiboHeights;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -27,6 +28,7 @@
         [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_home"]];
         self.title = @"首页";
         weiboArray = [[NSMutableArray alloc] init];
+        weiboHeights = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -46,6 +48,8 @@
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                               target:self
                                               action:@selector(newWeibo)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshMainWindowTable:) name:@"freshMainWindowTable" object:nil];
     
     //假数据
     WeiboCellData *a = [[WeiboCellData alloc] init];
@@ -105,6 +109,10 @@
     [weiboArray addObject:b];
     [weiboArray addObject:a];
     [weiboArray addObject:c];
+    
+    [weiboHeights setObject:[[NSNumber alloc] initWithFloat:250.0] forKey:@"a"];
+    [weiboHeights setObject:[[NSNumber alloc] initWithFloat:250.0] forKey:@"b"];
+    [weiboHeights setObject:[[NSNumber alloc] initWithFloat:250.0] forKey:@"c"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,6 +129,26 @@
 }
 
 #pragma mark -- table View Data Source
+- (void) freshMainWindowTable:(NSNotification *)param
+{
+    id cell = [param.userInfo objectForKey:@"cell"];
+    CGFloat height = [[param.userInfo objectForKey:@"height"] floatValue];
+    
+    if ([weiboArray objectAtIndex:0] == cell) {
+        [weiboHeights setObject: [[NSNumber alloc]initWithFloat:height] forKey:@"a"];
+    }
+    
+    if ([weiboArray objectAtIndex:1] == cell) {
+        [weiboHeights setObject: [[NSNumber alloc]initWithFloat:height] forKey:@"b"];
+    }
+    
+    if ([weiboArray objectAtIndex:2] == cell) {
+        [weiboHeights setObject: [[NSNumber alloc]initWithFloat:height] forKey:@"c"];
+    }
+    
+    [self.tableView reloadData];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -145,6 +173,7 @@
     }
     
     cell.webView.delegate = cell;
+
     [cell updateWithWeiboData:[weiboArray objectAtIndex:indexPath.row]];
     
     return cell;
@@ -169,8 +198,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WeiboTableCell *cell = (WeiboTableCell *)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-    return cell.webViewHeight + 250;
+    if (indexPath.row == 0) {
+        return [[weiboHeights objectForKey:@"a"] floatValue];
+    }
+    else if (indexPath.row == 1) {
+        return [[weiboHeights objectForKey:@"b"] floatValue];
+    }
+    else {//(indexPath.row == 2) {
+        return [[weiboHeights objectForKey:@"c"] floatValue];
+    }
 }
 
 @end

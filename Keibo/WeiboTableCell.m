@@ -11,7 +11,12 @@
 #import "DataModel.h"
 #import "KUnits.h"
 
-@implementation WeiboTableCell
+@implementation WeiboTableCell {
+    WeiboCellData *cellData;
+    UIView *btnRepost;
+    UIView *btnComment;
+    UIView *btnLike;
+}
 
 //remember IndexpathsForVisibleCells
 
@@ -42,6 +47,10 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    if (self.webViewHeight == self.webView.scrollView.contentSize.height) {
+        return;
+    }
+    
     self.webViewHeight = self.webView.scrollView.contentSize.height;
     self.webView.frame = CGRectMake(0, 50, 320, self.webViewHeight);
     
@@ -50,13 +59,24 @@
     NSString *textComment = [[NSString alloc] initWithFormat:@"(%ld)", (long)self.comment];
     NSString *textLike = [[NSString alloc] initWithFormat:@"(%ld)", (long)self.like];
     
-    [self addSubview:[self createUIButton:CGRectMake(30, self.webViewHeight+50, 22+40, 22) title:textRepost]];
-    [self addSubview:[self createUIButton:CGRectMake(130, self.webViewHeight+50, 22+40, 22) title:textComment]];
-    [self addSubview:[self createUIButton:CGRectMake(230, self.webViewHeight+50, 22+40, 22) title:textLike]];
+    [btnRepost removeFromSuperview];
+    [btnComment removeFromSuperview];
+    [btnLike removeFromSuperview];
+    
+    [self addSubview: btnRepost = [self createUIButton:CGRectMake(30, self.webViewHeight+50, 22+40, 22) title:textRepost]];
+    [self addSubview: btnComment = [self createUIButton:CGRectMake(130, self.webViewHeight+50, 22+40, 22) title:textComment]];
+    [self addSubview: btnLike = [self createUIButton:CGRectMake(230, self.webViewHeight+50, 22+40, 22) title:textLike]];
+    
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    [param setObject:cellData forKey:@"cell"];
+    [param setObject:[[NSNumber alloc] initWithFloat:self.webViewHeight + 80.0] forKey:@"height"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"freshMainWindowTable" object:nil userInfo:param];
 }
 
 - (void)updateWithWeiboData:(WeiboCellData *)data
 {
+    cellData = data;
     DataModel *model = [DataModel DMInstance];
     NSString *localFile = [model translateUrlToLocalPath:data.avatarUrl notificationName:nil customObj:nil];
     
