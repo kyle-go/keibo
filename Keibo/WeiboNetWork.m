@@ -48,7 +48,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
         } else {
             NSNumber *uid = [json objectForKey:@"uid"];
-            NSDictionary *params = @{@"access_token":accessToken, @"uid":[[NSString alloc] initWithFormat:@"%d", [uid intValue]]};
+            NSDictionary *params = @{@"access_token":accessToken, @"uid":[[NSString alloc] initWithFormat:@"%lld", [uid longLongValue]]};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginSucceed" object:nil userInfo:params];
         }
     };
@@ -119,7 +119,7 @@
         
         //解析数据
         DTUser *user = [[DTUser alloc] init];
-        user.uid = [json objectForKey:@"id"];
+        user.uid = [json objectForKey:@"idstr"];
         user.name = [json objectForKey:@"screen_name"];
         user.nickName = [json objectForKey:@"remark"];
         user.avatar = [json objectForKey:@"profile_image_url"];
@@ -255,14 +255,14 @@
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSString *filePath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:@"media"];
+        NSString *filePath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:kMedia];
         NSString *file = [[NSString alloc] initWithFormat:@"%@/%@", filePath, uuid];
         return [NSURL fileURLWithPath:file isDirectory:NO];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         
         if (!error) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Media" object:nil
-            userInfo:@{@"url": url, @"name": uuid}];
+            userInfo:@{@"url": url, @"path": [filePath path]}];
         }
     }];
     [downloadTask resume];

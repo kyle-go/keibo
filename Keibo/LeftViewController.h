@@ -11,5 +11,11 @@
 @interface LeftViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *signLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fanCount;
+@property (strong, nonatomic) IBOutlet UILabel *followingCount;
+@property (strong, nonatomic) IBOutlet UILabel *weiboCount;
 
 @end

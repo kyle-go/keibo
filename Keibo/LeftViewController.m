@@ -8,6 +8,8 @@
 
 #import "LeftViewController.h"
 #import "UIUser.h"
+#import "Storage.h"
+#import "WeiboNetWork.h"
 
 @interface LeftViewController ()
 
@@ -16,6 +18,8 @@
 @implementation LeftViewController {
     NSArray *defaultSectionNames;
     NSArray *sectionNames;
+    
+    NSString *avatarUrl;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshLoginUser:) name:@"freshLoginUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshLoginUser:) name:@"LeftView_LoginUser" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,11 +44,48 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)registerAvatarImageFresh
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshAvatar:) name:@"WeiboNetWork_Media" object:nil];
+}
+
+- (void)freshAvatar:(NSNotification *)nofity
+{
+    NSDictionary *param = [nofity userInfo];
+    NSString *url = [param objectForKey:@"url"];
+    if ([url isEqualToString:avatarUrl]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        
+        //刷新头像
+        NSString *path = [param objectForKey:@"path"];
+        self.avatarImageView.image = [UIImage imageWithContentsOfFile:path];
+    }
+}
+
 - (void)freshLoginUser:(NSNotification *)notify
 {
     NSDictionary *params = notify.userInfo;
     UIUser *user = [params objectForKey:@"user"];
-    //fresh with user....
+    
+    //刷新界面
+    NSString *avatar = [[Storage storageInstance] getMediaByUrl:user.avatar];
+    if ([avatar length] == 0) {
+        avatarUrl = user.avatar;
+        avatar = @"avatar-0";
+        if (user.sex) {
+            avatar = @"avatar-1";
+        }
+        [self registerAvatarImageFresh];
+        [WeiboNetWork getOneMedia:user.avatar];
+    }
+    
+    self.avatarImageView.image = [UIImage imageNamed:avatar];
+    self.nameLabel.text = user.name;
+    self.signLabel.text = user.sign;
+    self.fanCount.text = [[NSString alloc] initWithFormat:@"粉丝:%d", user.fanCount];
+    self.followingCount.text = [[NSString alloc] initWithFormat:@"关注:%d", user.followingCount ];
+    self.weiboCount.text = [[NSString alloc] initWithFormat:@"微博:%d", user.weiboCount];
+    
 }
 
 #pragma mark -- table View Data Source
@@ -84,7 +125,6 @@
     
     return cell;
 }
-
 
 //设置section头部
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

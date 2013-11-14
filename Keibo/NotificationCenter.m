@@ -7,8 +7,14 @@
 //
 
 #import "NotificationCenter.h"
+#import "DTUser.h"
+#import "UIUser.h"
+#import "DataAdapter.h"
+#import "Storage.h"
 
-@implementation NotificationCenter
+@implementation NotificationCenter {
+    Storage *storageInstance;
+}
 
 +(instancetype) NCInstance
 {
@@ -21,6 +27,8 @@
 - (id)init
 {
     if (self = [super init]) {
+        storageInstance = [Storage storageInstance];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_User:) name:@"WeiboNetWork_User" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Weibo:) name:@"WeiboNetWork_Weibo" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_WbMedia:) name:@"WeiboNetWork_WbMedia" object:nil];
@@ -32,7 +40,17 @@
 #pragma mark -------------- observer ----------------
 -(void)WeiboNetWork_User:(NSNotification *)notify
 {
-    NSLog(@"WeiboNetWrok_User.");
+    NSDictionary *param = [notify userInfo];
+    DTUser *user = [param objectForKey:@"User"];
+    UIUser *uiUser = [DataAdapter UserAdapter:user];
+    
+    if ([user.uid isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUserId]]) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LeftView_LoginUser" object:nil userInfo:@{@"user":uiUser}];
+    }
+    
+    //写入数据库
+    [storageInstance addUser:user];
 }
 
 -(void)WeiboNetWork_Weibo:(NSNotification *)notify
@@ -47,6 +65,6 @@
 
 -(void)WeiboNetWork_Media:(NSNotification *)notify
 {
-    NSLog(@"WeiboNetWrok_Media.");
+//    [storageInstance addMedia: ]
 }
 @end

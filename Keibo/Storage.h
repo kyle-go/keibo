@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DTUser.h"
-#import "DTWeibo.h"
-#import "DTWeiboMedia.h"
+@class DTUser;
+@class DTWeibo;
+@class DTWeiboMedia;
 
 @interface Storage : NSObject
 
@@ -25,9 +25,11 @@
 - (void)addWeibo:(DTWeibo *)weibo;
 
 //添加/更新多媒体资源
-- (void)addBasicMedia:(NSString *)url File:(NSString *)file;
+- (void)addMedia:(NSString *)url File:(NSString *)file;
 
 //添加weibo多媒体资源
 - (void)addWeiboMedia:(DTWeiboMedia *)media;
+
+- (NSString *)getMediaByUrl:(NSString *)url;
 
 @end

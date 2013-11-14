@@ -10,13 +10,13 @@
 #import "KUnits.h"
 #import "AFNetworking.h"
 #import "FMDatabase.h"
+#import "DTUser.h"
+#import "DTWeibo.h"
+#import "DTWeiboMedia.h"
 
 @implementation Storage {
     FMDatabase *db;
     NSString *ownerId;
-    
-    //.....
-    NSMutableDictionary *imageDictionary;
 }
 
 + (instancetype)storageInstance
@@ -30,13 +30,11 @@
 - (id)init
 {
     if (self = [super init]) {
-        imageDictionary = [[NSMutableDictionary alloc] init];
+        //创建media文件夹
+        NSString *imagesPath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:kMedia];
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:&error];
     }
-    
-    //创建media文件夹
-    NSString *imagesPath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:@"media"];
-    NSError *error;
-    [[NSFileManager defaultManager] createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:&error];
 
     return self;
 }
@@ -100,9 +98,9 @@
     }
     
     //多媒体库(Media) --- 多媒体资源url跟本地路径关系
-    //多媒体url，本地文件名（路径是固定的，所以只存一个文件名就ok，文件名是uuid随机生存）
-    //url，name
-    sql = @"CREATE TABLE IF NOT EXISTS 'Media' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'url' VARCHAR(512), 'name' VARCHAR(40))";
+    //多媒体url，本地全路径（文件名是uuid随机生存）
+    //url，path
+    sql = @"CREATE TABLE IF NOT EXISTS 'Media' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'url' VARCHAR(512), 'path' VARCHAR(260))";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create Media table failed. error=%@", [db lastError]);
         abort();
@@ -121,7 +119,7 @@
     
 }
 
-- (void)addBasicMedia:(NSString *)url File:(NSString *)file
+- (void)addMedia:(NSString *)url File:(NSString *)file
 {
     
 }
@@ -129,6 +127,16 @@
 - (void)addWeiboMedia:(DTWeiboMedia *)media
 {
     
+}
+
+- (NSString *)getMediaByUrl:(NSString *)url
+{
+    NSString *sql = @"SELECT * FROM Media WHERE url='?'";
+    FMResultSet *fs = [db executeQuery:sql, url];
+    if ([fs next]) {
+        return [fs stringForColumn:@"path"];
+    }
+    return nil;
 }
 
 @end

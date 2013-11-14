@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35917FD88B20069B2C9 /* Security.framework */; };
 		271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */; };
+		2737020F1835308D00016FB1 /* DataAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737020E1835308D00016FB1 /* DataAdapter.m */; };
 		2748FCD017F8738000A3B9ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCCF17F8738000A3B9ED /* Foundation.framework */; };
 		2748FCD217F8738000A3B9ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD117F8738000A3B9ED /* CoreGraphics.framework */; };
 		2748FCD417F8738000A3B9ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD317F8738000A3B9ED /* UIKit.framework */; };
@@ -98,6 +99,8 @@
 /* Begin PBXFileReference section */
 		271EA35917FD88B20069B2C9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		2737020D1835308D00016FB1 /* DataAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAdapter.h; sourceTree = "<group>"; };
+		2737020E1835308D00016FB1 /* DataAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAdapter.m; sourceTree = "<group>"; };
 		2748FCCC17F8738000A3B9ED /* Keibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2748FCCF17F8738000A3B9ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2748FCD117F8738000A3B9ED /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -473,6 +476,8 @@
 		FB4C013418349FED00EC97B1 /* StorageUI-Adapter */ = {
 			isa = PBXGroup;
 			children = (
+				2737020D1835308D00016FB1 /* DataAdapter.h */,
+				2737020E1835308D00016FB1 /* DataAdapter.m */,
 			);
 			name = "StorageUI-Adapter";
 			sourceTree = "<group>";
@@ -709,6 +714,7 @@
 				FB255BE018228C0700A0008B /* MessageViewController.m in Sources */,
 				FB4C01381834A31800EC97B1 /* UIUser.m in Sources */,
 				FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */,
+				2737020F1835308D00016FB1 /* DataAdapter.m in Sources */,
 				FB4C01231833CE8B00EC97B1 /* FMDatabase.m in Sources */,
 				FB54789F181EA37800501B7A /* Storage.m in Sources */,
 				FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */,
