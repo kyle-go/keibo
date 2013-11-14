@@ -112,7 +112,7 @@
 //添加/更新一条用户数据
 - (void)addUser:(DTUser *)user
 {
-    NSString *sql = @"";
+    //NSString *sql = @"";
 }
 
 //添加/更新一条微博

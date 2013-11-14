@@ -189,7 +189,7 @@
         //解析数据
         DTWeibo *weibo = [[DTWeibo alloc] init];
         weibo.weiboId = [[json objectForKey:@"id"] longLongValue];
-        weibo.date = [json objectForKey:@"create_at"];
+        weibo.date = [KUnits getNSDateByDateString:[json objectForKey:@"created_at"]];
         NSDictionary *user = [json objectForKey:@"user"];
         weibo.owner = [user objectForKey:@"idstr"];
         weibo.source = [KUnits getWeiboSourceText:[json objectForKey:@"source"]];
@@ -220,7 +220,7 @@
                 
                 int index = 0;
                 for (NSDictionary *each in pics) {
-                    NSString *url = [pics objectForKey:@"thumbnail_pic"];
+                    NSString *url = [each objectForKey:@"thumbnail_pic"];
                     DTWeiboMedia *media = [[DTWeiboMedia alloc] init];
                     media.weiboId = weibo.weiboId;
                     media.type = Type_Picture;

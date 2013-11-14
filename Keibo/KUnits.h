@@ -29,4 +29,7 @@
 //新浪微博
 + (NSString *)getWeiboSourceText:(NSString *)text;
 
+//Thu Nov 14 20:19:09 +0800 2013
++ (NSDate *)getNSDateByDateString:(NSString *)dateString;
+
 @end

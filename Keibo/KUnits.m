@@ -109,4 +109,14 @@
     return defaultValue;
 }
 
+
+
+//Thu Nov 14 20:19:09 +0800 2013
++ (NSDate *)getNSDateByDateString:(NSString *)dateString
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"EEE MMM dd HH:mm:ss z yyyy"];
+    return [formatter dateFromString:dateString];
+}
+
 @end
