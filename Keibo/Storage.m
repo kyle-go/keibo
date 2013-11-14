@@ -13,8 +13,11 @@
 #import "FMDatabase.h"
 
 @implementation Storage {
-    NSMutableDictionary *imageDictionary;
     FMDatabase *db;
+    NSString *ownerId;
+    
+    //.....
+    NSMutableDictionary *imageDictionary;
 }
 
 + (instancetype)storageInstance
@@ -31,8 +34,8 @@
         imageDictionary = [[NSMutableDictionary alloc] init];
     }
     
-    //创建images文件夹
-    NSString *imagesPath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:@"images"];
+    //创建media文件夹
+    NSString *imagesPath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:@"media"];
     NSError *error;
     [[NSFileManager defaultManager] createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:&error];
 
@@ -63,12 +66,16 @@
         abort();
     }
     
+    //保存用户名
+    ownerId = userId;
+    
+    //--------------------------------------------- 创建各种表 ---------------------------------------------------------
     //创建用户信息表(User) --- 记录用户一些信息，包括自己
     //uid, 名称，昵称，头像url，大头像url，性别，归属地，微博数，粉丝数，关注人数，签名，是否加V，加v原因，是否达人，最新一条微博id，是否正在关注,
-    //uid, name, nickname，avatar，avatarLarge,sex,address,weiboCount,fanCount，followingCount，sign，verified，verifiedReason，star,lastMyWeiboId, following
+    //uid, name, nickName，avatar，avatarLarge,sex,address,weiboCount,fanCount，followingCount，sign，verified，verifiedReason，star,lastMyWeiboId, following
     //是否此用户正在关注我, 是否所有人可以发私信，是否所有人可以评论, 互粉数
     //followMe，allowAllMsg，allowAllComment, biFollowerCount
-    NSString *sql = @"CREATE TABLE IF NOT EXISTS 'User' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickname' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowerCount' INTEGER)";
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS 'User' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickName' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowerCount' INTEGER)";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create User table failed. error=%@", [db lastError]);
         abort();
@@ -101,6 +108,16 @@
         NSLog(@"Create Media table failed. error=%@", [db lastError]);
         abort();
     }
+}
+
+- (void)addMedia:(NSString *)url File:(NSString *)file
+{
+    
+}
+
+- (void)addWeiboMedia:(DTWeiboMedia *)media
+{
+    
 }
 
 //url 转化为本地图片路径

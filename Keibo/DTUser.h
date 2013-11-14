@@ -11,4 +11,25 @@
 //DataBase Table User
 @interface DTUser : NSObject
 
+@property (strong, nonatomic)NSString *uid;
+@property (strong, nonatomic)NSString *name;
+@property (strong, nonatomic)NSString *nickName;
+@property (strong, nonatomic)NSString *avatar;
+@property (strong, nonatomic)NSString *avatarLarge;
+@property (strong, nonatomic)NSString *address;
+@property (strong, nonatomic)NSString *sign;
+@property (assign, nonatomic)NSInteger sex; //0-man  1-woman 2-unknown
+@property (assign, nonatomic)NSInteger weiboCount;
+@property (assign, nonatomic)NSInteger fanCount;
+@property (assign, nonatomic)NSInteger followingCount;
+@property (assign, nonatomic)NSInteger verified; //是否加v
+@property (strong, nonatomic)NSString *verifiedReason;
+@property (assign, nonatomic)NSInteger star;//是否达人
+@property (assign, nonatomic)long long lastMyWeiboId;
+@property (assign, nonatomic)NSInteger following;
+@property (assign, nonatomic)NSInteger followMe;
+@property (assign, nonatomic)NSInteger allowAllMsg;
+@property (assign, nonatomic)NSInteger allowAllComment;
+@property (assign, nonatomic)NSInteger biFollowCount;
+
 @end

@@ -48,6 +48,8 @@
 		FB4C01271833CE8B00EC97B1 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C01221833CE8B00EC97B1 /* FMResultSet.m */; };
 		FB4C01291833CE9F00EC97B1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4C01281833CE9F00EC97B1 /* libsqlite3.dylib */; };
 		FB4C012C18346CCE00EC97B1 /* DTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C012B18346CCE00EC97B1 /* DTUser.m */; };
+		FB4C012F183498AF00EC97B1 /* DTWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C012E183498AF00EC97B1 /* DTWeibo.m */; };
+		FB4C013218349E6000EC97B1 /* DTWeiboMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C013118349E6000EC97B1 /* DTWeiboMedia.m */; };
 		FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */; };
 		FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE81181F948100FF9331 /* AFHTTPRequestOperationManager.m */; };
 		FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE83181F948100FF9331 /* AFHTTPSessionManager.m */; };
@@ -157,6 +159,10 @@
 		FB4C01281833CE9F00EC97B1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		FB4C012A18346CCE00EC97B1 /* DTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTUser.h; sourceTree = "<group>"; };
 		FB4C012B18346CCE00EC97B1 /* DTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTUser.m; sourceTree = "<group>"; };
+		FB4C012D183498AF00EC97B1 /* DTWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTWeibo.h; sourceTree = "<group>"; };
+		FB4C012E183498AF00EC97B1 /* DTWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWeibo.m; sourceTree = "<group>"; };
+		FB4C013018349E6000EC97B1 /* DTWeiboMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTWeiboMedia.h; sourceTree = "<group>"; };
+		FB4C013118349E6000EC97B1 /* DTWeiboMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWeiboMedia.m; sourceTree = "<group>"; };
 		FB4FDE7E181F948100FF9331 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		FB4FDE80181F948100FF9331 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -345,6 +351,10 @@
 			children = (
 				FB4C012A18346CCE00EC97B1 /* DTUser.h */,
 				FB4C012B18346CCE00EC97B1 /* DTUser.m */,
+				FB4C012D183498AF00EC97B1 /* DTWeibo.h */,
+				FB4C012E183498AF00EC97B1 /* DTWeibo.m */,
+				FB4C013018349E6000EC97B1 /* DTWeiboMedia.h */,
+				FB4C013118349E6000EC97B1 /* DTWeiboMedia.m */,
 				FB54789D181EA37800501B7A /* Storage.h */,
 				FB54789E181EA37800501B7A /* Storage.m */,
 				FB5D10C8182F7940006E1D01 /* NotificationObject.h */,
@@ -646,6 +656,7 @@
 				FB4FDE94181F948100FF9331 /* AFNetworkReachabilityManager.m in Sources */,
 				FB255BF618228D0E00A0008B /* MMDrawerBarButtonItem.m in Sources */,
 				FB255BF718228D0E00A0008B /* MMDrawerController.m in Sources */,
+				FB4C013218349E6000EC97B1 /* DTWeiboMedia.m in Sources */,
 				2748FCE017F8738000A3B9ED /* AppDelegate.m in Sources */,
 				FBD2C00D18334FD000BBE4AF /* AuthorizeViewController.m in Sources */,
 				FB0136E9182E73570006DFB9 /* WeiboCellData.m in Sources */,
@@ -671,6 +682,7 @@
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,
 				FB255BE518228C1B00A0008B /* PersonViewController.m in Sources */,
+				FB4C012F183498AF00EC97B1 /* DTWeibo.m in Sources */,
 				FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */,
 				FB255BEA18228C2900A0008B /* MoreViewController.m in Sources */,
 				FB4C01261833CE8B00EC97B1 /* FMDatabaseQueue.m in Sources */,
