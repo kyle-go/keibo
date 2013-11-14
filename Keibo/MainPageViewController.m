@@ -11,7 +11,7 @@
 #import "MMDrawerBarButtonItem.h"
 #import "UIViewController+MMDrawerController.h"
 #import "WeiboTableCell.h"
-#import "WeiboCellData.h"
+#import "UIWeibo.h"
 
 @interface MainPageViewController ()
 
@@ -53,7 +53,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshMainWindowTable:) name:@"freshMainWindowTable" object:nil];
     
     //假数据
-    WeiboCellData *a = [[WeiboCellData alloc] init];
+    UIWeibo *a = [[UIWeibo alloc] init];
     a.weiboId = 1001;
     a.avatarUrl = @"http://tp2.sinaimg.cn/1496915057/50/40020993740/1";
     a.name = @"OnlySwan";
@@ -71,7 +71,7 @@
     a.originComments = 0;
     a.originLikes = 8;
     
-    WeiboCellData *b = [[WeiboCellData alloc] init];
+    UIWeibo *b = [[UIWeibo alloc] init];
     b.weiboId = 1002;
     b.avatarUrl = @"http://tp1.sinaimg.cn/1496850204/50/1283204010/1";
     b.name = @"封新城";
@@ -89,7 +89,7 @@
     b.originComments = 0;
     b.originLikes = 8;
     
-    WeiboCellData *c = [[WeiboCellData alloc] init];
+    UIWeibo *c = [[UIWeibo alloc] init];
     c.weiboId = 1001;
     c.avatarUrl = @"http://tp2.sinaimg.cn/1496915057/50/40020993740/1";
     c.name = @"OnlySwan";

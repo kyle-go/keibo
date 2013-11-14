@@ -1,14 +1,14 @@
 //
-//  WeiboCellData.h
+//  UIWeibo.h
 //  Keibo
 //
-//  Created by kyle on 11/9/13.
-//  Copyright (c) 2013 kyle. All rights reserved.
+//  Created by kyle on 13-11-14.
+//  Copyright (c) 2013年 kyle. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface WeiboCellData : NSObject
+@interface UIWeibo : NSObject
 
 @property (assign, nonatomic)NSInteger weiboId;         //微博唯一标识
 @property (strong, nonatomic)NSString *avatarUrl;       //头像http url

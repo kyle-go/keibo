@@ -110,7 +110,7 @@
     }
 }
 
-- (void)addMedia:(NSString *)url File:(NSString *)file
+- (void)addBasicMedia:(NSString *)url File:(NSString *)file
 {
     
 }

@@ -14,7 +14,7 @@
 + (NSString *)generateUuidString;
 
 //格式化一条微博，repostContent为nil说明没有被转发原微博
-+ (NSString *)weiboFormat:(NSString *)content repost:(NSString *)repostContent;
++ (NSString *)weiboFormat:(NSString *)content repost:(NSString *)repostContent reposter:(NSString *)name;
 
 //格式化一个http连接
 + (NSURL*)generateURL:(NSString*)baseURL params:(NSDictionary*)params;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class WeiboCellData;
+@class UIWeibo;
 
 @interface WeiboTableCell : UITableViewCell <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -23,6 +23,6 @@
 @property (assign, nonatomic) CGFloat webViewHeight;
 - (IBAction)btnMoreAction:(id)sender;
 
-- (void)updateWithWeiboData:(WeiboCellData *)data;
+- (void)updateWithWeiboData:(UIWeibo *)data;
 
 @end

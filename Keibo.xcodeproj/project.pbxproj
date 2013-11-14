@@ -25,7 +25,6 @@
 		274C4A8D17FB1A3D00D231E8 /* NewWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C4A8C17FB1A3D00D231E8 /* NewWeiboViewController.m */; };
 		FB0136E5182E70970006DFB9 /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = FB0136E3182E70970006DFB9 /* comments.png */; };
 		FB0136E6182E70970006DFB9 /* comments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB0136E4182E70970006DFB9 /* comments@2x.png */; };
-		FB0136E9182E73570006DFB9 /* WeiboCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0136E8182E73570006DFB9 /* WeiboCellData.m */; };
 		FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BD418228A6C00A0008B /* MainPageViewController.m */; };
 		FB255BD718228A6C00A0008B /* MainPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BD518228A6C00A0008B /* MainPageViewController.xib */; };
 		FB255BE018228C0700A0008B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BDE18228C0700A0008B /* MessageViewController.m */; };
@@ -50,6 +49,8 @@
 		FB4C012C18346CCE00EC97B1 /* DTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C012B18346CCE00EC97B1 /* DTUser.m */; };
 		FB4C012F183498AF00EC97B1 /* DTWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C012E183498AF00EC97B1 /* DTWeibo.m */; };
 		FB4C013218349E6000EC97B1 /* DTWeiboMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C013118349E6000EC97B1 /* DTWeiboMedia.m */; };
+		FB4C01381834A31800EC97B1 /* UIUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C01371834A31800EC97B1 /* UIUser.m */; };
+		FB4C013B1834A43200EC97B1 /* UIWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C013A1834A43200EC97B1 /* UIWeibo.m */; };
 		FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */; };
 		FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE81181F948100FF9331 /* AFHTTPRequestOperationManager.m */; };
 		FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE83181F948100FF9331 /* AFHTTPSessionManager.m */; };
@@ -118,8 +119,6 @@
 		274C4A8C17FB1A3D00D231E8 /* NewWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewWeiboViewController.m; sourceTree = "<group>"; };
 		FB0136E3182E70970006DFB9 /* comments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments.png; sourceTree = "<group>"; };
 		FB0136E4182E70970006DFB9 /* comments@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments@2x.png"; sourceTree = "<group>"; };
-		FB0136E7182E73570006DFB9 /* WeiboCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboCellData.h; sourceTree = "<group>"; };
-		FB0136E8182E73570006DFB9 /* WeiboCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboCellData.m; sourceTree = "<group>"; };
 		FB255BD318228A6C00A0008B /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		FB255BD418228A6C00A0008B /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 		FB255BD518228A6C00A0008B /* MainPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageViewController.xib; sourceTree = "<group>"; };
@@ -163,6 +162,10 @@
 		FB4C012E183498AF00EC97B1 /* DTWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWeibo.m; sourceTree = "<group>"; };
 		FB4C013018349E6000EC97B1 /* DTWeiboMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTWeiboMedia.h; sourceTree = "<group>"; };
 		FB4C013118349E6000EC97B1 /* DTWeiboMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWeiboMedia.m; sourceTree = "<group>"; };
+		FB4C01361834A31800EC97B1 /* UIUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUser.h; sourceTree = "<group>"; };
+		FB4C01371834A31800EC97B1 /* UIUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIUser.m; sourceTree = "<group>"; };
+		FB4C01391834A43200EC97B1 /* UIWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWeibo.h; sourceTree = "<group>"; };
+		FB4C013A1834A43200EC97B1 /* UIWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWeibo.m; sourceTree = "<group>"; };
 		FB4FDE7E181F948100FF9331 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		FB4FDE80181F948100FF9331 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -276,21 +279,17 @@
 		2748FCD517F8738000A3B9ED /* Keibo */ = {
 			isa = PBXGroup;
 			children = (
+				FB4C013418349FED00EC97B1 /* StorageUI-Adapter */,
+				FB4C013318349FDF00EC97B1 /* Data-UI */,
 				FB5D10C4182F7443006E1D01 /* KUnits */,
-				FB255BDC18228B4B00A0008B /* external */,
-				FB255BD818228A7300A0008B /* Main */,
-				2768E4141820159200896288 /* Authorize */,
-				FB255BD918228AAC00A0008B /* Message */,
-				FB255BDA18228ACD00A0008B /* Person */,
-				FB255BDB18228B3400A0008B /* More */,
-				274C4A8A17FB1A0A00D231E8 /* NewWeibo */,
-				FB255BFA18228D6900A0008B /* LeftWindow */,
+				FB255BDC18228B4B00A0008B /* External */,
+				FB4C01351834A06400EC97B1 /* VCs */,
+				FB0136EA182E74110006DFB9 /* Model */,
 				2748FCDE17F8738000A3B9ED /* AppDelegate.h */,
 				2748FCDF17F8738000A3B9ED /* AppDelegate.m */,
 				2748FCE417F8738000A3B9ED /* ViewController.h */,
 				2748FCE517F8738000A3B9ED /* ViewController.m */,
 				2748FCE717F8738000A3B9ED /* Images.xcassets */,
-				FB0136EA182E74110006DFB9 /* Model */,
 				FBE452C5183084C400DB43FF /* Resources */,
 				2748FCD617F8738000A3B9ED /* Supporting Files */,
 			);
@@ -366,8 +365,6 @@
 		FB255BD818228A7300A0008B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				FB0136E7182E73570006DFB9 /* WeiboCellData.h */,
-				FB0136E8182E73570006DFB9 /* WeiboCellData.m */,
 				FB6CEAD3182CE62000C07414 /* WeiboTableCell.h */,
 				FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */,
 				FB6CEAD6182CE63A00C07414 /* WeiboTableCell.xib */,
@@ -408,14 +405,14 @@
 			name = More;
 			sourceTree = "<group>";
 		};
-		FB255BDC18228B4B00A0008B /* external */ = {
+		FB255BDC18228B4B00A0008B /* External */ = {
 			isa = PBXGroup;
 			children = (
 				FB4C01181833CE8B00EC97B1 /* fmdb */,
 				FB255BEC18228D0E00A0008B /* MMDrawerController */,
 				FB4FDE7D181F948100FF9331 /* AFNetworking */,
 			);
-			name = external;
+			name = External;
 			sourceTree = "<group>";
 		};
 		FB255BEC18228D0E00A0008B /* MMDrawerController */ = {
@@ -459,6 +456,38 @@
 				FB4C01221833CE8B00EC97B1 /* FMResultSet.m */,
 			);
 			path = fmdb;
+			sourceTree = "<group>";
+		};
+		FB4C013318349FDF00EC97B1 /* Data-UI */ = {
+			isa = PBXGroup;
+			children = (
+				FB4C01361834A31800EC97B1 /* UIUser.h */,
+				FB4C01371834A31800EC97B1 /* UIUser.m */,
+				FB4C01391834A43200EC97B1 /* UIWeibo.h */,
+				FB4C013A1834A43200EC97B1 /* UIWeibo.m */,
+			);
+			name = "Data-UI";
+			sourceTree = "<group>";
+		};
+		FB4C013418349FED00EC97B1 /* StorageUI-Adapter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "StorageUI-Adapter";
+			sourceTree = "<group>";
+		};
+		FB4C01351834A06400EC97B1 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				FB255BD818228A7300A0008B /* Main */,
+				2768E4141820159200896288 /* Authorize */,
+				FB255BD918228AAC00A0008B /* Message */,
+				FB255BDA18228ACD00A0008B /* Person */,
+				FB255BDB18228B3400A0008B /* More */,
+				274C4A8A17FB1A0A00D231E8 /* NewWeibo */,
+				FB255BFA18228D6900A0008B /* LeftWindow */,
+			);
+			name = VCs;
 			sourceTree = "<group>";
 		};
 		FB4FDE7D181F948100FF9331 /* AFNetworking */ = {
@@ -659,7 +688,6 @@
 				FB4C013218349E6000EC97B1 /* DTWeiboMedia.m in Sources */,
 				2748FCE017F8738000A3B9ED /* AppDelegate.m in Sources */,
 				FBD2C00D18334FD000BBE4AF /* AuthorizeViewController.m in Sources */,
-				FB0136E9182E73570006DFB9 /* WeiboCellData.m in Sources */,
 				FB4FDE96181F948100FF9331 /* AFURLConnectionOperation.m in Sources */,
 				FB4C01271833CE8B00EC97B1 /* FMResultSet.m in Sources */,
 				FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */,
@@ -667,12 +695,14 @@
 				FB4FDE97181F948100FF9331 /* AFURLRequestSerialization.m in Sources */,
 				274C4A8D17FB1A3D00D231E8 /* NewWeiboViewController.m in Sources */,
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,
+				FB4C013B1834A43200EC97B1 /* UIWeibo.m in Sources */,
 				FB255BFE18228D9B00A0008B /* LeftViewController.m in Sources */,
 				FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */,
 				FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */,
 				FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */,
 				FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */,
 				FB255BE018228C0700A0008B /* MessageViewController.m in Sources */,
+				FB4C01381834A31800EC97B1 /* UIUser.m in Sources */,
 				FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */,
 				FB4C01231833CE8B00EC97B1 /* FMDatabase.m in Sources */,
 				FB54789F181EA37800501B7A /* Storage.m in Sources */,

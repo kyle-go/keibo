@@ -15,7 +15,7 @@
     return [NSString stringWithString:CFBridgingRelease(uuid)];
 }
 
-+ (NSString *)weiboFormat:(NSString *)content repost:(NSString *)repostContent
++ (NSString *)weiboFormat:(NSString *)content repost:(NSString *)repostContent reposter:(NSString *)name;
 {
     NSString *templateName;
     BOOL hasOriginWeibo = [repostContent length];
@@ -44,7 +44,8 @@
     
     NSString *html = [templateContent stringByReplacingOccurrencesOfString:@"WEIBO-BODY" withString:stringTranslate(content)];
     if (hasOriginWeibo) {
-        html = [html stringByReplacingOccurrencesOfString:@"WEIBO-REPOST" withString:stringTranslate(repostContent)];
+        NSString *translate = [[NSString alloc] initWithFormat:@"<strong>@%@:</strong>%@", name, stringTranslate(repostContent)];
+        html = [html stringByReplacingOccurrencesOfString:@"WEIBO-REPOST" withString:translate];
     }
     
     return html;

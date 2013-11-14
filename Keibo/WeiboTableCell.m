@@ -7,12 +7,12 @@
 //
 
 #import "WeiboTableCell.h"
-#import "WeiboCellData.h"
+#import "UIWeibo.h"
 #import "Storage.h"
 #import "KUnits.h"
 
 @implementation WeiboTableCell {
-    WeiboCellData *cellData;
+    UIWeibo *cellData;
     UIView *btnRepost;
     UIView *btnComment;
     UIView *btnLike;
@@ -74,7 +74,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"freshMainWindowTable" object:nil userInfo:param];
 }
 
-- (void)updateWithWeiboData:(WeiboCellData *)data
+- (void)updateWithWeiboData:(UIWeibo *)data
 {
     cellData = data;
     Storage *model = [Storage storageInstance];
@@ -99,7 +99,7 @@
     self.webView.scrollView.bounces = NO;
     self.webView.opaque = NO;
     
-    NSString *htmlString = [KUnits weiboFormat:data.content repost:data.hasOriginWeibo? data.originContent:nil];
+    NSString *htmlString = [KUnits weiboFormat:data.content repost:data.hasOriginWeibo? data.originContent:nil reposter:data.originName];
     [self.webView loadHTMLString:htmlString baseURL:nil];
 }
 
