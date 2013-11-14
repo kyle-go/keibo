@@ -11,6 +11,7 @@
 #import "AFTextResponseSerializer.h"
 #import "DTUser.h"
 #import "DTWeibo.h"
+#import "DTWeiboMedia.h"
 #import "KUnits.h"
 
 @implementation WeiboNetWork
@@ -125,6 +126,7 @@
         user.avatarLarge = [json objectForKey:@"avatar_large"];
         user.address = [json objectForKey:@"location"];
         user.sign = [json objectForKey:@"description"];
+        user.blog = [json objectForKey:@"url"];
         user.sex = [[json objectForKey:@"gender"] isEqualToString:@"m"]? 0:1;
         user.weiboCount = [[json objectForKey:@"statuses_count"] intValue];
         user.fanCount = [[json objectForKey:@"followers_count"] intValue];
@@ -215,7 +217,18 @@
                 weibo.picture = 0;
             } else {
                 weibo.picture = 1;
-                //分析picture内容，写入数据库
+                
+                int index = 0;
+                for (NSDictionary *each in pics) {
+                    NSString *url = [pics objectForKey:@"thumbnail_pic"];
+                    DTWeiboMedia *media = [[DTWeiboMedia alloc] init];
+                    media.weiboId = weibo.weiboId;
+                    media.type = Type_Picture;
+                    media.index = index++;
+                    media.url = url;
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_WbMedia" object:nil userInfo:@{@"WbMedia": media}];
+                }
             }
         }
         

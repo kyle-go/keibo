@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+enum DTWeiboMedia_Type {
+    Type_Picture = 0,
+    Type_Music = 1,
+    Type_Movie = 2,
+};
+
 //DataBase Table WbMedia
 @interface DTWeiboMedia : NSObject
 

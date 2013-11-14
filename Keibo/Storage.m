@@ -71,10 +71,10 @@
     //--------------------------------------------- 创建各种表 ---------------------------------------------------------
     //创建用户信息表(User) --- 记录用户一些信息，包括自己
     //uid, 名称，昵称，头像url，大头像url，性别，归属地，微博数，粉丝数，关注人数，签名，是否加V，加v原因，是否达人，是否会员，最新一条微博id，是否正在关注,
-    //uid, name, nickName，avatar，avatarLarge,sex,address,weiboCount,fanCount，followingCount，sign，verified，verifiedReason，star,weiboMember，lastMyWeiboId, following
+    //uid, name, nickName，avatar，avatarLarge,sex,address,weiboCount,fanCount，followingCount，sign，verified，verifiedReason，star,weiboMember，lastMyWeiboId, following，blog
     //是否此用户正在关注我, 是否所有人可以发私信，是否所有人可以评论, 互粉数
     //followMe，allowAllMsg，allowAllComment, biFollowerCount
-    NSString *sql = @"CREATE TABLE IF NOT EXISTS 'User' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickName' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'weiboMember' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowerCount' INTEGER)";
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS 'User' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickName' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'weiboMember' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowerCount' INTEGER, 'blog' VARCHAR(128))";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create User table failed. error=%@", [db lastError]);
         abort();
@@ -92,7 +92,7 @@
     }
     
     //微博资源表（WbMedia）
-    //微博唯一Id，类型（图片小，图片中，图片大，音乐，视频），资源序号，URL地址
+    //微博唯一Id，类型（图片，音乐，视频,目前只有图片这一种），资源序号，URL地址
     sql = @"CREATE TABLE IF NOT EXISTS 'WbMedia' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'type' INTEGER, 'index' INTEGER, 'url' VARCHAR(512))";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create WbMedia table failed. error=%@", [db lastError]);

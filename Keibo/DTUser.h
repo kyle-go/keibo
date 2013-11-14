@@ -18,6 +18,7 @@
 @property (strong, nonatomic)NSString *avatarLarge;
 @property (strong, nonatomic)NSString *address;
 @property (strong, nonatomic)NSString *sign;
+@property (strong, nonatomic)NSString *blog;
 @property (assign, nonatomic)NSInteger sex; //0-man  1-woman 2-unknown
 @property (assign, nonatomic)NSInteger weiboCount;
 @property (assign, nonatomic)NSInteger fanCount;
