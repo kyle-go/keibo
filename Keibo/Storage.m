@@ -51,6 +51,8 @@
     
     //用userId初始化数据库
     NSString *dbFile = [PATH_OF_DOCUMENT stringByAppendingPathComponent:userId];
+    dbFile = [dbFile stringByAppendingString:@"_v1"]; //for v1 database
+    
     db = [FMDatabase databaseWithPath:dbFile];
     if (!db) {
         NSLog(@"FMDatabase databaseWithPath failed.");
@@ -61,21 +63,36 @@
         abort();
     }
     
-    //创建登录者信息表(loginUser) --- 记录登录人的详细信息
-    //uid,名称，头像url，性别，归属地，微博数，粉丝数，关注人数，签名，是否加V，最新一条微博id，最新赞过微博id
-    //uid,name,avatar,sex,address,weiboCount,fanCount，followingCount，sign，isVip，lastMyWeiboId，lastLikeWeiboId
+    //创建用户信息表(User) --- 记录用户一些信息，包括自己
+    //uid, 名称，昵称，头像url，大头像url，性别，归属地，微博数，粉丝数，关注人数，签名，是否加V，加v原因，是否达人，最新一条微博id，是否正在关注,
+    //uid, name, nickname，avatar，avatarLarge,sex,address,weiboCount,fanCount，followingCount，sign，verified，verifiedReason，star,lastMyWeiboId, following
+    //是否此用户正在关注我, 是否所有人可以发私信，是否所有人可以评论, 互粉数
+    //followMe，allowAllMsg，allowAllComment, biFollowerCount
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS 'User' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickname' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowerCount' INTEGER)";
+    if (![db executeUpdate:sql]) {
+        NSLog(@"Create User table failed. error=%@", [db lastError]);
+        abort();
+    }
     
-    //创建用户表(user) --- 各种出现的人的基本信息
-    //uid,名称，头像url，微博数，粉丝数，关注人数
-    //uid，name，avatar，weiboCount，fanCount，followingCount
+    //微博表(Weibo) --- 各种微博
+    //微博唯一Id，创建时间，所属人，来源，可见性，内容， 是否转发，原转发微博id, 转发数，评论数，赞数，收藏
+    //weiboId，date, owner，source，visible，content，isRepost，originalWeiboId, repostCount, commentCount, likeCount, favorited，
     
-    //微博表(weibo) --- 各种微博
-    //微博唯一Id，所属人，类型，内容， 是否转发，原转发微博id,
-    //weiboId，owner，type，content，isRepost，originalWeiboId,
+    //0：普通微博，1：私密微博，3：指定分组微博，4：密友微博；list_id为分组的组号
+    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), )";
+    if (![db executeUpdate:sql]) {
+        NSLog(@"Create Weibo table failed. error=%@", [db lastError]);
+        abort();
+    }
     
-    //图片库(images) --- 各种图片url跟本地路径关系
+    //图片库(Image) --- 各种图片url跟本地路径关系
     //图片url，本地文件名（路径是固定的，所以只存一个文件名就ok，文件名是uuid随机生存）
-    //url，filename
+    //url，name
+    sql = @"CREATE TABLE IF NOT EXISTS 'Image' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'url' VARCHAR(512), 'name' VARCHAR(40))";
+    if (![db executeUpdate:sql]) {
+        NSLog(@"Create Image table failed. error=%@", [db lastError]);
+        abort();
+    }
 }
 
 //url 转化为本地图片路径
