@@ -64,7 +64,6 @@
 		FB4FDE99181F948100FF9331 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE90181F948100FF9331 /* AFURLSessionManager.m */; };
 		FB54789F181EA37800501B7A /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = FB54789E181EA37800501B7A /* Storage.m */; };
 		FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D10C6182F7497006E1D01 /* KUnits.m */; };
-		FB5D10CA182F7940006E1D01 /* NotificationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D10C9182F7940006E1D01 /* NotificationObject.m */; };
 		FB5D10CF182FAD6F006E1D01 /* avatar-1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5D10CD182FAD6F006E1D01 /* avatar-1.png */; };
 		FB5D10D0182FAD6F006E1D01 /* avatar-0.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5D10CE182FAD6F006E1D01 /* avatar-0.png */; };
 		FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */; };
@@ -195,8 +194,6 @@
 		FB54789E181EA37800501B7A /* Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storage.m; sourceTree = "<group>"; };
 		FB5D10C5182F7497006E1D01 /* KUnits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KUnits.h; sourceTree = "<group>"; };
 		FB5D10C6182F7497006E1D01 /* KUnits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KUnits.m; sourceTree = "<group>"; };
-		FB5D10C8182F7940006E1D01 /* NotificationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationObject.h; sourceTree = "<group>"; };
-		FB5D10C9182F7940006E1D01 /* NotificationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationObject.m; sourceTree = "<group>"; };
 		FB5D10CD182FAD6F006E1D01 /* avatar-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar-1.png"; sourceTree = "<group>"; };
 		FB5D10CE182FAD6F006E1D01 /* avatar-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar-0.png"; sourceTree = "<group>"; };
 		FB6CEAD3182CE62000C07414 /* WeiboTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTableCell.h; sourceTree = "<group>"; };
@@ -362,8 +359,6 @@
 				FB4C013118349E6000EC97B1 /* DTWeiboMedia.m */,
 				FB54789D181EA37800501B7A /* Storage.h */,
 				FB54789E181EA37800501B7A /* Storage.m */,
-				FB5D10C8182F7940006E1D01 /* NotificationObject.h */,
-				FB5D10C9182F7940006E1D01 /* NotificationObject.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -701,7 +696,6 @@
 				FB4FDE96181F948100FF9331 /* AFURLConnectionOperation.m in Sources */,
 				FB4C01271833CE8B00EC97B1 /* FMResultSet.m in Sources */,
 				FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */,
-				FB5D10CA182F7940006E1D01 /* NotificationObject.m in Sources */,
 				FB4FDE97181F948100FF9331 /* AFURLRequestSerialization.m in Sources */,
 				274C4A8D17FB1A3D00D231E8 /* NewWeiboViewController.m in Sources */,
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,

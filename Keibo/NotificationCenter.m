@@ -22,6 +22,9 @@
 {
     if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_User:) name:@"WeiboNetWork_User" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Weibo:) name:@"WeiboNetWork_Weibo" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_WbMedia:) name:@"WeiboNetWork_WbMedia" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Media:) name:@"WeiboNetWork_Media" object:nil];
     }
     return self;
 }
@@ -32,4 +35,18 @@
     NSLog(@"WeiboNetWrok_User.");
 }
 
+-(void)WeiboNetWork_Weibo:(NSNotification *)notify
+{
+    NSLog(@"WeiboNetWrok_Weibo.");
+}
+
+-(void)WeiboNetWork_WbMedia:(NSNotification *)notify
+{
+    NSLog(@"WeiboNetWrok_WbMedia.");
+}
+
+-(void)WeiboNetWork_Media:(NSNotification *)notify
+{
+    NSLog(@"WeiboNetWrok_Media.");
+}
 @end

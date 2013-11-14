@@ -25,4 +25,8 @@
 //  return = "2.00vVnMpDjoxjvDbc593cb4eft_exCE"
 + (NSString *)getSubSplitString:(NSString *)string sub:(NSString *)key;
 
+//"<a href=\"http://weibo.com/\" rel=\"nofollow\">新浪微博</a>"
+//新浪微博
++ (NSString *)getWeiboSourceText:(NSString *)text;
+
 @end

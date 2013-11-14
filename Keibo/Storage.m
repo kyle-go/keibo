@@ -8,7 +8,6 @@
 
 #import "Storage.h"
 #import "KUnits.h"
-#import "NotificationObject.h"
 #import "AFNetworking.h"
 #import "FMDatabase.h"
 
@@ -71,11 +70,11 @@
     
     //--------------------------------------------- 创建各种表 ---------------------------------------------------------
     //创建用户信息表(User) --- 记录用户一些信息，包括自己
-    //uid, 名称，昵称，头像url，大头像url，性别，归属地，微博数，粉丝数，关注人数，签名，是否加V，加v原因，是否达人，最新一条微博id，是否正在关注,
-    //uid, name, nickName，avatar，avatarLarge,sex,address,weiboCount,fanCount，followingCount，sign，verified，verifiedReason，star,lastMyWeiboId, following
+    //uid, 名称，昵称，头像url，大头像url，性别，归属地，微博数，粉丝数，关注人数，签名，是否加V，加v原因，是否达人，是否会员，最新一条微博id，是否正在关注,
+    //uid, name, nickName，avatar，avatarLarge,sex,address,weiboCount,fanCount，followingCount，sign，verified，verifiedReason，star,weiboMember，lastMyWeiboId, following
     //是否此用户正在关注我, 是否所有人可以发私信，是否所有人可以评论, 互粉数
     //followMe，allowAllMsg，allowAllComment, biFollowerCount
-    NSString *sql = @"CREATE TABLE IF NOT EXISTS 'User' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickName' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowerCount' INTEGER)";
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS 'User' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickName' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'weiboMember' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowerCount' INTEGER)";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create User table failed. error=%@", [db lastError]);
         abort();
@@ -83,10 +82,10 @@
     
     //微博表(Weibo) --- 各种微博
     //微博唯一Id，创建时间，所属人，来源，可见性，内容， 是否转发，原转发微博id, 转发数，评论数，赞数，收藏，有图片，有音乐，有视频
-    //weiboId，date, owner，source，visible，content，isRepost，originalWeiboId, repostCount, commentCount, likeCount, favorite，picture，music，movie
+    //weiboId，date, owner，source，visible，content，isRepost，originalWeiboId, repostCount, commentCount, likeCount, favorite，picture
     
     //0：普通微博，1：私密微博，3：指定分组微博，4：密友微博；list_id为分组的组号
-    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER, 'music' INTEGER, 'movie' INTEGER)";
+    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER)";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create Weibo table failed. error=%@", [db lastError]);
         abort();
@@ -152,17 +151,17 @@
         NSString *file = [[NSString alloc] initWithFormat:@"%@/%@", filePath, [KUnits generateUuidString]];
         return [NSURL fileURLWithPath:file isDirectory:NO];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        NotificationObject *notify = [[NotificationObject alloc] init];
-        notify.customObj = obj;
-        
-        if (!error) {
-            notify.resultValue = [filePath path];
-            [imageDictionary setObject:notify.resultValue forKey:url];
-        } else {
-            notify.resultValue = nil;
-            NSLog(@"downloaded %@ failed. error=%@", filePath, error);
-        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:name object:notify];
+//        NotificationObject *notify = [[NotificationObject alloc] init];
+//        notify.customObj = obj;
+//        
+//        if (!error) {
+//            notify.resultValue = [filePath path];
+//            [imageDictionary setObject:notify.resultValue forKey:url];
+//        } else {
+//            notify.resultValue = nil;
+//            NSLog(@"downloaded %@ failed. error=%@", filePath, error);
+//        }
+//        [[NSNotificationCenter defaultCenter] postNotificationName:name object:notify];
     }];
     [downloadTask resume];
     

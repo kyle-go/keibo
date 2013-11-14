@@ -91,4 +91,22 @@
     return nil;
 }
 
++ (NSString *)getWeiboSourceText:(NSString *)text
+{
+    NSString *defaultValue = @"未知应用";
+    if ([text length] == 0) {
+        return defaultValue;
+    }
+    
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@">[^[><]]+</a>"
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+    NSRange range = [regex rangeOfFirstMatchInString:text options:NSMatchingReportCompletion range:NSMakeRange(0, [text length])];
+    if (range.location != NSNotFound) {
+        return [text substringWithRange:NSMakeRange(range.location+1, range.length-5)];
+    }
+    return defaultValue;
+}
+
 @end

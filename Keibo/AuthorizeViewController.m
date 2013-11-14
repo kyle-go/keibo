@@ -38,15 +38,12 @@
     [super viewDidLoad];
     self.webView.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed:) name:@"loginSucceed" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginUnSucceed) name:@"loginUnSucceed" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Login) name:@"accessTokenExpired" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forMainView) name:@"accessTokenNoExpired" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenNetWorkFailure) name:@"accessTokenNetWorkFailure" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed:) name:@"AuthorizeView_loginSucceed" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed) name:@"AuthorizeView_loginFailed" object:nil];
     
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
     if (!accessToken) {
-        [self Login];
+        [self login];
         return;
     }
     
@@ -59,24 +56,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)Login {
-    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   kAppKey,                         @"client_id",       //申请的appkey
-                                   kRedirectUri,                    @"redirect_uri",    //申请时的重定向地址
-								   @"mobile",                       @"display",         //web页面的显示方式
-                                   @"all",                          @"scope",
-                                   @"true",                         @"forcelogin",
-                                   nil];
-	
-	NSURL *url = [KUnits generateURL:@"https://open.weibo.cn/oauth2/authorize" params:params];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
-	[self.webView loadRequest:request];
-}
-
-- (void)accessTokenNetWorkFailure
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请检查网络" message:@"验证token失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    [alertView show];
+#pragma mark -------- 登录相关 ------------------------
+- (void)login {
+	[self.webView loadRequest:[WeiboNetWork loginRequest]];
 }
 
 - (void)loginSucceed:(NSNotification *)notify
@@ -89,21 +71,21 @@
     [[NSUserDefaults standardUserDefaults] setObject:userId forKey:kUserId];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    [self getLoginInformation:accessToken userId:userId];
     [self showMainView];
 }
 
-- (void)loginUnSucceed
+- (void)loginFailed
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请检查网络" message:@"登陆失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"登录失败" message:@"token过期了么?" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
     [alertView show];
+    [self login];
 }
 
 #pragma mark ---- UIWebViewDelegate ---------
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *url = [[request URL] absoluteString];
-    NSLog(@"webview's url = %@", url);
-    
     NSRange range = [url rangeOfString:@"https://github.com/kylescript?code="];
     if (range.location == NSNotFound) {
         return YES;
@@ -114,16 +96,18 @@
     return NO;
 }
 
+#pragma mark ---- get information when login -----------
+- (void)getLoginInformation:(NSString *)accessToken userId:(NSString *)uid
+{
+    //获取登录者个人资料
+    [WeiboNetWork getUser:accessToken userId:uid];
+    
+    //获取最近10条微博
+}
+
 #pragma mark ---- show main window ---------
 - (void)showMainView
 {
-    //获取登录者个人资料
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:kUserId];
-    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
-    [WeiboNetWork getUser:accessToken userId:userId];
-    
-    //获取最近10条微博
-    
     //帐号注销的情况
     if (drawerController) {
         [self presentViewController:drawerController animated:YES completion:nil];

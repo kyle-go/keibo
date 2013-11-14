@@ -11,12 +11,25 @@
 #import "AFTextResponseSerializer.h"
 #import "DTUser.h"
 #import "DTWeibo.h"
+#import "KUnits.h"
 
 @implementation WeiboNetWork
 
-//过期 发送一个 “accessTokenExpired”广播
-//未过期 发送一个 “accessTokenNoExpired”广播
-//网络故障 发送一个 “accessTokenNetWorkFailure” 广播
+//获取登录request
++ (NSURLRequest *)loginRequest
+{
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            kAppKey,                         @"client_id",       //申请的appkey
+                            kRedirectUri,                    @"redirect_uri",    //申请时的重定向地址
+                            @"mobile",                       @"display",         //web页面的显示方式
+                            @"all",                          @"scope",
+                            @"true",                         @"forcelogin",
+                            nil];
+	
+	NSURL *url = [KUnits generateURL:@"https://open.weibo.cn/oauth2/authorize" params:params];
+   return [[NSURLRequest alloc]initWithURL:url];
+}
+
 + (void)checkAccessToken:(NSString *)accessToken
 {
     //获取token是否过期成功回调
@@ -31,17 +44,19 @@
         
         //已经过期则重新认证
         if ([expire intValue] <= 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"accessTokenExpired" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"accessTokenNoExpired" object:nil];
+            NSString *uid = [json objectForKey:@"uid"];
+            NSDictionary *params = @{@"access_token":accessToken, @"uid":uid};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginSucceed" object:nil userInfo:params];
         }
     };
     
     //获取token是否过期失败回调
     void (^failure_callback)(AFHTTPRequestOperation *operation, NSError *error) =
     ^(AFHTTPRequestOperation *operation, NSError *error){
-        NSLog(@"Error: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"accessTokenNetWorkFailure" object:nil];
+        NSLog(@"checkAccessToken Error: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
     };
     
     //判断token是否过期POST请求
@@ -63,20 +78,20 @@
         
         //已经过期则重新认证
         if ([expire intValue] <= 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"loginUnSucceed" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
             return;
         }
 
         NSString *accessToken = [json objectForKey:@"access_token"];
         NSString *uid = [json objectForKey:@"uid"];
         NSDictionary *params = @{@"access_token":accessToken, @"uid":uid};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSucceed" object:nil userInfo:params];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginSucceed" object:nil userInfo:params];
     };
     
     void (^failure_callback)(AFHTTPRequestOperation *operation, NSError *error) =
     ^(AFHTTPRequestOperation *operation, NSError *error){
-        NSLog(@"Error: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"loginUnSucceed" object:nil];
+        NSLog(@"getAccessTokenByCode Error: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
     };
     
     //判断token是否过期POST请求
@@ -93,10 +108,54 @@
         NSLog(@"JSON: %@", responseObject);
         
         NSError *error;
-        NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        NSDictionary *json;
+        if ([responseObject isKindOfClass:[NSString class]]) {
+            NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+            json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        } else {
+            json = responseObject;
+        }
         
-
+        //解析数据
+        DTUser *user = [[DTUser alloc] init];
+        user.uid = [json objectForKey:@"id"];
+        user.name = [json objectForKey:@"screen_name"];
+        user.nickName = [json objectForKey:@"remark"];
+        user.avatar = [json objectForKey:@"profile_image_url"];
+        user.avatarLarge = [json objectForKey:@"avatar_large"];
+        user.address = [json objectForKey:@"location"];
+        user.sign = [json objectForKey:@"description"];
+        user.sex = [[json objectForKey:@"gender"] isEqualToString:@"m"]? 0:1;
+        user.weiboCount = [[json objectForKey:@"statuses_count"] intValue];
+        user.fanCount = [[json objectForKey:@"followers_count"] intValue];
+        user.followingCount = [[json objectForKey:@"friends_count"] intValue];
+        user.verified = [[json objectForKey:@"verified"] intValue];
+        user.verifiedReason = [json objectForKey:@"verified_reason"];
+        int verified_type = [[json objectForKey:@"verified_type"] intValue];
+        if (verified_type == 2) {
+            user.verified = 2;
+        }
+        user.star = (verified_type == 200 || verified_type == 220)? 1:0; //官方说了，这个子段为200或者220都是达人
+        user.weiboMember = 0; //官方说了，这个会员接口现在获取不到（2013-2-1）
+        user.following = [[json objectForKey:@"following"] intValue];
+        user.followMe = [[json objectForKey:@"follow_me"] intValue];
+        user.allowAllComment = [[json objectForKey:@"allow_all_comment"] intValue];
+        user.allowAllMsg = [[json objectForKey:@"allow_all_act_msg"] intValue];
+        user.biFollowCount = [[json objectForKey:@"bi_followers_count"] intValue];
+        
+        //TODO: for test ---
+        if (user.verified && user.star) {
+            NSLog(@"达人和v是不能共存的！！！---");
+            abort();
+        }
+        
+        NSDictionary *jsonWeibo = [json objectForKey:@"status"];
+        if (jsonWeibo) {
+            user.lastMyWeiboId = [[jsonWeibo objectForKey:@"id"] longLongValue];
+            [WeiboNetWork getWeibo:accessToken weiboId:user.lastMyWeiboId];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_User" object:nil userInfo:@{@"User": user}];
     };
     
     void (^failure)(AFHTTPRequestOperation *operation, NSError *error) =
@@ -108,6 +167,70 @@
     //[manager setResponseSerializer:[AFTextResponseSerializer serializer]];
     NSDictionary *params = @{@"access_token":accessToken, @"uid":uid};
     [manager GET:@"https://api.weibo.com/2/users/show.json" parameters:params success:success failure:failure];
+}
+
++ (void)getWeibo:(NSString *)accessToken weiboId:(long long)weiboId
+{
+    void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
+    ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        NSError *error;
+        NSDictionary *json;
+        if ([responseObject isKindOfClass:[NSString class]]) {
+            NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+            json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        } else {
+            json = responseObject;
+        }
+        
+        //解析数据
+        DTWeibo *weibo = [[DTWeibo alloc] init];
+        weibo.weiboId = [[json objectForKey:@"id"] longLongValue];
+        weibo.date = [json objectForKey:@"create_at"];
+        NSDictionary *user = [json objectForKey:@"user"];
+        weibo.owner = [user objectForKey:@"idstr"];
+        weibo.source = [KUnits getWeiboSourceText:[json objectForKey:@"source"]];
+        NSDictionary *visiable = [json objectForKey:@"visible"];
+        weibo.visible = [[visiable objectForKey:@"type"] intValue];
+        if (weibo.visible == 2) {
+            weibo.visible *= 10000;
+            weibo.visible += [[visiable objectForKey:@"list_id"] intValue];
+        }
+        weibo.content = [json objectForKey:@"text"];
+        weibo.repostCount = [[json objectForKey:@"reposts_count"] intValue];
+        weibo.commentCount = [[json objectForKey:@"comments_count"] intValue];
+        weibo.likeCount = [[json objectForKey:@"attitudes_count"] intValue];
+        weibo.favorite = [[json objectForKey:@"favorited"] intValue];
+        
+        NSDictionary *repost= [json objectForKey:@"retweeted_status"];
+        weibo.isRepost = repost? 1:0;
+        if (weibo.isRepost) {
+            weibo.picture = 0;
+            weibo.originalWeiboId = [[repost objectForKey:@"idstr"] longLongValue];
+            [WeiboNetWork getWeibo:accessToken weiboId:weibo.originalWeiboId];
+        } else {
+            NSDictionary *pics = [json objectForKey:@"pic_urls"];
+            if ([pics count] == 0) {
+                weibo.picture = 0;
+            } else {
+                weibo.picture = 1;
+                //分析picture内容，写入数据库
+            }
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Weibo" object:nil userInfo:@{@"Weibo": weibo}];
+    };
+    
+    void (^failure)(AFHTTPRequestOperation *operation, NSError *error) =
+    ^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"get Weibo Error: %@", error);
+    };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //[manager setResponseSerializer:[AFTextResponseSerializer serializer]];
+    NSDictionary *params = @{@"access_token":accessToken, @"id":[[NSString alloc] initWithFormat:@"%lld", weiboId]};
+    [manager GET:@"https://api.weibo.com/2/statuses/show.json" parameters:params success:success failure:failure];
 }
 
 @end

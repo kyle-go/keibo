@@ -8,15 +8,18 @@
 
 #import "appInitialize.h"
 #import "NotificationCenter.h"
+#import "Storage.h"
 
 //define global variable instance.
 NotificationCenter * notifyCenter;
+Storage *storage;
 
 @implementation appInitialize
 
 + (void)appInit
 {
     notifyCenter = [NotificationCenter NCInstance];
+    storage = [Storage storageInstance];
 }
 
 @end
