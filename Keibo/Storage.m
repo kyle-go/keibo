@@ -110,6 +110,18 @@
     }
 }
 
+//添加/更新一条用户数据
+- (void)addUser:(DTUser *)user
+{
+    NSString *sql = @"";
+}
+
+//添加/更新一条微博
+- (void)addWeibo:(DTWeibo *)weibo
+{
+    
+}
+
 - (void)addBasicMedia:(NSString *)url File:(NSString *)file
 {
     

@@ -16,10 +16,12 @@
 + (void)checkAccessToken:(NSString *)accessToken;
 
 //由authorization_code获取accessToken
-//成功发送一个“LoginSucceed”广播
-//失败发送一个“LoginUnSucceed”广播
+//成功发送一个“loginSucceed”广播
+//失败发送一个“loginUnSucceed”广播
 + (void)getAccessTokenByCode:(NSString *)code;
 
-+ (void)getUserInfo:(NSString *)accessToken user:(NSString *)uid;
+//获取某个用户的信息
+//发送一个"WeiboNetWork_User"通知
++ (void)getUser:(NSString *)accessToken userId:(NSString *)uid;
 
 @end

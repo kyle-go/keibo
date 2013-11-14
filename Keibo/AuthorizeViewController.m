@@ -20,7 +20,9 @@
 
 @end
 
-@implementation AuthorizeViewController
+@implementation AuthorizeViewController {
+    MMDrawerController *drawerController;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,8 +40,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed:) name:@"loginSucceed" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginUnSucceed) name:@"loginUnSucceed" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenExpired) name:@"accessTokenExpired" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenNoExpired) name:@"accessTokenNoExpired" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Login) name:@"accessTokenExpired" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forMainView) name:@"accessTokenNoExpired" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenNetWorkFailure) name:@"accessTokenNetWorkFailure" object:nil];
     
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
@@ -47,6 +49,7 @@
         [self Login];
         return;
     }
+    
     [WeiboNetWork checkAccessToken:accessToken];
 }
 
@@ -70,19 +73,6 @@
 	[self.webView loadRequest:request];
 }
 
-#pragma mark ------ net working callback ------
-- (void)accessTokenExpired
-{
-    //已经过期，重新登陆
-    [self Login];
-}
-
-- (void)accessTokenNoExpired
-{
-    //没过期，显示主界面
-    [self forMainView];
-}
-
 - (void)accessTokenNetWorkFailure
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请检查网络" message:@"验证token失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -99,7 +89,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:userId forKey:kUserId];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self forMainView];
+    [self showMainView];
 }
 
 - (void)loginUnSucceed
@@ -124,9 +114,21 @@
     return NO;
 }
 
-- (void)forMainView
+#pragma mark ---- show main window ---------
+- (void)showMainView
 {
     //获取登录者个人资料
+    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:kUserId];
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+    [WeiboNetWork getUser:accessToken userId:userId];
+    
+    //获取最近10条微博
+    
+    //帐号注销的情况
+    if (drawerController) {
+        [self presentViewController:drawerController animated:YES completion:nil];
+        return;
+    }
     
     //显示主界面
     MainPageViewController *mainViewController = [[MainPageViewController alloc] init];
@@ -149,7 +151,7 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController setViewControllers:[[NSArray alloc] initWithObjects:mainNav, messageNav, personNav, settingNav, nil]];
     
-    MMDrawerController *drawerController = [[MMDrawerController alloc]
+    drawerController = [[MMDrawerController alloc]
                                             initWithCenterViewController:tabBarController
                                             leftDrawerViewController:[[LeftViewController alloc] init]];
     

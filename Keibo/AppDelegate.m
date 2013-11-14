@@ -7,12 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import "appInitialize.h"
 #import "AuthorizeViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [appInitialize appInit];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[AuthorizeViewController alloc] init];
     

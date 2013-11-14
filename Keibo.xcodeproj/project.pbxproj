@@ -51,6 +51,8 @@
 		FB4C013218349E6000EC97B1 /* DTWeiboMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C013118349E6000EC97B1 /* DTWeiboMedia.m */; };
 		FB4C01381834A31800EC97B1 /* UIUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C01371834A31800EC97B1 /* UIUser.m */; };
 		FB4C013B1834A43200EC97B1 /* UIWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C013A1834A43200EC97B1 /* UIWeibo.m */; };
+		FB4C013E1834BF0200EC97B1 /* NotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C013D1834BF0200EC97B1 /* NotificationCenter.m */; };
+		FB4C01411834C0A100EC97B1 /* appInitialize.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C01401834C0A100EC97B1 /* appInitialize.m */; };
 		FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */; };
 		FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE81181F948100FF9331 /* AFHTTPRequestOperationManager.m */; };
 		FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE83181F948100FF9331 /* AFHTTPSessionManager.m */; };
@@ -166,6 +168,10 @@
 		FB4C01371834A31800EC97B1 /* UIUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIUser.m; sourceTree = "<group>"; };
 		FB4C01391834A43200EC97B1 /* UIWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWeibo.h; sourceTree = "<group>"; };
 		FB4C013A1834A43200EC97B1 /* UIWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWeibo.m; sourceTree = "<group>"; };
+		FB4C013C1834BF0200EC97B1 /* NotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenter.h; sourceTree = "<group>"; };
+		FB4C013D1834BF0200EC97B1 /* NotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenter.m; sourceTree = "<group>"; };
+		FB4C013F1834C0A100EC97B1 /* appInitialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appInitialize.h; sourceTree = "<group>"; };
+		FB4C01401834C0A100EC97B1 /* appInitialize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = appInitialize.m; sourceTree = "<group>"; };
 		FB4FDE7E181F948100FF9331 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		FB4FDE80181F948100FF9331 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -523,8 +529,12 @@
 			children = (
 				FB5D10C5182F7497006E1D01 /* KUnits.h */,
 				FB5D10C6182F7497006E1D01 /* KUnits.m */,
+				FB4C013F1834C0A100EC97B1 /* appInitialize.h */,
+				FB4C01401834C0A100EC97B1 /* appInitialize.m */,
 				FB3135731833869C00AFF3BC /* WeiboNetWork.h */,
 				FB3135741833869C00AFF3BC /* WeiboNetWork.m */,
+				FB4C013C1834BF0200EC97B1 /* NotificationCenter.h */,
+				FB4C013D1834BF0200EC97B1 /* NotificationCenter.m */,
 			);
 			name = KUnits;
 			sourceTree = "<group>";
@@ -701,6 +711,7 @@
 				FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */,
 				FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */,
 				FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */,
+				FB4C01411834C0A100EC97B1 /* appInitialize.m in Sources */,
 				FB255BE018228C0700A0008B /* MessageViewController.m in Sources */,
 				FB4C01381834A31800EC97B1 /* UIUser.m in Sources */,
 				FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */,
@@ -711,6 +722,7 @@
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,
+				FB4C013E1834BF0200EC97B1 /* NotificationCenter.m in Sources */,
 				FB255BE518228C1B00A0008B /* PersonViewController.m in Sources */,
 				FB4C012F183498AF00EC97B1 /* DTWeibo.m in Sources */,
 				FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */,

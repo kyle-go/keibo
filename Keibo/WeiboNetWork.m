@@ -9,6 +9,8 @@
 #import "WeiboNetWork.h"
 #import "AFNetworking.h"
 #import "AFTextResponseSerializer.h"
+#import "DTUser.h"
+#import "DTWeibo.h"
 
 @implementation WeiboNetWork
 
@@ -82,6 +84,30 @@
     [manager setResponseSerializer:[AFTextResponseSerializer serializer]];
     NSDictionary *params = @{@"client_id":kAppKey, @"client_secret":kAppSecret, @"grant_type":@"authorization_code", @"code":code, @"redirect_uri":kRedirectUri};
     [manager POST:@"https://api.weibo.com/oauth2/access_token" parameters:params success:success_callback failure:failure_callback];
+}
+
++ (void)getUser:(NSString *)accessToken userId:(NSString *)uid
+{
+    void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
+    ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        NSError *error;
+        NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+
+    };
+    
+    void (^failure)(AFHTTPRequestOperation *operation, NSError *error) =
+    ^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"get User Error: %@", error);
+    };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //[manager setResponseSerializer:[AFTextResponseSerializer serializer]];
+    NSDictionary *params = @{@"access_token":accessToken, @"uid":uid};
+    [manager GET:@"https://api.weibo.com/2/users/show.json" parameters:params success:success failure:failure];
 }
 
 @end

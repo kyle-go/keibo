@@ -7,6 +7,7 @@
 //
 
 #import "LeftViewController.h"
+#import "UIUser.h"
 
 @interface LeftViewController ()
 
@@ -16,8 +17,6 @@
     NSArray *defaultSectionNames;
     NSArray *sectionNames;
 }
-
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,13 +31,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshLoginUser:) name:@"freshLoginUser" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)freshLoginUser:(NSNotification *)notify
+{
+    NSDictionary *params = notify.userInfo;
+    UIUser *user = [params objectForKey:@"user"];
+    //fresh with user....
 }
 
 #pragma mark -- table View Data Source
