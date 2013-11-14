@@ -15,6 +15,7 @@
 #import "MoreViewController.h"
 #import "KUnits.h"
 #import "WeiboNetWork.h"
+#import "Storage.h"
 
 @interface AuthorizeViewController ()
 
@@ -71,6 +72,10 @@
     [[NSUserDefaults standardUserDefaults] setObject:userId forKey:kUserId];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    //初始化数据库
+    [[Storage storageInstance] initStorageWithUserId:userId];
+    
+    //准备显示主界面
     [self getLoginInformation:accessToken userId:userId];
     [self showMainView];
 }
@@ -86,7 +91,8 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *url = [[request URL] absoluteString];
-    NSRange range = [url rangeOfString:@"https://github.com/kylescript?code="];
+    NSString *searchString = [[NSString alloc] initWithFormat:@"%@?code=", kRedirectUri];
+    NSRange range = [url rangeOfString:searchString];
     if (range.location == NSNotFound) {
         return YES;
     }

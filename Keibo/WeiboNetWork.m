@@ -246,4 +246,10 @@
     [manager GET:@"https://api.weibo.com/2/statuses/show.json" parameters:params success:success failure:failure];
 }
 
+//下载一个媒体(图片,音乐，视频）
++ (void)getOneMedia:(NSString *)ur
+{
+    
+}
+
 @end
