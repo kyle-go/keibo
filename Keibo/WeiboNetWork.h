@@ -34,6 +34,6 @@
 + (void)getWeibo:(NSString *)accessToken weiboId:(long long)weiboId;
 
 //下载一个媒体(图片,音乐，视频）
-+ (void)getOneMedia:(NSString *)ur;
++ (void)getOneMedia:(NSString *)url;
 
 @end

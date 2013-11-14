@@ -30,6 +30,4 @@
 //添加weibo多媒体资源
 - (void)addWeiboMedia:(DTWeiboMedia *)media;
 
-- (NSString *)translateUrlToLocalPath:(NSString *)url notificationName:(NSString *)name customObj:(id)obj;
-
 @end

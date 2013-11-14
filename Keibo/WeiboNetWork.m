@@ -28,7 +28,7 @@
                             nil];
 	
 	NSURL *url = [KUnits generateURL:@"https://open.weibo.cn/oauth2/authorize" params:params];
-   return [[NSURLRequest alloc]initWithURL:url];
+    return [[NSURLRequest alloc]initWithURL:url];
 }
 
 + (void)checkAccessToken:(NSString *)accessToken
@@ -47,8 +47,8 @@
         if ([expire intValue] <= 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
         } else {
-            NSString *uid = [json objectForKey:@"uid"];
-            NSDictionary *params = @{@"access_token":accessToken, @"uid":uid};
+            NSNumber *uid = [json objectForKey:@"uid"];
+            NSDictionary *params = @{@"access_token":accessToken, @"uid":[[NSString alloc] initWithFormat:@"%d", [uid intValue]]};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginSucceed" object:nil userInfo:params];
         }
     };
@@ -82,7 +82,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
             return;
         }
-
+        
         NSString *accessToken = [json objectForKey:@"access_token"];
         NSString *uid = [json objectForKey:@"uid"];
         NSDictionary *params = @{@"access_token":accessToken, @"uid":uid};
@@ -247,9 +247,25 @@
 }
 
 //下载一个媒体(图片,音乐，视频）
-+ (void)getOneMedia:(NSString *)ur
++ (void)getOneMedia:(NSString *)url
 {
-    
+    NSString *uuid = [KUnits generateUuidString];
+    //从网络上下载此文件
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSString *filePath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:@"media"];
+        NSString *file = [[NSString alloc] initWithFormat:@"%@/%@", filePath, uuid];
+        return [NSURL fileURLWithPath:file isDirectory:NO];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        
+        if (!error) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Media" object:nil
+            userInfo:@{@"url": url, @"name": uuid}];
+        }
+    }];
+    [downloadTask resume];
 }
 
 @end

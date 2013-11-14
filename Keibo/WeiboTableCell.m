@@ -77,14 +77,9 @@
 - (void)updateWithWeiboData:(UIWeibo *)data
 {
     cellData = data;
-    Storage *model = [Storage storageInstance];
-    NSString *localFile = [model translateUrlToLocalPath:data.avatarUrl notificationName:nil customObj:nil];
-    
-    if ([localFile length] == 0) {
-        [self.avatarImageView setImage:[UIImage imageNamed:@"avatar-0"]];
-    } else {
-        [self.avatarImageView setImage:[UIImage imageNamed:localFile]];
-    }
+
+    [self.avatarImageView setImage:[UIImage imageNamed:@"avatar-0"]];
+
     
     self.nameLabel.text = data.name;
     self.dateLabel.text = [data.date description];
