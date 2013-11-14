@@ -35,6 +35,9 @@
 {
     [super viewDidLoad];
     self.webView.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed:) name:@"loginSucceed" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginUnSucceed) name:@"loginUnSucceed" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenExpired) name:@"accessTokenExpired" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenNoExpired) name:@"accessTokenNoExpired" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenNetWorkFailure) name:@"accessTokenNetWorkFailure" object:nil];
@@ -56,12 +59,13 @@
 - (void)Login {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    kAppKey,                         @"client_id",       //申请的appkey
-								   @"token",                        @"response_type",   //access_token
                                    kRedirectUri,                    @"redirect_uri",    //申请时的重定向地址
 								   @"mobile",                       @"display",         //web页面的显示方式
+                                   @"all",                          @"scope",
+                                   @"true",                         @"forcelogin",
                                    nil];
 	
-	NSURL *url = [KUnits generateURL:@"https://api.weibo.com/oauth2/authorize" params:params];
+	NSURL *url = [KUnits generateURL:@"https://open.weibo.cn/oauth2/authorize" params:params];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
 	[self.webView loadRequest:request];
 }
@@ -85,44 +89,39 @@
     [alertView show];
 }
 
+- (void)loginSucceed:(NSNotification *)notify
+{
+    NSDictionary *param = notify.userInfo;
+    NSString *accessToken = [param objectForKey:@"access_token"];
+    NSString *userId = [param objectForKey:@"uid"];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:kAccessToken];
+    [[NSUserDefaults standardUserDefaults] setObject:userId forKey:kUserId];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self forMainView];
+}
+
+- (void)loginUnSucceed
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请检查网络" message:@"登陆失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alertView show];
+}
+
 #pragma mark ---- UIWebViewDelegate ---------
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"webview's url = %@", [request URL]);
+    NSString *url = [[request URL] absoluteString];
+    NSLog(@"webview's url = %@", url);
     
-	NSArray *array = [[[request URL] absoluteString] componentsSeparatedByString:@"#"];
-    if ([array count] <= 1) {
+    NSRange range = [url rangeOfString:@"https://github.com/kylescript?code="];
+    if (range.location == NSNotFound) {
         return YES;
     }
     
-    NSString *value = [array objectAtIndex:1];
-    NSRange range1 = [value rangeOfString:@"error_code%3A=" options:NSCaseInsensitiveSearch];
-    NSRange range2 = [value rangeOfString:@"error_code:=" options:NSCaseInsensitiveSearch];
-    
-    if (range1.location == NSNotFound && range2.location == NSNotFound) {
-        //access_token=2.00vVnMpDjoxjvDbc593cb4eft_exCE&remind_in=556237&expires_in=556237&uid=3505041903
-        NSString *access_token = [KUnits getSubSplitString:value sub:@"access_token="];
-        NSString *expires_in = [KUnits getSubSplitString:value sub:@"expires_in"];
-        NSString *uid = [KUnits getSubSplitString:value sub:@"uid="];
-        
-        //登陆成功
-        [[NSUserDefaults standardUserDefaults] setObject:access_token forKey:kAccessToken];
-        [[NSUserDefaults standardUserDefaults] setObject:uid forKey:kUserId];
-        [[NSUserDefaults standardUserDefaults] setObject:expires_in forKey:kExpirseIn];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-
-        //显示主界面
-        [self forMainView];
-    } else {
-        //error%3A=appkey%20permission%20denied&error_code%3A=21337
-        NSRange range = (range1.location == NSNotFound? range2 : range1);
-        NSString *code = [value substringFromIndex:range.location + range.length];
-        NSString *text = [[NSString alloc] initWithFormat:@"错误码:%@", code];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"登录失败" message:text delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
-    }
+    NSString *code = [url substringFromIndex:range.location + range.length];
+    [WeiboNetWork getAccessTokenByCode:code];
     return NO;
-    
 }
 
 - (void)forMainView

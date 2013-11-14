@@ -16,14 +16,11 @@
 
 #import "macro.h"
 
-#define kAppKey             @"3601604349"
-#define kRedirectUri        @"http://hi.baidu.com/jt_one"
-
-//#define kAppKey           @"1110757053"
-//#define kRedirectUri      @"http://github.com/kylescript"
-
+#define kAppKey           @"1110757053"
+#define kAppSecret        @"4b1a5ab78856b1ff88c9d3fbec752b9e"
+#define kRedirectUri      @"http://github.com/kylescript"
 
 #define kAccessToken        @"access_token"
 #define kUserId             @"uid"
-#define kExpirseIn          @"expires_in"
+
 #endif
