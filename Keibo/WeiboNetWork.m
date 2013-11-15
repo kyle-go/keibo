@@ -23,8 +23,7 @@
     DTWeibo *weibo = [[DTWeibo alloc] init];
     weibo.weiboId = [[json objectForKey:@"id"] longLongValue];
     weibo.date = [KUnits getNSDateByDateString:[json objectForKey:@"created_at"]];
-    NSDictionary *user = [json objectForKey:@"user"];
-    weibo.owner = [user objectForKey:@"idstr"];
+    weibo.owner = [[json objectForKey:@"uid"] stringValue];
     weibo.source = [KUnits getWeiboSourceText:[json objectForKey:@"source"]];
     NSDictionary *visiable = [json objectForKey:@"visible"];
     weibo.visible = [[visiable objectForKey:@"type"] intValue];
@@ -67,7 +66,7 @@
     return weibo;
 }
 
-+ (void)getWeibos:(NSString *)accessToken since:(NSString *)since_id max:(NSString *)max_id notify:(NSString *)notify
++ (void)getLoginUserWeibos:(NSString *)accessToken since:(NSString *)since_id max:(NSString *)max_id notify:(NSString *)notify
 {
     void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
     ^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -91,12 +90,13 @@
             [array addObject:weibo];
         }
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Weibos" object:nil userInfo:@{@"type": notify, @"array":array}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_LoginUserWeibos" object:nil userInfo:@{@"type": notify, @"array":array}];
     };
     
     void (^failure)(AFHTTPRequestOperation *operation, NSError *error) =
     ^(AFHTTPRequestOperation *operation, NSError *error){
         NSLog(@"get Weibo Error: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_LoginUserWeibos" object:nil];
     };
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -306,21 +306,21 @@
 }
 
 //批量获取最新微博，只有本地列表为空时才调用，覆盖当前用户weibo表，默认kWeiboCount条
-+ (void)getWeibos:(NSString *)accessToken
++ (void)getLoginUserWeibos:(NSString *)accessToken
 {
-    [WeiboNetWork getWeibos:accessToken since:nil max:nil notify:@"latest"];
+    [WeiboNetWork getLoginUserWeibos:accessToken since:nil max:nil notify:@"latest"];
 }
 
 //批量获取比since_id更新的微博，默认最多为kWeiboCount条，如果实际获取条数＝kWeiboCount则覆盖当前用户weibo表
-+ (void)getWeibos:(NSString *)accessToken since:(NSString *)since_id
++ (void)getLoginUserWeibos:(NSString *)accessToken since:(NSString *)since_id
 {
-    [WeiboNetWork getWeibos:accessToken since:since_id max:nil notify:@"since"];
+    [WeiboNetWork getLoginUserWeibos:accessToken since:since_id max:nil notify:@"since"];
 }
 
 //批量获取比max_id更旧的微博，默认每次为kWeiboCount条，添加到当前用户weibo表
-+ (void)getWeibos:(NSString *)accessToken max:(NSString *)max_id
++ (void)getLoginUserWeibos:(NSString *)accessToken max:(NSString *)max_id
 {
-    [WeiboNetWork getWeibos:accessToken since:nil max:max_id notify:@"max"];
+    [WeiboNetWork getLoginUserWeibos:accessToken since:nil max:max_id notify:@"max"];
 }
 
 //下载一个媒体(图片,音乐，视频）

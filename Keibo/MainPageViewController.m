@@ -25,6 +25,17 @@
     NSMutableArray *weiboHeights;
 }
 
+#pragma mark -------------------- private -----------------------------------
+- (void)setWeiboArray:(NSArray *)weibos
+{
+    [weiboArray setArray:weibos];
+    NSUInteger count = [weiboArray count];
+    for (NSUInteger i=0; i<count; i++) {
+        [weiboHeights addObject:[[NSNumber alloc] initWithInt:250]];
+    }
+
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,7 +57,7 @@
     self.title = @"正在获取...";
     NSString *userName = [DataAdapter UserAdapter:uid].name;
     if ([userName length] == 0) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MainWindow_User:) name:@"NotificationCenter_LoginUser" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLoginUser:) name:@"NotificationCenter_LoginUser" object:nil];
     } else {
         self.title = userName;
     }
@@ -61,19 +72,16 @@
                                               target:self
                                               action:@selector(newWeibo)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshMainWindowTable:) name:@"freshMainWindowTable" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTableView:) name:@"freshTableView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWeibos:) name:@"NotificationCenter_LoginUserWeibos" object:nil];
     //从数据库取数据
     NSArray *array = [DataAdapter getLoginUserWeibos:[kWeiboCountString intValue] date:nil];
     if ([array count] == 0) {
         //TODO 发起网络请求
-        [WeiboNetWork getWeibos:accessToken];
+        [WeiboNetWork getLoginUserWeibos:accessToken];
     } else {
-        [weiboArray setArray:array];
-        NSUInteger count = [weiboArray count];
-        for (NSUInteger i=0; i<count; i++) {
-            [weiboHeights addObject:[[NSNumber alloc] initWithInt:250]];
-        }
+        [self setWeiboArray:array];
     }
 }
 
@@ -82,12 +90,33 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)MainWindow_User:(NSNotification *)notify
+- (void)getLoginUser:(NSNotification *)notify
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSDictionary *param = notify.userInfo;
     UIUser *user = [param objectForKey:@"User"];
     self.title = user.name;
+}
+
+-(void)getWeibos:(NSNotification *)notify
+{
+    NSDictionary *param = notify.userInfo;
+    if ([param count] == 0) {
+        return;
+    }
+    
+    NSString *type = [param objectForKey:@"type"];
+    if ([type isEqualToString:@"latest"]) {
+        [self setWeiboArray:[param objectForKey:@"array"]];
+    } else if ([type isEqualToString:@"since"]) {
+        //
+    } else if([type isEqualToString:@"max"]) {
+        //
+    } else {
+        //
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)showLeftView {
@@ -99,7 +128,7 @@
 }
 
 #pragma mark -- table View Data Source
-- (void) freshMainWindowTable:(NSNotification *)notify
+- (void) freshTableView:(NSNotification *)notify
 {
     NSDictionary *param = notify.userInfo;
     

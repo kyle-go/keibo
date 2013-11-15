@@ -33,7 +33,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_User:) name:@"WeiboNetWork_User" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_OneWeibo:) name:@"WeiboNetWork_OneWeibo" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Weibos:) name:@"WeiboNetWork_Weibos" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_LoginUserWeibos:) name:@"WeiboNetWork_LoginUserWeibos" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_WbMedia:) name:@"WeiboNetWork_WbMedia" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Media:) name:@"WeiboNetWork_Media" object:nil];
     }
@@ -81,14 +81,23 @@
     NSLog(@"WeiboNetWrok_Weibo.");
 }
 
--(void)WeiboNetWork_Weibos:(NSNotification *)notify
+-(void)WeiboNetWork_LoginUserWeibos:(NSNotification *)notify
 {
     NSDictionary *param = notify.userInfo;
+    if ([param count] == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_LoginUserWeibos" object:nil];
+    }
+    
     NSString *type = [param objectForKey:@"type"];
     NSArray *array = [param objectForKey:@"array"];
     
     if ([type isEqualToString:@"latest"]) {
-        //
+        NSMutableArray *uiArray = [[NSMutableArray alloc] init];
+        for (DTWeibo *weibo in array) {
+            [uiArray addObject:[DataAdapter WeiboAdapter:weibo]];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_LoginUserWeibos" object:nil userInfo:@{@"array": uiArray, @"type":@"latest"}];
     } else if ([type isEqualToString:@"since"]) {
         //
     } else if ([type isEqualToString:@"max"]) {

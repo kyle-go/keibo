@@ -14,6 +14,7 @@
 //NotificationCenter_Login              登录成功，失败
 //NotificationCenter_Media              下载Media成功，失败
 //NotificationCenter_LoginUser          获取到当前登录用户信息
+//NotificationCenter_LoginUserWeibos    获取当前用户weibos通知
 
 @interface NotificationCenter : NSObject
 

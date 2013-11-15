@@ -19,6 +19,9 @@
 //根据uid获取UIUser
 + (UIUser *)UserAdapter:(NSString *)uid;
 
+//根据DTWeibo 获取 UIWeibo
++ (UIWeibo *)WeiboAdapter:(DTWeibo *)weibo;
+
 //根据uid获取UIWeibo数组，若date为空则获取最新的，否则获取比此时间早的微博（更旧的）
 + (NSArray *)getWeibosByUid:(NSString *)uid count:(NSInteger)count date:(NSDate *)date;
 

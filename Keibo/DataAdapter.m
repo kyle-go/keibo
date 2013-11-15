@@ -41,29 +41,33 @@
     return uiUser;
 }
 
++ (UIWeibo *)WeiboAdapter:(DTWeibo *)weibo
+{
+    UIWeibo *uiWeibo = [[UIWeibo alloc] init];
+    uiWeibo.weiboId = weibo.weiboId;
+    DTUser *dtUser = [[Storage storageInstance] getUserByUid:weibo.owner];
+    uiWeibo.avatarUrl = dtUser.avatar;
+    uiWeibo.name = dtUser.name;
+    uiWeibo.remarkName = dtUser.nickName;
+    uiWeibo.feedComeFrom = weibo.source;
+    uiWeibo.content = weibo.content;
+    uiWeibo.date = weibo.date;
+    uiWeibo.reposts = weibo.repostCount;
+    uiWeibo.comments = weibo.commentCount;
+    uiWeibo.likes = weibo.likeCount;
+    
+    uiWeibo.originWeiboId = weibo.originalWeiboId;
+    dtUser = [[Storage storageInstance] getUserByUid:weibo.originalOwner];
+    uiWeibo.originName = dtUser.name;
+    uiWeibo.originContent = weibo.originalWeiboContent;
+    return uiWeibo;
+}
+
 + (NSArray *)privateGetUIWeiboFromDTWeiboArray:(NSArray *)dtWeibos
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (DTWeibo *weibo in dtWeibos) {
-        UIWeibo *uiWeibo = [[UIWeibo alloc] init];
-        uiWeibo.weiboId = weibo.weiboId;
-        DTUser *dtUser = [[Storage storageInstance] getUserByUid:weibo.owner];
-        uiWeibo.avatarUrl = dtUser.avatar;
-        uiWeibo.name = dtUser.name;
-        uiWeibo.remarkName = dtUser.nickName;
-        uiWeibo.feedComeFrom = weibo.source;
-        uiWeibo.content = weibo.content;
-        uiWeibo.date = weibo.date;
-        uiWeibo.reposts = weibo.repostCount;
-        uiWeibo.comments = weibo.commentCount;
-        uiWeibo.likes = weibo.likeCount;
-        
-        uiWeibo.originWeiboId = weibo.originalWeiboId;
-        dtUser = [[Storage storageInstance] getUserByUid:weibo.originalOwner];
-        uiWeibo.originName = dtUser.name;
-        uiWeibo.originContent = weibo.originalWeiboContent;
-        
-        [array addObject:uiWeibo];
+        [array addObject:[self WeiboAdapter:weibo]];
     }
     return array;
 }

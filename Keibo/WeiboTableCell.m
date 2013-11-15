@@ -71,7 +71,7 @@
     [param setObject:cellData forKey:@"cell"];
     [param setObject:[[NSNumber alloc] initWithFloat:self.webViewHeight + 80.0] forKey:@"height"];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"freshMainWindowTable" object:nil userInfo:param];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"freshTableView" object:nil userInfo:param];
 }
 
 - (void)updateWithWeiboData:(UIWeibo *)data
@@ -80,7 +80,6 @@
 
     [self.avatarImageView setImage:[UIImage imageNamed:@"avatar-0"]];
 
-    
     self.nameLabel.text = data.name;
     self.dateLabel.text = [data.date description];
     self.comeFromLabel.text = data.feedComeFrom;
