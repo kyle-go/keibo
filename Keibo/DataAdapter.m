@@ -44,7 +44,18 @@
 //从数据库中获取UIWeibo数组，若为空返回nil
 + (NSArray *)WeibosFromStorage:(NSString *)uid
 {
-    return nil;
+    NSArray *dtWeibos = [[Storage storageInstance] getWeibosByUid:uid];
+    if ([dtWeibos count] == 0) {
+        return nil;
+    }
+    
+    NSMutableArray *array;
+    for (DTWeibo *weibo in dtWeibos) {
+        UIWeibo *uiWeibo = [[UIWeibo alloc] init];
+        
+        [array addObject:uiWeibo];
+    }
+    return array;
 }
 
 @end

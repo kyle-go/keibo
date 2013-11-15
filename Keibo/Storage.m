@@ -78,12 +78,14 @@
         abort();
     }
     
-    //微博表(Weibo) --- 各种微博
-    //微博唯一Id，创建时间，所属人，来源，可见性，内容， 是否转发，原转发微博id, 转发数，评论数，赞数，收藏，有图片，有音乐，有视频
-    //weiboId，date, owner，source，visible，content，isRepost，originalWeiboId, repostCount, commentCount, likeCount, favorite，picture
+    //微博表(Weibo) --- 微博表
+    //微博唯一Id，创建时间，所属人，来源，可见性，内容, 转发数，评论数，赞数，收藏，有图片
+    //weiboId，date, owner，source，visible，content, repostCount, commentCount, likeCount, favorite，picture
+    //是否转发，原转发微博id，原微博创建者,原微博内容，是否有图片
+    //isRepost，originalWeiboId,originalOwner,originalWeiboContent，originalWeiboPicture
     
     //0：普通微博，1：私密微博，3：指定分组微博，4：密友微博；list_id为分组的组号
-    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER)";
+    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER), 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'originalOwner' VARCHAR(16),'originalWeiboContent' VARCHAR(160), 'originalWeiboPicture' INTEGER";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create Weibo table failed. error=%@", [db lastError]);
         abort();

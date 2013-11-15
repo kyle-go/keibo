@@ -25,12 +25,16 @@ enum DTWeibo_Visible{
 @property (strong, nonatomic)NSString *source;
 @property (assign, nonatomic)NSInteger visible;
 @property (strong, nonatomic)NSString *content;
-@property (assign, nonatomic)NSInteger isRepost;
-@property (assign, nonatomic)long long originalWeiboId;
 @property (assign, nonatomic)NSInteger repostCount;
 @property (assign, nonatomic)NSInteger commentCount;
 @property (assign, nonatomic)NSInteger likeCount;
 @property (assign, nonatomic)NSInteger favorite;
 @property (assign, nonatomic)NSInteger picture;
+
+@property (assign, nonatomic)NSInteger isRepost;
+@property (assign, nonatomic)long long originalWeiboId;
+@property (strong, nonatomic)NSString *originalOwner;
+@property (strong, nonatomic)NSString *originalWeiboContent;
+@property (assign, nonatomic)NSInteger originaWeiboPicture;
 
 @end
