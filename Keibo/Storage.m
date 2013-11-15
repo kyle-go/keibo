@@ -40,17 +40,17 @@
 }
 
 //根据当前帐号id，初始化数据库
-- (void)initStorageWithUserId:(NSString *)userId
+- (void)initStorageWithUId:(NSString *)uid
 {
     //检查参数
-    if ([userId length] == 0) {
-        NSLog(@"initStorage userId = nil.");
+    if ([uid length] == 0) {
+        NSLog(@"initStorage uid = nil.");
         abort();
         return;
     }
     
-    //用userId初始化数据库
-    NSString *dbFile = [PATH_OF_DOCUMENT stringByAppendingPathComponent:userId];
+    //用uid初始化数据库
+    NSString *dbFile = [PATH_OF_DOCUMENT stringByAppendingPathComponent:uid];
     dbFile = [dbFile stringByAppendingString:@"_v1"]; //for v1 database
     
     db = [FMDatabase databaseWithPath:dbFile];
@@ -64,7 +64,7 @@
     }
     
     //保存用户名
-    ownerId = userId;
+    ownerId = uid;
     
     //--------------------------------------------- 创建各种表 ---------------------------------------------------------
     //创建用户信息表(User) --- 记录用户一些信息，包括自己
@@ -136,6 +136,18 @@
     if ([fs next]) {
         return [fs stringForColumn:@"path"];
     }
+    return nil;
+}
+
+//根据uid获取DTUser
+- (DTUser *)getUserByUid:(NSString *)uid
+{
+    return nil;
+}
+
+//根据uid获取其weibos
+- (NSArray *)getWeibosByUid:(NSString *)uid
+{
     return nil;
 }
 

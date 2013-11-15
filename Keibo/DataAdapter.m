@@ -41,4 +41,10 @@
     return uiUser;
 }
 
+//从数据库中获取UIWeibo数组，若为空返回nil
++ (NSArray *)WeibosFromStorage:(NSString *)uid
+{
+    return nil;
+}
+
 @end

@@ -21,7 +21,9 @@
 #define kRedirectUri      @"https://github.com/kylescript"
 
 #define kAccessToken      @"access_token"
-#define kUserId           @"uid"
+#define kUid              @"uid"
+
 #define kMedia            @"Media"
+#define kWeiboCount       @"12"
 
 #endif

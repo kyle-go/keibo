@@ -16,6 +16,103 @@
 
 @implementation WeiboNetWork
 
+#pragma mark ------------------- 私有接口 -------------------
+
++ (DTWeibo *)getWeiboByJson:(NSDictionary *)json
+{
+    //解析数据
+    DTWeibo *weibo = [[DTWeibo alloc] init];
+    weibo.weiboId = [[json objectForKey:@"id"] longLongValue];
+    weibo.date = [KUnits getNSDateByDateString:[json objectForKey:@"created_at"]];
+    NSDictionary *user = [json objectForKey:@"user"];
+    weibo.owner = [user objectForKey:@"idstr"];
+    weibo.source = [KUnits getWeiboSourceText:[json objectForKey:@"source"]];
+    NSDictionary *visiable = [json objectForKey:@"visible"];
+    weibo.visible = [[visiable objectForKey:@"type"] intValue];
+    if (weibo.visible == 2) {
+        weibo.visible *= 10000;
+        weibo.visible += [[visiable objectForKey:@"list_id"] intValue];
+    }
+    weibo.content = [json objectForKey:@"text"];
+    weibo.repostCount = [[json objectForKey:@"reposts_count"] intValue];
+    weibo.commentCount = [[json objectForKey:@"comments_count"] intValue];
+    weibo.likeCount = [[json objectForKey:@"attitudes_count"] intValue];
+    weibo.favorite = [[json objectForKey:@"favorited"] intValue];
+    
+    NSDictionary *repost= [json objectForKey:@"retweeted_status"];
+    weibo.isRepost = repost? 1:0;
+    if (weibo.isRepost) {
+        weibo.picture = 0;
+        weibo.originalWeiboId = [[repost objectForKey:@"idstr"] longLongValue];
+    } else {
+        NSDictionary *pics = [json objectForKey:@"pic_urls"];
+        if ([pics count] == 0) {
+            weibo.picture = 0;
+        } else {
+            weibo.picture = 1;
+            
+            int index = 0;
+            for (NSDictionary *each in pics) {
+                NSString *url = [each objectForKey:@"thumbnail_pic"];
+                DTWeiboMedia *media = [[DTWeiboMedia alloc] init];
+                media.weiboId = weibo.weiboId;
+                media.type = Type_Picture;
+                media.index = index++;
+                media.url = url;
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_WbMedia" object:nil userInfo:@{@"WbMedia": media}];
+            }
+        }
+    }
+    
+    return weibo;
+}
+
++ (void)getWeibos:(NSString *)accessToken since:(NSString *)since_id max:(NSString *)max_id notify:(NSString *)notify
+{
+    void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
+    ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        NSError *error;
+        NSDictionary *json;
+        if ([responseObject isKindOfClass:[NSString class]]) {
+            NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+            json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        } else {
+            json = [responseObject objectForKey:@"statuses"];
+        }
+        
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSDictionary *each in json) {
+            DTWeibo *weibo = [WeiboNetWork getWeiboByJson:each];
+            if (weibo.isRepost) {
+                [WeiboNetWork getWeibo:accessToken weiboId:weibo.originalWeiboId];
+            }
+            [array addObject:weibo];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Weibos" object:nil userInfo:@{@"type": notify, @"array":array}];
+    };
+    
+    void (^failure)(AFHTTPRequestOperation *operation, NSError *error) =
+    ^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"get Weibo Error: %@", error);
+    };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //[manager setResponseSerializer:[AFTextResponseSerializer serializer]];
+    NSDictionary *params = @{@"access_token":accessToken, @"trim_user":@"1", @"count":kWeiboCount, @"since_id":@"0", @"max_id":@"0"};
+    if ([since_id length] > 0) {
+        [params setValue:since_id forKey:@"since_id"];
+    }
+    if ([max_id length] > 0) {
+        [params setValue:max_id forKey:@"max_id"];
+    }
+    [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:params success:success failure:failure];
+}
+
+#pragma mark ------------------- 网络请求 -------------------
 //获取登录request
 + (NSURLRequest *)loginRequest
 {
@@ -102,7 +199,7 @@
     [manager POST:@"https://api.weibo.com/oauth2/access_token" parameters:params success:success_callback failure:failure_callback];
 }
 
-+ (void)getUser:(NSString *)accessToken userId:(NSString *)uid
++ (void)getUser:(NSString *)accessToken uid:(NSString *)uid
 {
     void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
     ^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -186,53 +283,14 @@
             json = responseObject;
         }
         
-        //解析数据
-        DTWeibo *weibo = [[DTWeibo alloc] init];
-        weibo.weiboId = [[json objectForKey:@"id"] longLongValue];
-        weibo.date = [KUnits getNSDateByDateString:[json objectForKey:@"created_at"]];
-        NSDictionary *user = [json objectForKey:@"user"];
-        weibo.owner = [user objectForKey:@"idstr"];
-        weibo.source = [KUnits getWeiboSourceText:[json objectForKey:@"source"]];
-        NSDictionary *visiable = [json objectForKey:@"visible"];
-        weibo.visible = [[visiable objectForKey:@"type"] intValue];
-        if (weibo.visible == 2) {
-            weibo.visible *= 10000;
-            weibo.visible += [[visiable objectForKey:@"list_id"] intValue];
-        }
-        weibo.content = [json objectForKey:@"text"];
-        weibo.repostCount = [[json objectForKey:@"reposts_count"] intValue];
-        weibo.commentCount = [[json objectForKey:@"comments_count"] intValue];
-        weibo.likeCount = [[json objectForKey:@"attitudes_count"] intValue];
-        weibo.favorite = [[json objectForKey:@"favorited"] intValue];
-        
-        NSDictionary *repost= [json objectForKey:@"retweeted_status"];
-        weibo.isRepost = repost? 1:0;
-        if (weibo.isRepost) {
-            weibo.picture = 0;
-            weibo.originalWeiboId = [[repost objectForKey:@"idstr"] longLongValue];
-            [WeiboNetWork getWeibo:accessToken weiboId:weibo.originalWeiboId];
-        } else {
-            NSDictionary *pics = [json objectForKey:@"pic_urls"];
-            if ([pics count] == 0) {
-                weibo.picture = 0;
-            } else {
-                weibo.picture = 1;
-                
-                int index = 0;
-                for (NSDictionary *each in pics) {
-                    NSString *url = [each objectForKey:@"thumbnail_pic"];
-                    DTWeiboMedia *media = [[DTWeiboMedia alloc] init];
-                    media.weiboId = weibo.weiboId;
-                    media.type = Type_Picture;
-                    media.index = index++;
-                    media.url = url;
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_WbMedia" object:nil userInfo:@{@"WbMedia": media}];
-                }
+        DTWeibo *weibo = [WeiboNetWork getWeiboByJson:json];
+        if (weibo) {
+            if (weibo.isRepost) {
+                [WeiboNetWork getWeibo:accessToken weiboId:weibo.originalWeiboId];
             }
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_OneWeibo" object:nil userInfo:@{@"Weibo": weibo}];
         }
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Weibo" object:nil userInfo:@{@"Weibo": weibo}];
     };
     
     void (^failure)(AFHTTPRequestOperation *operation, NSError *error) =
@@ -244,6 +302,24 @@
     //[manager setResponseSerializer:[AFTextResponseSerializer serializer]];
     NSDictionary *params = @{@"access_token":accessToken, @"id":[[NSString alloc] initWithFormat:@"%lld", weiboId]};
     [manager GET:@"https://api.weibo.com/2/statuses/show.json" parameters:params success:success failure:failure];
+}
+
+//批量获取最新微博，只有本地列表为空时才调用，覆盖当前用户weibo表，默认kWeiboCount条
++ (void)getWeibos:(NSString *)accessToken
+{
+    [WeiboNetWork getWeibos:accessToken since:nil max:nil notify:@"latest"];
+}
+
+//批量获取比since_id更新的微博，默认最多为kWeiboCount条，如果实际获取条数＝kWeiboCount则覆盖当前用户weibo表
++ (void)getWeibos:(NSString *)accessToken since:(NSString *)since_id
+{
+    [WeiboNetWork getWeibos:accessToken since:since_id max:nil notify:@"since"];
+}
+
+//批量获取比max_id更旧的微博，默认每次为kWeiboCount条，添加到当前用户weibo表
++ (void)getWeibos:(NSString *)accessToken max:(NSString *)max_id
+{
+    [WeiboNetWork getWeibos:accessToken since:nil max:max_id notify:@"max"];
 }
 
 //下载一个媒体(图片,音乐，视频）

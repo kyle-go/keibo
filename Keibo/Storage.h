@@ -16,7 +16,7 @@
 + (instancetype)storageInstance;
 
 //根据当前帐号id，初始化数据库
-- (void)initStorageWithUserId:(NSString *)userId;
+- (void)initStorageWithUId:(NSString *)uid;
 
 //添加/更新一条用户数据
 - (void)addUser:(DTUser *)user;
@@ -30,6 +30,13 @@
 //添加weibo多媒体资源
 - (void)addWeiboMedia:(DTWeiboMedia *)media;
 
+//根据Media url获取Media本地路径
 - (NSString *)getMediaByUrl:(NSString *)url;
+
+//根据uid获取DTUser
+- (DTUser *)getUserByUid:(NSString *)uid;
+
+//根据uid获取其weibos
+- (NSArray *)getWeibosByUid:(NSString *)uid;
 
 @end

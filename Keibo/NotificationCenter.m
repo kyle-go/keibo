@@ -30,7 +30,8 @@
         storageInstance = [Storage storageInstance];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_User:) name:@"WeiboNetWork_User" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Weibo:) name:@"WeiboNetWork_Weibo" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_OneWeibo:) name:@"WeiboNetWork_OneWeibo" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Weibos:) name:@"WeiboNetWork_Weibos" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_WbMedia:) name:@"WeiboNetWork_WbMedia" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Media:) name:@"WeiboNetWork_Media" object:nil];
     }
@@ -44,7 +45,7 @@
     DTUser *user = [param objectForKey:@"User"];
     UIUser *uiUser = [DataAdapter UserAdapter:user];
     
-    if ([user.uid isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUserId]]) {
+    if ([user.uid isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]]) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LeftView_LoginUser" object:nil userInfo:@{@"user":uiUser}];
     }
@@ -53,7 +54,12 @@
     [storageInstance addUser:user];
 }
 
--(void)WeiboNetWork_Weibo:(NSNotification *)notify
+-(void)WeiboNetWork_OneWeibo:(NSNotification *)notify
+{
+    NSLog(@"WeiboNetWrok_Weibo.");
+}
+
+-(void)WeiboNetWork_Weibos:(NSNotification *)notify
 {
     NSLog(@"WeiboNetWrok_Weibo.");
 }

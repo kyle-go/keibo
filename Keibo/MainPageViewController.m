@@ -12,6 +12,7 @@
 #import "UIViewController+MMDrawerController.h"
 #import "WeiboTableCell.h"
 #import "UIWeibo.h"
+#import "DataAdapter.h"
 
 @interface MainPageViewController ()
 
@@ -51,6 +52,9 @@
                                               action:@selector(newWeibo)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshMainWindowTable:) name:@"freshMainWindowTable" object:nil];
+    
+    //从数据库取数据
+    
     
     //假数据
     UIWeibo *a = [[UIWeibo alloc] init];

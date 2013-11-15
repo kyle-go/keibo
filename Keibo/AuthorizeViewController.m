@@ -66,17 +66,17 @@
 {
     NSDictionary *param = notify.userInfo;
     NSString *accessToken = [param objectForKey:@"access_token"];
-    NSString *userId = [param objectForKey:@"uid"];
+    NSString *uid = [param objectForKey:@"uid"];
     
     [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:kAccessToken];
-    [[NSUserDefaults standardUserDefaults] setObject:userId forKey:kUserId];
+    [[NSUserDefaults standardUserDefaults] setObject:uid forKey:kUid];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //初始化数据库
-    [[Storage storageInstance] initStorageWithUserId:userId];
+    [[Storage storageInstance] initStorageWithUId:uid];
     
     //准备显示主界面
-    [self getLoginInformation:accessToken userId:userId];
+    [self getLoginInformation:accessToken uid:uid];
     [self showMainView];
 }
 
@@ -103,12 +103,12 @@
 }
 
 #pragma mark ---- get information when login -----------
-- (void)getLoginInformation:(NSString *)accessToken userId:(NSString *)uid
+- (void)getLoginInformation:(NSString *)accessToken uid:(NSString *)uid
 {
     //获取登录者个人资料
-    [WeiboNetWork getUser:accessToken userId:uid];
+    [WeiboNetWork getUser:accessToken uid:uid];
     
-    //获取最近10条微博
+    //获取最近6条微博
 }
 
 #pragma mark ---- show main window ---------

@@ -28,10 +28,19 @@
 + (void)getAccessTokenByCode:(NSString *)code;
 
 //获取某个用户的信息, 操作完成会发送各种通知
-+ (void)getUser:(NSString *)accessToken userId:(NSString *)uid;
++ (void)getUser:(NSString *)accessToken uid:(NSString *)uid;
 
 //获取一条微博，
 + (void)getWeibo:(NSString *)accessToken weiboId:(long long)weiboId;
+
+//批量获取最新微博，只有本地列表为空时才调用，覆盖当前用户weibo表，默认kWeiboCount条
++ (void)getWeibos:(NSString *)accessToken;
+
+//批量获取比since_id更新的微博，默认最多为kWeiboCount条，如果实际获取条数＝kWeiboCount则覆盖当前用户weibo表
++ (void)getWeibos:(NSString *)accessToken since:(NSString *)since_id;
+
+//批量获取比max_id更旧的微博，默认每次为kWeiboCount条，添加到当前用户weibo表
++ (void)getWeibos:(NSString *)accessToken max:(NSString *)max_id;
 
 //下载一个媒体(图片,音乐，视频）
 + (void)getOneMedia:(NSString *)url;

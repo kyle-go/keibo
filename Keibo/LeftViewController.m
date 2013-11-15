@@ -78,13 +78,13 @@
         [self registerAvatarImageFresh];
         [WeiboNetWork getOneMedia:user.avatar];
     }
-    
+                
     self.avatarImageView.image = [UIImage imageNamed:avatar];
     self.nameLabel.text = user.name;
     self.signLabel.text = user.sign;
-    self.fanCount.text = [[NSString alloc] initWithFormat:@"粉丝:%d", user.fanCount];
-    self.followingCount.text = [[NSString alloc] initWithFormat:@"关注:%d", user.followingCount ];
-    self.weiboCount.text = [[NSString alloc] initWithFormat:@"微博:%d", user.weiboCount];
+    self.fanCount.text = [[NSString alloc] initWithFormat:@"粉丝:%ld", (long)user.fanCount];
+    self.followingCount.text = [[NSString alloc] initWithFormat:@"关注:%ld", (long)user.followingCount ];
+    self.weiboCount.text = [[NSString alloc] initWithFormat:@"微博:%ld", (long)user.weiboCount];
     
 }
 
