@@ -35,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshLoginUser:) name:@"LeftView_LoginUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshLoginUser:) name:@"NotificationCenter_LoginUser" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,7 +65,7 @@
 - (void)freshLoginUser:(NSNotification *)notify
 {
     NSDictionary *params = notify.userInfo;
-    UIUser *user = [params objectForKey:@"user"];
+    UIUser *user = [params objectForKey:@"User"];
     
     //刷新界面
     NSString *avatar = [[Storage storageInstance] getMediaByUrl:user.avatar];

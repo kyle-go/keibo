@@ -54,7 +54,6 @@
         UIWeibo *uiWeibo = [[UIWeibo alloc] init];
         uiWeibo.weiboId = weibo.weiboId;
         DTUser *dtUser = [[Storage storageInstance] getUserByUid:uid];
-        //TODO 根据uid获取DTUser
         uiWeibo.avatarUrl = dtUser.avatar;
         uiWeibo.name = dtUser.name;
         uiWeibo.remarkName = dtUser.nickName;

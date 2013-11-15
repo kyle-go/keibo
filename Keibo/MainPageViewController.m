@@ -30,7 +30,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_home"]];
-        self.title = @"首页";
         weiboArray = [[NSMutableArray alloc] init];
         weiboHeights = [[NSMutableArray alloc] init];
     }
@@ -42,7 +41,15 @@
     [super viewDidLoad];
     
     NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:kUid];
-    self.navigationItem.title = [DataAdapter UserAdapter:uid].name;
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+    
+    self.title = @"正在获取...";
+    NSString *userName = [DataAdapter UserAdapter:uid].name;
+    if ([userName length] == 0) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MainWindow_User:) name:@"NotificationCenter_LoginUser" object:nil];
+    } else {
+        self.title = userName;
+    }
     
     //添加左按钮
     self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc]
@@ -60,7 +67,7 @@
     NSArray *array = [DataAdapter WeibosFromStorage:uid];
     if ([array count] == 0) {
         //TODO 发起网络请求
-        [WeiboNetWork getWeibos:uid];
+        [WeiboNetWork getWeibos:accessToken];
     } else {
         [weiboArray setArray:array];
         NSUInteger count = [weiboArray count];
@@ -73,6 +80,14 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)MainWindow_User:(NSNotification *)notify
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSDictionary *param = notify.userInfo;
+    UIUser *user = [param objectForKey:@"User"];
+    self.title = user.name;
 }
 
 - (void)showLeftView {

@@ -35,7 +35,7 @@
         NSError *error;
         [[NSFileManager defaultManager] createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:&error];
     }
-
+    
     return self;
 }
 
@@ -72,7 +72,7 @@
     //uid, name, nickName，avatar，avatarLarge,sex,address,weiboCount,fanCount，followingCount，sign，verified，verifiedReason，star,weiboMember，lastMyWeiboId, following，blog
     //是否此用户正在关注我, 是否所有人可以发私信，是否所有人可以评论, 互粉数
     //followMe，allowAllMsg，allowAllComment, biFollowerCount
-    NSString *sql = @"CREATE TABLE IF NOT EXISTS 'User' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickName' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'weiboMember' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowerCount' INTEGER, 'blog' VARCHAR(128))";
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS 'User' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickName' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'weiboMember' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowCount' INTEGER, 'blog' VARCHAR(128))";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create User table failed. error=%@", [db lastError]);
         abort();
@@ -85,7 +85,7 @@
     //isRepost，originalWeiboId,originalOwner,originalWeiboContent，originalWeiboPicture
     
     //0：普通微博，1：私密微博，3：指定分组微博，4：密友微博；list_id为分组的组号
-    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER), 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'originalOwner' VARCHAR(16),'originalWeiboContent' VARCHAR(160), 'originalWeiboPicture' INTEGER";
+    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER, 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'originalOwner' VARCHAR(16), 'originalWeiboContent' VARCHAR(160), 'originalWeiboPicture' INTEGER)";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create Weibo table failed. error=%@", [db lastError]);
         abort();
@@ -112,7 +112,41 @@
 //添加/更新一条用户数据
 - (void)addUser:(DTUser *)user
 {
-    //NSString *sql = @"";
+    NSString *sql = @"SELECT * FROM User WHERE uid=(?)";
+    FMResultSet *fs = [db executeQuery:sql, user.uid];
+    if ([fs next]) {
+        sql = @"DELETE FROM User WHERE uid=(?)";
+        [db executeUpdate:sql, user.uid];
+    }
+    
+    //插入一条数据
+    sql = @"INSERT INTO User (uid,name,nickName,avatar,avatarLarge,sex,address,weiboCount,fanCount,followingCount,sign,verified,verifiedReason,star,weiboMember,lastMyWeiboId,following,followMe,allowAllMsg,allowAllComment,biFollowCount,blog) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    BOOL rs = [db executeUpdate:sql,
+               user.uid,
+               user.name,
+               user.nickName,
+               user.avatar,
+               user.avatarLarge,
+               [[NSNumber alloc] initWithLong:user.sex],
+               user.address,
+               [[NSNumber alloc] initWithLong:user.weiboCount],
+               [[NSNumber alloc] initWithLong:user.fanCount],
+               [[NSNumber alloc] initWithLong:user.followingCount],
+               user.sign,
+               [[NSNumber alloc] initWithLong:user.verified],
+               user.verifiedReason,
+               [[NSNumber alloc] initWithLong:user.star],
+               [[NSNumber alloc] initWithLong:user.weiboMember],
+               [[NSNumber alloc] initWithLongLong:user.lastMyWeiboId],
+               [[NSNumber alloc] initWithLong:user.following],
+               [[NSNumber alloc] initWithLong:user.followMe],
+               [[NSNumber alloc] initWithLong:user.allowAllMsg],
+               [[NSNumber alloc] initWithLong:user.allowAllComment],
+               [[NSNumber alloc] initWithLong:user.biFollowCount],
+               user.blog];
+    if (!rs) {
+        NSLog(@"Storage addUser failed. error=%@", [db lastError]);
+    }
 }
 
 //添加/更新一条微博
@@ -133,7 +167,7 @@
 
 - (NSString *)getMediaByUrl:(NSString *)url
 {
-    NSString *sql = @"SELECT * FROM Media WHERE url='?'";
+    NSString *sql = @"SELECT * FROM Media WHERE url=(?)";
     FMResultSet *fs = [db executeQuery:sql, url];
     if ([fs next]) {
         return [fs stringForColumn:@"path"];
@@ -144,7 +178,36 @@
 //根据uid获取DTUser
 - (DTUser *)getUserByUid:(NSString *)uid
 {
-    return nil;
+    NSString *sql = @"select * from User where uid=(?)";
+    FMResultSet *fs = [db executeQuery:sql, uid];
+    if (![fs next]) {
+        return nil;
+    }
+    
+    DTUser *user = [[DTUser alloc] init];
+    user.uid = [fs stringForColumn:@"uid"];
+    user.name = [fs stringForColumn:@"name"];
+    user.nickName = [fs stringForColumn:@"nickName"];
+    user.avatar = [fs stringForColumn:@"avatar"];
+    user.avatarLarge = [fs stringForColumn:@"avatarLarge"];
+    user.sex = [fs intForColumn:@"sex"];
+    user.address = [fs stringForColumn:@"address"];
+    user.weiboCount = [fs intForColumn:@"weiboCount"];
+    user.fanCount = [fs intForColumn:@"fanCount"];
+    user.followingCount = [fs intForColumn:@"followingCount"];
+    user.sign = [fs stringForColumn:@"sign"];
+    user.verified = [fs intForColumn:@"verified"];
+    user.verifiedReason =[fs stringForColumn:@"verifiedReason"];
+    user.star = [fs intForColumn:@"star"];
+    user.weiboMember = [fs intForColumn:@"weiboMember"];
+    user.lastMyWeiboId = [fs longLongIntForColumn:@"lastMyWeiboId"];
+    user.following = [fs intForColumn:@"following"];
+    user.followMe = [fs intForColumn:@"followMe"];
+    user.allowAllMsg = [fs intForColumn:@"allowAllMsg"];
+    user.allowAllComment = [fs intForColumn:@"allowAllComment"];
+    user.biFollowCount = [fs intForColumn:@"biFollowCount"];
+    user.blog = [fs stringForColumn:@"blog"];
+    return user;
 }
 
 //根据uid获取其weibos

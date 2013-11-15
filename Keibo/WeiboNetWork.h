@@ -18,13 +18,13 @@
 //获取登录request
 + (NSURLRequest *)loginRequest;
 
-//失败 发送一个 “AuthorizeView_loginFailed”广播
-//成功 发送一个 “AuthorizeView_loginSucceed”广播
+//失败 发送一个 “WeiboNetWork_LoginFailed”广播
+//成功 发送一个 “WeiboNetWork_LoginSucceed”广播
 + (void)checkAccessToken:(NSString *)accessToken;
 
 //由authorization_code获取accessToken
-//成功发送一个“AuthorizeView_loginSucceed”广播
-//失败发送一个“AuthorizeView_loginFailed”广播
+//失败发送一个“WeiboNetWork_LoginFailed”广播
+//成功发送一个“WeiboNetWork_LoginSucceed”广播
 + (void)getAccessTokenByCode:(NSString *)code;
 
 //获取某个用户的信息, 操作完成会发送各种通知

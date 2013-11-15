@@ -17,7 +17,6 @@
 @implementation WeiboNetWork
 
 #pragma mark ------------------- 私有接口 -------------------
-
 + (DTWeibo *)getWeiboByJson:(NSDictionary *)json
 {
     //解析数据
@@ -102,7 +101,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     //[manager setResponseSerializer:[AFTextResponseSerializer serializer]];
-    NSDictionary *params = @{@"access_token":accessToken, @"trim_user":@"1", @"count":kWeiboCount, @"since_id":@"0", @"max_id":@"0"};
+    NSDictionary *params = @{@"access_token":accessToken, @"trim_user":@"1", @"count":kWeiboCountString, @"since_id":@"0", @"max_id":@"0"};
     if ([since_id length] > 0) {
         [params setValue:since_id forKey:@"since_id"];
     }
@@ -112,7 +111,9 @@
     [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:params success:success failure:failure];
 }
 
-#pragma mark ------------------- 网络请求 -------------------
+
+
+#pragma mark ------------------------------ 网络请求 ----------------------
 //获取登录request
 + (NSURLRequest *)loginRequest
 {
@@ -142,11 +143,11 @@
         
         //已经过期则重新认证
         if ([expire intValue] <= 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Login" object:nil];
         } else {
             NSNumber *uid = [json objectForKey:@"uid"];
             NSDictionary *params = @{@"access_token":accessToken, @"uid":[[NSString alloc] initWithFormat:@"%lld", [uid longLongValue]]};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginSucceed" object:nil userInfo:params];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Login" object:nil userInfo:params];
         }
     };
     
@@ -154,7 +155,7 @@
     void (^failure_callback)(AFHTTPRequestOperation *operation, NSError *error) =
     ^(AFHTTPRequestOperation *operation, NSError *error){
         NSLog(@"checkAccessToken Error: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Login" object:nil];
     };
     
     //判断token是否过期POST请求
@@ -176,20 +177,20 @@
         
         //已经过期则重新认证
         if ([expire intValue] <= 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Login" object:nil];
             return;
         }
         
         NSString *accessToken = [json objectForKey:@"access_token"];
         NSString *uid = [json objectForKey:@"uid"];
         NSDictionary *params = @{@"access_token":accessToken, @"uid":uid};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginSucceed" object:nil userInfo:params];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Login" object:nil userInfo:params];
     };
     
     void (^failure_callback)(AFHTTPRequestOperation *operation, NSError *error) =
     ^(AFHTTPRequestOperation *operation, NSError *error){
         NSLog(@"getAccessTokenByCode Error: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"AuthorizeView_loginFailed" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Login" object:nil];
     };
     
     //判断token是否过期POST请求
@@ -325,6 +326,10 @@
 //下载一个媒体(图片,音乐，视频）
 + (void)getOneMedia:(NSString *)url
 {
+    if ([url length] == 0) {
+        abort();
+    }
+    
     NSString *uuid = [KUnits generateUuidString];
     //从网络上下载此文件
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];

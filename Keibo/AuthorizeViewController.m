@@ -39,8 +39,7 @@
     [super viewDidLoad];
     self.webView.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed:) name:@"AuthorizeView_loginSucceed" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed) name:@"AuthorizeView_loginFailed" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginCallBack:) name:@"NotificationCenter_Login" object:nil];
     
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
     if (!accessToken) {
@@ -62,29 +61,20 @@
 	[self.webView loadRequest:[WeiboNetWork loginRequest]];
 }
 
-- (void)loginSucceed:(NSNotification *)notify
+- (void)loginCallBack:(NSNotification *)notify
 {
-    NSDictionary *param = notify.userInfo;
-    NSString *accessToken = [param objectForKey:@"access_token"];
-    NSString *uid = [param objectForKey:@"uid"];
+    if (!notify.userInfo) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"登录失败" message:@"token过期了么?" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
+        [self login];
+        return;
+    }
     
-    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:kAccessToken];
-    [[NSUserDefaults standardUserDefaults] setObject:uid forKey:kUid];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    //初始化数据库
-    [[Storage storageInstance] initStorageWithUId:uid];
+    //获取登录者个人资料
+    [WeiboNetWork getUser:[[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken] uid:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]];
     
     //准备显示主界面
-    [self getLoginInformation:accessToken uid:uid];
     [self showMainView];
-}
-
-- (void)loginFailed
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"登录失败" message:@"token过期了么?" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    [alertView show];
-    [self login];
 }
 
 #pragma mark ---- UIWebViewDelegate ---------
@@ -100,15 +90,6 @@
     NSString *code = [url substringFromIndex:range.location + range.length];
     [WeiboNetWork getAccessTokenByCode:code];
     return NO;
-}
-
-#pragma mark ---- get information when login -----------
-- (void)getLoginInformation:(NSString *)accessToken uid:(NSString *)uid
-{
-    //获取登录者个人资料
-    [WeiboNetWork getUser:accessToken uid:uid];
-    
-    //获取最近6条微博
 }
 
 #pragma mark ---- show main window ---------
