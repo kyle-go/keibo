@@ -21,8 +21,14 @@
 //添加/更新一条用户数据
 - (void)addUser:(DTUser *)user;
 
-//添加/更新一条微博
+//添加/更新一条weibo
 - (void)addWeibo:(DTWeibo *)weibo;
+
+//批量添加weibo
+- (void)addWeibos:(NSArray *)weibos;
+
+//根据uid批量删除weibo
+- (void)deleteWeibosByUid:(NSString *)uid;
 
 //添加/更新多媒体资源
 - (void)addMedia:(NSString *)url File:(NSString *)file;
@@ -36,7 +42,7 @@
 //根据uid获取DTUser
 - (DTUser *)getUserByUid:(NSString *)uid;
 
-//根据uid获取其weibos
-- (NSArray *)getWeibosByUid:(NSString *)uid;
+//根据uid获取其weibos, 若date为空则获取最新的，否则获取比此时间早的微博（更旧的）
+- (NSArray *)getWeibosByUid:(NSString *)uid  count:(NSInteger)count date:(NSDate*)date;
 
 @end

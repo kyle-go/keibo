@@ -39,7 +39,7 @@
 //批量获取比since_id更新的微博，默认最多为kWeiboCount条，如果实际获取条数＝kWeiboCount则覆盖当前用户weibo表
 + (void)getWeibos:(NSString *)accessToken since:(NSString *)since_id;
 
-//批量获取比max_id更旧的微博，默认每次为kWeiboCount条，添加到当前用户weibo表
+//批量获取比max_id更旧的微博，默认每次为kWeiboCount条，【不添加】weibo表，只在内存中出现
 + (void)getWeibos:(NSString *)accessToken max:(NSString *)max_id;
 
 //下载一个媒体(图片,音乐，视频）

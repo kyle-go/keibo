@@ -85,7 +85,7 @@
     //isRepost，originalWeiboId,originalOwner,originalWeiboContent，originalWeiboPicture
     
     //0：普通微博，1：私密微博，3：指定分组微博，4：密友微博；list_id为分组的组号
-    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER, 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'originalOwner' VARCHAR(16), 'originalWeiboContent' VARCHAR(160), 'originalWeiboPicture' INTEGER)";
+    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER, 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'originalOwner' VARCHAR(16), 'originalWeiboContent' VARCHAR(160), 'originalWeiboPicture' INTEGER 'isIndexWeibo' INTEGER)";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create Weibo table failed. error=%@", [db lastError]);
         abort();
@@ -155,6 +155,18 @@
     
 }
 
+//批量添加weibo
+- (void)addWeibos:(NSArray *)weibos
+{
+    
+}
+
+//根据uid批量删除weibo
+- (void)deleteWeibosByUid:(NSString *)uid
+{
+    
+}
+
 - (void)addMedia:(NSString *)url File:(NSString *)file
 {
     
@@ -210,10 +222,10 @@
     return user;
 }
 
-//根据uid获取其weibos
-- (NSArray *)getWeibosByUid:(NSString *)uid
+//根据uid获取其weibos, 若date为空则获取最新的，否则获取比此时间早的微博（更旧的）
+- (NSArray *)getWeibosByUid:(NSString *)uid  count:(NSInteger)count date:(NSDate*)date
 {
-    return nil;
+   return nil;
 }
 
 @end
