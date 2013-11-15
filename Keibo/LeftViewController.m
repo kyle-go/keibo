@@ -8,7 +8,7 @@
 
 #import "LeftViewController.h"
 #import "UIUser.h"
-#import "Storage.h"
+#import "DataAdapter.h"
 #import "WeiboNetWork.h"
 
 @interface LeftViewController ()
@@ -68,7 +68,7 @@
     UIUser *user = [params objectForKey:@"User"];
     
     //刷新界面
-    NSString *avatar = [[Storage storageInstance] getMediaByUrl:user.avatar];
+    NSString *avatar = [DataAdapter getMediaByUrl:user.avatar];
     if ([avatar length] == 0) {
         avatarUrl = user.avatar;
         avatar = @"avatar-0";

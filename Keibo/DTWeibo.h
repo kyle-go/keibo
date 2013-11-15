@@ -35,6 +35,7 @@ enum DTWeibo_Visible{
 @property (assign, nonatomic)long long originalWeiboId;
 @property (strong, nonatomic)NSString *originalOwner;
 @property (strong, nonatomic)NSString *originalWeiboContent;
-@property (assign, nonatomic)NSInteger originaWeiboPicture;
+@property (assign, nonatomic)NSInteger originalWeiboPicture;
+@property (assign, nonatomic)NSInteger isIndex;
 
 @end

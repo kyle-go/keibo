@@ -41,19 +41,13 @@
     return uiUser;
 }
 
-//从数据库中获取UIWeibo数组，若为空返回nil
-+ (NSArray *)WeibosFromStorage:(NSString *)uid
++ (NSArray *)privateGetUIWeiboFromDTWeiboArray:(NSArray *)dtWeibos
 {
-    NSArray *dtWeibos = [[Storage storageInstance] getWeibosByUid:uid];
-    if ([dtWeibos count] == 0) {
-        return nil;
-    }
-    
-    NSMutableArray *array;
+    NSMutableArray *array = [[NSMutableArray alloc] init];
     for (DTWeibo *weibo in dtWeibos) {
         UIWeibo *uiWeibo = [[UIWeibo alloc] init];
         uiWeibo.weiboId = weibo.weiboId;
-        DTUser *dtUser = [[Storage storageInstance] getUserByUid:uid];
+        DTUser *dtUser = [[Storage storageInstance] getUserByUid:weibo.owner];
         uiWeibo.avatarUrl = dtUser.avatar;
         uiWeibo.name = dtUser.name;
         uiWeibo.remarkName = dtUser.nickName;
@@ -72,6 +66,33 @@
         [array addObject:uiWeibo];
     }
     return array;
+}
+
+//根据uid获取UIWeibo数组，若date为空则获取最新的，否则获取比此时间早的微博（更旧的）
++ (NSArray *)getWeibosByUid:(NSString *)uid count:(NSInteger)count date:(NSDate *)date
+{
+    NSArray *dtWeibos = [[Storage storageInstance] getWeibosByUid:uid count:count date:date];
+    if ([dtWeibos count] == 0) {
+        return nil;
+    }
+    return [self privateGetUIWeiboFromDTWeiboArray:dtWeibos];
+}
+
+//获取当前登录用户UIWeibo数组，若date为空则获取最新的，否则获取比此时间早的微博（更旧的）
++ (NSArray *)getLoginUserWeibos:(NSInteger)count date:(NSDate *)date
+{
+    NSArray *dtWeibos = [[Storage storageInstance] getLoginUserWeibos:count date:date];
+    if ([dtWeibos count] == 0) {
+        return nil;
+    }
+    
+    return [self privateGetUIWeiboFromDTWeiboArray:dtWeibos];
+}
+
+//根据Media url获取Media本地路径
++ (NSString *)getMediaByUrl:(NSString *)url
+{
+    return [[Storage storageInstance]getMediaByUrl:url];
 }
 
 @end

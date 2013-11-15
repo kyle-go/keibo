@@ -152,29 +152,78 @@
 //添加/更新一条微博
 - (void)addWeibo:(DTWeibo *)weibo
 {
+    NSString *sql = @"SELECT * FROM Weibo WHERE weiboId=(?)";
+    FMResultSet *fs = [db executeQuery:sql, weibo.weiboId];
+    if ([fs next]) {
+        sql = @"DELETE FROM Weibo WHERE weiboId=(?)";
+        [db executeUpdate:sql, weibo.weiboId];
+    }
     
+    sql = @"INSERT INTO weibo (weiboId,date,owner,source,visible,content,repostCount,commentCount,likeCount,favorite,picture,isRepost,originalWeiboId,originalOwner,originalWeiboContent,originalWeiboPicture,isIndexWeibo) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    BOOL rs = [db executeUpdate:sql,
+               [[NSNumber alloc] initWithLongLong:weibo.weiboId],
+               weibo.date,
+               weibo.owner,
+               weibo.source,
+               [[NSNumber alloc] initWithLong:weibo.visible],
+               weibo.content,
+               [[NSNumber alloc] initWithLong:weibo.repostCount],
+               [[NSNumber alloc] initWithLong:weibo.commentCount],
+               [[NSNumber alloc] initWithLong:weibo.likeCount],
+               [[NSNumber alloc] initWithLong:weibo.favorite],
+               [[NSNumber alloc] initWithLong:weibo.picture],
+               [[NSNumber alloc] initWithLong:weibo.isRepost],
+               [[NSNumber alloc] initWithLongLong:weibo.originalWeiboId],
+               weibo.originalOwner,
+               weibo.originalWeiboContent,
+               [[NSNumber alloc] initWithLong:weibo.originalWeiboPicture],
+               [[NSNumber alloc] initWithLong:weibo.isIndex]];
+    if (!rs) {
+        NSLog(@"Storage addWeibo failed. error=%@", [db lastError]);
+    }
 }
 
 //批量添加weibo
 - (void)addWeibos:(NSArray *)weibos
 {
-    
+    for (DTWeibo *user in weibos) {
+        [self addWeibo:user];
+    }
 }
 
-//根据uid批量删除weibo
+//根据uid批量删除非Index weibo
 - (void)deleteWeibosByUid:(NSString *)uid
 {
-    
+    NSString *sql = @"DELETE FROM Weibo WHERE owner=(?) AND isIndex='0'";
+    BOOL rs = [db executeUpdate:sql, uid];
+    if (!rs) {
+        NSLog(@"Storage deleteWeibosByUid failed. error=%@", [db lastError]);
+    }
 }
 
-- (void)addMedia:(NSString *)url File:(NSString *)file
+//批量删除index微博
+- (void)deleteIndexWeibos
 {
-    
+    NSString *sql = @"DELETE FROM Weibo WHERE AND isIndex='1'";
+    BOOL rs = [db executeUpdate:sql];
+    if (!rs) {
+        NSLog(@"Storage deleteIndexWeibos failed. error=%@", [db lastError]);
+    }
 }
 
-- (void)addWeiboMedia:(DTWeiboMedia *)media
+- (void)addMedia:(NSString *)url File:(NSString *)path
 {
+    NSString *sql = @"SELECT * FROM Media WHERE url=(?)";
+    FMResultSet *fs = [db executeQuery:sql, url];
+    if ([fs next]) {
+        sql = @"DELETE FROM Media WHERE url=(?)";
+        [db executeUpdate:sql, url];
+    }
     
+    sql = @"INSERT INTO Media (url, path) values (?,?)";
+    if (![db executeUpdate:sql, url, path]) {
+        NSLog(@"Storage addMedia failed. error=%@", [db lastError]);
+    }
 }
 
 - (NSString *)getMediaByUrl:(NSString *)url
@@ -187,45 +236,121 @@
     return nil;
 }
 
-//根据uid获取DTUser
-- (DTUser *)getUserByUid:(NSString *)uid
+- (void)addWeiboMedia:(DTWeiboMedia *)media
 {
-    NSString *sql = @"select * from User where uid=(?)";
-    FMResultSet *fs = [db executeQuery:sql, uid];
-    if (![fs next]) {
-        return nil;
+    NSString *sql = @"INSERT INTO WbMedia (weiboId, type, index, url) values (?,?,?,?)";
+    BOOL rs = [db executeUpdate:sql,
+               [[NSNumber alloc] initWithLongLong:media.weiboId],
+               [[NSNumber alloc] initWithLong:media.type],
+               [[NSNumber alloc] initWithLong:media.index],
+               media.url];
+    if (!rs) {
+        NSLog(@"Storage addWeiboMedia failed. error=%@", [db lastError]);
+    }
+}
+
+- (NSArray *)privateGetDTWeiboArrayByFMResult:(FMResultSet *)rs count:(NSInteger)count
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSInteger index = 0;
+    while ([rs next]) {
+        DTWeibo *weibo = [[DTWeibo alloc] init];
+        weibo.weiboId = [rs longLongIntForColumn:@"weiboId"];
+        weibo.date = [rs dateForColumn:@"date"];
+        weibo.owner = [rs stringForColumn:@"owner"];
+        weibo.source = [rs stringForColumn:@"source"];
+        weibo.visible = [rs intForColumn:@"visible"];
+        weibo.content = [rs stringForColumn:@"content"];
+        weibo.repostCount = [rs intForColumn:@"repostCount"];
+        weibo.commentCount = [rs intForColumn:@"commentCount"];
+        weibo.likeCount = [rs intForColumn:@"likeCount"];
+        weibo.favorite = [rs intForColumn:@"favorite"];
+        weibo.picture = [rs intForColumn:@"picture"];
+        weibo.isRepost = [rs intForColumn:@"isRepost"];
+        weibo.originalWeiboId = [rs longLongIntForColumn:@"originalWeiboId"];
+        weibo.originalOwner = [rs stringForColumn:@"originalOwner"];
+        weibo.originalWeiboContent = [rs stringForColumn:@"originalWeiboContent"];
+        weibo.originalWeiboPicture = [rs intForColumn:@"originalWeiboPicture"];
+        weibo.isIndex = [rs intForColumn:@"isIndex"];
+        [array addObject:weibo];
+        
+        if (count == ++index) {
+            return array;
+        }
     }
     
-    DTUser *user = [[DTUser alloc] init];
-    user.uid = [fs stringForColumn:@"uid"];
-    user.name = [fs stringForColumn:@"name"];
-    user.nickName = [fs stringForColumn:@"nickName"];
-    user.avatar = [fs stringForColumn:@"avatar"];
-    user.avatarLarge = [fs stringForColumn:@"avatarLarge"];
-    user.sex = [fs intForColumn:@"sex"];
-    user.address = [fs stringForColumn:@"address"];
-    user.weiboCount = [fs intForColumn:@"weiboCount"];
-    user.fanCount = [fs intForColumn:@"fanCount"];
-    user.followingCount = [fs intForColumn:@"followingCount"];
-    user.sign = [fs stringForColumn:@"sign"];
-    user.verified = [fs intForColumn:@"verified"];
-    user.verifiedReason =[fs stringForColumn:@"verifiedReason"];
-    user.star = [fs intForColumn:@"star"];
-    user.weiboMember = [fs intForColumn:@"weiboMember"];
-    user.lastMyWeiboId = [fs longLongIntForColumn:@"lastMyWeiboId"];
-    user.following = [fs intForColumn:@"following"];
-    user.followMe = [fs intForColumn:@"followMe"];
-    user.allowAllMsg = [fs intForColumn:@"allowAllMsg"];
-    user.allowAllComment = [fs intForColumn:@"allowAllComment"];
-    user.biFollowCount = [fs intForColumn:@"biFollowCount"];
-    user.blog = [fs stringForColumn:@"blog"];
-    return user;
+    if ([array count]) {
+        return array;
+    }
+    
+    return nil;
 }
 
 //根据uid获取其weibos, 若date为空则获取最新的，否则获取比此时间早的微博（更旧的）
 - (NSArray *)getWeibosByUid:(NSString *)uid  count:(NSInteger)count date:(NSDate*)date
 {
-   return nil;
+    FMResultSet *rs;
+    NSString *sql = @"SELECT * FROM Weibo WHERE owner=(?) AND ";
+    if (!date) {
+        sql = [sql stringByAppendingString:@"ORDER BY date DESC"];
+        rs = [db executeQuery:uid, sql];
+    } else {
+        sql = [sql stringByAppendingString:@"date<(?) ORDER BY date DESC"];
+        rs = [db executeQuery:sql, uid, date];
+    }
+    
+    return [self privateGetDTWeiboArrayByFMResult:rs count:count];
+}
+
+//获取当前用户weibos，若date为空则获取最新的，否则获取比此时间早的微博（更旧的）
+- (NSArray *)getLoginUserWeibos:(NSInteger)count date:(NSDate *)date
+{
+    FMResultSet *rs;
+    NSString *sql = @"SELECT * FROM Weibo WHERE isIndex = '1' AND ";
+    if (!date) {
+        sql = [sql stringByAppendingString:@"ORDER BY date DESC"];
+        rs = [db executeQuery:sql];
+    } else {
+        sql = [sql stringByAppendingString:@"date<(?) ORDER BY date DESC"];
+        rs = [db executeQuery:sql, date];
+    }
+    
+    return [self privateGetDTWeiboArrayByFMResult:rs count:count];
+}
+
+//根据uid获取DTUser
+- (DTUser *)getUserByUid:(NSString *)uid
+{
+    NSString *sql = @"select * from User where uid=(?)";
+    FMResultSet *rs = [db executeQuery:sql, uid];
+    if (![rs next]) {
+        return nil;
+    }
+    
+    DTUser *user = [[DTUser alloc] init];
+    user.uid = [rs stringForColumn:@"uid"];
+    user.name = [rs stringForColumn:@"name"];
+    user.nickName = [rs stringForColumn:@"nickName"];
+    user.avatar = [rs stringForColumn:@"avatar"];
+    user.avatarLarge = [rs stringForColumn:@"avatarLarge"];
+    user.sex = [rs intForColumn:@"sex"];
+    user.address = [rs stringForColumn:@"address"];
+    user.weiboCount = [rs intForColumn:@"weiboCount"];
+    user.fanCount = [rs intForColumn:@"fanCount"];
+    user.followingCount = [rs intForColumn:@"followingCount"];
+    user.sign = [rs stringForColumn:@"sign"];
+    user.verified = [rs intForColumn:@"verified"];
+    user.verifiedReason =[rs stringForColumn:@"verifiedReason"];
+    user.star = [rs intForColumn:@"star"];
+    user.weiboMember = [rs intForColumn:@"weiboMember"];
+    user.lastMyWeiboId = [rs longLongIntForColumn:@"lastMyWeiboId"];
+    user.following = [rs intForColumn:@"following"];
+    user.followMe = [rs intForColumn:@"followMe"];
+    user.allowAllMsg = [rs intForColumn:@"allowAllMsg"];
+    user.allowAllComment = [rs intForColumn:@"allowAllComment"];
+    user.biFollowCount = [rs intForColumn:@"biFollowCount"];
+    user.blog = [rs stringForColumn:@"blog"];
+    return user;
 }
 
 @end

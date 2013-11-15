@@ -64,7 +64,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshMainWindowTable:) name:@"freshMainWindowTable" object:nil];
     
     //从数据库取数据
-    NSArray *array = [DataAdapter WeibosFromStorage:uid];
+    NSArray *array = [DataAdapter getLoginUserWeibos:[kWeiboCountString intValue] date:nil];
     if ([array count] == 0) {
         //TODO 发起网络请求
         [WeiboNetWork getWeibos:accessToken];
