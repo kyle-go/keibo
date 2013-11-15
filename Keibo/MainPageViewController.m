@@ -11,8 +11,10 @@
 #import "MMDrawerBarButtonItem.h"
 #import "UIViewController+MMDrawerController.h"
 #import "WeiboTableCell.h"
+#import "UIUser.h"
 #import "UIWeibo.h"
 #import "DataAdapter.h"
+#import "WeiboNetWork.h"
 
 @interface MainPageViewController ()
 
@@ -20,7 +22,7 @@
 
 @implementation MainPageViewController {
     NSMutableArray *weiboArray;
-    NSMutableDictionary *weiboHeights;
+    NSMutableArray *weiboHeights;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -30,7 +32,7 @@
         [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_home"]];
         self.title = @"首页";
         weiboArray = [[NSMutableArray alloc] init];
-        weiboHeights = [[NSMutableDictionary alloc] init];
+        weiboHeights = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -39,7 +41,8 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"程序猿卡尔";
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:kUid];
+    self.navigationItem.title = [DataAdapter UserAdapter:uid].name;
     
     //添加左按钮
     self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc]
@@ -54,70 +57,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshMainWindowTable:) name:@"freshMainWindowTable" object:nil];
     
     //从数据库取数据
-    
-    
-    //假数据
-    UIWeibo *a = [[UIWeibo alloc] init];
-    a.weiboId = 1001;
-    a.avatarUrl = @"http://tp2.sinaimg.cn/1496915057/50/40020993740/1";
-    a.name = @"OnlySwan";
-    a.feedComeFrom = @"vivo X3";
-    a.date = [NSDate date];
-    a.content = @"未来世界[挖鼻屎]//@珏铭:腾讯WE，一直不知道有这个活动。。 //@D狐狸：腾讯？ //@珏铭:[挖鼻屎]真好， @HaichunZ";
-    a.reposts = 1;
-    a.likes = 3;
-    a.hasOriginWeibo = YES;
-    a.originWeiboId = 100;
-    a.originName = @"大亨heng";
-    a.originContent = @"位置太好了吧，第二排～";
-    a.originFeedComeFrom = @"新浪微博";
-    a.originReposts = 2;
-    a.originComments = 0;
-    a.originLikes = 8;
-    
-    UIWeibo *b = [[UIWeibo alloc] init];
-    b.weiboId = 1002;
-    b.avatarUrl = @"http://tp1.sinaimg.cn/1496850204/50/1283204010/1";
-    b.name = @"封新城";
-    b.feedComeFrom = @"iPad客户端";
-    b.date = [NSDate date];
-    b.content = @"//@陈晓阳改革: 难怪日本这一AV大国日比较长寿呢[哈哈]懂了！";
-    b.reposts = 1;
-    b.likes = 3;
-    b.hasOriginWeibo = YES;
-    b.originWeiboId = 200;
-    b.originName = @"日本新闻网微博";
-    b.originContent = @"【专家称性生活能减中老年人癌变】被称为“世界治疗ED第一人”的东京都浜松町第一医院院长竹越昭彦，在最近出版的《生涯性爱的推荐》一书中指出，为了防止心脏病和前列腺癌的发生，中老年男性应该多从事性生活，性生活能促进血液循环，提高免疫力，富有朝气。详情http://t.cn/zRy9FLT";
-    b.originFeedComeFrom = @"iPhone客户端";
-    b.originReposts = 2;
-    b.originComments = 0;
-    b.originLikes = 8;
-    
-    UIWeibo *c = [[UIWeibo alloc] init];
-    c.weiboId = 1001;
-    c.avatarUrl = @"http://tp2.sinaimg.cn/1496915057/50/40020993740/1";
-    c.name = @"OnlySwan";
-    c.feedComeFrom = @"vivo X3";
-    c.date = [NSDate date];
-    c.content = @"未来世界[挖鼻屎]//@珏铭:腾讯WE，一直不知道有这个活动。。 //@D狐狸：腾讯？ //@珏铭:[挖鼻屎]真好， @HaichunZ";
-    c.reposts = 1;
-    c.likes = 3;
-    c.hasOriginWeibo = YES;
-    c.originWeiboId = 100;
-    c.originName = @"大亨heng";
-    c.originContent = @"位置太好了吧，第二排～";
-    c.originFeedComeFrom = @"新浪微博";
-    c.originReposts = 2;
-    c.originComments = 0;
-    c.originLikes = 8;
-    
-    [weiboArray addObject:b];
-    [weiboArray addObject:a];
-    [weiboArray addObject:c];
-    
-    [weiboHeights setObject:[[NSNumber alloc] initWithFloat:250.0] forKey:@"a"];
-    [weiboHeights setObject:[[NSNumber alloc] initWithFloat:250.0] forKey:@"b"];
-    [weiboHeights setObject:[[NSNumber alloc] initWithFloat:250.0] forKey:@"c"];
+    NSArray *array = [DataAdapter WeibosFromStorage:uid];
+    if ([array count] == 0) {
+        //TODO 发起网络请求
+        [WeiboNetWork getWeibos:uid];
+    } else {
+        [weiboArray setArray:array];
+        NSUInteger count = [weiboArray count];
+        for (NSUInteger i=0; i<count; i++) {
+            [weiboHeights addObject:[[NSNumber alloc] initWithInt:250]];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -134,22 +84,15 @@
 }
 
 #pragma mark -- table View Data Source
-- (void) freshMainWindowTable:(NSNotification *)param
+- (void) freshMainWindowTable:(NSNotification *)notify
 {
-    id cell = [param.userInfo objectForKey:@"cell"];
-    CGFloat height = [[param.userInfo objectForKey:@"height"] floatValue];
+    NSDictionary *param = notify.userInfo;
     
-    if ([weiboArray objectAtIndex:0] == cell) {
-        [weiboHeights setObject: [[NSNumber alloc]initWithFloat:height] forKey:@"a"];
-    }
+    id cell = [param objectForKey:@"cell"];
+    CGFloat height = [[param objectForKey:@"height"] floatValue];
     
-    if ([weiboArray objectAtIndex:1] == cell) {
-        [weiboHeights setObject: [[NSNumber alloc]initWithFloat:height] forKey:@"b"];
-    }
-    
-    if ([weiboArray objectAtIndex:2] == cell) {
-        [weiboHeights setObject: [[NSNumber alloc]initWithFloat:height] forKey:@"c"];
-    }
+    NSUInteger index = [weiboArray indexOfObject:cell];
+    [weiboHeights replaceObjectAtIndex:index withObject:[[NSNumber alloc] initWithFloat:height]];
     
     [self.tableView reloadData];
 }
@@ -203,15 +146,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return [[weiboHeights objectForKey:@"a"] floatValue];
-    }
-    else if (indexPath.row == 1) {
-        return [[weiboHeights objectForKey:@"b"] floatValue];
-    }
-    else {//(indexPath.row == 2) {
-        return [[weiboHeights objectForKey:@"c"] floatValue];
-    }
+    return [[weiboHeights objectAtIndex:indexPath.row] floatValue];
 }
 
 @end

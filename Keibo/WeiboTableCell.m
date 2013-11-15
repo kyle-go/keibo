@@ -94,7 +94,7 @@
     self.webView.scrollView.bounces = NO;
     self.webView.opaque = NO;
     
-    NSString *htmlString = [KUnits weiboFormat:data.content repost:data.hasOriginWeibo? data.originContent:nil reposter:data.originName];
+    NSString *htmlString = [KUnits weiboFormat:data.content repost:data.originWeiboId? data.originContent:nil reposter:data.originName];
     [self.webView loadHTMLString:htmlString baseURL:nil];
 }
 

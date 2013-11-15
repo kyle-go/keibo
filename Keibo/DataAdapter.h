@@ -16,8 +16,8 @@
 @interface DataAdapter : NSObject
 
 //+ (instancetype)DAInstance;
-//这个要改
-+ (UIUser *)UserAdapter:(DTUser *)dtUser;
+//根据uid获取UIUser
++ (UIUser *)UserAdapter:(NSString *)uid;
 
 //从数据库中获取UIWeibo数组，若为空返回nil
 + (NSArray *)WeibosFromStorage:(NSString *)uid;

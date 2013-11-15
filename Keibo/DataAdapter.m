@@ -23,9 +23,9 @@
 //    return instace;
 //}
 
-
-+ (UIUser *)UserAdapter:(DTUser *)dtUser
++ (UIUser *)UserAdapter:(NSString *)uid
 {
+    DTUser *dtUser = [[Storage storageInstance] getUserByUid:uid];
     UIUser * uiUser = [[UIUser alloc] init];
     uiUser.avatar = dtUser.avatar;
     uiUser.name = dtUser.name;
@@ -52,6 +52,23 @@
     NSMutableArray *array;
     for (DTWeibo *weibo in dtWeibos) {
         UIWeibo *uiWeibo = [[UIWeibo alloc] init];
+        uiWeibo.weiboId = weibo.weiboId;
+        DTUser *dtUser = [[Storage storageInstance] getUserByUid:uid];
+        //TODO 根据uid获取DTUser
+        uiWeibo.avatarUrl = dtUser.avatar;
+        uiWeibo.name = dtUser.name;
+        uiWeibo.remarkName = dtUser.nickName;
+        uiWeibo.feedComeFrom = weibo.source;
+        uiWeibo.content = weibo.content;
+        uiWeibo.date = weibo.date;
+        uiWeibo.reposts = weibo.repostCount;
+        uiWeibo.comments = weibo.commentCount;
+        uiWeibo.likes = weibo.likeCount;
+        
+        uiWeibo.originWeiboId = weibo.originalWeiboId;
+        dtUser = [[Storage storageInstance] getUserByUid:weibo.originalOwner];
+        uiWeibo.originName = dtUser.name;
+        uiWeibo.originContent = weibo.originalWeiboContent;
         
         [array addObject:uiWeibo];
     }

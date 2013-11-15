@@ -43,7 +43,7 @@
 {
     NSDictionary *param = [notify userInfo];
     DTUser *user = [param objectForKey:@"User"];
-    UIUser *uiUser = [DataAdapter UserAdapter:user];
+    UIUser *uiUser = [DataAdapter UserAdapter:user.uid];
     
     if ([user.uid isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]]) {
         
