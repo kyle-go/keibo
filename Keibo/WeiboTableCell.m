@@ -19,6 +19,14 @@
 }
 
 //remember IndexpathsForVisibleCells
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+    }
+    return self;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -47,7 +55,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    if (self.webViewHeight == self.webView.scrollView.contentSize.height) {
+    if (self.webViewHeight == self.webView.scrollView.contentSize.height && btnRepost) {
         return;
     }
     
@@ -74,12 +82,16 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"freshTableView" object:nil userInfo:param];
 }
 
+- (void)prepareForReuse
+{
+    NSLog(@"prepare For Reuse.");
+}
+
 - (void)updateWithWeiboData:(UIWeibo *)data
 {
     cellData = data;
 
     [self.avatarImageView setImage:[UIImage imageNamed:@"avatar-0"]];
-
     self.nameLabel.text = data.name;
     self.dateLabel.text = [data.date description];
     self.comeFromLabel.text = data.feedComeFrom;
@@ -89,6 +101,8 @@
     self.like = data.likes;
 
     //set webview content
+    [self.webView stopLoading];
+    self.webView.delegate = self;
     self.webView.scrollView.scrollEnabled = NO;
     self.webView.scrollView.bounces = NO;
     self.webView.opaque = NO;

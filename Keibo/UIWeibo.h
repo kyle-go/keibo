@@ -19,7 +19,7 @@
 @property (strong, nonatomic)NSDate *date;              //微博发生日期
 @property (assign, nonatomic)NSInteger reposts;         //转发数
 @property (assign, nonatomic)NSInteger comments;        //评论数
-@property (assign, nonatomic)NSInteger likes;           // 赞数
+@property (assign, nonatomic)NSInteger likes;           //赞数
 
 @property (assign, nonatomic)NSInteger originWeiboId;   //原微博唯一标识
 @property (strong, nonatomic)NSString *originName;      //原微博发送者

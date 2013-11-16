@@ -29,11 +29,12 @@
 - (void)setWeiboArray:(NSArray *)weibos
 {
     [weiboArray setArray:weibos];
+    
     NSUInteger count = [weiboArray count];
+    [weiboHeights removeAllObjects];
     for (NSUInteger i=0; i<count; i++) {
         [weiboHeights addObject:[[NSNumber alloc] initWithInt:250]];
     }
-
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -133,10 +134,10 @@
     NSDictionary *param = notify.userInfo;
     
     id cell = [param objectForKey:@"cell"];
-    CGFloat height = [[param objectForKey:@"height"] floatValue];
+    id height = [param objectForKey:@"height"];
     
     NSUInteger index = [weiboArray indexOfObject:cell];
-    [weiboHeights replaceObjectAtIndex:index withObject:[[NSNumber alloc] initWithFloat:height]];
+    [weiboHeights replaceObjectAtIndex:index withObject:height];
     
     [self.tableView reloadData];
 }
@@ -152,6 +153,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"get cell ...");
+
     static NSString *cellIdentifier = @"weiboCellIdentifier";
     
     static dispatch_once_t once;
@@ -160,12 +163,7 @@
     });
     
     WeiboTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        cell = [[WeiboTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    
-    cell.webView.delegate = cell;
-
+    assert(cell);
     [cell updateWithWeiboData:[weiboArray objectAtIndex:indexPath.row]];
     
     return cell;
@@ -190,6 +188,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"get height...");
     return [[weiboHeights objectAtIndex:indexPath.row] floatValue];
 }
 
