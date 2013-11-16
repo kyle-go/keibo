@@ -36,7 +36,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.sexImageView.image = [WeiboImageCreator weiboImage:IMAGE_BOY];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshLoginUser:) name:@"NotificationCenter_LoginUser" object:nil];
 }
 
@@ -82,7 +81,9 @@
     }
                 
     self.avatarImageView.image = [UIImage imageNamed:avatar];
+    self.sexImageView.image = [WeiboImageCreator weiboImage:user.sex?IMAGE_GIRL:IMAGE_BOY];
     self.nameLabel.text = user.name;
+    [self.nameLabel sizeToFit];
     self.signLabel.text = user.sign;
     self.fanCount.text = [[NSString alloc] initWithFormat:@"粉丝:%ld", (long)user.fanCount];
     self.followingCount.text = [[NSString alloc] initWithFormat:@"关注:%ld", (long)user.followingCount ];

@@ -19,7 +19,7 @@
 #pragma mark ------------------- 私有接口 -------------------
 + (DTWeibo *)getWeiboByJson:(NSDictionary *)json
 {
-    debugLog(@"%@", json);
+    //debugLog(@"%@", json);
     
     //解析数据
     DTWeibo *weibo = [[DTWeibo alloc] init];
@@ -91,7 +91,7 @@
 {
     void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
     ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        //NSLog(@"JSON: %@", responseObject);
         
         NSError *error;
         NSDictionary *json;
@@ -201,7 +201,7 @@
     //获取token是否过期成功回调
     void (^success_callback) (AFHTTPRequestOperation *operation, id responseObject) =
     ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        //NSLog(@"JSON: %@", responseObject);
         
         NSError *error;
         NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
@@ -235,7 +235,7 @@
 {
     void (^success_callback) (AFHTTPRequestOperation *operation, id responseObject) =
     ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        //NSLog(@"JSON: %@", responseObject);
         
         NSError *error;
         NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
@@ -271,7 +271,7 @@
 {
     void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
     ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        //NSLog(@"JSON: %@", responseObject);
         
         NSError *error;
         NSDictionary *json;
@@ -300,7 +300,7 @@
 {
     void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
     ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        //NSLog(@"JSON: %@", responseObject);
         
         NSError *error;
         NSDictionary *json;

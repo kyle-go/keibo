@@ -85,7 +85,7 @@
     //isRepost，originalWeiboId,originalOwner,originalWeiboContent，originalWeiboPicture
     
     //0：普通微博，1：私密微博，3：指定分组微博，4：密友微博；list_id为分组的组号
-    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER, 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'originalOwner' VARCHAR(16), 'originalWeiboContent' VARCHAR(160), 'originalWeiboPicture' INTEGER 'isIndexWeibo' INTEGER)";
+    sql = @"CREATE TABLE IF NOT EXISTS 'Weibo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'weiboId' BITINTEGER, 'date' DATE, 'owner' VARCHAR(16), 'source' VARCHAR(32), 'visible' INTEGER, 'content' VARCHAR(160), 'repostCount' INTEGER, 'commentCount' INTEGER, 'likeCount' INTEGER, 'favorite' INTEGER, 'picture' INTEGER, 'isRepost' INTEGER, 'originalWeiboId' BIGINTEGER, 'originalOwner' VARCHAR(16), 'originalWeiboContent' VARCHAR(160), 'originalWeiboPicture' INTEGER, 'isIndexWeibo' INTEGER)";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create Weibo table failed. error=%@", [db lastError]);
         abort();
@@ -194,7 +194,7 @@
 //根据uid批量删除非Index weibo
 - (void)deleteWeibosByUid:(NSString *)uid
 {
-    NSString *sql = @"DELETE FROM Weibo WHERE owner=(?) AND isIndex='0'";
+    NSString *sql = @"DELETE FROM Weibo WHERE owner=(?) AND isIndexWeibo='0'";
     BOOL rs = [db executeUpdate:sql, uid];
     if (!rs) {
         NSLog(@"Storage deleteWeibosByUid failed. error=%@", [db lastError]);
@@ -204,7 +204,7 @@
 //批量删除index微博
 - (void)deleteIndexWeibos
 {
-    NSString *sql = @"DELETE FROM Weibo WHERE AND isIndex='1'";
+    NSString *sql = @"DELETE FROM Weibo WHERE AND isIndexWeibo='1'";
     BOOL rs = [db executeUpdate:sql];
     if (!rs) {
         NSLog(@"Storage deleteIndexWeibos failed. error=%@", [db lastError]);
@@ -271,7 +271,7 @@
         weibo.originalOwner = [rs stringForColumn:@"originalOwner"];
         weibo.originalWeiboContent = [rs stringForColumn:@"originalWeiboContent"];
         weibo.originalWeiboPicture = [rs intForColumn:@"originalWeiboPicture"];
-        weibo.isIndex = [rs intForColumn:@"isIndex"];
+        weibo.isIndex = [rs intForColumn:@"isIndexWeibo"];
         [array addObject:weibo];
         
         if (count == ++index) {
@@ -290,12 +290,12 @@
 - (NSArray *)getWeibosByUid:(NSString *)uid  count:(NSInteger)count date:(NSDate*)date
 {
     FMResultSet *rs;
-    NSString *sql = @"SELECT * FROM Weibo WHERE owner=(?) AND ";
+    NSString *sql = @"SELECT * FROM Weibo WHERE owner=(?) ";
     if (!date) {
         sql = [sql stringByAppendingString:@"ORDER BY date DESC"];
         rs = [db executeQuery:uid, sql];
     } else {
-        sql = [sql stringByAppendingString:@"date<(?) ORDER BY date DESC"];
+        sql = [sql stringByAppendingString:@"AND date<(?) ORDER BY date DESC"];
         rs = [db executeQuery:sql, uid, date];
     }
     
@@ -306,12 +306,12 @@
 - (NSArray *)getLoginUserWeibos:(NSInteger)count date:(NSDate *)date
 {
     FMResultSet *rs;
-    NSString *sql = @"SELECT * FROM Weibo WHERE isIndex = '1' AND ";
+    NSString *sql = @"SELECT * FROM Weibo WHERE isIndexWeibo='1' ";
     if (!date) {
         sql = [sql stringByAppendingString:@"ORDER BY date DESC"];
         rs = [db executeQuery:sql];
     } else {
-        sql = [sql stringByAppendingString:@"date<(?) ORDER BY date DESC"];
+        sql = [sql stringByAppendingString:@"AND date<(?) ORDER BY date DESC"];
         rs = [db executeQuery:sql, date];
     }
     

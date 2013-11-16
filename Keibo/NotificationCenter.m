@@ -86,6 +86,7 @@
     NSDictionary *param = notify.userInfo;
     if ([param count] == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_LoginUserWeibos" object:nil];
+        return;
     }
     
     NSString *type = [param objectForKey:@"type"];
