@@ -10,6 +10,7 @@
 #import "UIUser.h"
 #import "DataAdapter.h"
 #import "WeiboNetWork.h"
+#import "WeiboImageCreator.h"
 
 @interface LeftViewController ()
 
@@ -35,6 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.sexImageView.image = [WeiboImageCreator weiboImage:IMAGE_BOY];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshLoginUser:) name:@"NotificationCenter_LoginUser" object:nil];
 }
 
