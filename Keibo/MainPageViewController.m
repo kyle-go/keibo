@@ -33,7 +33,7 @@
     NSUInteger count = [weiboArray count];
     [weiboHeights removeAllObjects];
     for (NSUInteger i=0; i<count; i++) {
-        [weiboHeights addObject:[[NSNumber alloc] initWithInt:250]];
+        [weiboHeights addObject:[[NSNumber alloc] initWithInt:150]];
     }
 }
 
@@ -137,6 +137,9 @@
     id height = [param objectForKey:@"height"];
     
     NSUInteger index = [weiboArray indexOfObject:cell];
+    if (index == NSNotFound) {
+        abort();
+    }
     [weiboHeights replaceObjectAtIndex:index withObject:height];
     
     [self.tableView reloadData];

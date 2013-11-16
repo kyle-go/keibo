@@ -162,7 +162,7 @@
     user.allowAllMsg = [[json objectForKey:@"allow_all_act_msg"] intValue];
     user.biFollowCount = [[json objectForKey:@"bi_followers_count"] intValue];
     
-    //TODO: for test ---
+    //TODO: -------- for test ------
     if (user.verified && user.star) {
         NSLog(@"达人和v是不能共存的！！！---");
         abort();

@@ -24,6 +24,6 @@
 #define kUid              @"uid"
 
 #define kMedia            @"Media"
-#define kWeiboCountString @"12"
+#define kWeiboCountString @"7"
 
 #endif
