@@ -19,12 +19,18 @@
 #pragma mark ------------------- 私有接口 -------------------
 + (DTWeibo *)getWeiboByJson:(NSDictionary *)json
 {
+    debugLog(@"%@", json);
+    
     //解析数据
     DTWeibo *weibo = [[DTWeibo alloc] init];
     weibo.weiboId = [[json objectForKey:@"id"] longLongValue];
     weibo.date = [KUnits getNSDateByDateString:[json objectForKey:@"created_at"]];
-    weibo.owner = [[json objectForKey:@"uid"] stringValue];
     weibo.source = [KUnits getWeiboSourceText:[json objectForKey:@"source"]];
+    
+    NSDictionary *jsonUser = [json objectForKey:@"user"];
+    DTUser *user = [self getDTUserByJson:jsonUser];
+    weibo.owner = user.uid;
+    
     NSDictionary *visiable = [json objectForKey:@"visible"];
     weibo.visible = [[visiable objectForKey:@"type"] intValue];
     if (weibo.visible == 2) {
@@ -42,6 +48,18 @@
     if (weibo.isRepost) {
         weibo.picture = 0;
         weibo.originalWeiboId = [[repost objectForKey:@"idstr"] longLongValue];
+        NSDictionary *pics = [repost objectForKey:@"pic_urls"];
+        if ([pics count] == 0) {
+            weibo.originalWeiboPicture = 0;
+        } else {
+            weibo.originalWeiboPicture = 1;
+        }
+        jsonUser = [repost objectForKey:@"user"];
+        if (jsonUser) {
+            user = [self getDTUserByJson:jsonUser];
+            weibo.originalOwner = user.uid;
+            weibo.originalWeiboContent = [repost objectForKey:@"text"];
+        }
     } else {
         NSDictionary *pics = [json objectForKey:@"pic_urls"];
         if ([pics count] == 0) {
@@ -62,6 +80,9 @@
             }
         }
     }
+    
+    //TODO: 这个要改
+    weibo.isIndex = 1;
     
     return weibo;
 }
@@ -101,7 +122,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     //[manager setResponseSerializer:[AFTextResponseSerializer serializer]];
-    NSDictionary *params = @{@"access_token":accessToken, @"trim_user":@"1", @"count":kWeiboCountString, @"since_id":@"0", @"max_id":@"0"};
+    NSDictionary *params = @{@"access_token":accessToken, @"trim_user":@"0", @"count":kWeiboCountString, @"since_id":@"0", @"max_id":@"0"};
     if ([since_id length] > 0) {
         [params setValue:since_id forKey:@"since_id"];
     }
@@ -111,6 +132,52 @@
     [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:params success:success failure:failure];
 }
 
++ (DTUser *)getDTUserByJson:(NSDictionary *)json
+{
+    //解析数据
+    DTUser *user = [[DTUser alloc] init];
+    user.uid = [json objectForKey:@"idstr"];
+    user.name = [json objectForKey:@"screen_name"];
+    user.nickName = [json objectForKey:@"remark"];
+    user.avatar = [json objectForKey:@"profile_image_url"];
+    user.avatarLarge = [json objectForKey:@"avatar_large"];
+    user.address = [json objectForKey:@"location"];
+    user.sign = [json objectForKey:@"description"];
+    user.blog = [json objectForKey:@"url"];
+    user.sex = [[json objectForKey:@"gender"] isEqualToString:@"m"]? 0:1;
+    user.weiboCount = [[json objectForKey:@"statuses_count"] intValue];
+    user.fanCount = [[json objectForKey:@"followers_count"] intValue];
+    user.followingCount = [[json objectForKey:@"friends_count"] intValue];
+    user.verified = [[json objectForKey:@"verified"] intValue];
+    user.verifiedReason = [json objectForKey:@"verified_reason"];
+    int verified_type = [[json objectForKey:@"verified_type"] intValue];
+    if (verified_type == 2) {
+        user.verified = 2;
+    }
+    user.star = (verified_type == 200 || verified_type == 220)? 1:0; //官方说了，这个子段为200或者220都是达人
+    user.weiboMember = 0; //官方说了，这个会员接口现在获取不到（2013-2-1）
+    user.following = [[json objectForKey:@"following"] intValue];
+    user.followMe = [[json objectForKey:@"follow_me"] intValue];
+    user.allowAllComment = [[json objectForKey:@"allow_all_comment"] intValue];
+    user.allowAllMsg = [[json objectForKey:@"allow_all_act_msg"] intValue];
+    user.biFollowCount = [[json objectForKey:@"bi_followers_count"] intValue];
+    
+    //TODO: for test ---
+    if (user.verified && user.star) {
+        NSLog(@"达人和v是不能共存的！！！---");
+        abort();
+    }
+    
+    NSDictionary *jsonWeibo = [json objectForKey:@"status"];
+    if (jsonWeibo) {
+        user.lastMyWeiboId = [[jsonWeibo objectForKey:@"id"] longLongValue];
+        //[WeiboNetWork getWeibo:accessToken weiboId:user.lastMyWeiboId];
+    }
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_User" object:nil userInfo:@{@"User": user}];
+    
+    return user;
+}
 
 
 #pragma mark ------------------------------ 网络请求 ----------------------
@@ -215,47 +282,7 @@
             json = responseObject;
         }
         
-        //解析数据
-        DTUser *user = [[DTUser alloc] init];
-        user.uid = [json objectForKey:@"idstr"];
-        user.name = [json objectForKey:@"screen_name"];
-        user.nickName = [json objectForKey:@"remark"];
-        user.avatar = [json objectForKey:@"profile_image_url"];
-        user.avatarLarge = [json objectForKey:@"avatar_large"];
-        user.address = [json objectForKey:@"location"];
-        user.sign = [json objectForKey:@"description"];
-        user.blog = [json objectForKey:@"url"];
-        user.sex = [[json objectForKey:@"gender"] isEqualToString:@"m"]? 0:1;
-        user.weiboCount = [[json objectForKey:@"statuses_count"] intValue];
-        user.fanCount = [[json objectForKey:@"followers_count"] intValue];
-        user.followingCount = [[json objectForKey:@"friends_count"] intValue];
-        user.verified = [[json objectForKey:@"verified"] intValue];
-        user.verifiedReason = [json objectForKey:@"verified_reason"];
-        int verified_type = [[json objectForKey:@"verified_type"] intValue];
-        if (verified_type == 2) {
-            user.verified = 2;
-        }
-        user.star = (verified_type == 200 || verified_type == 220)? 1:0; //官方说了，这个子段为200或者220都是达人
-        user.weiboMember = 0; //官方说了，这个会员接口现在获取不到（2013-2-1）
-        user.following = [[json objectForKey:@"following"] intValue];
-        user.followMe = [[json objectForKey:@"follow_me"] intValue];
-        user.allowAllComment = [[json objectForKey:@"allow_all_comment"] intValue];
-        user.allowAllMsg = [[json objectForKey:@"allow_all_act_msg"] intValue];
-        user.biFollowCount = [[json objectForKey:@"bi_followers_count"] intValue];
-        
-        //TODO: for test ---
-        if (user.verified && user.star) {
-            NSLog(@"达人和v是不能共存的！！！---");
-            abort();
-        }
-        
-        NSDictionary *jsonWeibo = [json objectForKey:@"status"];
-        if (jsonWeibo) {
-            user.lastMyWeiboId = [[jsonWeibo objectForKey:@"id"] longLongValue];
-            [WeiboNetWork getWeibo:accessToken weiboId:user.lastMyWeiboId];
-        }
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_User" object:nil userInfo:@{@"User": user}];
+        [self getDTUserByJson:json];
     };
     
     void (^failure)(AFHTTPRequestOperation *operation, NSError *error) =
