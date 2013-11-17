@@ -8,6 +8,7 @@
 
 #import "AuthorizeViewController.h"
 #import "MMDrawerController.h"
+#import "MMDrawerVisualState.h"
 #import "LeftViewController.h"
 #import "MainPageViewController.h"
 #import "MessageViewController.h"
@@ -130,6 +131,7 @@
     [drawerController setMaximumLeftDrawerWidth:250];
     [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    [drawerController setDrawerVisualStateBlock:[MMDrawerVisualState slideAndScaleVisualStateBlock]];
     
     [self presentViewController:drawerController animated:YES completion:nil];
 }
