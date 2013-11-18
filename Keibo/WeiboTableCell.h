@@ -23,6 +23,6 @@
 @property (assign, nonatomic) CGFloat webViewHeight;
 - (IBAction)btnMoreAction:(id)sender;
 
-- (void)updateWithWeiboData:(UIWeibo *)data;
+- (void)updateWithWeiboData:(UIWeibo *)data index:(NSInteger)index;
 
 @end

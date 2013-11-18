@@ -133,14 +133,10 @@
 {
     NSDictionary *param = notify.userInfo;
     
-    id cell = [param objectForKey:@"cell"];
+    id index = [param objectForKey:@"index"];
     id height = [param objectForKey:@"height"];
     
-    NSUInteger index = [weiboArray indexOfObject:cell];
-    if (index == NSNotFound) {
-        abort();
-    }
-    [weiboHeights replaceObjectAtIndex:index withObject:height];
+    [weiboHeights replaceObjectAtIndex:[index intValue] withObject:height];
     
     [self.tableView reloadData];
 }
@@ -167,7 +163,7 @@
     
     WeiboTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     assert(cell);
-    [cell updateWithWeiboData:[weiboArray objectAtIndex:indexPath.row]];
+    [cell updateWithWeiboData:[weiboArray objectAtIndex:indexPath.row] index:indexPath.row];
     
     return cell;
 }
