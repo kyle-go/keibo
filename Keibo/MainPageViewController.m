@@ -152,8 +152,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"get cell ...");
-
     static NSString *cellIdentifier = @"weiboCellIdentifier";
     
     static dispatch_once_t once;
@@ -187,7 +185,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"get height...");
     return [[weiboHeights objectAtIndex:indexPath.row] floatValue];
 }
 
