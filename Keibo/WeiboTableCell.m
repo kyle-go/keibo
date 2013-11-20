@@ -60,7 +60,6 @@
     BOOL notify = YES;
     if (self.webViewHeight == self.webView.scrollView.contentSize.height) {
         notify = NO;
-        ;
     }
     
     self.webViewHeight = webView.scrollView.contentSize.height;
