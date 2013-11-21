@@ -72,9 +72,9 @@
         [btnComment removeFromSuperview];
         [btnLike removeFromSuperview];
         
-        btnRepost = [self createUIButton:CGRectMake(30, self.webViewHeight+50, 22+40, 22) title:textRepost];
-        btnComment = [self createUIButton:CGRectMake(130, self.webViewHeight+50, 22+40, 22) title:textComment];
-        btnLike = [self createUIButton:CGRectMake(230, self.webViewHeight+50, 22+40, 22) title:textLike];
+        btnRepost = [self createUIButton:CGRectMake(30, self.webViewHeight+54, 22+40, 22) title:textRepost];
+        btnComment = [self createUIButton:CGRectMake(130, self.webViewHeight+54, 22+40, 22) title:textComment];
+        btnLike = [self createUIButton:CGRectMake(230, self.webViewHeight+54, 22+40, 22) title:textLike];
         
         [self addSubview: btnRepost];
         [self addSubview: btnComment];
@@ -85,7 +85,7 @@
     self.webViewHeight = webView.frame.size.height;
     
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
-    [param setObject:[[NSNumber alloc] initWithInt:cellIndex] forKey:@"index"];
+    [param setObject:[[NSNumber alloc] initWithLong:cellIndex] forKey:@"index"];
     [param setObject:[[NSNumber alloc] initWithFloat:self.webViewHeight + 80.0] forKey:@"height"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"freshTableView" object:nil userInfo:param];
