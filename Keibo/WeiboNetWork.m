@@ -140,7 +140,7 @@
     user.name = [json objectForKey:@"screen_name"];
     user.nickName = [json objectForKey:@"remark"];
     user.avatar = [json objectForKey:@"profile_image_url"];
-    user.avatarLarge = [json objectForKey:@"avatar_large"];
+    user.avatarLarge = [json objectForKey:@"avatar_large"];    
     user.address = [json objectForKey:@"location"];
     user.sign = [json objectForKey:@"description"];
     user.blog = [json objectForKey:@"url"];
@@ -370,7 +370,7 @@
         
         if (!error) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_Media" object:nil
-            userInfo:@{@"url": url, @"path": [filePath path]}];
+            userInfo:@{@"url": url, @"file": [filePath path]}];
         }
     }];
     [downloadTask resume];

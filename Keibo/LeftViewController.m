@@ -58,7 +58,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         
         //刷新头像
-        NSString *path = [param objectForKey:@"path"];
+        NSString *path = [param objectForKey:@"file"];
         self.avatarImageView.image = [UIImage imageWithContentsOfFile:path];
     }
 }

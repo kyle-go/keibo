@@ -47,6 +47,7 @@
     uiWeibo.weiboId = weibo.weiboId;
     DTUser *dtUser = [[Storage storageInstance] getUserByUid:weibo.owner];
     uiWeibo.avatarUrl = dtUser.avatar;
+    uiWeibo.sex = dtUser.sex;
     uiWeibo.name = dtUser.name;
     uiWeibo.remarkName = dtUser.nickName;
     uiWeibo.feedComeFrom = weibo.source;

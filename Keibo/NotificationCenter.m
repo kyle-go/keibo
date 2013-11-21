@@ -11,6 +11,7 @@
 #import "UIUser.h"
 #import "DataAdapter.h"
 #import "Storage.h"
+#import "WeiboNetWork.h"
 
 @implementation NotificationCenter {
     Storage *storageInstance;
@@ -67,9 +68,18 @@
 {
     NSDictionary *param = [notify userInfo];
     DTUser *user = [param objectForKey:@"User"];
+    
     //写入数据库
     [storageInstance addUser:user];
     
+    //检查小头像，大头像是否都已经下载到本地了
+    if ([[storageInstance getMediaByUrl:user.avatar] length] == 0) {
+        [WeiboNetWork getOneMedia:user.avatar];
+    }
+    if ([[storageInstance getMediaByUrl:user.avatarLarge] length] == 0) {
+        [WeiboNetWork getOneMedia:user.avatarLarge];
+    }
+
     UIUser *uiUser = [DataAdapter UserAdapter:user.uid];
     if ([user.uid isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_LoginUser" object:nil userInfo:@{@"User":uiUser}];
@@ -115,6 +125,12 @@
 
 -(void)WeiboNetWork_Media:(NSNotification *)notify
 {
-//    [storageInstance addMedia: ]
+    NSDictionary *param = notify.userInfo;
+    if ([param count] == 0) {
+        return;
+    }
+    
+    [storageInstance addMedia: [param objectForKey:@"url"] File:[param objectForKey:@"file"]];
 }
+
 @end

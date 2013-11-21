@@ -102,7 +102,7 @@
     //多媒体库(Media) --- 多媒体资源url跟本地路径关系
     //多媒体url，本地全路径（文件名是uuid随机生存）
     //url，path
-    sql = @"CREATE TABLE IF NOT EXISTS 'Media' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'url' VARCHAR(512), 'path' VARCHAR(260))";
+    sql = @"CREATE TABLE IF NOT EXISTS 'Media' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'url' VARCHAR(512), 'file' VARCHAR(260))";
     if (![db executeUpdate:sql]) {
         NSLog(@"Create Media table failed. error=%@", [db lastError]);
         abort();
@@ -220,7 +220,7 @@
         [db executeUpdate:sql, url];
     }
     
-    sql = @"INSERT INTO Media (url, path) values (?,?)";
+    sql = @"INSERT INTO Media (url, file) values (?,?)";
     if (![db executeUpdate:sql, url, path]) {
         NSLog(@"Storage addMedia failed. error=%@", [db lastError]);
     }
@@ -231,7 +231,7 @@
     NSString *sql = @"SELECT * FROM Media WHERE url=(?)";
     FMResultSet *fs = [db executeQuery:sql, url];
     if ([fs next]) {
-        return [fs stringForColumn:@"path"];
+        return [fs stringForColumn:@"file"];
     }
     return nil;
 }

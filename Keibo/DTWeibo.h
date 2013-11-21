@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-enum DTWeibo_Visible{
+enum DTWeibo_Visible {
     Visible_Normal = 0, //普通微博
     Visible_Secret = 1, //私密微博
     Visible_GoodFriend = 3,//密友微博

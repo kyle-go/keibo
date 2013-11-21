@@ -10,6 +10,7 @@
 #import "UIWeibo.h"
 #import "Storage.h"
 #import "KUnits.h"
+#import "DataAdapter.h"
 
 @implementation WeiboTableCell {
     NSInteger cellIndex;
@@ -89,7 +90,6 @@
     [param setObject:[[NSNumber alloc] initWithFloat:self.webViewHeight + 80.0] forKey:@"height"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"freshTableView" object:nil userInfo:param];
-    
 }
 
 - (void)prepareForReuse
@@ -100,8 +100,14 @@
 - (void)updateWithWeiboData:(UIWeibo *)data index:(NSInteger)index;
 {
     cellIndex = index;
-    
-    [self.avatarImageView setImage:[UIImage imageNamed:@"avatar-0"]];
+    NSString *avatarPath = [DataAdapter getMediaByUrl:data.avatarUrl];
+    if ([avatarPath length] == 0) {
+        self.avatarImageView.image = [UIImage imageNamed:data.sex? @"avatar-1":@"avatar-0"];
+    } else {
+        UIImage *image = [UIImage imageWithContentsOfFile:avatarPath];
+        self.avatarImageView.image = image;
+    }
+
     self.nameLabel.text = data.name;
     self.dateLabel.text = [data.date description];
     self.comeFromLabel.text = data.feedComeFrom;
