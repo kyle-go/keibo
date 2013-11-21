@@ -14,6 +14,8 @@
 @property (strong, nonatomic)NSString *avatarUrl;       //头像http url
 @property (strong, nonatomic)NSString *name;            //微博发送者
 @property (assign, nonatomic)NSInteger sex;             //微博博主性别
+@property (assign, nonatomic)NSInteger star;            //是否达人
+@property (assign, nonatomic)NSInteger verified;             //是否是认证 1黄v 2蓝v
 @property (strong, nonatomic)NSString *remarkName;      //备注名，暂时不会用到
 @property (strong, nonatomic)NSString *feedComeFrom;    //来自哪
 @property (strong, nonatomic)NSString *content;         //微博内容

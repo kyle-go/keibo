@@ -26,4 +26,7 @@
 //Thu Nov 14 20:19:09 +0800 2013
 + (NSDate *)getNSDateByDateString:(NSString *)dateString;
 
+//由具体时间获取一个“微博时间”，比如“1分钟前“
++ (NSString *)getProperDateStringByDate:(NSDate *)date type:(NSInteger *)type;
+
 @end
