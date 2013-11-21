@@ -28,6 +28,7 @@
     DTUser *dtUser = [[Storage storageInstance] getUserByUid:uid];
     UIUser * uiUser = [[UIUser alloc] init];
     uiUser.avatar = dtUser.avatar;
+    uiUser.avatarLarge = dtUser.avatarLarge;
     uiUser.name = dtUser.name;
     uiUser.sign = dtUser.sign;
     uiUser.address = dtUser.address;

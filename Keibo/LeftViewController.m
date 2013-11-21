@@ -47,7 +47,7 @@
 
 - (void)registerAvatarImageFresh
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshAvatar:) name:@"WeiboNetWork_Media" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshAvatar:) name:@"NotificationCenter_Media" object:nil];
 }
 
 - (void)freshAvatar:(NSNotification *)nofity
@@ -69,18 +69,22 @@
     UIUser *user = [params objectForKey:@"User"];
     
     //刷新界面
-    NSString *avatar = [DataAdapter getMediaByUrl:user.avatar];
+    UIImage *avatarImage;
+    NSString *avatar = [DataAdapter getMediaByUrl:user.avatarLarge];
     if ([avatar length] == 0) {
         avatarUrl = user.avatar;
         avatar = @"avatar-0";
         if (user.sex) {
             avatar = @"avatar-1";
         }
+        avatarImage = [UIImage imageNamed:avatar];
         [self registerAvatarImageFresh];
         [WeiboNetWork getOneMedia:user.avatar];
+    } else {
+        avatarImage = [UIImage imageWithContentsOfFile:avatar];
     }
                 
-    self.avatarImageView.image = [UIImage imageNamed:avatar];
+    self.avatarImageView.image = avatarImage;
     self.sexImageView.image = [WeiboImageCreator weiboImage:user.sex?IMAGE_GIRL:IMAGE_BOY];
     self.nameLabel.text = user.name;
     [self.nameLabel sizeToFit];

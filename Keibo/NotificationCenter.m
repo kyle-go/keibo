@@ -72,12 +72,9 @@
     //写入数据库
     [storageInstance addUser:user];
     
-    //检查小头像，大头像是否都已经下载到本地了
+    //检查小头像(大头像暂且不下载)是否已下载到本地
     if ([[storageInstance getMediaByUrl:user.avatar] length] == 0) {
         [WeiboNetWork getOneMedia:user.avatar];
-    }
-    if ([[storageInstance getMediaByUrl:user.avatarLarge] length] == 0) {
-        [WeiboNetWork getOneMedia:user.avatarLarge];
     }
 
     UIUser *uiUser = [DataAdapter UserAdapter:user.uid];
@@ -129,8 +126,12 @@
     if ([param count] == 0) {
         return;
     }
+    NSString *url = [param objectForKey:@"url"];
+    NSString *file = [param objectForKey:@"file"];
     
-    [storageInstance addMedia: [param objectForKey:@"url"] File:[param objectForKey:@"file"]];
+    [storageInstance addMedia: url File:file];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_Media" object:nil userInfo:@{@"url": url, @"file":file}];
 }
 
 @end
