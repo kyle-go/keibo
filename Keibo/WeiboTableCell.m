@@ -139,15 +139,24 @@
     }
     
     //设置时间
-    static NSInteger ef = 7;
-    NSString *dateString = [KUnits getProperDateStringByDate:data.date type:&ef];
+    static NSInteger type = 7;
+    NSString *dateString = [KUnits getProperDateStringByDate:data.date type:&type];
     self.dateLabel.text = dateString;
-    if (ef <= 2) {
+    if (type <= 2) {
         UIColor *color = [[UIColor alloc] initWithRed:1.0 green:128.0/255.0 blue:0.0 alpha:1.0];
         [self.dateLabel setTextColor:color];
+    } else {
+        [self.dateLabel setTextColor:[UIColor darkGrayColor]];
     }
+    [self.dateLabel sizeToFit];
     
-    self.comeFromLabel.text = data.feedComeFrom;
+    //设置微博来源
+    CGRect frame = self.comeFromLabel.frame;
+    frame.origin.x = 4 + self.dateLabel.frame.origin.x + self.dateLabel.frame.size.width;
+    self.comeFromLabel.frame = frame;
+    self.comeFromLabel.text = [[NSString alloc] initWithFormat:@"来自%@", data.feedComeFrom];
+    
+    
     self.repost = data.reposts;
     self.comment = data.comments;
     self.like = data.likes;

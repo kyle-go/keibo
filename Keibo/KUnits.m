@@ -164,7 +164,7 @@
         *type = 1;
         NSInteger tmp = 1 + second/10;
         if (tmp <= 5) {
-            return [[NSString alloc] initWithFormat:@"%d秒前", 10*tmp];
+            return [[NSString alloc] initWithFormat:@"%ld秒前", (long)tmp*10];
         } else {
             return @"1分钟前";
         }
@@ -174,7 +174,7 @@
         *type = 2;
         NSInteger tmp = second/60 + 1;
         if (tmp <= 59) {
-            return [[NSString alloc] initWithFormat:@"%d分钟前", tmp];
+            return [[NSString alloc] initWithFormat:@"%ld分钟前", (long)tmp];
         } else {
             return @"1小时前";
         }
@@ -183,7 +183,7 @@
     } else if (second < 10*60*60) {
         *type = 3;
         NSInteger tmp = second/(60*60) + 1;
-        return [[NSString alloc] initWithFormat:@"%d小时前", tmp];
+        return [[NSString alloc] initWithFormat:@"%ld小时前", (long)tmp];
         
         //今天的微博，返回今天时分 例如“今天 11:24”
     } else if (isTheDateSameDay(date, curDate)) {
