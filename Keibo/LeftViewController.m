@@ -17,8 +17,9 @@
 @end
 
 @implementation LeftViewController {
-    NSArray *defaultSectionNames;
-    NSArray *sectionNames;
+    NSArray *sectionsName;
+    NSArray *defaultSectionItemsName;
+    NSMutableArray *friendSectionItemsName;
     
     NSString *avatarUrl;
 }
@@ -27,8 +28,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        defaultSectionNames = [[NSArray alloc] initWithObjects: @"全部微博", @"提到我", @"评论", @"私信", @"收藏", @"搜索", nil];
-        sectionNames = [[NSArray alloc] initWithObjects:@"", @"分组", @"话题", nil];
+        sectionsName = [[NSArray alloc] initWithObjects:@"", @"好友分组", nil];
+        defaultSectionItemsName = [[NSArray alloc] initWithObjects: @"全部微博", @"消息", @"话题", @"收藏", @"搜索", nil];
+        friendSectionItemsName = [[NSMutableArray alloc] initWithObjects:@"特别关注", @"互粉好友", nil];
     }
     return self;
 }
@@ -72,14 +74,10 @@
     UIImage *avatarImage;
     NSString *avatar = [DataAdapter getMediaByUrl:user.avatarLarge];
     if ([avatar length] == 0) {
-        avatarUrl = user.avatar;
-        avatar = @"avatar-0";
-        if (user.sex) {
-            avatar = @"avatar-1";
-        }
-        avatarImage = [UIImage imageNamed:avatar];
+        avatarUrl = user.avatarLarge;
+        avatarImage = [UIImage imageNamed:user.sex? @"avatar-1":@"avatar-0"];
         [self registerAvatarImageFresh];
-        [WeiboNetWork getOneMedia:user.avatar];
+        [WeiboNetWork getOneMedia:avatarUrl];
     } else {
         avatarImage = [UIImage imageWithContentsOfFile:avatar];
     }
@@ -97,22 +95,21 @@
 
 #pragma mark -- table View Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [sectionNames count];
+    return [sectionsName count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return [defaultSectionNames count];
+        return [defaultSectionItemsName count];
     } else if (section == 1) {
-        return 1;
-    } else if (section == 2) {
-        return 1;
+        return [friendSectionItemsName count];
     }
+    
     return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [sectionNames objectAtIndex:section];
+    return [sectionsName objectAtIndex:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -123,14 +120,17 @@
     }
     
     if (indexPath.section == 0) {
-        cell.textLabel.text = [defaultSectionNames objectAtIndex:indexPath.row];
+        cell.textLabel.text = [defaultSectionItemsName objectAtIndex:indexPath.row];
     } else if (indexPath.section == 1) {
-        cell.textLabel.text = @"互粉微博";
-    } else if (indexPath.section == 2) {
-       cell.textLabel.text = @"热门话题";
+        cell.textLabel.text = [friendSectionItemsName objectAtIndex:indexPath.row];
     }
     
     return cell;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
 }
 
 //设置section头部

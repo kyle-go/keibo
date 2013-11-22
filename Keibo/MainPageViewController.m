@@ -66,6 +66,8 @@
         self.title = userName;
     }
     
+    self.tabBarItem.title = @"首页";
+    
     //添加左按钮
     self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc]
                                              initWithTarget:self
@@ -109,6 +111,7 @@
     NSDictionary *param = notify.userInfo;
     UIUser *user = [param objectForKey:@"User"];
     self.title = user.name;
+    self.tabBarItem.title = @"首页";
 }
 
 -(void)getWeibos:(NSNotification *)notify
