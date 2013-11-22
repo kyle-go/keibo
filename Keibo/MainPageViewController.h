@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGORefreshTableHeaderView.h"
 
-@interface MainPageViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MainPageViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, EGORefreshTableHeaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
