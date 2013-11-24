@@ -20,7 +20,7 @@
     self.window.rootViewController = [[AuthorizeViewController alloc] init];
     
     //set status bar style
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     [self.window makeKeyAndVisible];
     

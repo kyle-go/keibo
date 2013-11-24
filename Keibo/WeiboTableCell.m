@@ -112,6 +112,7 @@
     [self.nameLabel sizeToFit];
     
     //设置达人、认证
+    self.starImageView.image = nil;
     if (data.star || data.verified) {
         if (data.star) {
             self.starImageView.image = [WeiboImageCreator weiboImage:IMAGE_STAR];
