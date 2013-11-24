@@ -228,7 +228,6 @@
     if (indexPath.row == [weiboArray count] - 1) {
         if (_refreshFooterView) {
             [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
-            [self setFooterView];
         }
         [self setFooterView];
     }
@@ -272,6 +271,11 @@
 - (void)wtfDone
 {
     isReloading = NO;
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
+    if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
+        [self setFooterView];
+    }
 }
 
 //下拉刷新动作

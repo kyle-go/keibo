@@ -106,9 +106,16 @@
         [storageInstance addWeibos:array];
     } else if ([type isEqualToString:@"since"]) {
         //不清空表，直接添加数据库
+        //
         [storageInstance addWeibos:array];
     } else if ([type isEqualToString:@"max"]) {
         //不添加数据库，只在内存中给UI使用
+        //这里需要去掉第一个，因为这个请求是闭区间
+        NSMutableArray *paramArray = [[NSMutableArray alloc] initWithArray:array];
+        if ([paramArray count] > 0) {
+            [paramArray removeObjectAtIndex:0];
+        }
+        array = paramArray;
     } else {
         //
     }
