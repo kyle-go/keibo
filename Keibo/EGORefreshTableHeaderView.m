@@ -43,7 +43,7 @@
     if (self = [super initWithFrame:frame]) {
 		
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		self.backgroundColor = [UIColor whiteColor];
+		self.backgroundColor = [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:200.0/255.0 alpha:1.0];
 
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, self.frame.size.width, 20.0f)];
 		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -98,6 +98,55 @@
 	
 }
 
+#pragma mark ----------- properDate format ---- add by kyle -------------
+- (NSString *)properDateString:(NSDate *)date
+{
+    //是否是同一天
+    BOOL (^isTheDateSameDay)(NSDate* date1, NSDate *date2) = ^(NSDate* date1, NSDate *date2){
+        NSDateFormatter *formatatter = [[NSDateFormatter alloc] init];
+        [formatatter setDateFormat:@"yyyy-MM-dd"];
+        return [[formatatter stringFromDate:date1] isEqualToString:[formatatter stringFromDate:date2]];
+    };
+    
+    //是否是昨天
+    BOOL (^isYesterdayDate)(NSDate *date, NSDate *dstDate) = ^(NSDate *date, NSDate *dstDate) {
+        NSDate *datePlus = [date dateByAddingTimeInterval:24*60*60.0];
+        return isTheDateSameDay(datePlus, dstDate);
+    };
+    
+    //是否是同一年
+    BOOL (^isTheDateSameYear)(NSDate* date1, NSDate *date2) = ^(NSDate* date1, NSDate *date2){
+        NSDateFormatter *formatatter = [[NSDateFormatter alloc] init];
+        [formatatter setDateFormat:@"yyyy"];
+        return [[formatatter stringFromDate:date1] isEqualToString:[formatatter stringFromDate:date2]];
+    };
+    
+    NSDate *curDate = [NSDate date];
+    if (isTheDateSameDay(date, curDate)) {
+        NSDateFormatter *formatatter = [[NSDateFormatter alloc] init];
+        [formatatter setDateFormat:@"'今天' HH:mm"];
+        return [formatatter stringFromDate:date];
+        
+        //昨天的微博，返回昨天时分 例如“昨天 12:08”
+    } else if (isYesterdayDate(date, curDate)) {
+        NSDateFormatter *formatatter = [[NSDateFormatter alloc] init];
+        [formatatter setDateFormat:@"'昨天' HH:mm"];
+        return [formatatter stringFromDate:date];
+        
+        //今年的微博，返回月日时分 例如"10月23日 23:18"
+    } else if(isTheDateSameYear(date, curDate)){
+        NSDateFormatter *formatatter = [[NSDateFormatter alloc] init];
+        [formatatter setDateFormat:@"MM'月'dd'日' HH:mm"];
+        return [formatatter stringFromDate:date];
+        
+        //其他的，返回完整格式 例如“2012-12-08 12:38:46”
+    } else {
+        NSDateFormatter *formatatter = [[NSDateFormatter alloc] init];
+        [formatatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        return [formatatter stringFromDate:date];
+    }
+}
+
 
 #pragma mark -
 #pragma mark Setters
@@ -107,16 +156,10 @@
 	if ([_delegate respondsToSelector:@selector(egoRefreshTableHeaderDataSourceLastUpdated:)]) {
 		
 		NSDate *date = [_delegate egoRefreshTableHeaderDataSourceLastUpdated:self];
-		
-		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-		[formatter setAMSymbol:@"AM"];
-		[formatter setPMSymbol:@"PM"];
-		[formatter setDateFormat:@"MM/dd/yyyy hh:mm:a"];
-		_lastUpdatedLabel.text = [NSString stringWithFormat:@"最后更新: %@", [formatter stringFromDate:date]];
+		_lastUpdatedLabel.text = [NSString stringWithFormat:@"最后更新: %@", [self properDateString:date]];
 		[[NSUserDefaults standardUserDefaults] setObject:_lastUpdatedLabel.text forKey:@"EGORefreshTableView_LastRefresh"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
-		[formatter release];
-		
+
 	} else {
 		_lastUpdatedLabel.text = nil;
 	}
