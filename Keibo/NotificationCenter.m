@@ -104,7 +104,7 @@
         for (DTWeibo *weibo in array) {
             [uiArray addObject:[DataAdapter WeiboAdapter:weibo]];
         }
-        
+
         [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_LoginUserWeibos" object:nil userInfo:@{@"array": uiArray, @"type":@"latest"}];
     } else if ([type isEqualToString:@"since"]) {
         //

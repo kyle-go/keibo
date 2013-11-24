@@ -57,7 +57,6 @@
     NSDictionary *param = [nofity userInfo];
     NSString *url = [param objectForKey:@"url"];
     if ([url isEqualToString:avatarUrl]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
         
         //刷新头像
         NSString *path = [param objectForKey:@"file"];

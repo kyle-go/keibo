@@ -60,13 +60,23 @@
     
     self.title = @"正在获取...";
     NSString *userName = [DataAdapter UserAdapter:uid].name;
-    if ([userName length] == 0) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLoginUser:) name:@"NotificationCenter_LoginUser" object:nil];
-    } else {
+    if ([userName length] > 0) {
         self.title = userName;
     }
-    
     self.tabBarItem.title = @"首页";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTableView:) name:@"freshTableView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLoginUser:) name:@"NotificationCenter_LoginUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWeibos:) name:@"NotificationCenter_LoginUserWeibos" object:nil];
+    
+    //从数据库取数据
+    NSArray *array = [DataAdapter getLoginUserWeibos:[kWeiboCountString intValue] date:nil];
+    if ([array count] == 0) {
+        //TODO 发起网络请求
+        [WeiboNetWork getLoginUserWeibos:accessToken];
+    } else {
+        [self setWeiboArray:array];
+    }
     
     //添加左按钮
     self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc]
@@ -86,17 +96,6 @@
 	//update the last update date
 	[_refreshHeaderView refreshLastUpdatedDate];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTableView:) name:@"freshTableView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWeibos:) name:@"NotificationCenter_LoginUserWeibos" object:nil];
-    //从数据库取数据
-    NSArray *array = [DataAdapter getLoginUserWeibos:[kWeiboCountString intValue] date:nil];
-    if ([array count] == 0) {
-        //TODO 发起网络请求
-        [WeiboNetWork getLoginUserWeibos:accessToken];
-    } else {
-        [self setWeiboArray:array];
-    }
-    
     [self.tableView setContentInset:UIEdgeInsetsMake(-65,0,0,0)];
 }
 
@@ -107,7 +106,6 @@
 
 - (void)getLoginUser:(NSNotification *)notify
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSDictionary *param = notify.userInfo;
     UIUser *user = [param objectForKey:@"User"];
     self.title = user.name;
@@ -116,6 +114,7 @@
 
 -(void)getWeibos:(NSNotification *)notify
 {
+    NSLog(@"getWeibs...callbakc...");
     NSDictionary *param = notify.userInfo;
     if ([param count] == 0) {
         return;

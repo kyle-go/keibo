@@ -72,7 +72,9 @@
     }
     
     //获取登录者个人资料
-    [WeiboNetWork getUser:[[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken] uid:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]];
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:kUid];
+    [WeiboNetWork getUser:accessToken uid:uid];
     
     //准备显示主界面
     [self showMainView];
