@@ -109,16 +109,16 @@
     MoreViewController *settingViewController = [[MoreViewController alloc] init];
     
     UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    [mainNav.navigationBar setBarTintColor:[UIColor whiteColor]];
+    //[mainNav.navigationBar setBarTintColor:[UIColor whiteColor]];
     
     UINavigationController *messageNav = [[UINavigationController alloc] initWithRootViewController:messageViewController];
-    [messageNav.navigationBar setBarTintColor:[UIColor whiteColor]];
+    //[messageNav.navigationBar setBarTintColor:[UIColor whiteColor]];
     
     UINavigationController *personNav = [[UINavigationController alloc] initWithRootViewController:personViewController];
-    [personNav.navigationBar setBarTintColor:[UIColor whiteColor]];
+    //[personNav.navigationBar setBarTintColor:[UIColor whiteColor]];
     
     UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController:settingViewController];
-    [settingNav.navigationBar setBarTintColor:[UIColor whiteColor]];
+    //[settingNav.navigationBar setBarTintColor:[UIColor whiteColor]];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController setViewControllers:[[NSArray alloc] initWithObjects:mainNav, messageNav, personNav, settingNav, nil]];
