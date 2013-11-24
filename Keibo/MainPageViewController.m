@@ -89,7 +89,6 @@
     
     CGRect frame = CGRectMake(0, 65, 320, 568-65-50);
     UIView *tempView = [[UIView alloc] initWithFrame:frame];
-    tempView.backgroundColor = [UIColor redColor];
     tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,568-65-50) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;

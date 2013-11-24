@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2714663C18424F03000376F9 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2714663B18424F03000376F9 /* UserInfoCell.m */; };
+		2714663E18424F18000376F9 /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714663D18424F18000376F9 /* UserInfoCell.xib */; };
+		2714664018424F54000376F9 /* UserBasicNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714663F18424F54000376F9 /* UserBasicNumberCell.xib */; };
+		2714664318424F76000376F9 /* UserBasicNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2714664218424F76000376F9 /* UserBasicNumberCell.m */; };
+		271466461842507A000376F9 /* WeiboSimpleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 271466451842507A000376F9 /* WeiboSimpleCell.m */; };
+		2714664818425097000376F9 /* WeiboSimpleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714664718425097000376F9 /* WeiboSimpleCell.xib */; };
+		2714664A18425195000376F9 /* WeiboTypeSelectorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714664918425195000376F9 /* WeiboTypeSelectorCell.xib */; };
+		2714664D184251A7000376F9 /* WeiboTypeSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2714664C184251A7000376F9 /* WeiboTypeSelectorCell.m */; };
 		271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35917FD88B20069B2C9 /* Security.framework */; };
 		271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */; };
 		2737020F1835308D00016FB1 /* DataAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737020E1835308D00016FB1 /* DataAdapter.m */; };
@@ -101,6 +109,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2714663A18424F03000376F9 /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
+		2714663B18424F03000376F9 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
+		2714663D18424F18000376F9 /* UserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoCell.xib; sourceTree = "<group>"; };
+		2714663F18424F54000376F9 /* UserBasicNumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserBasicNumberCell.xib; sourceTree = "<group>"; };
+		2714664118424F76000376F9 /* UserBasicNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBasicNumberCell.h; sourceTree = "<group>"; };
+		2714664218424F76000376F9 /* UserBasicNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBasicNumberCell.m; sourceTree = "<group>"; };
+		271466441842507A000376F9 /* WeiboSimpleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSimpleCell.h; sourceTree = "<group>"; };
+		271466451842507A000376F9 /* WeiboSimpleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboSimpleCell.m; sourceTree = "<group>"; };
+		2714664718425097000376F9 /* WeiboSimpleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboSimpleCell.xib; sourceTree = "<group>"; };
+		2714664918425195000376F9 /* WeiboTypeSelectorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboTypeSelectorCell.xib; sourceTree = "<group>"; };
+		2714664B184251A7000376F9 /* WeiboTypeSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTypeSelectorCell.h; sourceTree = "<group>"; };
+		2714664C184251A7000376F9 /* WeiboTypeSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboTypeSelectorCell.m; sourceTree = "<group>"; };
 		271EA35917FD88B20069B2C9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2737020D1835308D00016FB1 /* DataAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAdapter.h; sourceTree = "<group>"; };
@@ -261,6 +281,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2714663918424E9D000376F9 /* CommonUI */ = {
+			isa = PBXGroup;
+			children = (
+				2714663A18424F03000376F9 /* UserInfoCell.h */,
+				2714663B18424F03000376F9 /* UserInfoCell.m */,
+				2714663D18424F18000376F9 /* UserInfoCell.xib */,
+				2714664118424F76000376F9 /* UserBasicNumberCell.h */,
+				2714664218424F76000376F9 /* UserBasicNumberCell.m */,
+				2714663F18424F54000376F9 /* UserBasicNumberCell.xib */,
+				2714664B184251A7000376F9 /* WeiboTypeSelectorCell.h */,
+				2714664C184251A7000376F9 /* WeiboTypeSelectorCell.m */,
+				2714664918425195000376F9 /* WeiboTypeSelectorCell.xib */,
+				271466441842507A000376F9 /* WeiboSimpleCell.h */,
+				271466451842507A000376F9 /* WeiboSimpleCell.m */,
+				2714664718425097000376F9 /* WeiboSimpleCell.xib */,
+			);
+			name = CommonUI;
+			sourceTree = "<group>";
+		};
 		2748FCC317F8738000A3B9ED = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +518,7 @@
 		FB4C01351834A06400EC97B1 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				2714663918424E9D000376F9 /* CommonUI */,
 				FB255BD818228A7300A0008B /* Main */,
 				2768E4141820159200896288 /* Authorize */,
 				FB255BD918228AAC00A0008B /* Message */,
@@ -674,6 +714,7 @@
 				2748FCDA17F8738000A3B9ED /* InfoPlist.strings in Resources */,
 				FB6CEAF8182D2EB300C07414 /* tabbar_me@2x.png in Resources */,
 				276D7C241837ABC800C0B4BC /* bg_line.png in Resources */,
+				2714664018424F54000376F9 /* UserBasicNumberCell.xib in Resources */,
 				FBC0D95C1830DB4800163C3C /* weibo-simple.html in Resources */,
 				FB4E8B00184208C9004AE49F /* blackArrow.png in Resources */,
 				FB6CEADC182CEE6D00C07414 /* superman.png in Resources */,
@@ -682,7 +723,10 @@
 				FB255BE618228C1B00A0008B /* PersonViewController.xib in Resources */,
 				FB255BD718228A6C00A0008B /* MainPageViewController.xib in Resources */,
 				FB6CEAFC182D2EF000C07414 /* tabbar_more@2x.png in Resources */,
+				2714664A18425195000376F9 /* WeiboTypeSelectorCell.xib in Resources */,
+				2714664818425097000376F9 /* WeiboSimpleCell.xib in Resources */,
 				FB255BEB18228C2900A0008B /* MoreViewController.xib in Resources */,
+				2714663E18424F18000376F9 /* UserInfoCell.xib in Resources */,
 				FB6CEAF7182D2EB300C07414 /* tabbar_me.png in Resources */,
 				FB6CEADA182CEAF600C07414 /* codeMonkey.png in Resources */,
 				FB6CEAEF182D2E2D00C07414 /* tabbar_home.png in Resources */,
@@ -711,6 +755,7 @@
 				FB255BF718228D0E00A0008B /* MMDrawerController.m in Sources */,
 				FB4C013218349E6000EC97B1 /* DTWeiboMedia.m in Sources */,
 				2748FCE017F8738000A3B9ED /* AppDelegate.m in Sources */,
+				2714663C18424F03000376F9 /* UserInfoCell.m in Sources */,
 				FB63266A1841DE4800B48E25 /* EGORefreshTableFooterView.m in Sources */,
 				FBD2C00D18334FD000BBE4AF /* AuthorizeViewController.m in Sources */,
 				FB4FDE96181F948100FF9331 /* AFURLConnectionOperation.m in Sources */,
@@ -724,6 +769,7 @@
 				FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */,
 				FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */,
 				FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */,
+				2714664D184251A7000376F9 /* WeiboTypeSelectorCell.m in Sources */,
 				FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */,
 				FB4C01411834C0A100EC97B1 /* AppInitialize.m in Sources */,
 				FB255BE018228C0700A0008B /* MessageViewController.m in Sources */,
@@ -738,6 +784,7 @@
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,
+				2714664318424F76000376F9 /* UserBasicNumberCell.m in Sources */,
 				FB4C013E1834BF0200EC97B1 /* NotificationCenter.m in Sources */,
 				FB255BE518228C1B00A0008B /* PersonViewController.m in Sources */,
 				FB4C012F183498AF00EC97B1 /* DTWeibo.m in Sources */,
@@ -745,6 +792,7 @@
 				FB255BEA18228C2900A0008B /* MoreViewController.m in Sources */,
 				FB4C01261833CE8B00EC97B1 /* FMDatabaseQueue.m in Sources */,
 				FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */,
+				271466461842507A000376F9 /* WeiboSimpleCell.m in Sources */,
 				FB4C012C18346CCE00EC97B1 /* DTUser.m in Sources */,
 				FB63266B1841DE4800B48E25 /* EGORefreshTableHeaderView.m in Sources */,
 				FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */,
