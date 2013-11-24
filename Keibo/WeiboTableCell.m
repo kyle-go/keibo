@@ -149,6 +149,7 @@
     frame.origin.x = 4 + self.dateLabel.frame.origin.x + self.dateLabel.frame.size.width;
     self.comeFromLabel.frame = frame;
     self.comeFromLabel.text = [[NSString alloc] initWithFormat:@"来自%@", data.feedComeFrom];
+    [self.comeFromLabel sizeToFit];
     
     self.repost = data.reposts;
     self.comment = data.comments;
