@@ -1,5 +1,5 @@
 //
-//  EGORefreshTableHeaderView.h
+//  EGORefreshTableFooterView.h
 //  Demo
 //
 //  Created by Devin Doty on 10/14/09October14.
@@ -26,15 +26,9 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "EGOViewCommon.h"
 
-typedef enum{
-	EGOOPullRefreshPulling = 0,
-	EGOOPullRefreshNormal,
-	EGOOPullRefreshLoading,	
-} EGOPullRefreshState;
-
-@protocol EGORefreshTableHeaderDelegate;
-@interface EGORefreshTableHeaderView : UIView {
+@interface EGORefreshTableFooterView : UIView {
 	
 	id _delegate;
 	EGOPullRefreshState _state;
@@ -43,9 +37,13 @@ typedef enum{
 	UILabel *_statusLabel;
 	CALayer *_arrowImage;
 	UIActivityIndicatorView *_activityView;
+	
+
 }
 
-@property(nonatomic,assign) id <EGORefreshTableHeaderDelegate> delegate;
+@property(nonatomic,assign) id <EGORefreshTableDelegate> delegate;
+
+- (id)initWithFrame:(CGRect)frame arrowImageName:(NSString *)arrow textColor:(UIColor *)textColor;
 
 - (void)refreshLastUpdatedDate;
 - (void)egoRefreshScrollViewDidScroll:(UIScrollView *)scrollView;
@@ -53,9 +51,4 @@ typedef enum{
 - (void)egoRefreshScrollViewDataSourceDidFinishedLoading:(UIScrollView *)scrollView;
 
 @end
-@protocol EGORefreshTableHeaderDelegate
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view;
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view;
-@optional
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view;
-@end
+

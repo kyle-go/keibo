@@ -55,6 +55,8 @@
 		FB4C013B1834A43200EC97B1 /* UIWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C013A1834A43200EC97B1 /* UIWeibo.m */; };
 		FB4C013E1834BF0200EC97B1 /* NotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C013D1834BF0200EC97B1 /* NotificationCenter.m */; };
 		FB4C01411834C0A100EC97B1 /* AppInitialize.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C01401834C0A100EC97B1 /* AppInitialize.m */; };
+		FB4E8AFD1841FE4B004AE49F /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = FB4E8AFB1841FE4B004AE49F /* blackArrow.png */; };
+		FB4E8AFE1841FE4B004AE49F /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB4E8AFC1841FE4B004AE49F /* blackArrow@2x.png */; };
 		FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */; };
 		FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE81181F948100FF9331 /* AFHTTPRequestOperationManager.m */; };
 		FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4FDE83181F948100FF9331 /* AFHTTPSessionManager.m */; };
@@ -68,9 +70,8 @@
 		FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D10C6182F7497006E1D01 /* KUnits.m */; };
 		FB5D10CF182FAD6F006E1D01 /* avatar-1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5D10CD182FAD6F006E1D01 /* avatar-1.png */; };
 		FB5D10D0182FAD6F006E1D01 /* avatar-0.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5D10CE182FAD6F006E1D01 /* avatar-0.png */; };
-		FB6777B6183FAAB700441F05 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6777B3183FAAB700441F05 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FB6777B7183FAAB700441F05 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6777B4183FAAB700441F05 /* blackArrow.png */; };
-		FB6777B8183FAAB700441F05 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6777B5183FAAB700441F05 /* blackArrow@2x.png */; };
+		FB63266A1841DE4800B48E25 /* EGORefreshTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6326631841DE4800B48E25 /* EGORefreshTableFooterView.m */; };
+		FB63266B1841DE4800B48E25 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6326651841DE4800B48E25 /* EGORefreshTableHeaderView.m */; };
 		FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */; };
 		FB6CEAD7182CE63A00C07414 /* WeiboTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAD6182CE63A00C07414 /* WeiboTableCell.xib */; };
 		FB6CEADA182CEAF600C07414 /* codeMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAD9182CEAF600C07414 /* codeMonkey.png */; };
@@ -180,6 +181,8 @@
 		FB4C013D1834BF0200EC97B1 /* NotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenter.m; sourceTree = "<group>"; };
 		FB4C013F1834C0A100EC97B1 /* AppInitialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInitialize.h; sourceTree = "<group>"; };
 		FB4C01401834C0A100EC97B1 /* AppInitialize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppInitialize.m; sourceTree = "<group>"; };
+		FB4E8AFB1841FE4B004AE49F /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		FB4E8AFC1841FE4B004AE49F /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
 		FB4FDE7E181F948100FF9331 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		FB4FDE7F181F948100FF9331 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		FB4FDE80181F948100FF9331 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -205,10 +208,11 @@
 		FB5D10C6182F7497006E1D01 /* KUnits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KUnits.m; sourceTree = "<group>"; };
 		FB5D10CD182FAD6F006E1D01 /* avatar-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar-1.png"; sourceTree = "<group>"; };
 		FB5D10CE182FAD6F006E1D01 /* avatar-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar-0.png"; sourceTree = "<group>"; };
-		FB6777B2183FAAB700441F05 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
-		FB6777B3183FAAB700441F05 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		FB6777B4183FAAB700441F05 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
-		FB6777B5183FAAB700441F05 /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		FB6326621841DE4800B48E25 /* EGORefreshTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableFooterView.h; sourceTree = "<group>"; };
+		FB6326631841DE4800B48E25 /* EGORefreshTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableFooterView.m; sourceTree = "<group>"; };
+		FB6326641841DE4800B48E25 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		FB6326651841DE4800B48E25 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		FB6326661841DE4800B48E25 /* EGOViewCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOViewCommon.h; sourceTree = "<group>"; };
 		FB6CEAD3182CE62000C07414 /* WeiboTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTableCell.h; sourceTree = "<group>"; };
 		FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboTableCell.m; sourceTree = "<group>"; };
 		FB6CEAD6182CE63A00C07414 /* WeiboTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboTableCell.xib; sourceTree = "<group>"; };
@@ -403,7 +407,7 @@
 		FB255BDC18228B4B00A0008B /* External */ = {
 			isa = PBXGroup;
 			children = (
-				FB6777B1183FAAA200441F05 /* EGORefreshTableView */,
+				FB6326611841DE4800B48E25 /* EGORefreshView */,
 				FB4C01181833CE8B00EC97B1 /* fmdb */,
 				FB255BEC18228D0E00A0008B /* MMDrawerController */,
 				FB4FDE7D181F948100FF9331 /* AFNetworking */,
@@ -536,15 +540,18 @@
 			name = KUnits;
 			sourceTree = "<group>";
 		};
-		FB6777B1183FAAA200441F05 /* EGORefreshTableView */ = {
+		FB6326611841DE4800B48E25 /* EGORefreshView */ = {
 			isa = PBXGroup;
 			children = (
-				FB6777B2183FAAB700441F05 /* EGORefreshTableHeaderView.h */,
-				FB6777B3183FAAB700441F05 /* EGORefreshTableHeaderView.m */,
-				FB6777B4183FAAB700441F05 /* blackArrow.png */,
-				FB6777B5183FAAB700441F05 /* blackArrow@2x.png */,
+				FB6326621841DE4800B48E25 /* EGORefreshTableFooterView.h */,
+				FB6326631841DE4800B48E25 /* EGORefreshTableFooterView.m */,
+				FB6326641841DE4800B48E25 /* EGORefreshTableHeaderView.h */,
+				FB6326651841DE4800B48E25 /* EGORefreshTableHeaderView.m */,
+				FB6326661841DE4800B48E25 /* EGOViewCommon.h */,
+				FB4E8AFB1841FE4B004AE49F /* blackArrow.png */,
+				FB4E8AFC1841FE4B004AE49F /* blackArrow@2x.png */,
 			);
-			name = EGORefreshTableView;
+			path = EGORefreshView;
 			sourceTree = "<group>";
 		};
 		FB6CEAD8182CEAE900C07414 /* images */ = {
@@ -671,13 +678,13 @@
 				FB6CEAF8182D2EB300C07414 /* tabbar_me@2x.png in Resources */,
 				276D7C241837ABC800C0B4BC /* bg_line.png in Resources */,
 				FBC0D95C1830DB4800163C3C /* weibo-simple.html in Resources */,
-				FB6777B7183FAAB700441F05 /* blackArrow.png in Resources */,
+				FB4E8AFD1841FE4B004AE49F /* blackArrow.png in Resources */,
 				FB6CEADC182CEE6D00C07414 /* superman.png in Resources */,
 				FB255BE118228C0700A0008B /* MessageViewController.xib in Resources */,
 				FB6CEAF0182D2E2D00C07414 /* tabbar_home@2x.png in Resources */,
 				FB255BE618228C1B00A0008B /* PersonViewController.xib in Resources */,
 				FB255BD718228A6C00A0008B /* MainPageViewController.xib in Resources */,
-				FB6777B8183FAAB700441F05 /* blackArrow@2x.png in Resources */,
+				FB4E8AFE1841FE4B004AE49F /* blackArrow@2x.png in Resources */,
 				FB6CEAFC182D2EF000C07414 /* tabbar_more@2x.png in Resources */,
 				FB255BEB18228C2900A0008B /* MoreViewController.xib in Resources */,
 				FB6CEAF7182D2EB300C07414 /* tabbar_me.png in Resources */,
@@ -708,6 +715,7 @@
 				FB255BF718228D0E00A0008B /* MMDrawerController.m in Sources */,
 				FB4C013218349E6000EC97B1 /* DTWeiboMedia.m in Sources */,
 				2748FCE017F8738000A3B9ED /* AppDelegate.m in Sources */,
+				FB63266A1841DE4800B48E25 /* EGORefreshTableFooterView.m in Sources */,
 				FBD2C00D18334FD000BBE4AF /* AuthorizeViewController.m in Sources */,
 				FB4FDE96181F948100FF9331 /* AFURLConnectionOperation.m in Sources */,
 				FB4C01271833CE8B00EC97B1 /* FMResultSet.m in Sources */,
@@ -740,9 +748,9 @@
 				FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */,
 				FB255BEA18228C2900A0008B /* MoreViewController.m in Sources */,
 				FB4C01261833CE8B00EC97B1 /* FMDatabaseQueue.m in Sources */,
-				FB6777B6183FAAB700441F05 /* EGORefreshTableHeaderView.m in Sources */,
 				FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */,
 				FB4C012C18346CCE00EC97B1 /* DTUser.m in Sources */,
+				FB63266B1841DE4800B48E25 /* EGORefreshTableHeaderView.m in Sources */,
 				FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

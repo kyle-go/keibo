@@ -23,9 +23,11 @@
 @implementation MainPageViewController {
     NSMutableArray *weiboArray;
     NSMutableArray *weiboHeights;
+    UITableView *tableView;
     
     EGORefreshTableHeaderView *_refreshHeaderView;
-	BOOL _reloading;
+    EGORefreshTableFooterView *_refreshFooterView;
+    BOOL isReloading;
 }
 
 #pragma mark -------------------- private -----------------------------------
@@ -85,6 +87,15 @@
     }
     self.tabBarItem.title = @"首页";
     
+    CGRect frame = CGRectMake(0, 65, 320, 568-65-50);
+    UIView *tempView = [[UIView alloc] initWithFrame:frame];
+    tempView.backgroundColor = [UIColor redColor];
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,568-65-50) style:UITableViewStylePlain];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [tempView addSubview:tableView];
+    [self.view addSubview:tempView];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTableView:) name:@"freshTableView" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLoginUser:) name:@"NotificationCenter_LoginUser" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWeibos:) name:@"NotificationCenter_LoginUserWeibos" object:nil];
@@ -107,15 +118,40 @@
                                               target:self
                                               action:@selector(newWeibo)];
     
-    EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-    view.delegate = self;
-    [self.tableView addSubview:view];
-    _refreshHeaderView = view;
-    
-	//update the last update date
+    //下拉刷新
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - tableView.bounds.size.height, self.view.frame.size.width, tableView.bounds.size.height)];
+    _refreshHeaderView.delegate = self;
+    [tableView addSubview:_refreshHeaderView];
 	[_refreshHeaderView refreshLastUpdatedDate];
     
-    [self.tableView setContentInset:UIEdgeInsetsMake(-65,0,0,0)];
+    //上拉刷新
+    //[self setFooterView];
+     [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.0f];
+    
+    //[self.tableView setContentInset:UIEdgeInsetsMake(130,0,0,0)];
+}
+
+- (void)setFooterView
+{
+    CGFloat height = MAX(tableView.contentSize.height, tableView.frame.size.height);
+    if (_refreshFooterView && [_refreshFooterView superview]) {
+        // reset position
+        _refreshFooterView.frame = CGRectMake(0.0f,
+                                              height,
+                                              tableView.frame.size.width,
+                                              self.view.bounds.size.height);
+    }else {
+        // create the footerView
+        _refreshFooterView = [[EGORefreshTableFooterView alloc] initWithFrame:
+                              CGRectMake(0.0f, height,
+                                         tableView.frame.size.width, self.view.bounds.size.height)];
+        _refreshFooterView.delegate = self;
+        [tableView addSubview:_refreshFooterView];
+    }
+    
+    if (_refreshFooterView) {
+        [_refreshFooterView refreshLastUpdatedDate];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -140,18 +176,19 @@
     
     id array = [param objectForKey:@"array"];
     NSString *type = [param objectForKey:@"type"];
+    
     if ([type isEqualToString:@"latest"]) {
         [self setWeiboArray:array];
     } else if ([type isEqualToString:@"since"]) {
-        [self doneLoadingTableViewData];
         [self addWeiboArray:array front:YES];
-    } else if([type isEqualToString:@"max"]) {
-        //
-    } else {
-        //
+        [self doneLoadingTableViewData];
+    } else{
+        assert([type isEqualToString:@"max"]);
+        [self addWeiboArray:array front:NO];
+        [self doneLoadingTableViewData];
     }
     
-    [self.tableView reloadData];
+    [tableView reloadData];
 }
 
 - (void)showLeftView {
@@ -172,7 +209,7 @@
     
     [weiboHeights replaceObjectAtIndex:[index intValue] withObject:height];
     
-    [self.tableView reloadData];
+    [tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -185,15 +222,15 @@
     return [weiboArray count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView2 cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"weiboCellIdentifier";
     
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        [tableView registerNib:[UINib nibWithNibName:@"WeiboTableCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
+        [tableView2 registerNib:[UINib nibWithNibName:@"WeiboTableCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
     });
     
-    WeiboTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    WeiboTableCell *cell = [tableView2 dequeueReusableCellWithIdentifier:cellIdentifier];
     assert(cell);
     [cell updateWithWeiboData:[weiboArray objectAtIndex:indexPath.row] index:indexPath.row];
     
@@ -222,59 +259,73 @@
     return [[weiboHeights objectAtIndex:indexPath.row] floatValue];
 }
 
-
-#pragma mark -
-#pragma mark Data Source Loading / Reloading Methods
-
-- (void)reloadTableViewDataSource{
-	
-	//  should be calling your tableviews data source model to reload
-	//  put here just for demo
-	_reloading = YES;
-	
+- (void)doneLoadingTableViewData
+{
+    isReloading = NO;
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
+    }
+    
+    if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
+        [self setFooterView];
+    }
+    [self setFooterView];
 }
 
-- (void)doneLoadingTableViewData{
-	
-	//  model should call this when its done loading
-	_reloading = NO;
-	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+#pragma mark- EGORefreshTableDelegate
+- (void)egoRefreshTableDidTriggerRefresh:(EGORefreshPos)aRefreshPos
+{
+    if(aRefreshPos == EGORefreshHeader)
+    {
+        if (weiboArray) {
+            isReloading = YES;
+            UIWeibo *weibo = [weiboArray objectAtIndex:0];
+            NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+            [WeiboNetWork getLoginUserWeibos:accessToken since:[[NSString alloc] initWithFormat:@"%lld", weibo.weiboId]];
+        }
+    } else {
+        assert(aRefreshPos == EGORefreshFooter);
+        
+        isReloading = YES;
+        [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:2.0];
+//        NSInteger count = [weiboArray count];
+//        UIWeibo *weibo = [weiboArray objectAtIndex:count - 1];
+//        NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+//        [WeiboNetWork getLoginUserWeibos:accessToken max:[[NSString alloc] initWithFormat:@"%lld", weibo.weiboId]];
+    }
 }
 
+- (BOOL)egoRefreshTableDataSourceIsLoading:(UIView*)view
+{
+    return isReloading;
+}
+
+- (NSDate *)egoRefreshTableDataSourceLastUpdated:(UIView*)view
+{
+    return [NSDate date];
+}
 
 #pragma mark -
 #pragma mark UIScrollViewDelegate Methods
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    }
 	
-	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-	
-	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-}
-
-
-#pragma mark -
-#pragma mark EGORefreshTableHeaderDelegate Methods
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
-	
-	[self reloadTableViewDataSource];
-    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
-    if (weiboArray) {
-        UIWeibo *weibo = [weiboArray objectAtIndex:0];
-        [WeiboNetWork getLoginUserWeibos:accessToken since:[[NSString alloc] initWithFormat:@"%lld", weibo.weiboId]];
+	if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDidScroll:scrollView];
     }
 }
 
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
 	
-	return _reloading; // should return if data source model is reloading
-}
-
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
-	
-	return [NSDate date]; // should return date data source was last changed
+	if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
 }
 
 @end
