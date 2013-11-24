@@ -186,8 +186,8 @@
 //批量添加weibo
 - (void)addWeibos:(NSArray *)weibos
 {
-    for (DTWeibo *user in weibos) {
-        [self addWeibo:user];
+    for (DTWeibo *wb in weibos) {
+        [self addWeibo:wb];
     }
 }
 

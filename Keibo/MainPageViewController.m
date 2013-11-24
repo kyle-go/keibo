@@ -71,8 +71,7 @@
     
     //从数据库取数据
     NSArray *array = [DataAdapter getLoginUserWeibos:[kWeiboCountString intValue] date:nil];
-    if ([array count] == 0) {
-        //TODO 发起网络请求
+    if ([array count] == 0 || [array count] >= 100) {
         [WeiboNetWork getLoginUserWeibos:accessToken];
     } else {
         [self setWeiboArray:array];

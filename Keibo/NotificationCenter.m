@@ -100,19 +100,26 @@
     NSArray *array = [param objectForKey:@"array"];
     
     if ([type isEqualToString:@"latest"]) {
-        NSMutableArray *uiArray = [[NSMutableArray alloc] init];
-        for (DTWeibo *weibo in array) {
-            [uiArray addObject:[DataAdapter WeiboAdapter:weibo]];
-        }
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_LoginUserWeibos" object:nil userInfo:@{@"array": uiArray, @"type":@"latest"}];
+        //清空weibo表
+        [storageInstance deleteIndexWeibos];
+        //将数据写入数据库
+        [storageInstance addWeibos:array];
     } else if ([type isEqualToString:@"since"]) {
-        //
+        //不清空表，直接添加数据库
+        [storageInstance addWeibos:array];
     } else if ([type isEqualToString:@"max"]) {
-        //
+        //不添加数据库，只在内存中给UI使用
     } else {
-        abort();
+        //
     }
+    
+    //转化格式给UI使用
+    NSMutableArray *uiArray = [[NSMutableArray alloc] init];
+    for (DTWeibo *weibo in array) {
+        [uiArray addObject:[DataAdapter WeiboAdapter:weibo]];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_LoginUserWeibos" object:nil userInfo:@{@"array": uiArray, @"type":type}];
 }
 
 -(void)WeiboNetWork_WbMedia:(NSNotification *)notify
