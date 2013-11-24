@@ -124,11 +124,8 @@
     [tableView addSubview:_refreshHeaderView];
 	[_refreshHeaderView refreshLastUpdatedDate];
     
-    //上拉刷新
-    //[self setFooterView];
-     [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.0f];
-    
-    //[self.tableView setContentInset:UIEdgeInsetsMake(130,0,0,0)];
+    //执行一下下拉刷新动作
+    [self actionPullDown];
 }
 
 - (void)setFooterView
@@ -140,7 +137,7 @@
                                               height,
                                               tableView.frame.size.width,
                                               self.view.bounds.size.height);
-    }else {
+    } else {
         // create the footerView
         _refreshFooterView = [[EGORefreshTableFooterView alloc] initWithFrame:
                               CGRectMake(0.0f, height,
@@ -181,11 +178,14 @@
         [self setWeiboArray:array];
     } else if ([type isEqualToString:@"since"]) {
         [self addWeiboArray:array front:YES];
-        [self doneLoadingTableViewData];
+        isReloading = NO;
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
     } else{
         assert([type isEqualToString:@"max"]);
         [self addWeiboArray:array front:NO];
-        [self doneLoadingTableViewData];
+        isReloading = NO;
+        //用完footer赶紧删！
+        [_refreshFooterView removeFromSuperview];
     }
     
     [tableView reloadData];
@@ -223,6 +223,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView2 cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //只在最后一个cell出来的时候 加载footer
+    if (indexPath.row == [weiboArray count] - 1) {
+        if (_refreshFooterView) {
+            [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
+            [self setFooterView];
+        }
+        [self setFooterView];
+    }
+    
     static NSString *cellIdentifier = @"weiboCellIdentifier";
     
     static dispatch_once_t once;
@@ -259,40 +269,46 @@
     return [[weiboHeights objectAtIndex:indexPath.row] floatValue];
 }
 
-- (void)doneLoadingTableViewData
+- (void)wtfDone
 {
     isReloading = NO;
-	if (_refreshHeaderView) {
-        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
+}
+
+//下拉刷新动作
+- (void)actionPullDown
+{
+    isReloading = YES;
+    if ([weiboArray count] > 0) {
+        UIWeibo *weibo = [weiboArray objectAtIndex:0];
+        NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+        [WeiboNetWork getLoginUserWeibos:accessToken since:[[NSString alloc] initWithFormat:@"%lld", weibo.weiboId]];
+    } else {
+        [self performSelector:@selector(wtfDone) withObject:nil afterDelay:0.6];
     }
-    
-    if (_refreshFooterView) {
-        [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
-        [self setFooterView];
+}
+
+//上拉刷新
+- (void)actionPullUp
+{
+    isReloading = YES;
+    if ([weiboArray count] > 0) {
+        NSInteger count = [weiboArray count];
+        UIWeibo *weibo = [weiboArray objectAtIndex:count - 1];
+        NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+        [WeiboNetWork getLoginUserWeibos:accessToken max:[[NSString alloc] initWithFormat:@"%lld", weibo.weiboId]];
+    } else {
+        [self performSelector:@selector(wtfDone) withObject:nil afterDelay:0.6];
     }
-    [self setFooterView];
 }
 
 #pragma mark- EGORefreshTableDelegate
 - (void)egoRefreshTableDidTriggerRefresh:(EGORefreshPos)aRefreshPos
 {
-    if(aRefreshPos == EGORefreshHeader)
-    {
-        if (weiboArray) {
-            isReloading = YES;
-            UIWeibo *weibo = [weiboArray objectAtIndex:0];
-            NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
-            [WeiboNetWork getLoginUserWeibos:accessToken since:[[NSString alloc] initWithFormat:@"%lld", weibo.weiboId]];
-        }
+    if(aRefreshPos == EGORefreshHeader) {
+        [self actionPullDown];
     } else {
         assert(aRefreshPos == EGORefreshFooter);
-        
-        isReloading = YES;
-        [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:2.0];
-//        NSInteger count = [weiboArray count];
-//        UIWeibo *weibo = [weiboArray objectAtIndex:count - 1];
-//        NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
-//        [WeiboNetWork getLoginUserWeibos:accessToken max:[[NSString alloc] initWithFormat:@"%lld", weibo.weiboId]];
+        [self actionPullUp];
     }
 }
 
