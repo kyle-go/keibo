@@ -133,7 +133,6 @@
 
 -(void)getWeibos:(NSNotification *)notify
 {
-    NSLog(@"getWeibs...callbakc...");
     NSDictionary *param = notify.userInfo;
     if ([param count] == 0) {
         return;

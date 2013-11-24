@@ -14,6 +14,7 @@
 #import "DataAdapter.h"
 
 @implementation WeiboTableCell {
+    UIWeibo *data;
     NSInteger cellIndex;
     UIView *btnRepost;
     UIView *btnComment;
@@ -65,6 +66,8 @@
     webView.frame = frame;
     
     if (self.webViewHeight == webView.frame.size.height) {
+        [self setUIWithData];
+        
         //添加按钮并放置合适位置
         NSString *textRepost = [[NSString alloc] initWithFormat:@"(%ld)", (long)self.repost];
         NSString *textComment = [[NSString alloc] initWithFormat:@"(%ld)", (long)self.comment];
@@ -93,18 +96,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"freshTableView" object:nil userInfo:param];
 }
 
-- (void)prepareForReuse
+- (void)setUIWithData
 {
-    [super prepareForReuse];
-    self.nameLabel.text = @".";
-    [self.nameLabel sizeToFit];
-    self.starImageView.image = nil;
-}
-
-- (void)updateWithWeiboData:(UIWeibo *)data index:(NSInteger)index;
-{
-    cellIndex = index;
-    
     //设置头像
     NSString *avatarPath = [DataAdapter getMediaByUrl:data.avatarUrl];
     if ([avatarPath length] == 0) {
@@ -113,7 +106,7 @@
         UIImage *image = [UIImage imageWithContentsOfFile:avatarPath];
         self.avatarImageView.image = image;
     }
-
+    
     //设置名字，自适应长度
     self.nameLabel.text = data.name;
     [self.nameLabel sizeToFit];
@@ -156,10 +149,15 @@
     self.comeFromLabel.frame = frame;
     self.comeFromLabel.text = [[NSString alloc] initWithFormat:@"来自%@", data.feedComeFrom];
     
-    
     self.repost = data.reposts;
     self.comment = data.comments;
     self.like = data.likes;
+}
+
+- (void)updateWithWeiboData:(UIWeibo *)weiboData index:(NSInteger)index;
+{
+    cellIndex = index;
+    data = weiboData;
     
     //set webview content
     self.webView.delegate = self;
