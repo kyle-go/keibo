@@ -153,10 +153,10 @@
 - (void)addWeibo:(DTWeibo *)weibo
 {
     NSString *sql = @"SELECT * FROM Weibo WHERE weiboId=(?)";
-    FMResultSet *fs = [db executeQuery:sql, weibo.weiboId];
+    FMResultSet *fs = [db executeQuery:sql, [[NSNumber alloc]initWithLongLong:weibo.weiboId]];
     if ([fs next]) {
         sql = @"DELETE FROM Weibo WHERE weiboId=(?)";
-        [db executeUpdate:sql, weibo.weiboId];
+        [db executeUpdate:sql, [[NSNumber alloc]initWithLongLong:weibo.weiboId]];
     }
     
     sql = @"INSERT INTO weibo (weiboId,date,owner,source,visible,content,repostCount,commentCount,likeCount,favorite,picture,isRepost,originalWeiboId,originalOwner,originalWeiboContent,originalWeiboPicture,isIndexWeibo) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -204,7 +204,7 @@
 //批量删除index微博
 - (void)deleteIndexWeibos
 {
-    NSString *sql = @"DELETE FROM Weibo WHERE AND isIndexWeibo='1'";
+    NSString *sql = @"DELETE FROM Weibo WHERE isIndexWeibo='1'";
     BOOL rs = [db executeUpdate:sql];
     if (!rs) {
         NSLog(@"Storage deleteIndexWeibos failed. error=%@", [db lastError]);

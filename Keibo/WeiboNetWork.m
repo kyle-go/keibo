@@ -122,7 +122,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     //[manager setResponseSerializer:[AFTextResponseSerializer serializer]];
-    NSDictionary *params = @{@"access_token":accessToken, @"trim_user":@"0", @"count":kWeiboCountString, @"since_id":@"0", @"max_id":@"0"};
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:@{@"access_token":accessToken, @"trim_user":@"0", @"count":kWeiboCountString}];
     if ([since_id length] > 0) {
         [params setValue:since_id forKey:@"since_id"];
     }

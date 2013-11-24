@@ -40,6 +40,26 @@
     }
 }
 
+- (void)addWeiboArray:(NSArray *)weibos front:(BOOL)front
+{
+    if ([weibos count] == 0) {
+        return;
+    }
+    
+    if (front) {
+        NSMutableArray *tmp = [[NSMutableArray alloc] initWithArray:weibos];
+        [tmp addObjectsFromArray:weiboArray];
+        [weiboArray setArray:tmp];
+    } else {
+        [weiboArray addObjectsFromArray:weibos];
+    }
+    
+    NSUInteger count = [weibos count];
+    for (NSUInteger i=0; i<count; i++) {
+        [weiboHeights addObject:[[NSNumber alloc] initWithInt:150]];
+    }
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -119,11 +139,13 @@
         return;
     }
     
+    id array = [param objectForKey:@"array"];
     NSString *type = [param objectForKey:@"type"];
     if ([type isEqualToString:@"latest"]) {
-        [self setWeiboArray:[param objectForKey:@"array"]];
+        [self setWeiboArray:array];
     } else if ([type isEqualToString:@"since"]) {
-        //
+        [self doneLoadingTableViewData];
+        [self addWeiboArray:array front:YES];
     } else if([type isEqualToString:@"max"]) {
         //
     } else {
@@ -239,7 +261,11 @@
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
 	
 	[self reloadTableViewDataSource];
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+    if (weiboArray) {
+        UIWeibo *weibo = [weiboArray objectAtIndex:0];
+        [WeiboNetWork getLoginUserWeibos:accessToken since:[[NSString alloc] initWithFormat:@"%lld", weibo.weiboId]];
+    }
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
