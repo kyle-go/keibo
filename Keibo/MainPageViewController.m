@@ -7,6 +7,7 @@
 //
 
 #import "MainPageViewController.h"
+#import "NewWeiboViewController.h"
 #import "AuthorizeViewController.h"
 #import "MMDrawerBarButtonItem.h"
 #import "UIViewController+MMDrawerController.h"
@@ -195,7 +196,9 @@
 }
 
 - (void)newWeibo {
-    
+    NewWeiboViewController *newWeibo = [[NewWeiboViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:newWeibo];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark -- table View Data Source

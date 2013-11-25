@@ -15,6 +15,7 @@
 		2714664818425097000376F9 /* WeiboSimpleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714664718425097000376F9 /* WeiboSimpleCell.xib */; };
 		2714664A18425195000376F9 /* WeiboTypeSelectorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714664918425195000376F9 /* WeiboTypeSelectorCell.xib */; };
 		2714664D184251A7000376F9 /* WeiboTypeSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2714664C184251A7000376F9 /* WeiboTypeSelectorCell.m */; };
+		271BB8941843B276008BB2A4 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 271BB8931843B276008BB2A4 /* GCPlaceholderTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35917FD88B20069B2C9 /* Security.framework */; };
 		271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */; };
 		2737020F1835308D00016FB1 /* DataAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737020E1835308D00016FB1 /* DataAdapter.m */; };
@@ -29,8 +30,9 @@
 		2748FCEF17F8738000A3B9ED /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCEE17F8738000A3B9ED /* XCTest.framework */; };
 		2748FCF017F8738000A3B9ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCCF17F8738000A3B9ED /* Foundation.framework */; };
 		2748FCF117F8738000A3B9ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD317F8738000A3B9ED /* UIKit.framework */; };
-		274C4A8D17FB1A3D00D231E8 /* NewWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C4A8C17FB1A3D00D231E8 /* NewWeiboViewController.m */; };
 		276D7C241837ABC800C0B4BC /* bg_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 276D7C231837ABC800C0B4BC /* bg_line.png */; };
+		276FFAB01843AAF600D41EB6 /* NewWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276FFAAE1843AAF600D41EB6 /* NewWeiboViewController.m */; };
+		276FFAB11843AAF600D41EB6 /* NewWeiboViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 276FFAAF1843AAF600D41EB6 /* NewWeiboViewController.xib */; };
 		27AB3DB01837A3010011BB18 /* RoundImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AB3DAF1837A3010011BB18 /* RoundImageView.m */; };
 		27AB3DB31837A4440011BB18 /* WeiboImageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AB3DB21837A4440011BB18 /* WeiboImageCreator.m */; };
 		FB0136E5182E70970006DFB9 /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = FB0136E3182E70970006DFB9 /* comments.png */; };
@@ -121,6 +123,8 @@
 		2714664918425195000376F9 /* WeiboTypeSelectorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboTypeSelectorCell.xib; sourceTree = "<group>"; };
 		2714664B184251A7000376F9 /* WeiboTypeSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTypeSelectorCell.h; sourceTree = "<group>"; };
 		2714664C184251A7000376F9 /* WeiboTypeSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboTypeSelectorCell.m; sourceTree = "<group>"; };
+		271BB8921843B276008BB2A4 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
+		271BB8931843B276008BB2A4 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		271EA35917FD88B20069B2C9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2737020D1835308D00016FB1 /* DataAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAdapter.h; sourceTree = "<group>"; };
@@ -140,9 +144,10 @@
 		2748FCE717F8738000A3B9ED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2748FCED17F8738000A3B9ED /* KeiboTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeiboTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2748FCEE17F8738000A3B9ED /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		274C4A8B17FB1A3D00D231E8 /* NewWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewWeiboViewController.h; sourceTree = "<group>"; };
-		274C4A8C17FB1A3D00D231E8 /* NewWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewWeiboViewController.m; sourceTree = "<group>"; };
 		276D7C231837ABC800C0B4BC /* bg_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_line.png; sourceTree = "<group>"; };
+		276FFAAD1843AAF600D41EB6 /* NewWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewWeiboViewController.h; sourceTree = "<group>"; };
+		276FFAAE1843AAF600D41EB6 /* NewWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewWeiboViewController.m; sourceTree = "<group>"; };
+		276FFAAF1843AAF600D41EB6 /* NewWeiboViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewWeiboViewController.xib; sourceTree = "<group>"; };
 		27AB3DAE1837A3010011BB18 /* RoundImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundImageView.h; sourceTree = "<group>"; };
 		27AB3DAF1837A3010011BB18 /* RoundImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundImageView.m; sourceTree = "<group>"; };
 		27AB3DB11837A4440011BB18 /* WeiboImageCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboImageCreator.h; sourceTree = "<group>"; };
@@ -300,6 +305,15 @@
 			name = CommonUI;
 			sourceTree = "<group>";
 		};
+		271BB8911843B24D008BB2A4 /* PlaceholderTextVIew */ = {
+			isa = PBXGroup;
+			children = (
+				271BB8921843B276008BB2A4 /* GCPlaceholderTextView.h */,
+				271BB8931843B276008BB2A4 /* GCPlaceholderTextView.m */,
+			);
+			name = PlaceholderTextVIew;
+			sourceTree = "<group>";
+		};
 		2748FCC317F8738000A3B9ED = {
 			isa = PBXGroup;
 			children = (
@@ -367,8 +381,9 @@
 		274C4A8A17FB1A0A00D231E8 /* NewWeibo */ = {
 			isa = PBXGroup;
 			children = (
-				274C4A8B17FB1A3D00D231E8 /* NewWeiboViewController.h */,
-				274C4A8C17FB1A3D00D231E8 /* NewWeiboViewController.m */,
+				276FFAAD1843AAF600D41EB6 /* NewWeiboViewController.h */,
+				276FFAAE1843AAF600D41EB6 /* NewWeiboViewController.m */,
+				276FFAAF1843AAF600D41EB6 /* NewWeiboViewController.xib */,
 			);
 			name = NewWeibo;
 			sourceTree = "<group>";
@@ -444,6 +459,7 @@
 		FB255BDC18228B4B00A0008B /* External */ = {
 			isa = PBXGroup;
 			children = (
+				271BB8911843B24D008BB2A4 /* PlaceholderTextVIew */,
 				FB6326611841DE4800B48E25 /* EGORefreshView */,
 				FB4C01181833CE8B00EC97B1 /* fmdb */,
 				FB255BEC18228D0E00A0008B /* MMDrawerController */,
@@ -709,6 +725,7 @@
 				FB5D10CF182FAD6F006E1D01 /* avatar-1.png in Resources */,
 				FB6CEAD7182CE63A00C07414 /* WeiboTableCell.xib in Resources */,
 				FB255BFF18228D9B00A0008B /* LeftViewController.xib in Resources */,
+				276FFAB11843AAF600D41EB6 /* NewWeiboViewController.xib in Resources */,
 				FB0136E6182E70970006DFB9 /* comments@2x.png in Resources */,
 				FB6CEAF4182D2E9300C07414 /* tabbar_message@2x.png in Resources */,
 				2748FCDA17F8738000A3B9ED /* InfoPlist.strings in Resources */,
@@ -751,6 +768,7 @@
 				27AB3DB31837A4440011BB18 /* WeiboImageCreator.m in Sources */,
 				2748FCE617F8738000A3B9ED /* ViewController.m in Sources */,
 				FB4FDE94181F948100FF9331 /* AFNetworkReachabilityManager.m in Sources */,
+				276FFAB01843AAF600D41EB6 /* NewWeiboViewController.m in Sources */,
 				FB255BF618228D0E00A0008B /* MMDrawerBarButtonItem.m in Sources */,
 				FB255BF718228D0E00A0008B /* MMDrawerController.m in Sources */,
 				FB4C013218349E6000EC97B1 /* DTWeiboMedia.m in Sources */,
@@ -762,7 +780,6 @@
 				FB4C01271833CE8B00EC97B1 /* FMResultSet.m in Sources */,
 				FB4FDE93181F948100FF9331 /* AFHTTPSessionManager.m in Sources */,
 				FB4FDE97181F948100FF9331 /* AFURLRequestSerialization.m in Sources */,
-				274C4A8D17FB1A3D00D231E8 /* NewWeiboViewController.m in Sources */,
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,
 				FB4C013B1834A43200EC97B1 /* UIWeibo.m in Sources */,
 				FB255BFE18228D9B00A0008B /* LeftViewController.m in Sources */,
@@ -784,6 +801,7 @@
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,
+				271BB8941843B276008BB2A4 /* GCPlaceholderTextView.m in Sources */,
 				2714664318424F76000376F9 /* UserBasicNumberCell.m in Sources */,
 				FB4C013E1834BF0200EC97B1 /* NotificationCenter.m in Sources */,
 				FB255BE518228C1B00A0008B /* PersonViewController.m in Sources */,

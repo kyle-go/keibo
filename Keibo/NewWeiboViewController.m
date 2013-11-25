@@ -1,9 +1,9 @@
 //
-//  KSNewWeiboViewController.m
+//  NewWeiboViewController.m
 //  Keibo
 //
-//  Created by kyle on 13-10-1.
-//  Copyright (c) 2013年 kyle. All rights reserved.
+//  Created by kyle on 11/25/13.
+//  Copyright (c) 2013 kyle. All rights reserved.
 //
 
 #import "NewWeiboViewController.h"
@@ -27,9 +27,13 @@
 {
     [super viewDidLoad];
     
-
+    self.title = @"发微博";
+    self.weiboTextView.placeholder = @"分享新鲜事...";
+    [self.weiboTextView becomeFirstResponder];
     
-	// Do any additional setup after loading the view.
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(Cancel)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(SendWeibo)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,10 +42,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-
--(IBAction)close
+- (void)Cancel
 {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)SendWeibo
+{
+    [self Cancel];
 }
 
 @end
