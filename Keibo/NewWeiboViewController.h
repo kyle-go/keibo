@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GCPlaceholderTextView.h"
 
-@interface NewWeiboViewController : UIViewController
+@interface NewWeiboViewController : UIViewController <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet GCPlaceholderTextView *weiboTextView;
+@property (weak, nonatomic) IBOutlet UIToolbar *keyboardHelperBar;
 
 @end
