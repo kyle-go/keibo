@@ -88,9 +88,9 @@
     }
     self.tabBarItem.title = @"首页";
     
-    CGRect frame = CGRectMake(0, 65, 320, 568-65-50);
+    CGRect frame = CGRectMake(0, 64, 320, 568-64-49);
     UIView *tempView = [[UIView alloc] initWithFrame:frame];
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,568-65-50) style:UITableViewStylePlain];
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,568-64-49) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     [tempView addSubview:tableView];
@@ -126,6 +126,7 @@
     
     //执行一下下拉刷新动作
     [self actionPullDown];
+    [_refreshHeaderView setState:EGOOPullRefreshLoading];
 }
 
 - (void)setFooterView

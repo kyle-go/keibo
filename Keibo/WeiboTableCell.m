@@ -49,8 +49,8 @@
     [button setTitle:title forState:UIControlStateNormal];
     UIImage *image = [UIImage imageNamed:@"comments.png"];
     [button setImage:image forState:UIControlStateNormal];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(-5.0, 2.0, 0.0, 0.0)];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, -5.0, 0.0, 0.0)];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(-4.0, 5.0, 0.0, 0.0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, -8.0, 0.0, 0.0)];
     
     button.titleLabel.font = [UIFont systemFontOfSize:10];
     return button;
