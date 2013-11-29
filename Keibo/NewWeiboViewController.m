@@ -40,11 +40,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     //keyboardHelperBar添加按钮
-    UIButton *btnTest = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [btnTest setTitle:@"Test" forState:UIControlStateNormal];
-    [btnTest setBackgroundColor:[UIColor redColor]];
-    [btnTest addTarget:self action:@selector(targetTest:) forControlEvents:UIControlEventTouchUpInside];
-    [self.keyboardHelperBar addSubview:btnTest];
+//    UIButton *btnTest = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+//    [btnTest setTitle:@"Test" forState:UIControlStateNormal];
+//    [btnTest setBackgroundColor:[UIColor redColor]];
+//    [btnTest addTarget:self action:@selector(targetTest:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.keyboardHelperBar addSubview:btnTest];
     
     [self performSelector:@selector(setWeiboTextViewFirstResponse) withObject:nil afterDelay:0.0];
 }
@@ -111,9 +111,9 @@
 {
     [UIView animateWithDuration:0.3f
                      animations:^{
-                         CGRect frame = self.keyboardHelperBar.frame;
+                         CGRect frame = self.keyboardHelper.frame;
                          frame.origin.y = height - 65 + 21;
-                         self.keyboardHelperBar.frame= frame;
+                         self.keyboardHelper.frame= frame;
                      }];
 }
 

@@ -12,6 +12,6 @@
 @interface NewWeiboViewController : UIViewController <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet GCPlaceholderTextView *weiboTextView;
-@property (weak, nonatomic) IBOutlet UIToolbar *keyboardHelperBar;
+@property (weak, nonatomic) IBOutlet UIView *keyboardHelper;
 
 @end

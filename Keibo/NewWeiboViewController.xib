@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewWeiboViewController">
             <connections>
-                <outlet property="keyboardHelperBar" destination="DmX-IW-vyR" id="ZoB-ls-lgc"/>
+                <outlet property="keyboardHelper" destination="Sel-Hk-v0r" id="nIs-YO-duD"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="weiboTextView" destination="D0S-DI-Yqy" id="yop-H7-Dqn"/>
             </connections>
@@ -23,18 +23,25 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                 </textView>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DmX-IW-vyR">
-                    <rect key="frame" x="0.0" y="352" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <items>
-                        <barButtonItem title="Item" id="HAi-X0-M1a"/>
-                    </items>
-                </toolbar>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sel-Hk-v0r">
+                    <rect key="frame" x="0.0" y="352" width="320" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="face" translatesAutoresizingMaskIntoConstraints="NO" id="2PS-DV-Yuh">
+                            <rect key="frame" x="8" y="9" width="27" height="27"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="face" width="27" height="27"/>
+    </resources>
 </document>
