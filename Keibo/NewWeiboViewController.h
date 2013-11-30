@@ -13,5 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet GCPlaceholderTextView *weiboTextView;
 @property (weak, nonatomic) IBOutlet UIView *keyboardHelper;
+@property (weak, nonatomic) IBOutlet UIButton *btnFace;
+
+- (IBAction)actionBtnFace:(id)sender;
 
 @end

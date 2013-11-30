@@ -12,13 +12,15 @@
 
 @end
 
-@implementation NewWeiboViewController
+@implementation NewWeiboViewController {
+    BOOL bIsFaceIcon;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        bIsFaceIcon = YES;
     }
     return self;
 }
@@ -46,6 +48,7 @@
     [self.keyboardHelper addSubview:bgImgView];
     [self.keyboardHelper sendSubviewToBack:bgImgView];
     
+    self.keyboardHelper.frame = CGRectMake(0, 568-50, 320, 50);
     [self.view addSubview:self.keyboardHelper];
     [self performSelector:@selector(setWeiboTextViewFirstResponse) withObject:nil afterDelay:0.0];
 }
@@ -59,11 +62,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)targetTest:(id)sender
-{
-    [self.weiboTextView resignFirstResponder];
 }
 
 #pragma mark -
@@ -126,6 +124,18 @@
 - (void)SendWeibo
 {
     [self Cancel];
+}
+
+- (IBAction)actionBtnFace:(id)sender {
+    if (bIsFaceIcon) {
+        bIsFaceIcon = NO;
+        [self.btnFace setImage:[UIImage imageNamed:@"kb_keyboard"] forState:UIControlStateNormal];
+        [self.weiboTextView resignFirstResponder];
+    } else {
+        bIsFaceIcon = YES;
+        [self.btnFace setImage:[UIImage imageNamed:@"kb_face"] forState:UIControlStateNormal];
+        [self.weiboTextView becomeFirstResponder];
+    }
 }
 
 @end
