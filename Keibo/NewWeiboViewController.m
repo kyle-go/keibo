@@ -38,13 +38,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
-    //keyboardHelperBar添加按钮
-//    UIButton *btnTest = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-//    [btnTest setTitle:@"Test" forState:UIControlStateNormal];
-//    [btnTest setBackgroundColor:[UIColor redColor]];
-//    [btnTest addTarget:self action:@selector(targetTest:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.keyboardHelperBar addSubview:btnTest];
+
+    //添加背景图片
+    CGRect frame = self.keyboardHelper.frame;
+    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    bgImgView.image = [UIImage imageNamed:@"kb_background"];
+    [self.keyboardHelper addSubview:bgImgView];
+    [self.keyboardHelper sendSubviewToBack:bgImgView];
     
     [self performSelector:@selector(setWeiboTextViewFirstResponse) withObject:nil afterDelay:0.0];
 }
