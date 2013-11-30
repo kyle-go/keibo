@@ -46,6 +46,7 @@
     [self.keyboardHelper addSubview:bgImgView];
     [self.keyboardHelper sendSubviewToBack:bgImgView];
     
+    [self.view addSubview:self.keyboardHelper];
     [self performSelector:@selector(setWeiboTextViewFirstResponse) withObject:nil afterDelay:0.0];
 }
 
