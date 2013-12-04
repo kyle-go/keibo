@@ -41,7 +41,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
-    //添加背景图片
+    //keyboardHelper 添加背景图片
     CGRect frame = self.keyboardHelper.frame;
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     bgImgView.image = [UIImage imageNamed:@"kb_background"];
@@ -51,6 +51,9 @@
     self.keyboardHelper.frame = CGRectMake(0, 568-50, 320, 50);
     [self.view addSubview:self.keyboardHelper];
     [self performSelector:@selector(setWeiboTextViewFirstResponse) withObject:nil afterDelay:0.0];
+    
+    //emoji view
+    UIView *emoji = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 350)];
 }
 
 - (void)setWeiboTextViewFirstResponse
