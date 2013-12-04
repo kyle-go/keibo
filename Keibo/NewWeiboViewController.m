@@ -7,12 +7,15 @@
 //
 
 #import "NewWeiboViewController.h"
+#define EMOJI_VIEW_HEIGHT 216
 
 @interface NewWeiboViewController ()
 
 @end
 
 @implementation NewWeiboViewController {
+    BOOL reponseKeyBoardMove;
+    
     BOOL bIsFaceIcon;
     UIView *emojiView;
 }
@@ -22,6 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         bIsFaceIcon = YES;
+        reponseKeyBoardMove = YES;
     }
     return self;
 }
@@ -39,7 +43,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     //keyboardHelper 添加背景图片
@@ -54,9 +57,8 @@
     [self performSelector:@selector(setWeiboTextViewFirstResponse) withObject:nil afterDelay:0.0];
     
     //emoji view
-    emojiView = [[UIView alloc] initWithFrame:CGRectMake(0, 568, 320, 216)];
+    emojiView = [[UIView alloc] initWithFrame:CGRectMake(0, 568, 320, EMOJI_VIEW_HEIGHT)];
     emojiView.backgroundColor = [UIColor redColor];
-    [self.view addSubview:emojiView];
 }
 
 - (void)setWeiboTextViewFirstResponse
@@ -112,12 +114,16 @@
     [self moveInputBarWithKeyboardHeight:568 withDuration:animationDuration];
 }
 
-- (void) moveInputBarWithKeyboardHeight:(CGFloat)position_y withDuration:(NSTimeInterval)duration
+- (void) moveInputBarWithKeyboardHeight:(CGFloat)posY withDuration:(NSTimeInterval)duration
 {
-    [UIView animateWithDuration:duration
+    if (reponseKeyBoardMove == NO) {
+        return;
+    }
+    
+    [UIView animateWithDuration:0.01
                      animations:^{
                          CGRect frame = self.keyboardHelper.frame;
-                         frame.origin.y = position_y - 65 + 21;
+                         frame.origin.y = posY - 44;
                          self.keyboardHelper.frame = frame;
                      }];
 }
@@ -136,16 +142,17 @@
     if (bIsFaceIcon) {
         bIsFaceIcon = NO;
         [self.btnFace setImage:[UIImage imageNamed:@"kb_keyboard"] forState:UIControlStateNormal];
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             CGRect frame = CGRectMake(0, 352, 320, 216);
-                             emojiView.frame = frame;
-                         }];
-        [self.weiboTextView resignFirstResponder];
+        
+        //dismiss keyboard
+        self.weiboTextView.inputView = emojiView;
+        [self.weiboTextView reloadInputViews];
     } else {
         bIsFaceIcon = YES;
         [self.btnFace setImage:[UIImage imageNamed:@"kb_face"] forState:UIControlStateNormal];
-        [self.weiboTextView becomeFirstResponder];
+        
+        //show keyboard
+        self.weiboTextView.inputView = nil;
+        [self.weiboTextView reloadInputViews];
     }
 }
 
