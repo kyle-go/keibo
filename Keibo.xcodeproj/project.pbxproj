@@ -15,7 +15,6 @@
 		2714664818425097000376F9 /* WeiboSimpleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714664718425097000376F9 /* WeiboSimpleCell.xib */; };
 		2714664A18425195000376F9 /* WeiboTypeSelectorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714664918425195000376F9 /* WeiboTypeSelectorCell.xib */; };
 		2714664D184251A7000376F9 /* WeiboTypeSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2714664C184251A7000376F9 /* WeiboTypeSelectorCell.m */; };
-		271BB8941843B276008BB2A4 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 271BB8931843B276008BB2A4 /* GCPlaceholderTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35917FD88B20069B2C9 /* Security.framework */; };
 		271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */; };
 		2737020F1835308D00016FB1 /* DataAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737020E1835308D00016FB1 /* DataAdapter.m */; };
@@ -96,6 +95,7 @@
 		FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */; };
 		FBC0D95B1830DB4800163C3C /* weibo-repost.html in Resources */ = {isa = PBXBuildFile; fileRef = FBC0D9591830DB4800163C3C /* weibo-repost.html */; };
 		FBC0D95C1830DB4800163C3C /* weibo-simple.html in Resources */ = {isa = PBXBuildFile; fileRef = FBC0D95A1830DB4800163C3C /* weibo-simple.html */; };
+		FBD28960184F7E79003150C3 /* CPTextViewPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD2895F184F7E79003150C3 /* CPTextViewPlaceholder.m */; };
 		FBD2C00D18334FD000BBE4AF /* AuthorizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD2C00B18334FD000BBE4AF /* AuthorizeViewController.m */; };
 		FBD2C00E18334FD000BBE4AF /* AuthorizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBD2C00C18334FD000BBE4AF /* AuthorizeViewController.xib */; };
 		FBE5E579184EF8D8004CFDDA /* Emoji-Default.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBE5E578184EF8D8004CFDDA /* Emoji-Default.bundle */; };
@@ -129,8 +129,6 @@
 		2714664918425195000376F9 /* WeiboTypeSelectorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboTypeSelectorCell.xib; sourceTree = "<group>"; };
 		2714664B184251A7000376F9 /* WeiboTypeSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTypeSelectorCell.h; sourceTree = "<group>"; };
 		2714664C184251A7000376F9 /* WeiboTypeSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboTypeSelectorCell.m; sourceTree = "<group>"; };
-		271BB8921843B276008BB2A4 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
-		271BB8931843B276008BB2A4 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		271EA35917FD88B20069B2C9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2737020D1835308D00016FB1 /* DataAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAdapter.h; sourceTree = "<group>"; };
@@ -260,6 +258,8 @@
 		FBBDEE8F182CCE6000067D6E /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
 		FBC0D9591830DB4800163C3C /* weibo-repost.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "weibo-repost.html"; sourceTree = "<group>"; };
 		FBC0D95A1830DB4800163C3C /* weibo-simple.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "weibo-simple.html"; sourceTree = "<group>"; };
+		FBD2895E184F7E79003150C3 /* CPTextViewPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextViewPlaceholder.h; sourceTree = "<group>"; };
+		FBD2895F184F7E79003150C3 /* CPTextViewPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextViewPlaceholder.m; sourceTree = "<group>"; };
 		FBD2C00A18334FD000BBE4AF /* AuthorizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorizeViewController.h; sourceTree = "<group>"; };
 		FBD2C00B18334FD000BBE4AF /* AuthorizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorizeViewController.m; sourceTree = "<group>"; };
 		FBD2C00C18334FD000BBE4AF /* AuthorizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthorizeViewController.xib; sourceTree = "<group>"; };
@@ -326,8 +326,8 @@
 		271BB8911843B24D008BB2A4 /* PlaceholderTextVIew */ = {
 			isa = PBXGroup;
 			children = (
-				271BB8921843B276008BB2A4 /* GCPlaceholderTextView.h */,
-				271BB8931843B276008BB2A4 /* GCPlaceholderTextView.m */,
+				FBD2895E184F7E79003150C3 /* CPTextViewPlaceholder.h */,
+				FBD2895F184F7E79003150C3 /* CPTextViewPlaceholder.m */,
 			);
 			name = PlaceholderTextVIew;
 			sourceTree = "<group>";
@@ -838,9 +838,9 @@
 				FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */,
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
+				FBD28960184F7E79003150C3 /* CPTextViewPlaceholder.m in Sources */,
 				FBE5E588184EFAB5004CFDDA /* UICustomTapGestureRecognizer.m in Sources */,
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,
-				271BB8941843B276008BB2A4 /* GCPlaceholderTextView.m in Sources */,
 				2714664318424F76000376F9 /* UserBasicNumberCell.m in Sources */,
 				FB4C013E1834BF0200EC97B1 /* NotificationCenter.m in Sources */,
 				FB255BE518228C1B00A0008B /* PersonViewController.m in Sources */,

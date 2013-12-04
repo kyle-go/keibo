@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GCPlaceholderTextView.h"
+#import "CPTextViewPlaceholder.h"
 
 @interface NewWeiboViewController : UIViewController <UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet GCPlaceholderTextView *weiboTextView;
+@property (weak, nonatomic) IBOutlet CPTextViewPlaceholder *weiboTextView;
 @property (weak, nonatomic) IBOutlet UIView *keyboardHelper;
 @property (weak, nonatomic) IBOutlet UIButton *btnFace;
 
