@@ -14,6 +14,7 @@
 
 @implementation NewWeiboViewController {
     BOOL bIsFaceIcon;
+    UIView *emojiView;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -48,12 +49,14 @@
     [self.keyboardHelper addSubview:bgImgView];
     [self.keyboardHelper sendSubviewToBack:bgImgView];
     
-    self.keyboardHelper.frame = CGRectMake(0, 568-50, 320, 50);
+    self.keyboardHelper.frame = CGRectMake(0, 568-45, 320, 50);
     [self.view addSubview:self.keyboardHelper];
     [self performSelector:@selector(setWeiboTextViewFirstResponse) withObject:nil afterDelay:0.0];
     
     //emoji view
-    UIView *emoji = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 350)];
+    emojiView = [[UIView alloc] initWithFrame:CGRectMake(0, 568, 320, 216)];
+    emojiView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:emojiView];
 }
 
 - (void)setWeiboTextViewFirstResponse
@@ -109,13 +112,13 @@
     [self moveInputBarWithKeyboardHeight:568 withDuration:animationDuration];
 }
 
-- (void) moveInputBarWithKeyboardHeight:(CGFloat)height withDuration:(NSTimeInterval)duration
+- (void) moveInputBarWithKeyboardHeight:(CGFloat)position_y withDuration:(NSTimeInterval)duration
 {
-    [UIView animateWithDuration:0.3f
+    [UIView animateWithDuration:duration
                      animations:^{
                          CGRect frame = self.keyboardHelper.frame;
-                         frame.origin.y = height - 65 + 21;
-                         self.keyboardHelper.frame= frame;
+                         frame.origin.y = position_y - 65 + 21;
+                         self.keyboardHelper.frame = frame;
                      }];
 }
 
@@ -133,6 +136,11 @@
     if (bIsFaceIcon) {
         bIsFaceIcon = NO;
         [self.btnFace setImage:[UIImage imageNamed:@"kb_keyboard"] forState:UIControlStateNormal];
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             CGRect frame = CGRectMake(0, 352, 320, 216);
+                             emojiView.frame = frame;
+                         }];
         [self.weiboTextView resignFirstResponder];
     } else {
         bIsFaceIcon = YES;

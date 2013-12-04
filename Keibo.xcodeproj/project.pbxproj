@@ -98,6 +98,12 @@
 		FBC0D95C1830DB4800163C3C /* weibo-simple.html in Resources */ = {isa = PBXBuildFile; fileRef = FBC0D95A1830DB4800163C3C /* weibo-simple.html */; };
 		FBD2C00D18334FD000BBE4AF /* AuthorizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD2C00B18334FD000BBE4AF /* AuthorizeViewController.m */; };
 		FBD2C00E18334FD000BBE4AF /* AuthorizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBD2C00C18334FD000BBE4AF /* AuthorizeViewController.xib */; };
+		FBE5E579184EF8D8004CFDDA /* Emoji-Default.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBE5E578184EF8D8004CFDDA /* Emoji-Default.bundle */; };
+		FBE5E57F184EF8E6004CFDDA /* OLImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E57C184EF8E6004CFDDA /* OLImage.m */; };
+		FBE5E580184EF8E6004CFDDA /* OLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E57E184EF8E6004CFDDA /* OLImageView.m */; };
+		FBE5E584184EF8FF004CFDDA /* EmojiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E582184EF8FF004CFDDA /* EmojiViewController.m */; };
+		FBE5E585184EF8FF004CFDDA /* EmojiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE5E583184EF8FF004CFDDA /* EmojiViewController.xib */; };
+		FBE5E588184EFAB5004CFDDA /* UICustomTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E587184EFAB5004CFDDA /* UICustomTapGestureRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +263,16 @@
 		FBD2C00A18334FD000BBE4AF /* AuthorizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorizeViewController.h; sourceTree = "<group>"; };
 		FBD2C00B18334FD000BBE4AF /* AuthorizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorizeViewController.m; sourceTree = "<group>"; };
 		FBD2C00C18334FD000BBE4AF /* AuthorizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthorizeViewController.xib; sourceTree = "<group>"; };
+		FBE5E578184EF8D8004CFDDA /* Emoji-Default.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Emoji-Default.bundle"; sourceTree = "<group>"; };
+		FBE5E57B184EF8E6004CFDDA /* OLImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLImage.h; sourceTree = "<group>"; };
+		FBE5E57C184EF8E6004CFDDA /* OLImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLImage.m; sourceTree = "<group>"; };
+		FBE5E57D184EF8E6004CFDDA /* OLImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLImageView.h; sourceTree = "<group>"; };
+		FBE5E57E184EF8E6004CFDDA /* OLImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLImageView.m; sourceTree = "<group>"; };
+		FBE5E581184EF8FF004CFDDA /* EmojiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiViewController.h; sourceTree = "<group>"; };
+		FBE5E582184EF8FF004CFDDA /* EmojiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiViewController.m; sourceTree = "<group>"; };
+		FBE5E583184EF8FF004CFDDA /* EmojiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiViewController.xib; sourceTree = "<group>"; };
+		FBE5E586184EFAB5004CFDDA /* UICustomTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomTapGestureRecognizer.h; sourceTree = "<group>"; };
+		FBE5E587184EFAB5004CFDDA /* UICustomTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomTapGestureRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +305,8 @@
 		2714663918424E9D000376F9 /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
+				FBE5E586184EFAB5004CFDDA /* UICustomTapGestureRecognizer.h */,
+				FBE5E587184EFAB5004CFDDA /* UICustomTapGestureRecognizer.m */,
 				2714663A18424F03000376F9 /* UserInfoCell.h */,
 				2714663B18424F03000376F9 /* UserInfoCell.m */,
 				2714663D18424F18000376F9 /* UserInfoCell.xib */,
@@ -381,6 +399,9 @@
 		274C4A8A17FB1A0A00D231E8 /* NewWeibo */ = {
 			isa = PBXGroup;
 			children = (
+				FBE5E581184EF8FF004CFDDA /* EmojiViewController.h */,
+				FBE5E582184EF8FF004CFDDA /* EmojiViewController.m */,
+				FBE5E583184EF8FF004CFDDA /* EmojiViewController.xib */,
 				276FFAAD1843AAF600D41EB6 /* NewWeiboViewController.h */,
 				276FFAAE1843AAF600D41EB6 /* NewWeiboViewController.m */,
 				276FFAAF1843AAF600D41EB6 /* NewWeiboViewController.xib */,
@@ -459,6 +480,7 @@
 		FB255BDC18228B4B00A0008B /* External */ = {
 			isa = PBXGroup;
 			children = (
+				FBE5E57A184EF8E6004CFDDA /* OLImageView */,
 				271BB8911843B24D008BB2A4 /* PlaceholderTextVIew */,
 				FB6326611841DE4800B48E25 /* EGORefreshView */,
 				FB4C01181833CE8B00EC97B1 /* fmdb */,
@@ -631,11 +653,23 @@
 		FBE452C5183084C400DB43FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FBE5E578184EF8D8004CFDDA /* Emoji-Default.bundle */,
 				FBC0D9591830DB4800163C3C /* weibo-repost.html */,
 				FBC0D95A1830DB4800163C3C /* weibo-simple.html */,
 				FB6CEAD8182CEAE900C07414 /* images */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		FBE5E57A184EF8E6004CFDDA /* OLImageView */ = {
+			isa = PBXGroup;
+			children = (
+				FBE5E57B184EF8E6004CFDDA /* OLImage.h */,
+				FBE5E57C184EF8E6004CFDDA /* OLImage.m */,
+				FBE5E57D184EF8E6004CFDDA /* OLImageView.h */,
+				FBE5E57E184EF8E6004CFDDA /* OLImageView.m */,
+			);
+			path = OLImageView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -716,7 +750,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB6CEAFB182D2EF000C07414 /* tabbar_more.png in Resources */,
+				FBE5E585184EF8FF004CFDDA /* EmojiViewController.xib in Resources */,
 				FB0136E5182E70970006DFB9 /* comments.png in Resources */,
+				FBE5E579184EF8D8004CFDDA /* Emoji-Default.bundle in Resources */,
 				FB6CEAF3182D2E9300C07414 /* tabbar_message.png in Resources */,
 				FBD2C00E18334FD000BBE4AF /* AuthorizeViewController.xib in Resources */,
 				2748FCE817F8738000A3B9ED /* Images.xcassets in Resources */,
@@ -790,9 +826,11 @@
 				FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */,
 				FB4C01411834C0A100EC97B1 /* AppInitialize.m in Sources */,
 				FB255BE018228C0700A0008B /* MessageViewController.m in Sources */,
+				FBE5E584184EF8FF004CFDDA /* EmojiViewController.m in Sources */,
 				FB4C01381834A31800EC97B1 /* UIUser.m in Sources */,
 				FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */,
 				2737020F1835308D00016FB1 /* DataAdapter.m in Sources */,
+				FBE5E580184EF8E6004CFDDA /* OLImageView.m in Sources */,
 				27AB3DB01837A3010011BB18 /* RoundImageView.m in Sources */,
 				FB4C01231833CE8B00EC97B1 /* FMDatabase.m in Sources */,
 				FB54789F181EA37800501B7A /* Storage.m in Sources */,
@@ -800,6 +838,7 @@
 				FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */,
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
+				FBE5E588184EFAB5004CFDDA /* UICustomTapGestureRecognizer.m in Sources */,
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,
 				271BB8941843B276008BB2A4 /* GCPlaceholderTextView.m in Sources */,
 				2714664318424F76000376F9 /* UserBasicNumberCell.m in Sources */,
@@ -809,6 +848,7 @@
 				FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */,
 				FB255BEA18228C2900A0008B /* MoreViewController.m in Sources */,
 				FB4C01261833CE8B00EC97B1 /* FMDatabaseQueue.m in Sources */,
+				FBE5E57F184EF8E6004CFDDA /* OLImage.m in Sources */,
 				FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */,
 				271466461842507A000376F9 /* WeiboSimpleCell.m in Sources */,
 				FB4C012C18346CCE00EC97B1 /* DTUser.m in Sources */,
