@@ -11,6 +11,8 @@
 #import "OLImageView.h"
 #import "OLImage.h"
 
+#define EMOJI_BACKGROUND_COLOR [UIColor colorWithRed:220.0/250.0 green:220.0/250.0 blue:220.0/250.0 alpha:1];
+
 @interface EmojiViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -32,15 +34,15 @@
     }
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 160)];
-    view.backgroundColor = [UIColor blueColor];
+    view.backgroundColor = EMOJI_BACKGROUND_COLOR;
     NSUInteger allIndex = 0;
     for (NSUInteger i=index; i<content.count && allIndex<20; i++, allIndex++) {
         
         NSUInteger x = allIndex%7; //y = 0...6
         NSUInteger y = allIndex/7; //x = 0 1 2
         
-        OLImageView *imageButton = [[OLImageView alloc] initWithFrame:CGRectMake(x*42 + 14, y*42 + 10, 36, 36)];
-        imageButton.backgroundColor = [UIColor redColor];
+        OLImageView *imageButton = [[OLImageView alloc] initWithFrame:CGRectMake(x*42 + 16, y*42 + 10, 36, 36)];
+        imageButton.backgroundColor = EMOJI_BACKGROUND_COLOR;
         imageButton.image = [OLImage imageWithContentsOfFile:[content objectAtIndex:i]];
         
         [self addImageToView:view image:imageButton string:[content objectAtIndex:i]];
@@ -49,8 +51,9 @@
     NSUInteger x = 6; //y = 0...6
     NSUInteger y = 2; //x = 0 1 2
     
-    OLImageView *imageButton = [[OLImageView alloc] initWithFrame:CGRectMake(x*42 + 14, y*42 + 10, 36, 36)];
-    imageButton.backgroundColor = [UIColor redColor];
+    OLImageView *imageButton = [[OLImageView alloc] initWithFrame:CGRectMake(x*42 + 16, y*42 + 10, 36, 36)];
+    imageButton.backgroundColor = EMOJI_BACKGROUND_COLOR;
+    imageButton.image = [UIImage imageNamed:@"delete-emoji"];
     
     [self addImageToView:view image:imageButton string:@"delete-emoji"];
     
@@ -89,6 +92,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.pageControl.backgroundColor = EMOJI_BACKGROUND_COLOR;
     
     self.viewControllers = [[NSMutableArray alloc] init];
     pageCount = (self.contentList.count+19)/20;

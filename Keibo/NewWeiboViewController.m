@@ -133,7 +133,6 @@
 #pragma mark moveInputBarWithKeyboardHeight
 - (void) moveInputBarWithKeyboardHeight:(CGFloat)posY withDuration:(NSTimeInterval)duration
 {
-    NSLog(@"%f", duration);
     [UIView animateWithDuration:duration
                      animations:^{
                          CGRect frame = self.keyboardHelper.frame;
@@ -151,7 +150,7 @@
         
         //dismiss keyboard
         self.weiboTextView.inputView = emojiView;
-        [UIView animateWithDuration:0.4
+        [UIView animateWithDuration:0.2
                          animations:^{[ self.weiboTextView reloadInputViews]; }
                          completion:^(BOOL finished){ /*Do something here if you want.*/ }];
     } else {
@@ -160,7 +159,7 @@
         
         //show keyboard
         self.weiboTextView.inputView = nil;
-        [UIView animateWithDuration:0.4
+        [UIView animateWithDuration:0.2
                          animations:^{[ self.weiboTextView reloadInputViews]; }
                          completion:^(BOOL finished){ /*Do something here if you want.*/ }];
     }

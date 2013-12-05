@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270328B21850C83D00D90B7C /* delete-emoji.png in Resources */ = {isa = PBXBuildFile; fileRef = 270328B11850C83D00D90B7C /* delete-emoji.png */; };
 		2714663C18424F03000376F9 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2714663B18424F03000376F9 /* UserInfoCell.m */; };
 		2714663E18424F18000376F9 /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714663D18424F18000376F9 /* UserInfoCell.xib */; };
 		2714664018424F54000376F9 /* UserBasicNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714663F18424F54000376F9 /* UserBasicNumberCell.xib */; };
@@ -82,8 +83,6 @@
 		FB63266B1841DE4800B48E25 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6326651841DE4800B48E25 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */; };
 		FB6CEAD7182CE63A00C07414 /* WeiboTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAD6182CE63A00C07414 /* WeiboTableCell.xib */; };
-		FB6CEADA182CEAF600C07414 /* codeMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAD9182CEAF600C07414 /* codeMonkey.png */; };
-		FB6CEADC182CEE6D00C07414 /* superman.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEADB182CEE6D00C07414 /* superman.png */; };
 		FB6CEAEF182D2E2D00C07414 /* tabbar_home.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAED182D2E2D00C07414 /* tabbar_home.png */; };
 		FB6CEAF0182D2E2D00C07414 /* tabbar_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAEE182D2E2D00C07414 /* tabbar_home@2x.png */; };
 		FB6CEAF3182D2E9300C07414 /* tabbar_message.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAF1182D2E9300C07414 /* tabbar_message.png */; };
@@ -117,6 +116,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		270328B11850C83D00D90B7C /* delete-emoji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-emoji.png"; sourceTree = "<group>"; };
 		2714663A18424F03000376F9 /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
 		2714663B18424F03000376F9 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
 		2714663D18424F18000376F9 /* UserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoCell.xib; sourceTree = "<group>"; };
@@ -243,8 +243,6 @@
 		FB6CEAD3182CE62000C07414 /* WeiboTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboTableCell.h; sourceTree = "<group>"; };
 		FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboTableCell.m; sourceTree = "<group>"; };
 		FB6CEAD6182CE63A00C07414 /* WeiboTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboTableCell.xib; sourceTree = "<group>"; };
-		FB6CEAD9182CEAF600C07414 /* codeMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = codeMonkey.png; sourceTree = "<group>"; };
-		FB6CEADB182CEE6D00C07414 /* superman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = superman.png; sourceTree = "<group>"; };
 		FB6CEAED182D2E2D00C07414 /* tabbar_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_home.png; sourceTree = "<group>"; };
 		FB6CEAEE182D2E2D00C07414 /* tabbar_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_home@2x.png"; sourceTree = "<group>"; };
 		FB6CEAF1182D2E9300C07414 /* tabbar_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_message.png; sourceTree = "<group>"; };
@@ -644,8 +642,7 @@
 				FB0136E4182E70970006DFB9 /* comments@2x.png */,
 				FB5D10CD182FAD6F006E1D01 /* avatar-1.png */,
 				FB5D10CE182FAD6F006E1D01 /* avatar-0.png */,
-				FB6CEADB182CEE6D00C07414 /* superman.png */,
-				FB6CEAD9182CEAF600C07414 /* codeMonkey.png */,
+				270328B11850C83D00D90B7C /* delete-emoji.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -754,6 +751,7 @@
 				FB0136E5182E70970006DFB9 /* comments.png in Resources */,
 				FBE5E579184EF8D8004CFDDA /* Emoji-Default.bundle in Resources */,
 				FB6CEAF3182D2E9300C07414 /* tabbar_message.png in Resources */,
+				270328B21850C83D00D90B7C /* delete-emoji.png in Resources */,
 				FBD2C00E18334FD000BBE4AF /* AuthorizeViewController.xib in Resources */,
 				2748FCE817F8738000A3B9ED /* Images.xcassets in Resources */,
 				FBC0D95B1830DB4800163C3C /* weibo-repost.html in Resources */,
@@ -770,7 +768,6 @@
 				2714664018424F54000376F9 /* UserBasicNumberCell.xib in Resources */,
 				FBC0D95C1830DB4800163C3C /* weibo-simple.html in Resources */,
 				FB4E8B00184208C9004AE49F /* blackArrow.png in Resources */,
-				FB6CEADC182CEE6D00C07414 /* superman.png in Resources */,
 				FB255BE118228C0700A0008B /* MessageViewController.xib in Resources */,
 				FB6CEAF0182D2E2D00C07414 /* tabbar_home@2x.png in Resources */,
 				FB255BE618228C1B00A0008B /* PersonViewController.xib in Resources */,
@@ -781,7 +778,6 @@
 				FB255BEB18228C2900A0008B /* MoreViewController.xib in Resources */,
 				2714663E18424F18000376F9 /* UserInfoCell.xib in Resources */,
 				FB6CEAF7182D2EB300C07414 /* tabbar_me.png in Resources */,
-				FB6CEADA182CEAF600C07414 /* codeMonkey.png in Resources */,
 				FB6CEAEF182D2E2D00C07414 /* tabbar_home.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
