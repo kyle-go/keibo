@@ -134,14 +134,18 @@
         
         //dismiss keyboard
         self.weiboTextView.inputView = emojiView;
-        [self.weiboTextView reloadInputViews];
+        [UIView animateWithDuration:0.4
+                         animations:^{[ self.weiboTextView reloadInputViews]; }
+                         completion:^(BOOL finished){ /*Do something here if you want.*/ }];
     } else {
         bIsFaceIcon = YES;
         [self.btnFace setImage:[UIImage imageNamed:@"kb_face"] forState:UIControlStateNormal];
         
         //show keyboard
         self.weiboTextView.inputView = nil;
-        [self.weiboTextView reloadInputViews];
+        [UIView animateWithDuration:0.4
+                         animations:^{[ self.weiboTextView reloadInputViews]; }
+                         completion:^(BOOL finished){ /*Do something here if you want.*/ }];
     }
 }
 
@@ -156,6 +160,5 @@
 {
     [self Cancel];
 }
-
 
 @end
