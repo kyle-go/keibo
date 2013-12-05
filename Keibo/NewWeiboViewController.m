@@ -14,7 +14,6 @@
 @end
 
 @implementation NewWeiboViewController {
-    BOOL reponseKeyBoardMove;
     
     BOOL bIsFaceIcon;
     UIView *emojiView;
@@ -25,7 +24,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         bIsFaceIcon = YES;
-        reponseKeyBoardMove = YES;
     }
     return self;
 }
@@ -114,13 +112,12 @@
     [self moveInputBarWithKeyboardHeight:568 withDuration:animationDuration];
 }
 
+#pragma mark -
+#pragma mark moveInputBarWithKeyboardHeight
 - (void) moveInputBarWithKeyboardHeight:(CGFloat)posY withDuration:(NSTimeInterval)duration
 {
-    if (reponseKeyBoardMove == NO) {
-        return;
-    }
-    
-    [UIView animateWithDuration:0.01
+    NSLog(@"%f", duration);
+    [UIView animateWithDuration:duration
                      animations:^{
                          CGRect frame = self.keyboardHelper.frame;
                          frame.origin.y = posY - 44;
@@ -128,16 +125,8 @@
                      }];
 }
 
-- (void)Cancel
-{
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)SendWeibo
-{
-    [self Cancel];
-}
-
+#pragma mark -
+#pragma mark action inputbar buttons
 - (IBAction)actionBtnFace:(id)sender {
     if (bIsFaceIcon) {
         bIsFaceIcon = NO;
@@ -155,5 +144,18 @@
         [self.weiboTextView reloadInputViews];
     }
 }
+
+#pragma mark -
+#pragma mark action others
+- (void)Cancel
+{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)SendWeibo
+{
+    [self Cancel];
+}
+
 
 @end
