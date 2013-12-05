@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewWeiboViewController">
             <connections>
                 <outlet property="btnFace" destination="J7S-jK-iTT" id="eSs-AE-Ovo"/>
+                <outlet property="changeEmojiScrollView" destination="vdc-qE-Q33" id="yT1-ef-Dq3"/>
                 <outlet property="keyboardHelper" destination="Sel-Hk-v0r" id="nIs-YO-duD"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="weiboTextView" destination="D0S-DI-Yqy" id="6fQ-3h-PDb"/>
@@ -75,6 +76,10 @@
             </subviews>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vdc-qE-Q33">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="38"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+        </scrollView>
     </objects>
     <resources>
         <image name="kb_@" width="48" height="48"/>

@@ -8,8 +8,9 @@
 
 #import "NewWeiboViewController.h"
 #import "EmojiViewController.h"
+#import "SVSegmentedControl.h"
 
-#define EMOJI_VIEW_HEIGHT 216
+#define EMOJI_VIEW_HEIGHT 190
 
 @interface NewWeiboViewController ()
 
@@ -69,11 +70,19 @@
     
     //emoji view
     emojiView = [[UIView alloc] initWithFrame:CGRectMake(0, 568, 320, EMOJI_VIEW_HEIGHT)];
-    emojiView.backgroundColor = [UIColor redColor];
+    emojiView.backgroundColor = [UIColor lightGrayColor];
     controller = [[EmojiViewController alloc] init];
     controller.contentList = paramArray;
     
     [emojiView addSubview:controller.view];
+    self.changeEmojiScrollView.frame = CGRectMake(0, 152, 320, 38);
+    self.changeEmojiScrollView.contentSize = CGSizeMake(321, 38);
+    [emojiView addSubview:self.changeEmojiScrollView];
+    
+    NSArray * btns = [NSArray arrayWithObjects:@"常用", @"默认", @"+", nil];
+    SVSegmentedControl *navSC = [[SVSegmentedControl alloc] initWithSectionTitles:btns];
+    navSC.frame = CGRectMake(0, 0, 320, 38);
+    [self.changeEmojiScrollView addSubview:navSC];
 }
 
 - (void)setWeiboTextViewFirstResponse
@@ -176,5 +185,6 @@
 {
     [self Cancel];
 }
+
 
 @end

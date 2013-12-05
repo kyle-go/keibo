@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet CPTextViewPlaceholder *weiboTextView;
 @property (weak, nonatomic) IBOutlet UIView *keyboardHelper;
 @property (weak, nonatomic) IBOutlet UIButton *btnFace;
+@property (weak, nonatomic) IBOutlet UIScrollView *changeEmojiScrollView;
 
 - (IBAction)actionBtnFace:(id)sender;
 
