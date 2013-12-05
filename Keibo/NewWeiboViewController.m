@@ -7,6 +7,8 @@
 //
 
 #import "NewWeiboViewController.h"
+#import "EmojiViewController.h"
+
 #define EMOJI_VIEW_HEIGHT 216
 
 @interface NewWeiboViewController ()
@@ -17,6 +19,7 @@
     
     BOOL bIsFaceIcon;
     UIView *emojiView;
+    EmojiViewController *controller;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -54,9 +57,23 @@
     [self.view addSubview:self.keyboardHelper];
     [self performSelector:@selector(setWeiboTextViewFirstResponse) withObject:nil afterDelay:0.0];
     
+    //emoji files.
+    NSError *error = nil;
+    NSArray *filesArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Emoji-Default.bundle"] error:&error];
+    
+    NSMutableArray *paramArray = [[NSMutableArray alloc] init];
+    for (NSString *name in filesArray) {
+        NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/Emoji-Default.bundle/%@", name];
+        [paramArray addObject:filePath];
+    }
+    
     //emoji view
     emojiView = [[UIView alloc] initWithFrame:CGRectMake(0, 568, 320, EMOJI_VIEW_HEIGHT)];
     emojiView.backgroundColor = [UIColor redColor];
+    controller = [[EmojiViewController alloc] init];
+    controller.contentList = paramArray;
+    
+    [emojiView addSubview:controller.view];
 }
 
 - (void)setWeiboTextViewFirstResponse
