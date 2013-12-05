@@ -11,7 +11,7 @@
 #import "OLImageView.h"
 #import "OLImage.h"
 
-#define EMOJI_BACKGROUND_COLOR [UIColor colorWithRed:220.0/250.0 green:220.0/250.0 blue:220.0/250.0 alpha:1];
+#define EMOJI_BACKGROUND_COLOR [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1];
 
 @interface EmojiViewController ()
 

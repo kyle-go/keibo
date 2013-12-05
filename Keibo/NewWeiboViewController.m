@@ -81,7 +81,11 @@
     
     NSArray * btns = [NSArray arrayWithObjects:@"常用", @"默认", @"+", nil];
     SVSegmentedControl *navSC = [[SVSegmentedControl alloc] initWithSectionTitles:btns];
-    navSC.frame = CGRectMake(0, 0, 320, 38);
+    navSC.height = 40;
+    navSC.thumbEdgeInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    navSC.cornerRadius = 0.0;
+    
+    navSC.frame = CGRectMake(0, 0, 150, 38);
     [self.changeEmojiScrollView addSubview:navSC];
 }
 
