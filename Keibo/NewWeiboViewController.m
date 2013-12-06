@@ -100,7 +100,30 @@
 #pragma mark emoji did click delegate
 - (void)emojiDidClicked:(NSString *)emoji
 {
-    self.weiboTextView.text = [self.weiboTextView.text stringByAppendingString:emoji];
+    //删除表情
+    if ([emoji isEqualToString:@"delete-emoji"]) {
+        NSString *regexString = @"\\[\\w+\\]$";
+        NSString *text = self.weiboTextView.text;
+        NSRange range = [text rangeOfString:regexString options:NSRegularExpressionSearch];
+        if (range.location != NSNotFound && (range.location + range.length) == text.length) {
+            self.weiboTextView.text = [text substringWithRange:NSMakeRange(0, range.location)];
+        }
+        
+        return;
+    }
+    
+    //匹配 "xxxx[BOBO爱你].gif"
+    NSString *regexString = @"\\[\\w+\\].gif$";
+    NSRange range = [emoji rangeOfString:regexString options:NSRegularExpressionSearch];
+    if (range.location != NSNotFound) {
+        NSString *matched = [emoji substringWithRange:NSMakeRange(range.location, range.length - 4)];
+        self.weiboTextView.text = [self.weiboTextView.text stringByAppendingString:matched];
+        
+        return;
+    }
+    
+    //sth unexpected.
+    abort();
 }
 
 #pragma mark -
