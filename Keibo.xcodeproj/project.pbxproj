@@ -52,6 +52,7 @@
 		FB255BFE18228D9B00A0008B /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BFC18228D9B00A0008B /* LeftViewController.m */; };
 		FB255BFF18228D9B00A0008B /* LeftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BFD18228D9B00A0008B /* LeftViewController.xib */; };
 		FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3135741833869C00AFF3BC /* WeiboNetWork.m */; };
+		FB3A28AF185201A700AD37D0 /* KTextViewPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3A28AE185201A700AD37D0 /* KTextViewPlaceholder.m */; };
 		FB4C01231833CE8B00EC97B1 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C011A1833CE8B00EC97B1 /* FMDatabase.m */; };
 		FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C011C1833CE8B00EC97B1 /* FMDatabaseAdditions.m */; };
 		FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C011E1833CE8B00EC97B1 /* FMDatabasePool.m */; };
@@ -94,7 +95,6 @@
 		FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */; };
 		FBC0D95B1830DB4800163C3C /* weibo-repost.html in Resources */ = {isa = PBXBuildFile; fileRef = FBC0D9591830DB4800163C3C /* weibo-repost.html */; };
 		FBC0D95C1830DB4800163C3C /* weibo-simple.html in Resources */ = {isa = PBXBuildFile; fileRef = FBC0D95A1830DB4800163C3C /* weibo-simple.html */; };
-		FBD28960184F7E79003150C3 /* CPTextViewPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD2895F184F7E79003150C3 /* CPTextViewPlaceholder.m */; };
 		FBD2C00D18334FD000BBE4AF /* AuthorizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD2C00B18334FD000BBE4AF /* AuthorizeViewController.m */; };
 		FBD2C00E18334FD000BBE4AF /* AuthorizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBD2C00C18334FD000BBE4AF /* AuthorizeViewController.xib */; };
 		FBE5E579184EF8D8004CFDDA /* Emoji-Default.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBE5E578184EF8D8004CFDDA /* Emoji-Default.bundle */; };
@@ -184,6 +184,8 @@
 		FB255BFD18228D9B00A0008B /* LeftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftViewController.xib; sourceTree = "<group>"; };
 		FB3135731833869C00AFF3BC /* WeiboNetWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboNetWork.h; sourceTree = "<group>"; };
 		FB3135741833869C00AFF3BC /* WeiboNetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboNetWork.m; sourceTree = "<group>"; };
+		FB3A28AD185201A700AD37D0 /* KTextViewPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTextViewPlaceholder.h; sourceTree = "<group>"; };
+		FB3A28AE185201A700AD37D0 /* KTextViewPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTextViewPlaceholder.m; sourceTree = "<group>"; };
 		FB4C01191833CE8B00EC97B1 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		FB4C011A1833CE8B00EC97B1 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		FB4C011B1833CE8B00EC97B1 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -256,8 +258,6 @@
 		FBBDEE8F182CCE6000067D6E /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
 		FBC0D9591830DB4800163C3C /* weibo-repost.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "weibo-repost.html"; sourceTree = "<group>"; };
 		FBC0D95A1830DB4800163C3C /* weibo-simple.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "weibo-simple.html"; sourceTree = "<group>"; };
-		FBD2895E184F7E79003150C3 /* CPTextViewPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextViewPlaceholder.h; sourceTree = "<group>"; };
-		FBD2895F184F7E79003150C3 /* CPTextViewPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextViewPlaceholder.m; sourceTree = "<group>"; };
 		FBD2C00A18334FD000BBE4AF /* AuthorizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorizeViewController.h; sourceTree = "<group>"; };
 		FBD2C00B18334FD000BBE4AF /* AuthorizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorizeViewController.m; sourceTree = "<group>"; };
 		FBD2C00C18334FD000BBE4AF /* AuthorizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthorizeViewController.xib; sourceTree = "<group>"; };
@@ -319,15 +319,6 @@
 				2714664718425097000376F9 /* WeiboSimpleCell.xib */,
 			);
 			name = CommonUI;
-			sourceTree = "<group>";
-		};
-		271BB8911843B24D008BB2A4 /* PlaceholderTextVIew */ = {
-			isa = PBXGroup;
-			children = (
-				FBD2895E184F7E79003150C3 /* CPTextViewPlaceholder.h */,
-				FBD2895F184F7E79003150C3 /* CPTextViewPlaceholder.m */,
-			);
-			name = PlaceholderTextVIew;
 			sourceTree = "<group>";
 		};
 		2748FCC317F8738000A3B9ED = {
@@ -478,8 +469,8 @@
 		FB255BDC18228B4B00A0008B /* External */ = {
 			isa = PBXGroup;
 			children = (
+				FB3A28AC185201A700AD37D0 /* KTextViewPlaceholder */,
 				FBE5E57A184EF8E6004CFDDA /* OLImageView */,
-				271BB8911843B24D008BB2A4 /* PlaceholderTextVIew */,
 				FB6326611841DE4800B48E25 /* EGORefreshView */,
 				FB4C01181833CE8B00EC97B1 /* fmdb */,
 				FB255BEC18228D0E00A0008B /* MMDrawerController */,
@@ -512,6 +503,15 @@
 				FB255BFD18228D9B00A0008B /* LeftViewController.xib */,
 			);
 			name = LeftWindow;
+			sourceTree = "<group>";
+		};
+		FB3A28AC185201A700AD37D0 /* KTextViewPlaceholder */ = {
+			isa = PBXGroup;
+			children = (
+				FB3A28AD185201A700AD37D0 /* KTextViewPlaceholder.h */,
+				FB3A28AE185201A700AD37D0 /* KTextViewPlaceholder.m */,
+			);
+			path = KTextViewPlaceholder;
 			sourceTree = "<group>";
 		};
 		FB4C01181833CE8B00EC97B1 /* fmdb */ = {
@@ -815,6 +815,7 @@
 				2748FCDC17F8738000A3B9ED /* main.m in Sources */,
 				FB4C013B1834A43200EC97B1 /* UIWeibo.m in Sources */,
 				FB255BFE18228D9B00A0008B /* LeftViewController.m in Sources */,
+				FB3A28AF185201A700AD37D0 /* KTextViewPlaceholder.m in Sources */,
 				FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */,
 				FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */,
 				FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */,
@@ -834,7 +835,6 @@
 				FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */,
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
-				FBD28960184F7E79003150C3 /* CPTextViewPlaceholder.m in Sources */,
 				FBE5E588184EFAB5004CFDDA /* UICustomTapGestureRecognizer.m in Sources */,
 				FB4FDE98181F948100FF9331 /* AFURLResponseSerialization.m in Sources */,
 				2714664318424F76000376F9 /* UserBasicNumberCell.m in Sources */,

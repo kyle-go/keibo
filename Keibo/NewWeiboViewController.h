@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CPTextViewPlaceholder.h"
+#import "KTextViewPlaceholder.h"
 #import "EmojiViewController.h"
 
 @interface NewWeiboViewController : UIViewController <UITextViewDelegate, EmojiDidClickDelegate>
 
-@property (weak, nonatomic) IBOutlet CPTextViewPlaceholder *weiboTextView;
+@property (weak, nonatomic) IBOutlet KTextViewPlaceholder *weiboTextView;
 @property (weak, nonatomic) IBOutlet UIView *keyboardHelper;
 @property (weak, nonatomic) IBOutlet UIButton *btnFace;
 @property (weak, nonatomic) IBOutlet UIScrollView *changeEmojiScrollView;
