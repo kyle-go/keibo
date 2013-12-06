@@ -48,7 +48,8 @@
 	segmentedControl.selectedSegmentIndex = 0;
 	segmentedControl.frame = CGRectMake(0, 0, 160, 30);
 	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-    
+    segmentedControl.backgroundColor = [UIColor redColor];
+    segmentedControl.tintColor = [UIColor blackColor];
 	self.navigationItem.titleView = segmentedControl;
     
     //init table views

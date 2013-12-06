@@ -19,8 +19,6 @@
 		271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35917FD88B20069B2C9 /* Security.framework */; };
 		271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */; };
 		2737020F1835308D00016FB1 /* DataAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737020E1835308D00016FB1 /* DataAdapter.m */; };
-		2737E43A1850DD8900DAB262 /* SVSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737E4371850DD8900DAB262 /* SVSegmentedControl.m */; };
-		2737E43B1850DD8900DAB262 /* SVSegmentedThumb.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737E4391850DD8900DAB262 /* SVSegmentedThumb.m */; };
 		2748FCD017F8738000A3B9ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCCF17F8738000A3B9ED /* Foundation.framework */; };
 		2748FCD217F8738000A3B9ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD117F8738000A3B9ED /* CoreGraphics.framework */; };
 		2748FCD417F8738000A3B9ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD317F8738000A3B9ED /* UIKit.framework */; };
@@ -135,10 +133,6 @@
 		271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2737020D1835308D00016FB1 /* DataAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAdapter.h; sourceTree = "<group>"; };
 		2737020E1835308D00016FB1 /* DataAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAdapter.m; sourceTree = "<group>"; };
-		2737E4361850DD8900DAB262 /* SVSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSegmentedControl.h; sourceTree = "<group>"; };
-		2737E4371850DD8900DAB262 /* SVSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSegmentedControl.m; sourceTree = "<group>"; };
-		2737E4381850DD8900DAB262 /* SVSegmentedThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSegmentedThumb.h; sourceTree = "<group>"; };
-		2737E4391850DD8900DAB262 /* SVSegmentedThumb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSegmentedThumb.m; sourceTree = "<group>"; };
 		2748FCCC17F8738000A3B9ED /* Keibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2748FCCF17F8738000A3B9ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2748FCD117F8738000A3B9ED /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -336,17 +330,6 @@
 			name = PlaceholderTextVIew;
 			sourceTree = "<group>";
 		};
-		2737E4351850DD8900DAB262 /* SVSegmentedControl */ = {
-			isa = PBXGroup;
-			children = (
-				2737E4361850DD8900DAB262 /* SVSegmentedControl.h */,
-				2737E4371850DD8900DAB262 /* SVSegmentedControl.m */,
-				2737E4381850DD8900DAB262 /* SVSegmentedThumb.h */,
-				2737E4391850DD8900DAB262 /* SVSegmentedThumb.m */,
-			);
-			path = SVSegmentedControl;
-			sourceTree = "<group>";
-		};
 		2748FCC317F8738000A3B9ED = {
 			isa = PBXGroup;
 			children = (
@@ -495,7 +478,6 @@
 		FB255BDC18228B4B00A0008B /* External */ = {
 			isa = PBXGroup;
 			children = (
-				2737E4351850DD8900DAB262 /* SVSegmentedControl */,
 				FBE5E57A184EF8E6004CFDDA /* OLImageView */,
 				271BB8911843B24D008BB2A4 /* PlaceholderTextVIew */,
 				FB6326611841DE4800B48E25 /* EGORefreshView */,
@@ -838,7 +820,6 @@
 				FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */,
 				2714664D184251A7000376F9 /* WeiboTypeSelectorCell.m in Sources */,
 				FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */,
-				2737E43A1850DD8900DAB262 /* SVSegmentedControl.m in Sources */,
 				FB4C01411834C0A100EC97B1 /* AppInitialize.m in Sources */,
 				FB255BE018228C0700A0008B /* MessageViewController.m in Sources */,
 				FBE5E584184EF8FF004CFDDA /* EmojiViewController.m in Sources */,
@@ -848,7 +829,6 @@
 				FBE5E580184EF8E6004CFDDA /* OLImageView.m in Sources */,
 				27AB3DB01837A3010011BB18 /* RoundImageView.m in Sources */,
 				FB4C01231833CE8B00EC97B1 /* FMDatabase.m in Sources */,
-				2737E43B1850DD8900DAB262 /* SVSegmentedThumb.m in Sources */,
 				FB54789F181EA37800501B7A /* Storage.m in Sources */,
 				FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */,
 				FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */,

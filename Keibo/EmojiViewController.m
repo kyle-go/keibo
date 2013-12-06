@@ -106,8 +106,12 @@
     self.pageControl.numberOfPages = pageCount;
     self.pageControl.currentPage = 0;
     
-    [self loadScrollViewWithPage:0];
-    [self loadScrollViewWithPage:1];
+    for (int i=0; i<pageCount; i++) {
+        [self loadScrollViewWithPage:i];
+    }
+    
+    //[self loadScrollViewWithPage:0];
+    //[self loadScrollViewWithPage:1];
 }
 
 - (void)didReceiveMemoryWarning

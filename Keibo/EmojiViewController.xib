@@ -27,7 +27,7 @@
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VOg-6R-cmM" customClass="UIPageControl">
                     <rect key="frame" x="0.0" y="136" width="320" height="16"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" patternImage="785259B1-C865-491B-97D0-2B52A534879C" colorSpace="pattern"/>
+                    <color key="backgroundColor" patternImage="930D567E-C2F5-4250-ABC9-BE7FD7D47370" colorSpace="pattern"/>
                     <connections>
                         <action selector="changePage:" destination="-1" eventType="valueChanged" id="rdw-ke-bxg"/>
                     </connections>
@@ -37,7 +37,7 @@
         </view>
     </objects>
     <resources>
-        <image name="785259B1-C865-491B-97D0-2B52A534879C" width="320" height="460">
+        <image name="930D567E-C2F5-4250-ABC9-BE7FD7D47370" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
