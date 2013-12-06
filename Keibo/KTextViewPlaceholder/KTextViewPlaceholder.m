@@ -55,6 +55,11 @@
     _placehoderLabel.frame = frame;
 }
 
+- (void) setText:(NSString *)text {
+    [super setText:text];
+    [self textDidChange:nil];
+}
+
 #pragma mark -
 #pragma mark Notifications
 - (void)textDidChange:(NSNotification *)notification
