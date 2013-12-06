@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol emojiClick <NSObject>
+@protocol EmojiDidClickDelegate <NSObject>
 
-- (void)emojiClick:(NSString *)emoji;
+- (void)emojiDidClicked:(NSString *)emoji;
 
 @end
 
 @interface EmojiViewController : UIViewController
 
-@property (nonatomic, weak) id<emojiClick> delegate;
+@property (nonatomic, weak) id<EmojiDidClickDelegate> delegate;
 @property (nonatomic, strong) NSArray *contentList;
 
 @end

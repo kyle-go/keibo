@@ -73,7 +73,8 @@
 - (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer
 {
     if ([gestureRecognizer isKindOfClass:[UICustomTapGestureRecognizer class]]) {
-        NSLog(@"click = %@", ((UICustomTapGestureRecognizer*)gestureRecognizer).customString);
+        [self.delegate emojiDidClicked:((UICustomTapGestureRecognizer*)gestureRecognizer).customString];
+        //NSLog(@"click = %@", );
     } else {
         assert(NO);
         NSLog(@"click = unknown");

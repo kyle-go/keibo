@@ -7,7 +7,6 @@
 //
 
 #import "NewWeiboViewController.h"
-#import "EmojiViewController.h"
 
 #define EMOJI_VIEW_HEIGHT 190
 
@@ -19,7 +18,7 @@
     
     BOOL bIsFaceIcon;
     UIView *emojiView;
-    EmojiViewController *controller;
+    EmojiViewController *emojiViewController;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,13 +38,12 @@
     self.weiboTextView.placeholder = @"分享新鲜事...";
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(Cancel)];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(SendWeibo)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-
+    
     //keyboardHelper 添加背景图片
     CGRect frame = self.keyboardHelper.frame;
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -70,10 +68,11 @@
     //emoji view
     emojiView = [[UIView alloc] initWithFrame:CGRectMake(0, 568, 320, EMOJI_VIEW_HEIGHT)];
     emojiView.backgroundColor = [UIColor lightGrayColor];
-    controller = [[EmojiViewController alloc] init];
-    controller.contentList = paramArray;
+    emojiViewController = [[EmojiViewController alloc] init];
+    emojiViewController.delegate = self;
+    emojiViewController.contentList = paramArray;
     
-    [emojiView addSubview:controller.view];
+    [emojiView addSubview:emojiViewController.view];
     self.changeEmojiScrollView.frame = CGRectMake(0, 152, 320, 38);
     self.changeEmojiScrollView.contentSize = CGSizeMake(321, 38);
     [emojiView addSubview:self.changeEmojiScrollView];
@@ -95,6 +94,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+#pragma mark emoji did click delegate
+- (void)emojiDidClicked:(NSString *)emoji
+{
+    self.weiboTextView.text = [self.weiboTextView.text stringByAppendingString:emoji];
 }
 
 #pragma mark -

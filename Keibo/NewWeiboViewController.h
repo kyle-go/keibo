@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CPTextViewPlaceholder.h"
+#import "EmojiViewController.h"
 
-@interface NewWeiboViewController : UIViewController <UITextViewDelegate>
+@interface NewWeiboViewController : UIViewController <UITextViewDelegate, EmojiDidClickDelegate>
 
 @property (weak, nonatomic) IBOutlet CPTextViewPlaceholder *weiboTextView;
 @property (weak, nonatomic) IBOutlet UIView *keyboardHelper;
