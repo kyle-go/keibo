@@ -64,7 +64,7 @@
         return;
     }
     NSArray *users = [param objectForKey:@"array"];
-    
+    users;
 }
 
 - (void)Cancel
