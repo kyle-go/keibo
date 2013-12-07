@@ -93,8 +93,8 @@
                     action:@selector(reloadFollowing)]];
     
     CGRect frame = sender.frame;
-    frame.origin.y += 8;
-    [KxMenu showMenuInView:self.view
+    frame.origin.y += 10;
+    [KxMenu showMenuInView:self.navigationController.view
                   fromRect:frame
                  menuItems:menuItems];
 }
