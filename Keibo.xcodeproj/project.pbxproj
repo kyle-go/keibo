@@ -19,6 +19,10 @@
 		271EA35A17FD88B20069B2C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35917FD88B20069B2C9 /* Security.framework */; };
 		271EA35C17FD88DB0069B2C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */; };
 		2737020F1835308D00016FB1 /* DataAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737020E1835308D00016FB1 /* DataAdapter.m */; };
+		273F4F3B1853897600C8D6EA /* nav-more.png in Resources */ = {isa = PBXBuildFile; fileRef = 273F4F3A1853897600C8D6EA /* nav-more.png */; };
+		273F4F3F18538A1600C8D6EA /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 273F4F3E18538A1600C8D6EA /* KxMenu.m */; };
+		273F4F4218538A3400C8D6EA /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 273F4F4018538A3400C8D6EA /* reload.png */; };
+		273F4F4318538A3400C8D6EA /* reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 273F4F4118538A3400C8D6EA /* reload@2x.png */; };
 		2748FCD017F8738000A3B9ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCCF17F8738000A3B9ED /* Foundation.framework */; };
 		2748FCD217F8738000A3B9ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD117F8738000A3B9ED /* CoreGraphics.framework */; };
 		2748FCD417F8738000A3B9ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2748FCD317F8738000A3B9ED /* UIKit.framework */; };
@@ -135,6 +139,11 @@
 		271EA35B17FD88DB0069B2C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2737020D1835308D00016FB1 /* DataAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAdapter.h; sourceTree = "<group>"; };
 		2737020E1835308D00016FB1 /* DataAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAdapter.m; sourceTree = "<group>"; };
+		273F4F3A1853897600C8D6EA /* nav-more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-more.png"; sourceTree = "<group>"; };
+		273F4F3D18538A1600C8D6EA /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
+		273F4F3E18538A1600C8D6EA /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
+		273F4F4018538A3400C8D6EA /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
+		273F4F4118538A3400C8D6EA /* reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reload@2x.png"; sourceTree = "<group>"; };
 		2748FCCC17F8738000A3B9ED /* Keibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2748FCCF17F8738000A3B9ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2748FCD117F8738000A3B9ED /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -326,6 +335,17 @@
 			name = CommonUI;
 			sourceTree = "<group>";
 		};
+		273F4F3C18538A1600C8D6EA /* KxMenu */ = {
+			isa = PBXGroup;
+			children = (
+				273F4F4018538A3400C8D6EA /* reload.png */,
+				273F4F4118538A3400C8D6EA /* reload@2x.png */,
+				273F4F3D18538A1600C8D6EA /* KxMenu.h */,
+				273F4F3E18538A1600C8D6EA /* KxMenu.m */,
+			);
+			path = KxMenu;
+			sourceTree = "<group>";
+		};
 		2748FCC317F8738000A3B9ED = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +497,7 @@
 		FB255BDC18228B4B00A0008B /* External */ = {
 			isa = PBXGroup;
 			children = (
+				273F4F3C18538A1600C8D6EA /* KxMenu */,
 				FB3A28AC185201A700AD37D0 /* KTextViewPlaceholder */,
 				FBE5E57A184EF8E6004CFDDA /* OLImageView */,
 				FB6326611841DE4800B48E25 /* EGORefreshView */,
@@ -650,6 +671,7 @@
 				FB0136E4182E70970006DFB9 /* comments@2x.png */,
 				FB5D10CD182FAD6F006E1D01 /* avatar-1.png */,
 				FB5D10CE182FAD6F006E1D01 /* avatar-0.png */,
+				273F4F3A1853897600C8D6EA /* nav-more.png */,
 				270328B11850C83D00D90B7C /* delete-emoji.png */,
 			);
 			name = images;
@@ -767,6 +789,7 @@
 				FB5D10CF182FAD6F006E1D01 /* avatar-1.png in Resources */,
 				FB6CEAD7182CE63A00C07414 /* WeiboTableCell.xib in Resources */,
 				FB255BFF18228D9B00A0008B /* LeftViewController.xib in Resources */,
+				273F4F3B1853897600C8D6EA /* nav-more.png in Resources */,
 				276FFAB11843AAF600D41EB6 /* NewWeiboViewController.xib in Resources */,
 				FB0136E6182E70970006DFB9 /* comments@2x.png in Resources */,
 				FB6CEAF4182D2E9300C07414 /* tabbar_message@2x.png in Resources */,
@@ -781,11 +804,13 @@
 				FB6CEAF0182D2E2D00C07414 /* tabbar_home@2x.png in Resources */,
 				FB255BE618228C1B00A0008B /* PersonViewController.xib in Resources */,
 				FB255BD718228A6C00A0008B /* MainPageViewController.xib in Resources */,
+				273F4F4218538A3400C8D6EA /* reload.png in Resources */,
 				FB6CEAFC182D2EF000C07414 /* tabbar_more@2x.png in Resources */,
 				2714664A18425195000376F9 /* WeiboTypeSelectorCell.xib in Resources */,
 				2714664818425097000376F9 /* WeiboSimpleCell.xib in Resources */,
 				FB255BEB18228C2900A0008B /* MoreViewController.xib in Resources */,
 				2714663E18424F18000376F9 /* UserInfoCell.xib in Resources */,
+				273F4F4318538A3400C8D6EA /* reload@2x.png in Resources */,
 				FB6CEAF7182D2EB300C07414 /* tabbar_me.png in Resources */,
 				FB6CEAEF182D2E2D00C07414 /* tabbar_home.png in Resources */,
 			);
@@ -816,6 +841,7 @@
 				2748FCE017F8738000A3B9ED /* AppDelegate.m in Sources */,
 				2714663C18424F03000376F9 /* UserInfoCell.m in Sources */,
 				FB63266A1841DE4800B48E25 /* EGORefreshTableFooterView.m in Sources */,
+				273F4F3F18538A1600C8D6EA /* KxMenu.m in Sources */,
 				FBD2C00D18334FD000BBE4AF /* AuthorizeViewController.m in Sources */,
 				FB4FDE96181F948100FF9331 /* AFURLConnectionOperation.m in Sources */,
 				FB4C01271833CE8B00EC97B1 /* FMResultSet.m in Sources */,
