@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *changeEmojiScrollView;
 
 - (IBAction)actionBtnFace:(id)sender;
+- (IBAction)actionBtnAt:(id)sender;
 
 @end

@@ -45,4 +45,10 @@
 //下载一个媒体(图片,音乐，视频）
 + (void)getOneMedia:(NSString *)url;
 
+//获取某用户正在following的人,默认每次最多50条
++ (void)getUserFollowings:(NSString *)accessToken uid:(NSString *)uid cursor:(NSInteger)cursor;
+
+//获取某用户的粉丝，默认最多50条
++ (void)getUserFans:(NSString *)accessToken uid:(NSString *)uid cursor:(NSInteger)cursor;
+
 @end

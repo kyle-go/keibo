@@ -376,4 +376,52 @@
     [downloadTask resume];
 }
 
+
+//获取某用户正在following的人,默认每次最多50条
++ (void)getUserFollowings:(NSString *)accessToken uid:(NSString *)uid cursor:(NSInteger)cursor
+{
+    
+    void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
+    ^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSLog(@"JSON: %@", responseObject);
+        
+        NSError *error;
+        NSDictionary *json;
+        if ([responseObject isKindOfClass:[NSString class]]) {
+            NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+            json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        } else {
+            json = [responseObject objectForKey:@"users"];
+        }
+        
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSDictionary *each in json) {
+            DTUser *user = [WeiboNetWork getDTUserByJson:each];
+            [array addObject:user];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_FollowingUsers" object:nil userInfo:@{@"uid": uid, @"array":array}];
+    };
+    
+    void (^failure)(AFHTTPRequestOperation *operation, NSError *error) =
+    ^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"get Weibo Error: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_FollowingUsers" object:nil];
+    };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:@{@"access_token":accessToken, @"uid":uid}];
+    if (cursor) {
+        [params setValue:[[NSString alloc] initWithFormat:@"%ld", (long)cursor] forKey:@"cursor"];
+    }
+    [manager GET:@"https://api.weibo.com/2/friendships/friends.json" parameters:params success:success failure:failure];
+}
+
+//获取某用户的粉丝，默认最多50条
++ (void)getUserFans:(NSString *)accessToken uid:(NSString *)uid cursor:(NSInteger)cursor
+{
+    //WeiboNetWork_FanUsers
+    //TODO
+}
+
 @end

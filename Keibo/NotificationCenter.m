@@ -37,6 +37,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_LoginUserWeibos:) name:@"WeiboNetWork_LoginUserWeibos" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_WbMedia:) name:@"WeiboNetWork_WbMedia" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Media:) name:@"WeiboNetWork_Media" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_FollowingUsers:) name:@"WeiboNetWork_FollowingUsers" object:nil];
     }
     return self;
 }
@@ -146,6 +147,22 @@
     [storageInstance addMedia: url File:file];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_Media" object:nil userInfo:@{@"url": url, @"file":file}];
+}
+
+- (void)WeiboNetWork_FollowingUsers:(NSNotification *)notify
+{
+    NSDictionary *param = notify.userInfo;
+    if ([param count] == 0) {
+        return;
+    }
+    NSString *uid = [param objectForKey:@"uid"];
+    NSArray *users = [param objectForKey:@"array"];
+    
+    for (DTUser *u in users) {
+        [storageInstance addUser:u];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_FollowingUsers" object:nil userInfo:@{@"uid": uid, @"array":users}];
 }
 
 @end

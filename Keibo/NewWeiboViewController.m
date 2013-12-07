@@ -7,7 +7,7 @@
 //
 
 #import "NewWeiboViewController.h"
-
+#import "SelectAtViewController.h"
 #define EMOJI_VIEW_HEIGHT 190
 
 @interface NewWeiboViewController ()
@@ -50,10 +50,8 @@
     bgImgView.image = [UIImage imageNamed:@"kb_background"];
     [self.keyboardHelper addSubview:bgImgView];
     [self.keyboardHelper sendSubviewToBack:bgImgView];
-    
     self.keyboardHelper.frame = CGRectMake(0, 568-45, 320, 50);
     [self.view addSubview:self.keyboardHelper];
-    [self performSelector:@selector(setWeiboTextViewFirstResponse) withObject:nil afterDelay:0.0];
     
     //emoji files.
     NSError *error = nil;
@@ -85,7 +83,7 @@
     [self.changeEmojiScrollView addSubview:segmentedControl];
 }
 
-- (void)setWeiboTextViewFirstResponse
+- (void)viewWillAppear:(BOOL)animated
 {
     [self.weiboTextView becomeFirstResponder];
 }
@@ -200,8 +198,20 @@
         self.weiboTextView.inputView = nil;
         [UIView animateWithDuration:0.2
                          animations:^{[ self.weiboTextView reloadInputViews]; }
-                         completion:^(BOOL finished){ /*Do something here if you want.*/ }];
+                         completion:nil];
     }
+}
+
+- (IBAction)actionBtnAt:(id)sender {
+    SelectAtViewController *selectAtViewController = [[SelectAtViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:selectAtViewController];
+    
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         [self.weiboTextView resignFirstResponder];
+                         [self presentViewController:nav animated:YES completion:nil];
+                     }
+                     completion:nil];
 }
 
 #pragma mark -

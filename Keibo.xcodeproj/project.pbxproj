@@ -35,6 +35,8 @@
 		276FFAB11843AAF600D41EB6 /* NewWeiboViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 276FFAAF1843AAF600D41EB6 /* NewWeiboViewController.xib */; };
 		27AB3DB01837A3010011BB18 /* RoundImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AB3DAF1837A3010011BB18 /* RoundImageView.m */; };
 		27AB3DB31837A4440011BB18 /* WeiboImageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AB3DB21837A4440011BB18 /* WeiboImageCreator.m */; };
+		27B8BF2D1852F9A900EB3363 /* SelectAtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B8BF2B1852F9A900EB3363 /* SelectAtViewController.m */; };
+		27B8BF2E1852F9A900EB3363 /* SelectAtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B8BF2C1852F9A900EB3363 /* SelectAtViewController.xib */; };
 		FB0136E5182E70970006DFB9 /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = FB0136E3182E70970006DFB9 /* comments.png */; };
 		FB0136E6182E70970006DFB9 /* comments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB0136E4182E70970006DFB9 /* comments@2x.png */; };
 		FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BD418228A6C00A0008B /* MainPageViewController.m */; };
@@ -156,6 +158,9 @@
 		27AB3DAF1837A3010011BB18 /* RoundImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundImageView.m; sourceTree = "<group>"; };
 		27AB3DB11837A4440011BB18 /* WeiboImageCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboImageCreator.h; sourceTree = "<group>"; };
 		27AB3DB21837A4440011BB18 /* WeiboImageCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboImageCreator.m; sourceTree = "<group>"; };
+		27B8BF2A1852F9A900EB3363 /* SelectAtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAtViewController.h; sourceTree = "<group>"; };
+		27B8BF2B1852F9A900EB3363 /* SelectAtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAtViewController.m; sourceTree = "<group>"; };
+		27B8BF2C1852F9A900EB3363 /* SelectAtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAtViewController.xib; sourceTree = "<group>"; };
 		FB0136E3182E70970006DFB9 /* comments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments.png; sourceTree = "<group>"; };
 		FB0136E4182E70970006DFB9 /* comments@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments@2x.png"; sourceTree = "<group>"; };
 		FB255BD318228A6C00A0008B /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
@@ -388,6 +393,9 @@
 		274C4A8A17FB1A0A00D231E8 /* NewWeibo */ = {
 			isa = PBXGroup;
 			children = (
+				27B8BF2A1852F9A900EB3363 /* SelectAtViewController.h */,
+				27B8BF2B1852F9A900EB3363 /* SelectAtViewController.m */,
+				27B8BF2C1852F9A900EB3363 /* SelectAtViewController.xib */,
 				FBE5E581184EF8FF004CFDDA /* EmojiViewController.h */,
 				FBE5E582184EF8FF004CFDDA /* EmojiViewController.m */,
 				FBE5E583184EF8FF004CFDDA /* EmojiViewController.xib */,
@@ -765,6 +773,7 @@
 				2748FCDA17F8738000A3B9ED /* InfoPlist.strings in Resources */,
 				FB6CEAF8182D2EB300C07414 /* tabbar_me@2x.png in Resources */,
 				276D7C241837ABC800C0B4BC /* bg_line.png in Resources */,
+				27B8BF2E1852F9A900EB3363 /* SelectAtViewController.xib in Resources */,
 				2714664018424F54000376F9 /* UserBasicNumberCell.xib in Resources */,
 				FBC0D95C1830DB4800163C3C /* weibo-simple.html in Resources */,
 				FB4E8B00184208C9004AE49F /* blackArrow.png in Resources */,
@@ -818,6 +827,7 @@
 				FB3A28AF185201A700AD37D0 /* KTextViewPlaceholder.m in Sources */,
 				FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */,
 				FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */,
+				27B8BF2D1852F9A900EB3363 /* SelectAtViewController.m in Sources */,
 				FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */,
 				2714664D184251A7000376F9 /* WeiboTypeSelectorCell.m in Sources */,
 				FB255BF918228D0E00A0008B /* UIViewController+MMDrawerController.m in Sources */,
