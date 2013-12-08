@@ -9,6 +9,7 @@
 #import "SelectAtViewController.h"
 #import "UITableViewFollowingCell.h"
 #import "WeiboNetWork.h"
+#import "DataAdapter.h"
 #import "KxMenu.h"
 #import "pinyin.h"
 #import "UIUser.h"
@@ -25,6 +26,7 @@
     NSString *accessToken;
 
     //sth with table view
+    NSMutableArray *users;
     NSMutableArray *sectionNames;
     NSMutableDictionary *sectionItems;
     NSMutableDictionary *sectionItemsStatus;
@@ -50,6 +52,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _cursor = 0;
+        users = [[NSMutableArray alloc] init];
         sectionNames = [[NSMutableArray alloc] init];
         sectionItems = [[NSMutableDictionary alloc] init];
         sectionItemsStatus = [[NSMutableDictionary alloc] init];
@@ -70,7 +73,6 @@
     
     
     self.followingTableView.sectionIndexColor = [UIColor darkGrayColor];
-    
     self.followingTableView.sectionIndexBackgroundColor = [UIColor clearColor];
     self.followingTableView.sectionIndexTrackingBackgroundColor = [UIColor lightGrayColor];
     
@@ -105,11 +107,17 @@
     if ([userId isEqualToString:uid] == NO) {
         return;
     }
-    NSArray *users = [param objectForKey:@"array"];
+    NSArray *tmp = [param objectForKey:@"array"];
+
+    _cursor += tmp.count;
+    [users addObjectsFromArray:tmp];
     
-    _cursor += users.count;
+    [self reloadTableViewData];
     
-    [self reloadTableViewData:users];
+    //未获取完，继续获取
+    if (tmp.count >= 50) {
+        [self networkingFreshFollowing];
+    }
 }
 
 - (void)showMenu:(UIButton *)sender
@@ -119,7 +127,7 @@
     NSArray *menuItems = @[[KxMenuItem menuItem:@"刷新"
                      image:[UIImage imageNamed:@"reload"]
                     target:self.navigationController
-                    action:@selector(networkingFreshFollowing)]];
+                    action:@selector(networkingFreshAllFollowing)]];
     
     CGRect frame = sender.frame;
     frame.origin.y += 10;
@@ -128,12 +136,18 @@
                  menuItems:menuItems];
 }
 
+- (void)networkingFreshAllFollowing
+{
+    _cursor = 0;
+    [self networkingFreshFollowing];
+}
+
 - (void)networkingFreshFollowing
 {
     [WeiboNetWork getUserFollowings:accessToken uid:uid cursor:_cursor];
 }
 
-- (void)reloadTableViewData:(NSArray *)users
+- (void)reloadTableViewData
 {
     /**********************
      * (search_bar,latest)
@@ -203,6 +217,11 @@
     [self.followingTableView reloadData];
 }
 
+- (void)registerAvatarImageFresh
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self.followingTableView selector:@selector(reloadData) name:@"NotificationCenter_Media" object:nil];
+}
+
 #pragma mark -- sth with table view
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -250,7 +269,6 @@
         return cell;
     }
     
-    //users
     static NSString *cellIdentifier = @"followingUserIdenty";    
     UITableViewFollowingCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
@@ -259,10 +277,26 @@
     }
     
     cell.nameLabel.text = @"test";
-    if (indexPath.section >= 2) {
+    
+    //最近联系人
+    if (indexPath.section == 1) {
+        
+    //我关注的人
+    } else if (indexPath.section >= 2) {
         NSString *sectionName = [sectionNames objectAtIndex:indexPath.section];
         NSArray *cellNames = [sectionItems objectForKey:sectionName];
-        cell.nameLabel.text = ((UIUser *)[cellNames objectAtIndex:indexPath.row]).name;
+        UIUser *user = [cellNames objectAtIndex:indexPath.row];
+        cell.nameLabel.text = user.name;
+        UIImage *avatarImage;
+        NSString *avatar = [DataAdapter getMediaByUrl:user.avatar];
+        if ([avatar length] == 0) {
+            avatarImage = [UIImage imageNamed:user.sex? @"avatar-1":@"avatar-0"];
+            [self registerAvatarImageFresh];
+            [WeiboNetWork getOneMedia:user.avatarLarge];
+        } else {
+            avatarImage = [UIImage imageWithContentsOfFile:avatar];
+        }
+        cell.avatarImageView.image = avatarImage;
         
         NSArray *statusArray = [sectionItemsStatus objectForKey:sectionName];
         NSNumber *status = [statusArray objectAtIndex:indexPath.row];
