@@ -405,8 +405,13 @@
 {
     //插入一条数据
     void(^insertOneUser)(DTUser *) = ^(DTUser *user) {
+        BOOL result = [db executeUpdate:@"DELETE FROM LatestUser WHERE uid=(?)", user.uid];
+        if (!result) {
+            NSLog(@"updateLatestUser delete failed.error=%@", [db lastError]);
+        }
+        
         NSString *sql = @"INSERT INTO LatestUser (uid,name,nickName,avatar,avatarLarge,sex,address,weiboCount,fanCount,followingCount,sign,verified,verifiedReason,star,weiboMember,lastMyWeiboId,following,followMe,allowAllMsg,allowAllComment,biFollowCount,blog,date) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        BOOL result = [db executeUpdate:sql,
+        result = [db executeUpdate:sql,
                        user.uid,
                        user.name,
                        user.nickName,
@@ -436,8 +441,8 @@
     };
     
     //判断是否超过10条
-    int count = 0;
-    NSString *sql = @"select count(*) from LatestUser";
+    int count = 90;
+    NSString *sql = @"select count(*) AS count from LatestUser";
     FMResultSet *rs = [db executeQuery:sql];
     if ([rs next]) {
         count = [rs intForColumn:@"count"];
@@ -449,7 +454,7 @@
         
     //超过10条，更新最旧的一条数据
     } else {
-        NSString *sql = @"select * from LatestUser ORDER BY date";
+        NSString *sql = @"select * from LatestUser ORDER BY date DESC";
         rs = [db executeQuery:sql];
         if (![rs next]) {
             return;

@@ -173,7 +173,7 @@
     [sectionNames addObject:@"search"];
     [sectionNames addObject:@"最近联系人"];
     //for latest user.
-    [sectionItems setObject:@"latest" forKey:latestUser];
+    [sectionItems setObject:latestUser forKey:@"latest"];
     
     NSMutableArray *letters = [[NSMutableArray alloc] init];
     for (UIUser *u in users) {
@@ -376,6 +376,26 @@
 
 - (void)Finished
 {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (NSString* key in sectionItemsStatus.keyEnumerator) {
+        NSArray* value = [sectionItemsStatus objectForKey:key];
+        NSInteger index = 0;
+        for (NSNumber *num in value) {
+            if ([num longValue]) {
+                NSArray *uiUsers = [sectionItems objectForKey:key];
+                UIUser *user = [uiUsers objectAtIndex:index];
+                
+                //最近@过的人，更新数据库
+                [DataAdapter updateLatestUser:user];
+                
+                //添加到列表
+                [array addObject:user.name];
+            }
+            index++;
+        }
+    }
+    
+    [self.delegate selectedUsers:array];
     [self Cancel];
 }
 

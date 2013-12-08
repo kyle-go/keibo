@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SelectedUsersDelegate <NSObject>
+
+- (void)selectedUsers:(NSArray *)users;
+
+@end
+
 @interface SelectAtViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) id<SelectedUsersDelegate> delegate;
 
 @end

@@ -204,6 +204,7 @@
 
 - (IBAction)actionBtnAt:(id)sender {
     SelectAtViewController *selectAtViewController = [[SelectAtViewController alloc] init];
+    selectAtViewController.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:selectAtViewController];
     
     [UIView animateWithDuration:0.2
@@ -212,6 +213,21 @@
                          [self presentViewController:nav animated:YES completion:nil];
                      }
                      completion:nil];
+}
+
+
+#pragma mark -
+#pragma mark SelectedUsersDelegate
+- (void) selectedUsers:(NSArray *)users
+{
+    if ([users count] == 0) {
+        return;
+    }
+    
+    for (NSString *item in users) {
+        NSString *value = [NSString stringWithFormat:@"@%@ ", item];
+        self.weiboTextView.text = [self.weiboTextView.text stringByAppendingString:value];
+    }
 }
 
 #pragma mark -
