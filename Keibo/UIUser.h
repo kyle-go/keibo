@@ -10,6 +10,7 @@
 
 @interface UIUser : NSObject
 
+@property (nonatomic, strong)NSString *uid;
 @property (nonatomic, strong)NSString *avatar; //url路径
 @property (nonatomic, strong)NSString *avatarLarge; //url路径
 @property (nonatomic, strong)NSString *name;

@@ -26,6 +26,7 @@
 + (UIUser *)privateUserAdapter:(DTUser *)dtUser
 {
     UIUser * uiUser = [[UIUser alloc] init];
+    uiUser.uid = dtUser.uid;
     uiUser.avatar = dtUser.avatar;
     uiUser.avatarLarge = dtUser.avatarLarge;
     uiUser.name = dtUser.name;
@@ -85,7 +86,7 @@
 {
     NSArray *dtWeibos = [[Storage storageInstance] getWeibosByUid:uid count:count date:date];
     if ([dtWeibos count] == 0) {
-        return nil;
+        return [[NSArray alloc] init];
     }
     return [self privateGetUIWeiboFromDTWeiboArray:dtWeibos];
 }
@@ -95,7 +96,7 @@
 {
     NSArray *dtWeibos = [[Storage storageInstance] getLoginUserWeibos:count date:date];
     if ([dtWeibos count] == 0) {
-        return nil;
+        return [[NSArray alloc] init];
     }
     
     return [self privateGetUIWeiboFromDTWeiboArray:dtWeibos];
@@ -112,7 +113,7 @@
 {
     NSArray *dtUsers = [[Storage storageInstance]getLoginUserFollowings];
     if (dtUsers.count == 0) {
-        return nil;
+        return [[NSArray alloc] init];
     }
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -120,6 +121,30 @@
         [array addObject:[self privateUserAdapter:u]];
     }
     return array;
+}
+
+
+//获取最近@过的好友
++ (NSArray *)getLatestUsers
+{
+    NSArray *dtUsers = [[Storage storageInstance]getLatestUsers];
+    if (dtUsers.count == 0) {
+        return [[NSArray alloc] init];
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (DTUser *u in dtUsers) {
+        [array addObject:[self privateUserAdapter:u]];
+    }
+    return array;
+    
+}
+
+//更新最近@过的好友
++ (void)updateLatestUser:(UIUser *)user
+{
+    DTUser *dtUser = [[Storage storageInstance] getUserByUid:user.uid];
+    [[Storage storageInstance] updateLatestUser:dtUser];
 }
 
 @end

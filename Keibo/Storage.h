@@ -54,4 +54,10 @@
 //获取登录用户关注人
 - (NSArray *)getLoginUserFollowings;
 
+//获取最近@过的好友
+- (NSArray *)getLatestUsers;
+
+//更新最近@过的好友
+- (void)updateLatestUser:(DTUser *)user;
+
 @end

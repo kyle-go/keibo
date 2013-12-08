@@ -27,6 +27,7 @@
 
     //sth with table view
     NSMutableArray *users;
+    NSArray *latestUser;
     NSMutableArray *sectionNames;
     NSMutableDictionary *sectionItems;
     NSMutableDictionary *sectionItemsStatus;
@@ -53,6 +54,7 @@
     if (self) {
         _cursor = 0;
         users = [[NSMutableArray alloc] init];
+        latestUser = [[NSArray alloc] init];
         sectionNames = [[NSMutableArray alloc] init];
         sectionItems = [[NSMutableDictionary alloc] init];
         sectionItemsStatus = [[NSMutableDictionary alloc] init];
@@ -82,6 +84,7 @@
     accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
 
     //数据库中获取最近联系人&我关注的人
+    latestUser = [DataAdapter getLatestUsers];
     users = [NSMutableArray arrayWithArray:[DataAdapter getLoginUserFollowings]];
     [self reloadTableViewData];
     
@@ -130,7 +133,7 @@
 
     NSArray *menuItems = @[[KxMenuItem menuItem:@"刷新"
                      image:[UIImage imageNamed:@"reload"]
-                    target:self.navigationController
+                    target:self
                     action:@selector(networkingFreshAllFollowing)]];
     
     CGRect frame = sender.frame;
@@ -169,8 +172,8 @@
     
     [sectionNames addObject:@"search"];
     [sectionNames addObject:@"最近联系人"];
-    //TODO for latest user.
-    //
+    //for latest user.
+    [sectionItems setObject:@"latest" forKey:latestUser];
     
     NSMutableArray *letters = [[NSMutableArray alloc] init];
     for (UIUser *u in users) {
@@ -246,7 +249,7 @@
         return 1;
     }
     if (section == 1) {
-        return 5; //TODO default 10 latest.
+        return latestUser.count;
     }
     
     NSString *sectionName = [sectionNames objectAtIndex:section];
@@ -280,35 +283,36 @@
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     }
     
-    cell.nameLabel.text = @"test";
-    
+    NSString *sectionName;
     //最近联系人
     if (indexPath.section == 1) {
-        
+        sectionName = @"latest";
     //我关注的人
-    } else if (indexPath.section >= 2) {
-        NSString *sectionName = [sectionNames objectAtIndex:indexPath.section];
-        NSArray *cellNames = [sectionItems objectForKey:sectionName];
-        UIUser *user = [cellNames objectAtIndex:indexPath.row];
-        cell.nameLabel.text = user.name;
-        UIImage *avatarImage;
-        NSString *avatar = [DataAdapter getMediaByUrl:user.avatar];
-        if ([avatar length] == 0) {
-            avatarImage = [UIImage imageNamed:user.sex? @"avatar-1":@"avatar-0"];
-            [self registerAvatarImageFresh];
-            [WeiboNetWork getOneMedia:user.avatarLarge];
-        } else {
-            avatarImage = [UIImage imageWithContentsOfFile:avatar];
-        }
-        cell.avatarImageView.image = avatarImage;
-        
-        NSArray *statusArray = [sectionItemsStatus objectForKey:sectionName];
-        NSNumber *status = [statusArray objectAtIndex:indexPath.row];
-        if ([status longValue]) {
-            cell.flagImageView.image = [UIImage imageNamed:@"user_selected"];
-        } else {
-            cell.flagImageView.image = [UIImage imageNamed:@"user_un_selected"];
-        }
+    } else {
+        sectionName = [sectionNames objectAtIndex:indexPath.section];
+    }
+    
+    NSArray *cellUsers = [sectionItems objectForKey:sectionName];
+    UIUser *user = [cellUsers objectAtIndex:indexPath.row];
+    
+    cell.nameLabel.text = user.name;
+    UIImage *avatarImage;
+    NSString *avatar = [DataAdapter getMediaByUrl:user.avatar];
+    if ([avatar length] == 0) {
+        avatarImage = [UIImage imageNamed:user.sex? @"avatar-1":@"avatar-0"];
+        [self registerAvatarImageFresh];
+        [WeiboNetWork getOneMedia:user.avatarLarge];
+    } else {
+        avatarImage = [UIImage imageWithContentsOfFile:avatar];
+    }
+    cell.avatarImageView.image = avatarImage;
+    
+    NSArray *statusArray = [sectionItemsStatus objectForKey:sectionName];
+    NSNumber *status = [statusArray objectAtIndex:indexPath.row];
+    if ([status longValue]) {
+        cell.flagImageView.image = [UIImage imageNamed:@"user_selected"];
+    } else {
+        cell.flagImageView.image = [UIImage imageNamed:@"user_un_selected"];
     }
 
     return cell;

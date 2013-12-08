@@ -78,6 +78,13 @@
         abort();
     }
     
+    //我最近@过的用户，最多存10条记录
+    sql = @"CREATE TABLE IF NOT EXISTS 'LatestUser' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'uid' VARCHAR(16), 'name' VARCHAR(30), 'nickName' VARCHAR(30), 'avatar' VARCHAR(512), 'avatarLarge' VARCHAR(512), 'sex' INTEGER, 'address' VARCHAR(128), 'weiboCount' INTEGER, 'fanCount' INTEGER, 'followingCount' INTEGER, 'sign' VARCHAR(70), 'verified' INTEGER, 'verifiedReason' VARCHAR(128), 'star' INTEGER, 'weiboMember' INTEGER, 'lastMyWeiboId' BIGINTEGER, 'following' INTEGER, 'followMe' INTEGER, 'allowAllMsg' INTEGER, 'allowAllComment' INTEGER, 'biFollowCount' INTEGER, 'blog' VARCHAR(128), 'date' DATE)";
+    if (![db executeUpdate:sql]) {
+        NSLog(@"Create User table failed. error=%@", [db lastError]);
+        abort();
+    }
+    
     //微博表(Weibo) --- 微博表
     //微博唯一Id，创建时间，所属人，来源，可见性，内容, 转发数，评论数，赞数，收藏，有图片
     //weiboId，date, owner，source，visible，content, repostCount, commentCount, likeCount, favorite，picture
@@ -374,6 +381,86 @@
     }
     
     return nil;
+}
+
+//获取最近@过的好友
+- (NSArray *)getLatestUsers
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSString *sql = @"select * from LatestUser ORDER BY date DESC";
+    FMResultSet *rs = [db executeQuery:sql];
+    while ([rs next]) {
+        [array addObject: [self privateGetDTUserByFMResultSet:rs]];
+    }
+    
+    if (array.count) {
+        return  array;
+    }
+    
+    return nil;
+}
+
+//更新最近@过的好友
+- (void)updateLatestUser:(DTUser *)user
+{
+    //插入一条数据
+    void(^insertOneUser)(DTUser *) = ^(DTUser *user) {
+        NSString *sql = @"INSERT INTO LatestUser (uid,name,nickName,avatar,avatarLarge,sex,address,weiboCount,fanCount,followingCount,sign,verified,verifiedReason,star,weiboMember,lastMyWeiboId,following,followMe,allowAllMsg,allowAllComment,biFollowCount,blog,date) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        BOOL result = [db executeUpdate:sql,
+                       user.uid,
+                       user.name,
+                       user.nickName,
+                       user.avatar,
+                       user.avatarLarge,
+                       [[NSNumber alloc] initWithLong:user.sex],
+                       user.address,
+                       [[NSNumber alloc] initWithLong:user.weiboCount],
+                       [[NSNumber alloc] initWithLong:user.fanCount],
+                       [[NSNumber alloc] initWithLong:user.followingCount],
+                       user.sign,
+                       [[NSNumber alloc] initWithLong:user.verified],
+                       user.verifiedReason,
+                       [[NSNumber alloc] initWithLong:user.star],
+                       [[NSNumber alloc] initWithLong:user.weiboMember],
+                       [[NSNumber alloc] initWithLongLong:user.lastMyWeiboId],
+                       [[NSNumber alloc] initWithLong:user.following],
+                       [[NSNumber alloc] initWithLong:user.followMe],
+                       [[NSNumber alloc] initWithLong:user.allowAllMsg],
+                       [[NSNumber alloc] initWithLong:user.allowAllComment],
+                       [[NSNumber alloc] initWithLong:user.biFollowCount],
+                       [NSDate date],
+                       user.blog];
+        if (!result) {
+            NSLog(@"Storage LatestUser addUser failed. error=%@", [db lastError]);
+        }
+    };
+    
+    //判断是否超过10条
+    int count = 0;
+    NSString *sql = @"select count(*) from LatestUser";
+    FMResultSet *rs = [db executeQuery:sql];
+    if ([rs next]) {
+        count = [rs intForColumn:@"count"];
+    }
+    
+    //没超过10条，直接插入
+    if (count < 10) {
+        insertOneUser(user);
+        
+    //超过10条，更新最旧的一条数据
+    } else {
+        NSString *sql = @"select * from LatestUser ORDER BY date";
+        rs = [db executeQuery:sql];
+        if (![rs next]) {
+            return;
+        }
+        NSString *userId = [rs stringForColumn:@"uid"];
+        BOOL result = [db executeUpdate:@"DELETE FROM LatestUser WHERE uid=(?)", userId];
+        if (!result) {
+            NSLog(@"delete failed.error=%@", [db lastError]);
+        }
+        insertOneUser(user);
+    }
 }
 
 @end
