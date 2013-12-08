@@ -23,9 +23,8 @@
 //    return instace;
 //}
 
-+ (UIUser *)UserAdapter:(NSString *)uid
++ (UIUser *)privateUserAdapter:(DTUser *)dtUser
 {
-    DTUser *dtUser = [[Storage storageInstance] getUserByUid:uid];
     UIUser * uiUser = [[UIUser alloc] init];
     uiUser.avatar = dtUser.avatar;
     uiUser.avatarLarge = dtUser.avatarLarge;
@@ -38,8 +37,13 @@
     uiUser.followingCount = dtUser.followingCount;
     uiUser.fanCount = dtUser.fanCount;
     uiUser.weiboCount = dtUser.weiboCount;
-    
     return uiUser;
+}
+
++ (UIUser *)UserAdapter:(NSString *)uid
+{
+    DTUser *dtUser = [[Storage storageInstance] getUserByUid:uid];
+    return [self privateUserAdapter:dtUser];
 }
 
 + (UIWeibo *)WeiboAdapter:(DTWeibo *)weibo
@@ -101,6 +105,21 @@
 + (NSString *)getMediaByUrl:(NSString *)url
 {
     return [[Storage storageInstance]getMediaByUrl:url];
+}
+
+//获取登录用户关注人列表
++ (NSArray *)getLoginUserFollowings
+{
+    NSArray *dtUsers = [[Storage storageInstance]getLoginUserFollowings];
+    if (dtUsers.count == 0) {
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (DTUser *u in dtUsers) {
+        [array addObject:[self privateUserAdapter:u]];
+    }
+    return array;
 }
 
 @end

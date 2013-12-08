@@ -71,7 +71,6 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(Cancel)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(Finished)];
     
-    
     self.followingTableView.sectionIndexColor = [UIColor darkGrayColor];
     self.followingTableView.sectionIndexBackgroundColor = [UIColor clearColor];
     self.followingTableView.sectionIndexTrackingBackgroundColor = [UIColor lightGrayColor];
@@ -83,8 +82,8 @@
     accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
 
     //数据库中获取最近联系人&我关注的人
-    //
-    //[self reloadTableViewData:users];
+    users = [NSMutableArray arrayWithArray:[DataAdapter getLoginUserFollowings]];
+    [self reloadTableViewData];
     
     //网络请求最新的我关注的人
     [self networkingFreshFollowing];
@@ -109,6 +108,11 @@
     }
     NSArray *tmp = [param objectForKey:@"array"];
 
+    //如果是第一次获取 先清空
+    if (_cursor == 0) {
+        [users removeAllObjects];
+    }
+    
     _cursor += tmp.count;
     [users addObjectsFromArray:tmp];
     
@@ -157,16 +161,16 @@
      Z
      #
      **********************/
+    
+    //clean all
     [sectionNames removeAllObjects];
     [sectionItems removeAllObjects];
     [sectionItemsStatus removeAllObjects];
     
     [sectionNames addObject:@"search"];
     [sectionNames addObject:@"最近联系人"];
-    
     //TODO for latest user.
     //
-    
     
     NSMutableArray *letters = [[NSMutableArray alloc] init];
     for (UIUser *u in users) {

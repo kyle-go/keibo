@@ -318,15 +318,8 @@
     return [self privateGetDTWeiboArrayByFMResult:rs count:count];
 }
 
-//根据uid获取DTUser
-- (DTUser *)getUserByUid:(NSString *)uid
+- (DTUser *)privateGetDTUserByFMResultSet:(FMResultSet *)rs
 {
-    NSString *sql = @"select * from User where uid=(?)";
-    FMResultSet *rs = [db executeQuery:sql, uid];
-    if (![rs next]) {
-        return nil;
-    }
-    
     DTUser *user = [[DTUser alloc] init];
     user.uid = [rs stringForColumn:@"uid"];
     user.name = [rs stringForColumn:@"name"];
@@ -351,6 +344,36 @@
     user.biFollowCount = [rs intForColumn:@"biFollowCount"];
     user.blog = [rs stringForColumn:@"blog"];
     return user;
+}
+
+//根据uid获取DTUser
+- (DTUser *)getUserByUid:(NSString *)uid
+{
+    NSString *sql = @"select * from User where uid=(?)";
+    FMResultSet *rs = [db executeQuery:sql, uid];
+    if (![rs next]) {
+        return nil;
+    }
+    
+    return [self privateGetDTUserByFMResultSet:rs];
+}
+
+
+//获取登录用户关注人
+- (NSArray *)getLoginUserFollowings
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSString *sql = @"select * from User where following=1";
+    FMResultSet *rs = [db executeQuery:sql];
+    while ([rs next]) {
+        [array addObject: [self privateGetDTUserByFMResultSet:rs]];
+    }
+    
+    if (array.count) {
+        return  array;
+    }
+    
+    return nil;
 }
 
 @end

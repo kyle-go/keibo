@@ -31,4 +31,7 @@
 //根据Media url获取Media本地路径
 + (NSString *)getMediaByUrl:(NSString *)url;
 
+//获取登录用户关注人列表
++ (NSArray *)getLoginUserFollowings;
+
 @end

@@ -51,4 +51,7 @@
 //根据uid获取DTUser
 - (DTUser *)getUserByUid:(NSString *)uid;
 
+//获取登录用户关注人
+- (NSArray *)getLoginUserFollowings;
+
 @end
