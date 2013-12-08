@@ -7,16 +7,26 @@
 //
 
 #import "SelectAtViewController.h"
+#import "UITableViewFollowingCell.h"
 #import "WeiboNetWork.h"
 #import "KxMenu.h"
+#import "pinyin.h"
+#import "UIUser.h"
 
 @interface SelectAtViewController ()
+
+@property (weak, nonatomic) IBOutlet UITableView *followingTableView;
 
 @end
 
 @implementation SelectAtViewController {
     NSInteger _cursor;
     NSString *uid;
+    NSString *accessToken;
+
+    //sth with table view
+    NSMutableArray *sectionNames;
+    NSMutableDictionary *sectionItems;
 }
 
 - (UIButton *)createNavButton
@@ -38,6 +48,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _cursor = 0;
+        sectionNames = [[NSMutableArray alloc] init];
+        sectionItems = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -57,12 +69,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followingUsers:) name:@"NotificationCenter_FollowingUsers" object:nil];
     
     uid = [[NSUserDefaults standardUserDefaults] objectForKey:kUid];
-    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+    accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
 
     //数据库中获取最近联系人&我关注的人
+    //
+    //[self reloadTableViewData:users];
     
     //网络请求最新的我关注的人
-    [WeiboNetWork getUserFollowings:accessToken uid:uid cursor:_cursor];
+    [self networkingFreshFollowing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,6 +85,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//network data call back.
 - (void)followingUsers:(NSNotification *)notify
 {
     NSDictionary *param = [notify userInfo];
@@ -82,6 +97,7 @@
         return;
     }
     NSArray *users = [param objectForKey:@"array"];
+    [self reloadTableViewData:users];
 }
 
 - (void)showMenu:(UIButton *)sender
@@ -90,7 +106,7 @@
     NSArray *menuItems = @[[KxMenuItem menuItem:@"刷新"
                      image:[UIImage imageNamed:@"reload"]
                     target:self.navigationController
-                    action:@selector(reloadFollowing)]];
+                    action:@selector(networkingFreshFollowing)]];
     
     CGRect frame = sender.frame;
     frame.origin.y += 10;
@@ -99,11 +115,139 @@
                  menuItems:menuItems];
 }
 
-- (void)reloadFollowing
+- (void)networkingFreshFollowing
 {
-    
+    [WeiboNetWork getUserFollowings:accessToken uid:uid cursor:_cursor];
 }
 
+- (void)reloadTableViewData:(NSArray *)users
+{
+    /**********************
+     * (search_bar,latest)
+     A
+     B
+     ...
+     Z
+     #
+     **********************/
+    [sectionNames removeAllObjects];
+    [sectionItems removeAllObjects];
+    
+    [sectionNames addObject:@"search"];
+    [sectionNames addObject:@"最近联系人"];
+    
+    NSMutableArray *letters = [[NSMutableArray alloc] init];
+    for (UIUser *u in users) {
+        NSString *key;
+        unichar ch = [u.name characterAtIndex:0];
+        if (0x4e00 <= ch && ch <= 0x9fa6) {
+            key = [NSString stringWithFormat:@"%c", pinyinFirstLetter(ch)];
+        } else {
+            key = [NSString stringWithFormat:@"%c", ch];
+        }
+        key = [key uppercaseString];
+        if (key.length == 0 ||'A' > [key characterAtIndex:0] || [key characterAtIndex:0]> 'Z') {
+            key = @"#";
+        }
+        
+        NSMutableArray *value = [sectionItems objectForKey:key];
+        if (!value) {
+            value = [[NSMutableArray alloc] init];
+            [value addObject:u.name];
+            [sectionItems setObject:value forKey:key];
+        } else {
+            [value addObject:u.name];
+        }
+        
+        if (![letters containsObject:key]) {
+            [letters addObject:key];
+        }
+    }
+    
+    [letters sortUsingSelector:@selector(compare:)];
+    BOOL anySharp = NO;
+    for (NSString *ch in letters) {
+        if (![ch isEqualToString:@"#"]) {
+            [sectionNames addObject:ch];
+        } else {
+            anySharp = YES;
+        }
+    }
+    if (anySharp) {
+        [sectionNames addObject:@"#"];
+    }
+    
+    [self.followingTableView reloadData];
+}
+
+#pragma mark -- sth with table view
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [sectionNames count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [sectionNames objectAtIndex:section];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 1;
+    }
+    if (section == 1) {
+        return 5; //TODO default 10 latest.
+    }
+    
+    NSString *sectionName = [sectionNames objectAtIndex:section];
+    NSArray *cellNames = [sectionItems objectForKey:sectionName];
+    return [cellNames count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"followingUserIdenty";
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        [tableView registerNib:[UINib nibWithNibName:@"UITableViewFollowingCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
+    });
+    
+    UITableViewFollowingCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    cell.nameLabel.text = @"test";
+    if (indexPath.section >= 2) {
+        NSString *sectionName = [sectionNames objectAtIndex:indexPath.section];
+        NSArray *cellNames = [sectionItems objectForKey:sectionName];
+        cell.nameLabel.text = [cellNames objectAtIndex:indexPath.row];
+    }
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 45;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 0.01;
+    }
+    return 18;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+#pragma mark -- Cancel，Finished
 - (void)Cancel
 {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];

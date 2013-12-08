@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		270328B21850C83D00D90B7C /* delete-emoji.png in Resources */ = {isa = PBXBuildFile; fileRef = 270328B11850C83D00D90B7C /* delete-emoji.png */; };
+		2705EC8A18541D6E00F76A60 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 2705EC8818541D6E00F76A60 /* pinyin.c */; };
+		2705EC8D1854471A00F76A60 /* UITableViewFollowingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2705EC8C1854471A00F76A60 /* UITableViewFollowingCell.m */; };
+		2705EC8F1854472A00F76A60 /* UITableViewFollowingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2705EC8E1854472A00F76A60 /* UITableViewFollowingCell.xib */; };
 		2714663C18424F03000376F9 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2714663B18424F03000376F9 /* UserInfoCell.m */; };
 		2714663E18424F18000376F9 /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714663D18424F18000376F9 /* UserInfoCell.xib */; };
 		2714664018424F54000376F9 /* UserBasicNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714663F18424F54000376F9 /* UserBasicNumberCell.xib */; };
@@ -123,6 +126,11 @@
 
 /* Begin PBXFileReference section */
 		270328B11850C83D00D90B7C /* delete-emoji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-emoji.png"; sourceTree = "<group>"; };
+		2705EC8818541D6E00F76A60 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		2705EC8918541D6E00F76A60 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		2705EC8B1854471A00F76A60 /* UITableViewFollowingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewFollowingCell.h; sourceTree = "<group>"; };
+		2705EC8C1854471A00F76A60 /* UITableViewFollowingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewFollowingCell.m; sourceTree = "<group>"; };
+		2705EC8E1854472A00F76A60 /* UITableViewFollowingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITableViewFollowingCell.xib; sourceTree = "<group>"; };
 		2714663A18424F03000376F9 /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
 		2714663B18424F03000376F9 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
 		2714663D18424F18000376F9 /* UserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoCell.xib; sourceTree = "<group>"; };
@@ -314,6 +322,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2705EC8718541D6E00F76A60 /* pinyin */ = {
+			isa = PBXGroup;
+			children = (
+				2705EC8818541D6E00F76A60 /* pinyin.c */,
+				2705EC8918541D6E00F76A60 /* pinyin.h */,
+			);
+			path = pinyin;
+			sourceTree = "<group>";
+		};
 		2714663918424E9D000376F9 /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +439,9 @@
 				276FFAAD1843AAF600D41EB6 /* NewWeiboViewController.h */,
 				276FFAAE1843AAF600D41EB6 /* NewWeiboViewController.m */,
 				276FFAAF1843AAF600D41EB6 /* NewWeiboViewController.xib */,
+				2705EC8B1854471A00F76A60 /* UITableViewFollowingCell.h */,
+				2705EC8C1854471A00F76A60 /* UITableViewFollowingCell.m */,
+				2705EC8E1854472A00F76A60 /* UITableViewFollowingCell.xib */,
 			);
 			name = NewWeibo;
 			sourceTree = "<group>";
@@ -497,6 +517,7 @@
 		FB255BDC18228B4B00A0008B /* External */ = {
 			isa = PBXGroup;
 			children = (
+				2705EC8718541D6E00F76A60 /* pinyin */,
 				273F4F3C18538A1600C8D6EA /* KxMenu */,
 				FB3A28AC185201A700AD37D0 /* KTextViewPlaceholder */,
 				FBE5E57A184EF8E6004CFDDA /* OLImageView */,
@@ -813,6 +834,7 @@
 				273F4F4318538A3400C8D6EA /* reload@2x.png in Resources */,
 				FB6CEAF7182D2EB300C07414 /* tabbar_me.png in Resources */,
 				FB6CEAEF182D2E2D00C07414 /* tabbar_home.png in Resources */,
+				2705EC8F1854472A00F76A60 /* UITableViewFollowingCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,6 +891,7 @@
 				FB54789F181EA37800501B7A /* Storage.m in Sources */,
 				FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */,
 				FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */,
+				2705EC8A18541D6E00F76A60 /* pinyin.c in Sources */,
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
 				FBE5E588184EFAB5004CFDDA /* UICustomTapGestureRecognizer.m in Sources */,
@@ -884,6 +907,7 @@
 				FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */,
 				271466461842507A000376F9 /* WeiboSimpleCell.m in Sources */,
 				FB4C012C18346CCE00EC97B1 /* DTUser.m in Sources */,
+				2705EC8D1854471A00F76A60 /* UITableViewFollowingCell.m in Sources */,
 				FB63266B1841DE4800B48E25 /* EGORefreshTableHeaderView.m in Sources */,
 				FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */,
 			);

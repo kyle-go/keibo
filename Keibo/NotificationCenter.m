@@ -157,12 +157,13 @@
     }
     NSString *uid = [param objectForKey:@"uid"];
     NSArray *users = [param objectForKey:@"array"];
-    
+    NSMutableArray *uiUsers = [[NSMutableArray alloc] init];
     for (DTUser *u in users) {
         [storageInstance addUser:u];
+        [uiUsers addObject:[DataAdapter UserAdapter:u.uid]];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_FollowingUsers" object:nil userInfo:@{@"uid": uid, @"array":users}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_FollowingUsers" object:nil userInfo:@{@"uid": uid, @"array":uiUsers}];
 }
 
 @end
