@@ -175,7 +175,7 @@
             status = [[NSMutableArray alloc] init];
             [value addObject:u];
             [sectionItems setObject:value forKey:key];
-            [status addObject:[[NSNumber alloc] initWithLong:0]];
+            [status addObject:[[NSNumber alloc] initWithBool:NO]];
             [sectionItemsStatus setObject:status forKey:key];
         } else {
             [value addObject:u];
