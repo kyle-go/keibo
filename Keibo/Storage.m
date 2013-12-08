@@ -441,7 +441,7 @@
     };
     
     //判断是否超过10条
-    int count = 90;
+    int count = 0;
     NSString *sql = @"select count(*) AS count from LatestUser";
     FMResultSet *rs = [db executeQuery:sql];
     if ([rs next]) {
