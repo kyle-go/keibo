@@ -27,6 +27,8 @@
     //sth with table view
     NSMutableArray *sectionNames;
     NSMutableDictionary *sectionItems;
+    NSMutableDictionary *sectionItemsStatus;
+    UISearchBar *searchBar;
 }
 
 - (UIButton *)createNavButton
@@ -50,6 +52,7 @@
         _cursor = 0;
         sectionNames = [[NSMutableArray alloc] init];
         sectionItems = [[NSMutableDictionary alloc] init];
+        sectionItemsStatus = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -64,6 +67,12 @@
     self.navigationItem.titleView = navButton;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(Cancel)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(Finished)];
+    
+    
+    self.followingTableView.sectionIndexColor = [UIColor darkGrayColor];
+    
+    self.followingTableView.sectionIndexBackgroundColor = [UIColor clearColor];
+    self.followingTableView.sectionIndexTrackingBackgroundColor = [UIColor lightGrayColor];
     
     //添加我关注的人观察者
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followingUsers:) name:@"NotificationCenter_FollowingUsers" object:nil];
@@ -97,12 +106,16 @@
         return;
     }
     NSArray *users = [param objectForKey:@"array"];
+    
+    _cursor += users.count;
+    
     [self reloadTableViewData:users];
 }
 
 - (void)showMenu:(UIButton *)sender
-
 {
+    [searchBar resignFirstResponder];
+
     NSArray *menuItems = @[[KxMenuItem menuItem:@"刷新"
                      image:[UIImage imageNamed:@"reload"]
                     target:self.navigationController
@@ -132,9 +145,14 @@
      **********************/
     [sectionNames removeAllObjects];
     [sectionItems removeAllObjects];
+    [sectionItemsStatus removeAllObjects];
     
     [sectionNames addObject:@"search"];
     [sectionNames addObject:@"最近联系人"];
+    
+    //TODO for latest user.
+    //
+    
     
     NSMutableArray *letters = [[NSMutableArray alloc] init];
     for (UIUser *u in users) {
@@ -151,12 +169,17 @@
         }
         
         NSMutableArray *value = [sectionItems objectForKey:key];
+        NSMutableArray *status = [sectionItemsStatus objectForKey:key];
         if (!value) {
             value = [[NSMutableArray alloc] init];
-            [value addObject:u.name];
+            status = [[NSMutableArray alloc] init];
+            [value addObject:u];
             [sectionItems setObject:value forKey:key];
+            [status addObject:[[NSNumber alloc] initWithLong:0]];
+            [sectionItemsStatus setObject:status forKey:key];
         } else {
-            [value addObject:u.name];
+            [value addObject:u];
+            [status addObject:[NSNumber numberWithBool:NO]];
         }
         
         if (![letters containsObject:key]) {
@@ -188,6 +211,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return nil;
+    }
     return [sectionNames objectAtIndex:section];
 }
 
@@ -207,21 +233,58 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"followingUserIdenty";
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        [tableView registerNib:[UINib nibWithNibName:@"UITableViewFollowingCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
-    });
+    //for search bar
+    if (indexPath.section == 0) {
+        if (!searchBar) {
+            searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
+        }
+        searchBar.placeholder = [NSString stringWithFormat:@"共有 %d 位联系人", _cursor];
+        
+        static NSString *cellIdentifier = @"searchBarIdenty";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        
+        [cell addSubview:searchBar];
+        return cell;
+    }
     
+    //users
+    static NSString *cellIdentifier = @"followingUserIdenty";    
     UITableViewFollowingCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        [tableView registerNib:[UINib nibWithNibName:@"UITableViewFollowingCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    }
+    
     cell.nameLabel.text = @"test";
     if (indexPath.section >= 2) {
         NSString *sectionName = [sectionNames objectAtIndex:indexPath.section];
         NSArray *cellNames = [sectionItems objectForKey:sectionName];
-        cell.nameLabel.text = [cellNames objectAtIndex:indexPath.row];
+        cell.nameLabel.text = ((UIUser *)[cellNames objectAtIndex:indexPath.row]).name;
+        
+        NSArray *statusArray = [sectionItemsStatus objectForKey:sectionName];
+        NSNumber *status = [statusArray objectAtIndex:indexPath.row];
+        if ([status longValue]) {
+            cell.flagImageView.image = [UIImage imageNamed:@"user_selected"];
+        } else {
+            cell.flagImageView.image = [UIImage imageNamed:@"user_un_selected"];
+        }
     }
-    
+
     return cell;
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:sectionNames];
+    if (sectionNames.count >= 2) {
+        //[array replaceObjectAtIndex:0 withObject:@"◆"]; //查找
+        [array replaceObjectAtIndex:0 withObject:@"@"]; //查找
+        [array replaceObjectAtIndex:1 withObject:@"★"]; //最近
+    }
+    return array;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -234,7 +297,7 @@
     if (section == 0) {
         return 0.01;
     }
-    return 18;
+    return 16;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -244,7 +307,23 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [searchBar resignFirstResponder];
+    
+    //
+    
+    NSString *sectionName = [sectionNames objectAtIndex:indexPath.section];
+    NSMutableArray *statusArray = [sectionItemsStatus objectForKey:sectionName];
+    NSNumber *status = [statusArray objectAtIndex:indexPath.row];
+    [statusArray replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:!status.boolValue]];
+    
+    [tableView reloadData];
+    
     return nil;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [searchBar resignFirstResponder];
 }
 
 #pragma mark -- Cancel，Finished
