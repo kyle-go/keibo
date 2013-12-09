@@ -264,7 +264,7 @@
         if (!searchBar) {
             searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
         }
-        searchBar.placeholder = [NSString stringWithFormat:@"共有 %d 位联系人", _cursor];
+        searchBar.placeholder = [NSString stringWithFormat:@"共有 %ld 位联系人", (long)_cursor];
         
         static NSString *cellIdentifier = @"searchBarIdenty";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
