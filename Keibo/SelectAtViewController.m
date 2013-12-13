@@ -322,8 +322,7 @@
 {
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:sectionNames];
     if (sectionNames.count >= 2) {
-        //[array replaceObjectAtIndex:0 withObject:@"◆"]; //查找
-        [array replaceObjectAtIndex:0 withObject:@"@"]; //查找
+        [array replaceObjectAtIndex:0 withObject:UITableViewIndexSearch]; //查找
         [array replaceObjectAtIndex:1 withObject:@"★"]; //最近
     }
     return array;
