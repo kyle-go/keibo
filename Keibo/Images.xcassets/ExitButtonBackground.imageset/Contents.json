@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "launch2.png"
+      "filename" : "退出登录按钮@x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "launch2-1.png"
+      "filename" : "退出登录按钮@2x.png"
     }
   ],
   "info" : {

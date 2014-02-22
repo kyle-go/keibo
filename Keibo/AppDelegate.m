@@ -22,6 +22,9 @@
     //set status bar style
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
+    //恢复状态栏
+    [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    
     [self.window makeKeyAndVisible];
     
     return YES;

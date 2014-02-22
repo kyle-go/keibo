@@ -13,7 +13,7 @@
 #import "MainPageViewController.h"
 #import "MessageViewController.h"
 #import "PersonViewController.h"
-#import "MoreViewController.h"
+#import "SettingViewController.h"
 #import "KUnits.h"
 #import "WeiboNetWork.h"
 #import "Storage.h"
@@ -108,7 +108,7 @@
     MainPageViewController *mainViewController = [[MainPageViewController alloc] init];
     MessageViewController *messageViewController = [[MessageViewController alloc] init];
     PersonViewController *personViewController = [[PersonViewController alloc] init];
-    MoreViewController *settingViewController = [[MoreViewController alloc] init];
+    SettingViewController *settingViewController = [[SettingViewController alloc] init];
     
     UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     //[mainNav.navigationBar setBarTintColor:[UIColor whiteColor]];

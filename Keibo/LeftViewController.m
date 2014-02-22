@@ -86,10 +86,10 @@
     self.nameLabel.text = user.name;
     [self.nameLabel sizeToFit];
     self.signLabel.text = user.sign;
+    [self.signLabel sizeToFit];
     self.fanCount.text = [[NSString alloc] initWithFormat:@"粉丝:%ld", (long)user.fanCount];
     self.followingCount.text = [[NSString alloc] initWithFormat:@"关注:%ld", (long)user.followingCount ];
     self.weiboCount.text = [[NSString alloc] initWithFormat:@"微博:%ld", (long)user.weiboCount];
-    
 }
 
 #pragma mark -- table View Data Source

@@ -6,20 +6,20 @@
 //  Copyright (c) 2013年 kyle. All rights reserved.
 //
 
-#import "MoreViewController.h"
+#import "SettingViewController.h"
 
-@interface MoreViewController ()
+@interface SettingViewController ()
 
 @end
 
-@implementation MoreViewController
+@implementation SettingViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"更多";
-        [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_more"]];
+        self.title = @"设置";
+        [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_setting"]];
     }
     return self;
 }
@@ -27,7 +27,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    UIButton *_theButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 300, 300, 40)];
+    [_theButton setBackgroundImage:[[UIImage imageNamed:@"ExitButtonBackground"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:15] forState:UIControlStateNormal];
+    [_theButton setTitle:@"退出登录" forState:UIControlStateNormal];
+    [_theButton addTarget:self action:@selector(quitLoginClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.tableView addSubview:_theButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,7 +110,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 36.0;
+    return 45.0;
 }
 
 @end

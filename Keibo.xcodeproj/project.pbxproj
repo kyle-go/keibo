@@ -52,8 +52,8 @@
 		FB255BE118228C0700A0008B /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BDF18228C0700A0008B /* MessageViewController.xib */; };
 		FB255BE518228C1B00A0008B /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BE318228C1B00A0008B /* PersonViewController.m */; };
 		FB255BE618228C1B00A0008B /* PersonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BE418228C1B00A0008B /* PersonViewController.xib */; };
-		FB255BEA18228C2900A0008B /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BE818228C2900A0008B /* MoreViewController.m */; };
-		FB255BEB18228C2900A0008B /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BE918228C2900A0008B /* MoreViewController.xib */; };
+		FB255BEA18228C2900A0008B /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BE818228C2900A0008B /* SettingViewController.m */; };
+		FB255BEB18228C2900A0008B /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BE918228C2900A0008B /* SettingViewController.xib */; };
 		FB255BF618228D0E00A0008B /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BEE18228D0E00A0008B /* MMDrawerBarButtonItem.m */; };
 		FB255BF718228D0E00A0008B /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BF118228D0E00A0008B /* MMDrawerController.m */; };
 		FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = FB255BF318228D0E00A0008B /* MMDrawerVisualState.m */; };
@@ -99,8 +99,8 @@
 		FB6CEAF4182D2E9300C07414 /* tabbar_message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAF2182D2E9300C07414 /* tabbar_message@2x.png */; };
 		FB6CEAF7182D2EB300C07414 /* tabbar_me.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAF5182D2EB300C07414 /* tabbar_me.png */; };
 		FB6CEAF8182D2EB300C07414 /* tabbar_me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAF6182D2EB300C07414 /* tabbar_me@2x.png */; };
-		FB6CEAFB182D2EF000C07414 /* tabbar_more.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAF9182D2EF000C07414 /* tabbar_more.png */; };
-		FB6CEAFC182D2EF000C07414 /* tabbar_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAFA182D2EF000C07414 /* tabbar_more@2x.png */; };
+		FB6CEAFB182D2EF000C07414 /* tabbar_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAF9182D2EF000C07414 /* tabbar_setting.png */; };
+		FB6CEAFC182D2EF000C07414 /* tabbar_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB6CEAFA182D2EF000C07414 /* tabbar_setting@2x.png */; };
 		FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */; };
 		FBC0D95B1830DB4800163C3C /* weibo-repost.html in Resources */ = {isa = PBXBuildFile; fileRef = FBC0D9591830DB4800163C3C /* weibo-repost.html */; };
 		FBC0D95C1830DB4800163C3C /* weibo-simple.html in Resources */ = {isa = PBXBuildFile; fileRef = FBC0D95A1830DB4800163C3C /* weibo-simple.html */; };
@@ -189,9 +189,9 @@
 		FB255BE218228C1B00A0008B /* PersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewController.h; sourceTree = "<group>"; };
 		FB255BE318228C1B00A0008B /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
 		FB255BE418228C1B00A0008B /* PersonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonViewController.xib; sourceTree = "<group>"; };
-		FB255BE718228C2900A0008B /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
-		FB255BE818228C2900A0008B /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
-		FB255BE918228C2900A0008B /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
+		FB255BE718228C2900A0008B /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		FB255BE818228C2900A0008B /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		FB255BE918228C2900A0008B /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		FB255BED18228D0E00A0008B /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		FB255BEE18228D0E00A0008B /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		FB255BEF18228D0E00A0008B /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
@@ -273,8 +273,8 @@
 		FB6CEAF2182D2E9300C07414 /* tabbar_message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_message@2x.png"; sourceTree = "<group>"; };
 		FB6CEAF5182D2EB300C07414 /* tabbar_me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_me.png; sourceTree = "<group>"; };
 		FB6CEAF6182D2EB300C07414 /* tabbar_me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_me@2x.png"; sourceTree = "<group>"; };
-		FB6CEAF9182D2EF000C07414 /* tabbar_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_more.png; sourceTree = "<group>"; };
-		FB6CEAFA182D2EF000C07414 /* tabbar_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_more@2x.png"; sourceTree = "<group>"; };
+		FB6CEAF9182D2EF000C07414 /* tabbar_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_setting.png; sourceTree = "<group>"; };
+		FB6CEAFA182D2EF000C07414 /* tabbar_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_setting@2x.png"; sourceTree = "<group>"; };
 		FB75BF96181FF851006CA582 /* AFTextResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTextResponseSerializer.h; sourceTree = "<group>"; };
 		FB75BF97181FF851006CA582 /* AFTextResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTextResponseSerializer.m; sourceTree = "<group>"; };
 		FBBDEE8F182CCE6000067D6E /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
@@ -504,14 +504,14 @@
 			name = Person;
 			sourceTree = "<group>";
 		};
-		FB255BDB18228B3400A0008B /* More */ = {
+		FB255BDB18228B3400A0008B /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				FB255BE718228C2900A0008B /* MoreViewController.h */,
-				FB255BE818228C2900A0008B /* MoreViewController.m */,
-				FB255BE918228C2900A0008B /* MoreViewController.xib */,
+				FB255BE718228C2900A0008B /* SettingViewController.h */,
+				FB255BE818228C2900A0008B /* SettingViewController.m */,
+				FB255BE918228C2900A0008B /* SettingViewController.xib */,
 			);
-			name = More;
+			name = Setting;
 			sourceTree = "<group>";
 		};
 		FB255BDC18228B4B00A0008B /* External */ = {
@@ -609,7 +609,7 @@
 				2768E4141820159200896288 /* Authorize */,
 				FB255BD918228AAC00A0008B /* Message */,
 				FB255BDA18228ACD00A0008B /* Person */,
-				FB255BDB18228B3400A0008B /* More */,
+				FB255BDB18228B3400A0008B /* Setting */,
 				274C4A8A17FB1A0A00D231E8 /* NewWeibo */,
 				FB255BFA18228D6900A0008B /* LeftWindow */,
 			);
@@ -686,8 +686,8 @@
 				FB6CEAF2182D2E9300C07414 /* tabbar_message@2x.png */,
 				FB6CEAF5182D2EB300C07414 /* tabbar_me.png */,
 				FB6CEAF6182D2EB300C07414 /* tabbar_me@2x.png */,
-				FB6CEAF9182D2EF000C07414 /* tabbar_more.png */,
-				FB6CEAFA182D2EF000C07414 /* tabbar_more@2x.png */,
+				FB6CEAF9182D2EF000C07414 /* tabbar_setting.png */,
+				FB6CEAFA182D2EF000C07414 /* tabbar_setting@2x.png */,
 				FB0136E3182E70970006DFB9 /* comments.png */,
 				FB0136E4182E70970006DFB9 /* comments@2x.png */,
 				FB5D10CD182FAD6F006E1D01 /* avatar-1.png */,
@@ -797,7 +797,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB6CEAFB182D2EF000C07414 /* tabbar_more.png in Resources */,
+				FB6CEAFB182D2EF000C07414 /* tabbar_setting.png in Resources */,
 				FBE5E585184EF8FF004CFDDA /* EmojiViewController.xib in Resources */,
 				FB0136E5182E70970006DFB9 /* comments.png in Resources */,
 				FBE5E579184EF8D8004CFDDA /* Emoji-Default.bundle in Resources */,
@@ -826,10 +826,10 @@
 				FB255BE618228C1B00A0008B /* PersonViewController.xib in Resources */,
 				FB255BD718228A6C00A0008B /* MainPageViewController.xib in Resources */,
 				273F4F4218538A3400C8D6EA /* reload.png in Resources */,
-				FB6CEAFC182D2EF000C07414 /* tabbar_more@2x.png in Resources */,
+				FB6CEAFC182D2EF000C07414 /* tabbar_setting@2x.png in Resources */,
 				2714664A18425195000376F9 /* WeiboTypeSelectorCell.xib in Resources */,
 				2714664818425097000376F9 /* WeiboSimpleCell.xib in Resources */,
-				FB255BEB18228C2900A0008B /* MoreViewController.xib in Resources */,
+				FB255BEB18228C2900A0008B /* SettingViewController.xib in Resources */,
 				2714663E18424F18000376F9 /* UserInfoCell.xib in Resources */,
 				273F4F4318538A3400C8D6EA /* reload@2x.png in Resources */,
 				FB6CEAF7182D2EB300C07414 /* tabbar_me.png in Resources */,
@@ -901,7 +901,7 @@
 				FB255BE518228C1B00A0008B /* PersonViewController.m in Sources */,
 				FB4C012F183498AF00EC97B1 /* DTWeibo.m in Sources */,
 				FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */,
-				FB255BEA18228C2900A0008B /* MoreViewController.m in Sources */,
+				FB255BEA18228C2900A0008B /* SettingViewController.m in Sources */,
 				FB4C01261833CE8B00EC97B1 /* FMDatabaseQueue.m in Sources */,
 				FBE5E57F184EF8E6004CFDDA /* OLImage.m in Sources */,
 				FB4FDE91181F948100FF9331 /* AFHTTPRequestOperation.m in Sources */,
