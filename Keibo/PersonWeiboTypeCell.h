@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTextSliderButtons.h"
 
 @interface PersonWeiboTypeCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet KTextSliderButtons *textSlider;
 
 @end

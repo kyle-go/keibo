@@ -86,6 +86,7 @@
             break;
         case 2: {
             PersonWeiboTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:personWeiboTypeIdentifier];
+            [cell.textSlider setTextButtons:@"全部", @"原创微博", nil];
             return cell;
         }
             break;
@@ -123,6 +124,9 @@
             return 80.0;
             break;
         case 1:
+            return 40.0;
+            break;
+        case 2:
             return 40.0;
             break;
         default:

@@ -11,6 +11,8 @@
 		2705EC8A18541D6E00F76A60 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 2705EC8818541D6E00F76A60 /* pinyin.c */; };
 		2705EC8D1854471A00F76A60 /* UITableViewFollowingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2705EC8C1854471A00F76A60 /* UITableViewFollowingCell.m */; };
 		2705EC8F1854472A00F76A60 /* UITableViewFollowingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2705EC8E1854472A00F76A60 /* UITableViewFollowingCell.xib */; };
+		270DBBD818B9148900135E07 /* KTextSliderButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DBBD518B9148900135E07 /* KTextSliderButtons.m */; };
+		270DBBD918B9148900135E07 /* UIButton+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DBBD718B9148900135E07 /* UIButton+Block.m */; };
 		2714663C18424F03000376F9 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2714663B18424F03000376F9 /* UserInfoCell.m */; };
 		2714663E18424F18000376F9 /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714663D18424F18000376F9 /* UserInfoCell.xib */; };
 		2714664018424F54000376F9 /* UserBasicNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714663F18424F54000376F9 /* UserBasicNumberCell.xib */; };
@@ -137,6 +139,10 @@
 		2705EC8B1854471A00F76A60 /* UITableViewFollowingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewFollowingCell.h; sourceTree = "<group>"; };
 		2705EC8C1854471A00F76A60 /* UITableViewFollowingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewFollowingCell.m; sourceTree = "<group>"; };
 		2705EC8E1854472A00F76A60 /* UITableViewFollowingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITableViewFollowingCell.xib; sourceTree = "<group>"; };
+		270DBBD418B9148900135E07 /* KTextSliderButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTextSliderButtons.h; sourceTree = "<group>"; };
+		270DBBD518B9148900135E07 /* KTextSliderButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTextSliderButtons.m; sourceTree = "<group>"; };
+		270DBBD618B9148900135E07 /* UIButton+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Block.h"; sourceTree = "<group>"; };
+		270DBBD718B9148900135E07 /* UIButton+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Block.m"; sourceTree = "<group>"; };
 		2714663A18424F03000376F9 /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
 		2714663B18424F03000376F9 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
 		2714663D18424F18000376F9 /* UserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoCell.xib; sourceTree = "<group>"; };
@@ -346,6 +352,17 @@
 			path = pinyin;
 			sourceTree = "<group>";
 		};
+		270DBBD318B9148900135E07 /* KTextSliderButtons */ = {
+			isa = PBXGroup;
+			children = (
+				270DBBD418B9148900135E07 /* KTextSliderButtons.h */,
+				270DBBD518B9148900135E07 /* KTextSliderButtons.m */,
+				270DBBD618B9148900135E07 /* UIButton+Block.h */,
+				270DBBD718B9148900135E07 /* UIButton+Block.m */,
+			);
+			path = KTextSliderButtons;
+			sourceTree = "<group>";
+		};
 		2714663918424E9D000376F9 /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +558,7 @@
 		FB255BDC18228B4B00A0008B /* External */ = {
 			isa = PBXGroup;
 			children = (
+				270DBBD318B9148900135E07 /* KTextSliderButtons */,
 				2705EC8718541D6E00F76A60 /* pinyin */,
 				273F4F3C18538A1600C8D6EA /* KxMenu */,
 				FB3A28AC185201A700AD37D0 /* KTextViewPlaceholder */,
@@ -928,6 +946,7 @@
 				2714664318424F76000376F9 /* UserBasicNumberCell.m in Sources */,
 				FB4C013E1834BF0200EC97B1 /* NotificationCenter.m in Sources */,
 				FB255BE518228C1B00A0008B /* PersonViewController.m in Sources */,
+				270DBBD818B9148900135E07 /* KTextSliderButtons.m in Sources */,
 				FB4C012F183498AF00EC97B1 /* DTWeibo.m in Sources */,
 				FB255BD618228A6C00A0008B /* MainPageViewController.m in Sources */,
 				FB255BEA18228C2900A0008B /* SettingViewController.m in Sources */,
@@ -938,6 +957,7 @@
 				FB4C012C18346CCE00EC97B1 /* DTUser.m in Sources */,
 				2705EC8D1854471A00F76A60 /* UITableViewFollowingCell.m in Sources */,
 				27B662CB18B8ED1B006B67A5 /* PersonWeiboTypeCell.m in Sources */,
+				270DBBD918B9148900135E07 /* UIButton+Block.m in Sources */,
 				FB63266B1841DE4800B48E25 /* EGORefreshTableHeaderView.m in Sources */,
 				FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */,
 			);
