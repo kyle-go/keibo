@@ -130,10 +130,10 @@
                                             leftDrawerViewController:[[LeftViewController alloc] init]];
     
     [drawerController setShouldStretchDrawer:NO];
-    [drawerController setMaximumLeftDrawerWidth:250];
+    [drawerController setMaximumLeftDrawerWidth:260];
     [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-    [drawerController setDrawerVisualStateBlock:[MMDrawerVisualState slideAndScaleVisualStateBlock]];
+    [drawerController setDrawerVisualStateBlock:[MMDrawerVisualState slideVisualStateBlock]];
     
     [self presentViewController:drawerController animated:YES completion:nil];
 }
