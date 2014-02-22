@@ -8,7 +8,7 @@
 
 #import "SettingViewController.h"
 
-@interface SettingViewController ()
+@interface SettingViewController () <UIActionSheetDelegate>
 
 @end
 
@@ -28,10 +28,10 @@
 {
     [super viewDidLoad];
     
-    UIButton *_theButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 300, 300, 40)];
+    UIButton *_theButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 195, 300, 40)];
     [_theButton setBackgroundImage:[[UIImage imageNamed:@"ExitButtonBackground"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:15] forState:UIControlStateNormal];
     [_theButton setTitle:@"退出登录" forState:UIControlStateNormal];
-    [_theButton addTarget:self action:@selector(quitLoginClick) forControlEvents:UIControlEventTouchUpInside];
+    [_theButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     [self.tableView addSubview:_theButton];
 }
 
@@ -44,7 +44,7 @@
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -54,8 +54,6 @@
             return 1;
         case 1:
             return 2;
-        case 2:
-            return 1;
             break;
         default:
             break;
@@ -81,9 +79,6 @@
             } else {
                 text = @"关于小果微博";
             }
-            break;
-        case 2:
-            text = @"退出当前账号";
             break;
         default:
             break;
@@ -113,4 +108,23 @@
     return 45.0;
 }
 
+#pragma mark -- logout
+- (void)logout
+{
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:@"确定退出登录本账号？"
+                                                        delegate:self
+                                               cancelButtonTitle:@"取消"
+                                          destructiveButtonTitle:@"退出登录"
+                                               otherButtonTitles:nil];
+    
+    [action showInView:self.navigationController.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //退出登录
+    if (buttonIndex == 0) {
+        //TODO logout
+    }
+}
 @end

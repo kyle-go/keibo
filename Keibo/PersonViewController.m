@@ -7,15 +7,19 @@
 //
 
 #import "PersonViewController.h"
+#import "PersonHeaderCell.h"
+#import "PersonBasicNumberCell.h"
+#import "PersonWeiboTypeCell.h"
 #import "UIUser.h"
 #import "UIWeibo.h"
 
 @interface PersonViewController ()
 
+@property (weak, nonatomic) IBOutlet UITableView *tView;
+
 @end
 
 @implementation PersonViewController {
-    UITableView *tableView;
     UIUser *user;
     NSMutableArray *weiboData;
     NSMutableArray *weiboHeight;
@@ -34,16 +38,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    CGRect frame = CGRectMake(0, 0, 320, 568-50);
-    UIView *tempView = [[UIView alloc] initWithFrame:frame];
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,568-50) style:UITableViewStylePlain];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [tempView addSubview:tableView];
-    [self.view addSubview:tempView];
-    
-    //
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,56 +49,43 @@
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    switch (section) {
-        case 0:
-            return 1;
-            break;
-        case 1:
-            return 1;
-        case 2:
-            return 1;
-        case 3:
-            return [weiboData count];
-        default:
-            break;
-    }
-    return 0;
+    return 3 + [weiboData count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView2 cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *userInfoIdentifier = @"userInfoIdentifier";
-    static NSString *userBasicNumberIdentifier = @"userBasicNumberIdentifier";
-    static NSString *weiboTypeSelectorIdentifier = @"weiboTypeSelectorIdentifier";
+    static NSString *personHeaderIdentifier = @"personHeaderIdentifier";
+    static NSString *personBasicNumberIdentifier = @"personBasicNumberIdentifier";
+    static NSString *personWeiboTypeIdentifier = @"PersonWeiboTypeIdentifier";
     static NSString *weiboSimpleIdentifier = @"weiboSimpleIndentifier";
     
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        [tableView registerNib:[UINib nibWithNibName:@"UserInfoCell" bundle:nil] forCellReuseIdentifier:userInfoIdentifier];
-        [tableView registerNib:[UINib nibWithNibName:@"UserBasicNumberCell" bundle:nil] forCellReuseIdentifier:userBasicNumberIdentifier];
-        [tableView registerNib:[UINib nibWithNibName:@"WeiboTypeSelectorCell" bundle:nil] forCellReuseIdentifier:weiboTypeSelectorIdentifier];
+        [tableView registerNib:[UINib nibWithNibName:@"PersonHeaderCell" bundle:nil] forCellReuseIdentifier:personHeaderIdentifier];
+        [tableView registerNib:[UINib nibWithNibName:@"PersonBasicNumberCell" bundle:nil] forCellReuseIdentifier:personBasicNumberIdentifier];
+        [tableView registerNib:[UINib nibWithNibName:@"PersonWeiboTypeCell" bundle:nil] forCellReuseIdentifier:personWeiboTypeIdentifier];
         [tableView registerNib:[UINib nibWithNibName:@"WeiboSimpleCell" bundle:nil] forCellReuseIdentifier:weiboSimpleIdentifier];
     });
     
-    switch (indexPath.section) {
+    switch (indexPath.row) {
         case 0: {
-            id cell = [tableView dequeueReusableCellWithIdentifier:userInfoIdentifier];
+            PersonHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:personHeaderIdentifier];
             return cell;
         }
             break;
         case 1: {
-            id cell = [tableView dequeueReusableCellWithIdentifier:userBasicNumberIdentifier];
+            PersonBasicNumberCell *cell = [tableView dequeueReusableCellWithIdentifier:personBasicNumberIdentifier];
             return cell;
             
         }
             break;
         case 2: {
-            id cell = [tableView dequeueReusableCellWithIdentifier:weiboTypeSelectorIdentifier];
+            PersonWeiboTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:personWeiboTypeIdentifier];
             return cell;
         }
             break;
@@ -137,6 +118,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    switch (indexPath.row) {
+        case 0:
+            return 80.0;
+            break;
+        case 1:
+            return 40.0;
+            break;
+        default:
+            break;
+    }
     return 80.0;
 }
 
