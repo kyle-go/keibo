@@ -11,7 +11,6 @@
 #import "WeiboNetWork.h"
 #import "DataAdapter.h"
 #import "KxMenu.h"
-#import "pinyin.h"
 #import "UIUser.h"
 
 @interface SelectAtViewController ()
@@ -180,7 +179,7 @@
         NSString *key;
         unichar ch = [u.name characterAtIndex:0];
         if (0x4e00 <= ch && ch <= 0x9fa6) {
-            key = [NSString stringWithFormat:@"%c", pinyinFirstLetter(ch)];
+            key = [NSString stringWithFormat:@"%c", [self getFirstPinyinChar:u.name]];
         } else {
             key = [NSString stringWithFormat:@"%c", ch];
         }
@@ -227,6 +226,12 @@
 - (void)registerAvatarImageFresh
 {
     [[NSNotificationCenter defaultCenter] addObserver:self.followingTableView selector:@selector(reloadData) name:@"NotificationCenter_Media" object:nil];
+}
+
+- (char)getFirstPinyinChar:(NSString *)text {
+    NSInteger index = [[UILocalizedIndexedCollation currentCollation] sectionForObject:text collationStringSelector:@selector(self)];
+    NSString *englishLetter = [[[UILocalizedIndexedCollation currentCollation] sectionIndexTitles] objectAtIndex:index];
+    return [englishLetter characterAtIndex:0];
 }
 
 #pragma mark -- sth with table view

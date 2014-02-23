@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		270328B21850C83D00D90B7C /* delete-emoji.png in Resources */ = {isa = PBXBuildFile; fileRef = 270328B11850C83D00D90B7C /* delete-emoji.png */; };
-		2705EC8A18541D6E00F76A60 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 2705EC8818541D6E00F76A60 /* pinyin.c */; };
 		2705EC8D1854471A00F76A60 /* UITableViewFollowingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2705EC8C1854471A00F76A60 /* UITableViewFollowingCell.m */; };
 		2705EC8F1854472A00F76A60 /* UITableViewFollowingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2705EC8E1854472A00F76A60 /* UITableViewFollowingCell.xib */; };
 		270DBBD818B9148900135E07 /* KTextSliderButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DBBD518B9148900135E07 /* KTextSliderButtons.m */; };
@@ -134,8 +133,6 @@
 
 /* Begin PBXFileReference section */
 		270328B11850C83D00D90B7C /* delete-emoji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-emoji.png"; sourceTree = "<group>"; };
-		2705EC8818541D6E00F76A60 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
-		2705EC8918541D6E00F76A60 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		2705EC8B1854471A00F76A60 /* UITableViewFollowingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewFollowingCell.h; sourceTree = "<group>"; };
 		2705EC8C1854471A00F76A60 /* UITableViewFollowingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewFollowingCell.m; sourceTree = "<group>"; };
 		2705EC8E1854472A00F76A60 /* UITableViewFollowingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITableViewFollowingCell.xib; sourceTree = "<group>"; };
@@ -343,15 +340,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2705EC8718541D6E00F76A60 /* pinyin */ = {
-			isa = PBXGroup;
-			children = (
-				2705EC8818541D6E00F76A60 /* pinyin.c */,
-				2705EC8918541D6E00F76A60 /* pinyin.h */,
-			);
-			path = pinyin;
-			sourceTree = "<group>";
-		};
 		270DBBD318B9148900135E07 /* KTextSliderButtons */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,7 +555,6 @@
 			children = (
 				2799C11518B99DFE00251DC0 /* KCategorys */,
 				270DBBD318B9148900135E07 /* KTextSliderButtons */,
-				2705EC8718541D6E00F76A60 /* pinyin */,
 				273F4F3C18538A1600C8D6EA /* KxMenu */,
 				FB3A28AC185201A700AD37D0 /* KTextViewPlaceholder */,
 				FBE5E57A184EF8E6004CFDDA /* OLImageView */,
@@ -946,7 +933,6 @@
 				FB54789F181EA37800501B7A /* Storage.m in Sources */,
 				FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */,
 				FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */,
-				2705EC8A18541D6E00F76A60 /* pinyin.c in Sources */,
 				FB4FDE92181F948100FF9331 /* AFHTTPRequestOperationManager.m in Sources */,
 				27B662C118B8D8AD006B67A5 /* PersonHeaderCell.m in Sources */,
 				FB4FDE95181F948100FF9331 /* AFSecurityPolicy.m in Sources */,
