@@ -86,7 +86,7 @@
             break;
         case 2: {
             PersonWeiboTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:personWeiboTypeIdentifier];
-            [cell.textSlider setTextButtons:@"全部", @"原创微博", nil];
+            [cell.textSlider setDefaultIndex:0 type:KTextSliderTypeAdjusted withTexts:@"全部", @"原创微博", nil];
             return cell;
         }
             break;
@@ -127,7 +127,7 @@
             return 40.0;
             break;
         case 2:
-            return 40.0;
+            return 36.0;
             break;
         default:
             break;
