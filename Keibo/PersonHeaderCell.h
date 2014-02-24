@@ -11,6 +11,9 @@
 
 @interface PersonHeaderCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *detailInfo;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+
 - (void)setValuesWithUserInfo:(UIUser *)user;
 + (CGFloat)rightHeight:(UIUser *)user;
 

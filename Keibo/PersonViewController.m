@@ -30,6 +30,7 @@
     NSMutableArray *_weiboHeight;
     
     CGFloat _headerCellHeight;
+    UIActivityIndicatorView *_activeIndicator;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -114,17 +115,34 @@
         case 0: {
             PersonHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:personHeaderIdentifier];
             [cell setValuesWithUserInfo:_user];
+            if (![_user.uid isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]]) {
+                cell.detailInfo.hidden = YES;
+            } else {
+                [cell.detailInfo addTarget:self action:@selector(detailInfo) forControlEvents:UIControlEventTouchUpInside];
+            }
+            
+            cell.avatarImageView.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detailInfo)];
+            [cell.avatarImageView addGestureRecognizer:tapGestureRecognizer];
+            
             return cell;
         }
             break;
         case 1: {
             PersonBasicNumberCell *cell = [tableView dequeueReusableCellWithIdentifier:personBasicNumberIdentifier];
             [cell setWeibosNumber:_user.weiboCount followings:_user.followingCount fans:_user.fanCount];
+            if (![_user.uid isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]]) {
+                cell.moreInfo.hidden = YES;
+            } else {
+                [cell.moreInfo addTarget:self action:@selector(moreInfo) forControlEvents:UIControlEventTouchUpInside];
+            }
             return cell;
         }
             break;
         case 2: {
             PersonWeiboTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:personWeiboTypeIdentifier];
+            _activeIndicator = cell.activeIndicator;
+            _activeIndicator.hidden = YES;
             [cell.textSlider setDefaultIndex:0 type:KTextSliderTypeAdjusted withTexts:@"全部", @"原创微博", nil];
             return cell;
         }
@@ -198,6 +216,23 @@
     }
     
     return 40.0;
+}
+
+
+#pragma mark -  头部 “详细“ 按钮
+- (void)detailInfo
+{
+    UIActionSheet  *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"更换头像", @"编辑个人资料", @"登出", nil];
+    actionSheet.destructiveButtonIndex = 2;
+    [actionSheet showInView:self.navigationController.view];
+}
+
+
+#pragma mark - 微博，关注，粉丝按钮 栏目中  “更多“ 按钮
+- (void)moreInfo
+{
+    UIActionSheet  *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"我的收藏", @"分组设置", nil];
+    [actionSheet showInView:self.navigationController.view];
 }
 
 @end

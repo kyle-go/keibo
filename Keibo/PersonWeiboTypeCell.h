@@ -11,6 +11,7 @@
 
 @interface PersonWeiboTypeCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activeIndicator;
 @property (weak, nonatomic) IBOutlet KTextSliderButtons *textSlider;
 
 @end
