@@ -118,6 +118,7 @@
         [self addSubview:blog];
         cellHeight += blog.frame.size.height + 8;
     }
+    cellHeight += 4;
     
     //return cellHeight;
 }
@@ -164,6 +165,7 @@
         
         cellHeight += blog.frame.size.height + 8;
     }
+    cellHeight += 4;
     
     return cellHeight;
 }

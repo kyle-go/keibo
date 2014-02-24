@@ -161,8 +161,10 @@
 {
     NSDictionary *param = notify.userInfo;
     UIUser *user = [param objectForKey:@"User"];
-    self.title = user.name;
-    self.tabBarItem.title = @"首页";
+    if ([user.uid isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]]) {
+        self.title = user.name;
+        self.tabBarItem.title = @"首页";
+    }
 }
 
 -(void)getWeibos:(NSNotification *)notify
