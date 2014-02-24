@@ -8,7 +8,7 @@
 
 #import "KTextSliderButtons.h"
 
-#define btnWidthSpace 8.0
+#define btnWidthSpace 10.0
 #define btnNormalColor [UIColor lightGrayColor]
 #define btnSelectedColor [UIColor darkGrayColor]
 #define indicatorColor [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0]
@@ -91,7 +91,7 @@
         }
         
         CGFloat left = [self countArray:_btnWidths count:defaultIndex];
-        _indicator = [[UILabel alloc] initWithFrame:CGRectMake(left + btnWidthSpace*(defaultIndex + 1), _btnHeight+1, [[_btnWidths objectAtIndex:defaultIndex] floatValue], 2)];
+        _indicator = [[UILabel alloc] initWithFrame:CGRectMake(left + btnWidthSpace*(defaultIndex + 1), _btnHeight, [[_btnWidths objectAtIndex:defaultIndex] floatValue], 2)];
         _indicator.backgroundColor = indicatorColor;
         [self addSubview:_indicator];
     } else {

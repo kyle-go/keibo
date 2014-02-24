@@ -16,6 +16,7 @@
 #import "UIWeibo.h"
 #import "WeiboNetWork.h"
 #import "DataAdapter.h"
+#import "UIImageView+WebCache.h"
 
 @interface PersonViewController ()
 
@@ -110,6 +111,11 @@
     switch (indexPath.row) {
         case 0: {
             PersonHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:personHeaderIdentifier];
+            NSURL *url = [[NSURL alloc] initWithString:_user.avatarLarge];
+            UIImage *image = [UIImage imageNamed:_user.sex? @"avatar-1":@"avatar-0"];
+            [cell.avatarImageView setImageWithURL:url placeholderImage:image];
+            cell.avatarImageView.layer.masksToBounds = YES;
+            cell.avatarImageView.layer.cornerRadius = CGRectGetWidth(cell.avatarImageView.bounds)/2.0f;
             return cell;
         }
             break;

@@ -38,6 +38,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.avatarImageView.layer.masksToBounds = YES;
+    self.avatarImageView.layer.borderWidth = 2.0f;
+    self.avatarImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.avatarImageView.layer.cornerRadius = CGRectGetWidth(self.avatarImageView.bounds)/2.0f;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshLoginUser:) name:@"NotificationCenter_User" object:nil];
 }
 
