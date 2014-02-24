@@ -39,7 +39,7 @@
     if (self) {
         self.title = @"我";
         [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_me"]];
-        _headerCellHeight = 75.0;
+        _headerCellHeight = 78.0;
     }
     return self;
 }
@@ -48,15 +48,22 @@
 {
     [super viewDidLoad];
     
-    //如果本地数据库中有此用户信息没，先使用本地缓存
-    _user = [DataAdapter UserAdapter:_uid];
-    
     //注册观察者
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfomation:) name:@"NotificationCenter_User" object:nil];
     
-    //发起网络请求
+    //************本地缓存************
+    //1.获取个人基本信息
+    _user = [DataAdapter UserAdapter:_uid];
+    //2.获取个人最新3条微博
+    //TODO
+
+    
+    //************发起网络请求************
+    //1.个人基本信息
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
     [WeiboNetWork getUser:accessToken uid:_uid];
+    //2.个人最新3条微博
+    //TODO
 }
 
 - (void)didReceiveMemoryWarning
