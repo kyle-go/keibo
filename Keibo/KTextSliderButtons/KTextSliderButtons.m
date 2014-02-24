@@ -62,13 +62,12 @@
     if (type == KTextSliderTypeAdjusted) {
         CGFloat widthCount = btnWidthSpace;
         for (NSInteger i=0; i<btnCount; i++) {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(widthCount, 0, _btnWidth, _btnHeight)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(widthCount, 8, 1, 1)];
             label.text = [paramList objectAtIndex:i];
-            label.font = [UIFont systemFontOfSize:12.0];
+            label.font = [UIFont systemFontOfSize:13.0];
             label.textColor = btnNormalColor;
-            label.userInteractionEnabled = YES;
-            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(btnClick:)];
-            [label addGestureRecognizer:tapGestureRecognizer];
+            label.textAlignment = NSTextAlignmentCenter;
+            //label.backgroundColor = [UIColor greenColor];
             
             if (i == defaultIndex) {
                 label.textColor = btnSelectedColor;
@@ -76,14 +75,23 @@
             [_buttons addObject:label];
             
             [label sizeToFit];
+            
+            //细节微调
+            CGRect rect = label.frame;
+            rect.size.height += 20;
+            label.frame = rect;
             [_btnWidths addObject:[[NSNumber alloc] initWithFloat:label.frame.size.width]];
             widthCount += label.frame.size.width + btnWidthSpace;
+            
+            label.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(btnClick:)];
+            [label addGestureRecognizer:tapGestureRecognizer];
             
             [self addSubview:label];
         }
         
         CGFloat left = [self countArray:_btnWidths count:defaultIndex];
-        _indicator = [[UILabel alloc] initWithFrame:CGRectMake(left + btnWidthSpace*(defaultIndex + 1), _btnHeight, [[_btnWidths objectAtIndex:defaultIndex] floatValue], 2)];
+        _indicator = [[UILabel alloc] initWithFrame:CGRectMake(left + btnWidthSpace*(defaultIndex + 1), _btnHeight+1, [[_btnWidths objectAtIndex:defaultIndex] floatValue], 2)];
         _indicator.backgroundColor = indicatorColor;
         [self addSubview:_indicator];
     } else {

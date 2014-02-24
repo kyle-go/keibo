@@ -10,4 +10,6 @@
 
 @interface PersonViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+- (void)setUserId:(NSString *)uid;
+
 @end

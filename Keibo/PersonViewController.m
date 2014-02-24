@@ -14,6 +14,8 @@
 #import "AlbumCell.h"
 #import "UIUser.h"
 #import "UIWeibo.h"
+#import "WeiboNetWork.h"
+#import "DataAdapter.h"
 
 @interface PersonViewController ()
 
@@ -22,9 +24,10 @@
 @end
 
 @implementation PersonViewController {
-    UIUser *user;
-    NSMutableArray *weiboData;
-    NSMutableArray *weiboHeight;
+    NSString *_uid;
+    UIUser *_user;
+    NSMutableArray *_weiboData;
+    NSMutableArray *_weiboHeight;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,12 +43,38 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //如果本地数据库中有此用户信息没，先使用本地缓存
+    _user = [DataAdapter UserAdapter:_uid];
+    
+    //注册观察者
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfomation:) name:@"NotificationCenter_User" object:nil];
+    
+    //发起网络请求
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+    [WeiboNetWork getUser:accessToken uid:_uid];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setUserId:(NSString *)uid
+{
+    _uid = uid;
+}
+
+- (void)didGetUserInfomation:(NSNotification *)notify
+{
+    NSDictionary *params = notify.userInfo;
+    UIUser *user = [params objectForKey:@"User"];
+    if (![user.uid isEqualToString:_uid]) {
+        return;
+    }
+    _user = user;
+    [self.tView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -56,7 +85,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5 + [weiboData count];
+    return 5 + [_weiboData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,7 +116,6 @@
         case 1: {
             PersonBasicNumberCell *cell = [tableView dequeueReusableCellWithIdentifier:personBasicNumberIdentifier];
             return cell;
-            
         }
             break;
         case 2: {
@@ -101,12 +129,12 @@
     }
     
     //simple weibo
-    if (indexPath.row >= 3 && indexPath.row <= [weiboData count] + 2) {
+    if (indexPath.row >= 3 && indexPath.row <= [_weiboData count] + 2) {
         //
     }
     
     //查看所有xx条微博
-    if (indexPath.row == [weiboData count] + 3) {
+    if (indexPath.row == [_weiboData count] + 3) {
         CheckMoreWeibosCell *cell = [tableView dequeueReusableCellWithIdentifier:checkMoreWeiboIdentifier];
         cell.checkMore.layer.masksToBounds = YES;
         cell.checkMore.layer.cornerRadius = 4;
@@ -114,7 +142,7 @@
     }
     
     //微博相册
-    if (indexPath.row == [weiboData count] + 4) {
+    if (indexPath.row == [_weiboData count] + 4) {
         AlbumCell *cell = [tableView dequeueReusableCellWithIdentifier:albumIdentifier];
         return cell;
     }
@@ -146,21 +174,21 @@
             return 40.0;
             break;
         case 2:
-            return 30.0;
+            return 44.0;
             break;
         default:
             break;
     }
     //simple weibo
-    if (indexPath.row >= 3 && indexPath.row <= [weiboData count] + 2) {
+    if (indexPath.row >= 3 && indexPath.row <= [_weiboData count] + 2) {
         //
     }
     //查看所有xx条微博
-    if ((indexPath.row == [weiboData count] + 3)) {
+    if ((indexPath.row == [_weiboData count] + 3)) {
         return 46.0;
     }
     //微博相册
-    if (indexPath.row == [weiboData count] + 4) {
+    if (indexPath.row == [_weiboData count] + 4) {
         return 80.0;
     }
     

@@ -108,6 +108,7 @@
     MainPageViewController *mainViewController = [[MainPageViewController alloc] init];
     MessageViewController *messageViewController = [[MessageViewController alloc] init];
     PersonViewController *personViewController = [[PersonViewController alloc] init];
+    [personViewController setUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]];
     SettingViewController *settingViewController = [[SettingViewController alloc] init];
     
     UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainViewController];

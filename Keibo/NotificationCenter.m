@@ -79,9 +79,7 @@
     }
 
     UIUser *uiUser = [DataAdapter UserAdapter:user.uid];
-    if ([user.uid isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUid]]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_LoginUser" object:nil userInfo:@{@"User":uiUser}];
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_User" object:nil userInfo:@{@"User":uiUser}];
 }
 
 -(void)WeiboNetWork_OneWeibo:(NSNotification *)notify
