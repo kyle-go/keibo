@@ -127,7 +127,7 @@
             return 40.0;
             break;
         case 2:
-            return 36.0;
+            return 30.0;
             break;
         default:
             break;

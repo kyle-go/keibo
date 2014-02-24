@@ -7,7 +7,6 @@
 //
 
 #import "KTextSliderButtons.h"
-#import "UIButton+Block.h"
 
 #define btnWidthSpace 8.0
 #define btnNormalColor [UIColor lightGrayColor]
@@ -19,6 +18,8 @@
     UILabel *_indicator;
     NSMutableArray *_buttons;
     NSMutableArray *_btnWidths;
+    CGFloat _btnHeight;
+    CGFloat _btnWidth;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -52,8 +53,8 @@
     va_end(args);
     
     NSInteger btnCount = [paramList count];
-    CGFloat btnWidth = self.frame.size.width / btnCount;
-    CGFloat btnHeight = self.frame.size.height - 2;
+    _btnWidth = self.frame.size.width / btnCount;
+    _btnHeight = self.frame.size.height - 2;
     _buttons = [[NSMutableArray alloc] init];
     _btnWidths = [[NSMutableArray alloc] init];
     
@@ -61,74 +62,95 @@
     if (type == KTextSliderTypeAdjusted) {
         CGFloat widthCount = btnWidthSpace;
         for (NSInteger i=0; i<btnCount; i++) {
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-            btn.frame = CGRectMake(widthCount, 0, btnWidth, btnHeight);
-            [btn setTitle:[paramList objectAtIndex:i] forState:UIControlStateNormal];
-            btn.titleLabel.textColor = btnNormalColor;
-            btn.tintColor = btnNormalColor;
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(widthCount, 0, _btnWidth, _btnHeight)];
+            label.text = [paramList objectAtIndex:i];
+            label.font = [UIFont systemFontOfSize:12.0];
+            label.textColor = btnNormalColor;
+            label.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(btnClick:)];
+            [label addGestureRecognizer:tapGestureRecognizer];
+            
             if (i == defaultIndex) {
-                btn.tintColor = btnSelectedColor;
+                label.tintColor = btnSelectedColor;
             }
-            [_buttons addObject:btn];
+            [_buttons addObject:label];
             
-            [btn sizeToFit];
-            [_btnWidths addObject:[[NSNumber alloc] initWithFloat:btn.frame.size.width]];
-            widthCount += btn.frame.size.width + btnWidthSpace;
+            [label sizeToFit];
+            [_btnWidths addObject:[[NSNumber alloc] initWithFloat:label.frame.size.width]];
+            widthCount += label.frame.size.width + btnWidthSpace;
             
-            [btn handleControlEvent:UIControlEventTouchUpInside withBlock:^(void){
-                for (UIButton *button in _buttons) {
-                    button.titleLabel.textColor = btnNormalColor;
-                }
-                btn.highlighted = NO;
-                btn.titleLabel.textColor = btnSelectedColor;
-                btn.tintColor = btnSelectedColor;
-                [UIView animateWithDuration:0.3 animations:^(void){
-                    
-                    CGFloat left = [self countArray:_btnWidths count:i];
-                    _indicator.frame = CGRectMake(left + btnWidthSpace*(i + 1), btnHeight, [[_btnWidths objectAtIndex:i] floatValue], 2);
-                }];
-                
-                [self.delegate textSliderButtons:self clickedButtonAtIndex:i];
-            }];
-            [self addSubview:btn];
+            [self addSubview:label];
         }
         
         CGFloat left = [self countArray:_btnWidths count:defaultIndex];
-        _indicator = [[UILabel alloc] initWithFrame:CGRectMake(left + btnWidthSpace*(defaultIndex + 1), btnHeight, [[_btnWidths objectAtIndex:defaultIndex] floatValue], 2)];
+        _indicator = [[UILabel alloc] initWithFrame:CGRectMake(left + btnWidthSpace*(defaultIndex + 1), _btnHeight, [[_btnWidths objectAtIndex:defaultIndex] floatValue], 2)];
         _indicator.backgroundColor = indicatorColor;
         [self addSubview:_indicator];
     } else {
         for (NSInteger i=0; i<btnCount; i++) {
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-            btn.frame = CGRectMake(i*btnWidth, 0, btnWidth, btnHeight);
-            [btn setTitle:[paramList objectAtIndex:i] forState:UIControlStateNormal];
-            btn.titleLabel.textColor = btnNormalColor;
-            btn.tintColor = btnNormalColor;
-            if (i == defaultIndex) {
-                btn.tintColor = btnSelectedColor;
-            }
-            [_buttons addObject:btn];
             
-            [btn handleControlEvent:UIControlEventTouchUpInside withBlock:^(void){
-                for (UIButton *button in _buttons) {
-                    button.titleLabel.textColor = btnNormalColor;
-                }
-                btn.highlighted = NO;
-                btn.titleLabel.textColor = btnSelectedColor;
-                btn.tintColor = btnSelectedColor;
-                [UIView animateWithDuration:0.3 animations:^(void){
-                    _indicator.frame = CGRectMake(i*btnWidth, btnHeight, btnWidth, 2);
-                }];
-                
-                [self.delegate textSliderButtons:self clickedButtonAtIndex:i];
-            }];
-            [self addSubview:btn];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(i*_btnWidth, 0, _btnWidth, _btnHeight)];
+            label.text = [paramList objectAtIndex:i];
+            label.textColor = btnNormalColor;
+            label.userInteractionEnabled = YES;
+            label.textAlignment = NSTextAlignmentCenter;
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(btnClick2:)];
+            [label addGestureRecognizer:tapGestureRecognizer];
+            if (i == defaultIndex) {
+                label.textColor = btnSelectedColor;
+            }
+            [_buttons addObject:label];
+            
+            [self addSubview:label];
         }
         
-        _indicator = [[UILabel alloc] initWithFrame:CGRectMake(btnWidth*defaultIndex, btnHeight, btnWidth, 2)];
+        _indicator = [[UILabel alloc] initWithFrame:CGRectMake(_btnWidth*defaultIndex, _btnHeight, _btnWidth, 2)];
         _indicator.backgroundColor = indicatorColor;
         [self addSubview:_indicator];
     }
+}
+
+- (void)btnClick:(UITapGestureRecognizer *)gesture
+{
+    UILabel *label = (UILabel *)gesture.view;
+    NSUInteger i = 0;
+    NSUInteger index = 0;
+    for (UILabel *button in _buttons) {
+        button.textColor = btnNormalColor;
+        if (button == label) {
+            index = i;
+        }
+        i++;
+    }
+    label.textColor = btnSelectedColor;
+    [UIView animateWithDuration:0.3 animations:^(void){
+        
+        CGFloat left = [self countArray:_btnWidths count:index];
+        _indicator.frame = CGRectMake(left + btnWidthSpace*(index + 1), _btnHeight, [[_btnWidths objectAtIndex:index] floatValue], 2);
+    }];
+    
+    [self.delegate textSliderButtons:self clickedButtonAtIndex:index];
+}
+
+- (void)btnClick2:(UITapGestureRecognizer *)gesture
+{
+    UILabel *label = (UILabel *)gesture.view;
+    NSUInteger i = 0;
+    NSUInteger index = 0;
+    for (UILabel *button in _buttons) {
+        button.textColor = btnNormalColor;
+        if (button == label) {
+            index = i;
+        }
+        i++;
+    }
+
+    label.textColor = btnSelectedColor;
+    [UIView animateWithDuration:0.3 animations:^(void){
+        _indicator.frame = CGRectMake(index*_btnWidth, _btnHeight, _btnWidth, 2);
+    }];
+    
+    [self.delegate textSliderButtons:self clickedButtonAtIndex:index];
 }
 
 @end
