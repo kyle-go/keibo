@@ -69,6 +69,8 @@
 		FB255BFF18228D9B00A0008B /* LeftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB255BFD18228D9B00A0008B /* LeftViewController.xib */; };
 		FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3135741833869C00AFF3BC /* WeiboNetWork.m */; };
 		FB3A28AF185201A700AD37D0 /* KTextViewPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3A28AE185201A700AD37D0 /* KTextViewPlaceholder.m */; };
+		FB4B52BE18BB1499002C05FB /* CheckMoreWeibosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB4B52BD18BB1499002C05FB /* CheckMoreWeibosCell.xib */; };
+		FB4B52C118BB14B4002C05FB /* CheckMoreWeibosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4B52C018BB14B4002C05FB /* CheckMoreWeibosCell.m */; };
 		FB4C01231833CE8B00EC97B1 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C011A1833CE8B00EC97B1 /* FMDatabase.m */; };
 		FB4C01241833CE8B00EC97B1 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C011C1833CE8B00EC97B1 /* FMDatabaseAdditions.m */; };
 		FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4C011E1833CE8B00EC97B1 /* FMDatabasePool.m */; };
@@ -96,6 +98,8 @@
 		FB5D10C7182F7497006E1D01 /* KUnits.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D10C6182F7497006E1D01 /* KUnits.m */; };
 		FB5D10CF182FAD6F006E1D01 /* avatar-1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5D10CD182FAD6F006E1D01 /* avatar-1.png */; };
 		FB5D10D0182FAD6F006E1D01 /* avatar-0.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5D10CE182FAD6F006E1D01 /* avatar-0.png */; };
+		FB62F52F18BB1B6E006B02AE /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB62F52E18BB1B6E006B02AE /* AlbumCell.xib */; };
+		FB62F53218BB1B7F006B02AE /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB62F53118BB1B7F006B02AE /* AlbumCell.m */; };
 		FB63266A1841DE4800B48E25 /* EGORefreshTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6326631841DE4800B48E25 /* EGORefreshTableFooterView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FB63266B1841DE4800B48E25 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6326651841DE4800B48E25 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FB6CEAD5182CE62000C07414 /* WeiboTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6CEAD4182CE62000C07414 /* WeiboTableCell.m */; };
@@ -226,6 +230,9 @@
 		FB3135741833869C00AFF3BC /* WeiboNetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboNetWork.m; sourceTree = "<group>"; };
 		FB3A28AD185201A700AD37D0 /* KTextViewPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTextViewPlaceholder.h; sourceTree = "<group>"; };
 		FB3A28AE185201A700AD37D0 /* KTextViewPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTextViewPlaceholder.m; sourceTree = "<group>"; };
+		FB4B52BD18BB1499002C05FB /* CheckMoreWeibosCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckMoreWeibosCell.xib; sourceTree = "<group>"; };
+		FB4B52BF18BB14B4002C05FB /* CheckMoreWeibosCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckMoreWeibosCell.h; sourceTree = "<group>"; };
+		FB4B52C018BB14B4002C05FB /* CheckMoreWeibosCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckMoreWeibosCell.m; sourceTree = "<group>"; };
 		FB4C01191833CE8B00EC97B1 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		FB4C011A1833CE8B00EC97B1 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		FB4C011B1833CE8B00EC97B1 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -277,6 +284,9 @@
 		FB5D10C6182F7497006E1D01 /* KUnits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KUnits.m; sourceTree = "<group>"; };
 		FB5D10CD182FAD6F006E1D01 /* avatar-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar-1.png"; sourceTree = "<group>"; };
 		FB5D10CE182FAD6F006E1D01 /* avatar-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar-0.png"; sourceTree = "<group>"; };
+		FB62F52E18BB1B6E006B02AE /* AlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
+		FB62F53018BB1B7F006B02AE /* AlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCell.h; sourceTree = "<group>"; };
+		FB62F53118BB1B7F006B02AE /* AlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCell.m; sourceTree = "<group>"; };
 		FB6326621841DE4800B48E25 /* EGORefreshTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableFooterView.h; sourceTree = "<group>"; };
 		FB6326631841DE4800B48E25 /* EGORefreshTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableFooterView.m; sourceTree = "<group>"; };
 		FB6326641841DE4800B48E25 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -536,6 +546,12 @@
 				27B662C918B8ED1B006B67A5 /* PersonWeiboTypeCell.h */,
 				27B662CA18B8ED1B006B67A5 /* PersonWeiboTypeCell.m */,
 				27B662C718B8ED09006B67A5 /* PersonWeiboTypeCell.xib */,
+				FB4B52BF18BB14B4002C05FB /* CheckMoreWeibosCell.h */,
+				FB4B52C018BB14B4002C05FB /* CheckMoreWeibosCell.m */,
+				FB4B52BD18BB1499002C05FB /* CheckMoreWeibosCell.xib */,
+				FB62F53018BB1B7F006B02AE /* AlbumCell.h */,
+				FB62F53118BB1B7F006B02AE /* AlbumCell.m */,
+				FB62F52E18BB1B6E006B02AE /* AlbumCell.xib */,
 			);
 			name = Person;
 			sourceTree = "<group>";
@@ -854,6 +870,7 @@
 				FB6CEAF4182D2E9300C07414 /* tabbar_message@2x.png in Resources */,
 				2748FCDA17F8738000A3B9ED /* InfoPlist.strings in Resources */,
 				FB6CEAF8182D2EB300C07414 /* tabbar_me@2x.png in Resources */,
+				FB4B52BE18BB1499002C05FB /* CheckMoreWeibosCell.xib in Resources */,
 				276D7C241837ABC800C0B4BC /* bg_line.png in Resources */,
 				27B8BF2E1852F9A900EB3363 /* SelectAtViewController.xib in Resources */,
 				2714664018424F54000376F9 /* UserBasicNumberCell.xib in Resources */,
@@ -865,6 +882,7 @@
 				FB255BE618228C1B00A0008B /* PersonViewController.xib in Resources */,
 				FB255BD718228A6C00A0008B /* MainPageViewController.xib in Resources */,
 				273F4F4218538A3400C8D6EA /* reload.png in Resources */,
+				FB62F52F18BB1B6E006B02AE /* AlbumCell.xib in Resources */,
 				FB6CEAFC182D2EF000C07414 /* tabbar_setting@2x.png in Resources */,
 				2714664A18425195000376F9 /* WeiboTypeSelectorCell.xib in Resources */,
 				27B662C318B8E34F006B67A5 /* PersonBasicNumberCell.xib in Resources */,
@@ -915,6 +933,7 @@
 				FB255BFE18228D9B00A0008B /* LeftViewController.m in Sources */,
 				FB3A28AF185201A700AD37D0 /* KTextViewPlaceholder.m in Sources */,
 				FB75BF98181FF851006CA582 /* AFTextResponseSerializer.m in Sources */,
+				FB62F53218BB1B7F006B02AE /* AlbumCell.m in Sources */,
 				FB4C01251833CE8B00EC97B1 /* FMDatabasePool.m in Sources */,
 				27B8BF2D1852F9A900EB3363 /* SelectAtViewController.m in Sources */,
 				FB255BF818228D0E00A0008B /* MMDrawerVisualState.m in Sources */,
@@ -926,6 +945,7 @@
 				FBE5E584184EF8FF004CFDDA /* EmojiViewController.m in Sources */,
 				FB4C01381834A31800EC97B1 /* UIUser.m in Sources */,
 				FB3135751833869C00AFF3BC /* WeiboNetWork.m in Sources */,
+				FB4B52C118BB14B4002C05FB /* CheckMoreWeibosCell.m in Sources */,
 				2737020F1835308D00016FB1 /* DataAdapter.m in Sources */,
 				FBE5E580184EF8E6004CFDDA /* OLImageView.m in Sources */,
 				27AB3DB01837A3010011BB18 /* RoundImageView.m in Sources */,

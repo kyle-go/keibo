@@ -71,7 +71,7 @@
             [label addGestureRecognizer:tapGestureRecognizer];
             
             if (i == defaultIndex) {
-                label.tintColor = btnSelectedColor;
+                label.textColor = btnSelectedColor;
             }
             [_buttons addObject:label];
             

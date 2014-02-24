@@ -100,7 +100,7 @@
 {
     //帐号注销的情况
     if (drawerController) {
-        [self presentViewController:drawerController animated:YES completion:nil];
+        [self presentViewController:drawerController animated:NO completion:nil];
         return;
     }
     
@@ -135,7 +135,7 @@
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [drawerController setDrawerVisualStateBlock:[MMDrawerVisualState slideVisualStateBlock]];
     
-    [self presentViewController:drawerController animated:YES completion:nil];
+    [self presentViewController:drawerController animated:NO completion:nil];
 }
 
 @end

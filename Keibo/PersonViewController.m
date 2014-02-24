@@ -10,6 +10,8 @@
 #import "PersonHeaderCell.h"
 #import "PersonBasicNumberCell.h"
 #import "PersonWeiboTypeCell.h"
+#import "CheckMoreWeibosCell.h"
+#import "AlbumCell.h"
 #import "UIUser.h"
 #import "UIWeibo.h"
 
@@ -54,7 +56,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3 + [weiboData count];
+    return 5 + [weiboData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,6 +65,8 @@
     static NSString *personBasicNumberIdentifier = @"personBasicNumberIdentifier";
     static NSString *personWeiboTypeIdentifier = @"PersonWeiboTypeIdentifier";
     static NSString *weiboSimpleIdentifier = @"weiboSimpleIndentifier";
+    static NSString *checkMoreWeiboIdentifier = @"checkMoreWeibosIndentifier";
+    static NSString *albumIdentifier = @"albumIdentifier";
     
     static dispatch_once_t once;
     dispatch_once(&once, ^{
@@ -70,6 +74,8 @@
         [tableView registerNib:[UINib nibWithNibName:@"PersonBasicNumberCell" bundle:nil] forCellReuseIdentifier:personBasicNumberIdentifier];
         [tableView registerNib:[UINib nibWithNibName:@"PersonWeiboTypeCell" bundle:nil] forCellReuseIdentifier:personWeiboTypeIdentifier];
         [tableView registerNib:[UINib nibWithNibName:@"WeiboSimpleCell" bundle:nil] forCellReuseIdentifier:weiboSimpleIdentifier];
+        [tableView registerNib:[UINib nibWithNibName:@"CheckMoreWeibosCell" bundle:nil] forCellReuseIdentifier:checkMoreWeiboIdentifier];
+        [tableView registerNib:[UINib nibWithNibName:@"AlbumCell" bundle:nil] forCellReuseIdentifier:albumIdentifier];
     });
     
     switch (indexPath.row) {
@@ -90,15 +96,28 @@
             return cell;
         }
             break;
-        case 3: {
-            id cell = [tableView dequeueReusableCellWithIdentifier:weiboSimpleIdentifier];
-            return cell;
-        }
-            break;
         default:
             break;
     }
     
+    //simple weibo
+    if (indexPath.row >= 3 && indexPath.row <= [weiboData count] + 2) {
+        //
+    }
+    
+    //查看所有xx条微博
+    if (indexPath.row == [weiboData count] + 3) {
+        CheckMoreWeibosCell *cell = [tableView dequeueReusableCellWithIdentifier:checkMoreWeiboIdentifier];
+        cell.checkMore.layer.masksToBounds = YES;
+        cell.checkMore.layer.cornerRadius = 4;
+        return cell;
+    }
+    
+    //微博相册
+    if (indexPath.row == [weiboData count] + 4) {
+        AlbumCell *cell = [tableView dequeueReusableCellWithIdentifier:albumIdentifier];
+        return cell;
+    }
     return nil;
 }
 
@@ -132,7 +151,20 @@
         default:
             break;
     }
-    return 80.0;
+    //simple weibo
+    if (indexPath.row >= 3 && indexPath.row <= [weiboData count] + 2) {
+        //
+    }
+    //查看所有xx条微博
+    if ((indexPath.row == [weiboData count] + 3)) {
+        return 46.0;
+    }
+    //微博相册
+    if (indexPath.row == [weiboData count] + 4) {
+        return 80.0;
+    }
+    
+    return 40.0;
 }
 
 @end
