@@ -22,5 +22,7 @@
 @property (nonatomic, assign)NSInteger followingCount;
 @property (nonatomic, assign)NSInteger fanCount;
 @property (nonatomic, assign)NSInteger weiboCount;
+@property (nonatomic, strong)NSString  *verifiedReason;
+@property (nonatomic, strong)NSString  *blog;
 
 @end

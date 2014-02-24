@@ -9,9 +9,9 @@
 #import "KTextSliderButtons.h"
 
 #define btnWidthSpace 10.0
-#define btnNormalColor [UIColor lightGrayColor]
-#define btnSelectedColor [UIColor darkGrayColor]
-#define indicatorColor [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0]
+#define btnNormalColor [[UIColor alloc] initWithRed:75.0/255.0 green:137.0/255.0 blue:208.0/255.0 alpha:0.5]
+#define btnSelectedColor [[UIColor alloc] initWithRed:75.0/255.0 green:137.0/255.0 blue:208.0/255.0 alpha:1.0]
+#define indicatorColor [[UIColor alloc] initWithRed:75.0/255.0 green:137.0/255.0 blue:208.0/255.0 alpha:1.0]
 
 @implementation KTextSliderButtons
 {

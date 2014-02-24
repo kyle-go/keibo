@@ -38,6 +38,8 @@
     uiUser.followingCount = dtUser.followingCount;
     uiUser.fanCount = dtUser.fanCount;
     uiUser.weiboCount = dtUser.weiboCount;
+    uiUser.verifiedReason = dtUser.verifiedReason;
+    uiUser.blog = dtUser.blog;
     return uiUser;
 }
 

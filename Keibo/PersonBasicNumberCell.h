@@ -10,4 +10,8 @@
 
 @interface PersonBasicNumberCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *moreInfo;
+
+- (void)setWeibosNumber:(NSUInteger)weiboCount followings:(NSUInteger)followings fans:(NSUInteger)fans;
+
 @end

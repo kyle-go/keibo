@@ -16,7 +16,6 @@
 #import "UIWeibo.h"
 #import "WeiboNetWork.h"
 #import "DataAdapter.h"
-#import "UIImageView+WebCache.h"
 
 @interface PersonViewController ()
 
@@ -29,6 +28,8 @@
     UIUser *_user;
     NSMutableArray *_weiboData;
     NSMutableArray *_weiboHeight;
+    
+    CGFloat _headerCellHeight;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,6 +38,7 @@
     if (self) {
         self.title = @"我";
         [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_me"]];
+        _headerCellHeight = 75.0;
     }
     return self;
 }
@@ -111,16 +113,13 @@
     switch (indexPath.row) {
         case 0: {
             PersonHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:personHeaderIdentifier];
-            NSURL *url = [[NSURL alloc] initWithString:_user.avatarLarge];
-            UIImage *image = [UIImage imageNamed:_user.sex? @"avatar-1":@"avatar-0"];
-            [cell.avatarImageView setImageWithURL:url placeholderImage:image];
-            cell.avatarImageView.layer.masksToBounds = YES;
-            cell.avatarImageView.layer.cornerRadius = CGRectGetWidth(cell.avatarImageView.bounds)/2.0f;
+            [cell setValuesWithUserInfo:_user];
             return cell;
         }
             break;
         case 1: {
             PersonBasicNumberCell *cell = [tableView dequeueReusableCellWithIdentifier:personBasicNumberIdentifier];
+            [cell setWeibosNumber:_user.weiboCount followings:_user.followingCount fans:_user.fanCount];
             return cell;
         }
             break;
@@ -174,10 +173,10 @@
 {
     switch (indexPath.row) {
         case 0:
-            return 80.0;
+            return [PersonHeaderCell rightHeight:_user];
             break;
         case 1:
-            return 40.0;
+            return 44.0;
             break;
         case 2:
             return 44.0;

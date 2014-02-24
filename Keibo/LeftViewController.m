@@ -11,6 +11,7 @@
 #import "DataAdapter.h"
 #import "WeiboNetWork.h"
 #import "WeiboImageCreator.h"
+#import "UIImageView+WebCache.h"
 
 @interface LeftViewController ()
 
@@ -42,8 +43,13 @@
     self.avatarImageView.layer.borderWidth = 2.0f;
     self.avatarImageView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.avatarImageView.layer.cornerRadius = CGRectGetWidth(self.avatarImageView.bounds)/2.0f;
+
+    //获取登录者个人资料
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:kUid];
+    [WeiboNetWork getUser:accessToken uid:uid];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshLoginUser:) name:@"NotificationCenter_User" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfo:) name:@"NotificationCenter_User" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,24 +58,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)registerAvatarImageFresh
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshAvatar:) name:@"NotificationCenter_Media" object:nil];
-}
-
-- (void)freshAvatar:(NSNotification *)nofity
-{
-    NSDictionary *param = [nofity userInfo];
-    NSString *url = [param objectForKey:@"url"];
-    if ([url isEqualToString:avatarUrl]) {
-        
-        //刷新头像
-        NSString *path = [param objectForKey:@"file"];
-        self.avatarImageView.image = [UIImage imageWithContentsOfFile:path];
-    }
-}
-
-- (void)freshLoginUser:(NSNotification *)notify
+- (void)didGetUserInfo:(NSNotification *)notify
 {
     NSDictionary *params = notify.userInfo;
     UIUser *user = [params objectForKey:@"User"];
@@ -77,19 +66,8 @@
         return;
     }
     
-    //刷新界面
-    UIImage *avatarImage;
-    NSString *avatar = [DataAdapter getMediaByUrl:user.avatarLarge];
-    if ([avatar length] == 0) {
-        avatarUrl = user.avatarLarge;
-        avatarImage = [UIImage imageNamed:user.sex? @"avatar-1":@"avatar-0"];
-        [self registerAvatarImageFresh];
-        [WeiboNetWork getOneMedia:avatarUrl];
-    } else {
-        avatarImage = [UIImage imageWithContentsOfFile:avatar];
-    }
-                
-    self.avatarImageView.image = avatarImage;
+    NSURL *url = [[NSURL alloc] initWithString:user.avatarLarge];
+    [self.avatarImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:user.sex? @"avatar-1":@"avatar-0"]];
     self.sexImageView.image = [WeiboImageCreator weiboImage:user.sex?IMAGE_GIRL:IMAGE_BOY];
     self.nameLabel.text = user.name;
     [self.nameLabel sizeToFit];
