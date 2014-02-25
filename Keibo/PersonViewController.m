@@ -12,6 +12,7 @@
 #import "PersonWeiboTypeCell.h"
 #import "CheckMoreWeibosCell.h"
 #import "AlbumCell.h"
+#import "WeiboTableCell.h"
 #import "UIUser.h"
 #import "UIWeibo.h"
 #import "WeiboNetWork.h"
@@ -51,19 +52,19 @@
     //注册观察者
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfomation:) name:@"NotificationCenter_User" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTableView:) name:@"freshTableView" object:nil];
+    
     //************本地缓存************
     //1.获取个人基本信息
     _user = [DataAdapter UserAdapter:_uid];
     //2.获取个人最新3条微博
-    //TODO
-
+    _weiboData = [NSMutableArray arrayWithArray:[DataAdapter getWeibosByUid:_uid count:3 date:nil]];
     
     //************发起网络请求************
     //1.个人基本信息
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
     [WeiboNetWork getUser:accessToken uid:_uid];
     //2.个人最新3条微博
-    //TODO
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,6 +86,18 @@
         return;
     }
     _user = user;
+    [self.tView reloadData];
+}
+
+- (void) freshTableView:(NSNotification *)notify
+{
+    NSDictionary *param = notify.userInfo;
+    
+    id index = [param objectForKey:@"index"];
+    id height = [param objectForKey:@"height"];
+    
+    [_weiboHeight replaceObjectAtIndex:[index intValue] withObject:height];
+    
     [self.tView reloadData];
 }
 
@@ -113,7 +126,7 @@
         [tableView registerNib:[UINib nibWithNibName:@"PersonHeaderCell" bundle:nil] forCellReuseIdentifier:personHeaderIdentifier];
         [tableView registerNib:[UINib nibWithNibName:@"PersonBasicNumberCell" bundle:nil] forCellReuseIdentifier:personBasicNumberIdentifier];
         [tableView registerNib:[UINib nibWithNibName:@"PersonWeiboTypeCell" bundle:nil] forCellReuseIdentifier:personWeiboTypeIdentifier];
-        [tableView registerNib:[UINib nibWithNibName:@"WeiboSimpleCell" bundle:nil] forCellReuseIdentifier:weiboSimpleIdentifier];
+        [tableView registerNib:[UINib nibWithNibName:@"WeiboTableCell" bundle:nil] forCellReuseIdentifier:weiboSimpleIdentifier];
         [tableView registerNib:[UINib nibWithNibName:@"CheckMoreWeibosCell" bundle:nil] forCellReuseIdentifier:checkMoreWeiboIdentifier];
         [tableView registerNib:[UINib nibWithNibName:@"AlbumCell" bundle:nil] forCellReuseIdentifier:albumIdentifier];
     });
@@ -160,7 +173,11 @@
     
     //simple weibo
     if (indexPath.row >= 3 && indexPath.row <= [_weiboData count] + 2) {
-        //
+        WeiboTableCell *cell = [tableView dequeueReusableCellWithIdentifier:weiboSimpleIdentifier];
+        NSUInteger index = indexPath.row - 3;
+        UIWeibo *weibo = [_weiboData objectAtIndex:index];
+        [cell updateWithWeiboData:weibo index:index];
+        return cell;
     }
     
     //查看所有xx条微博
@@ -211,7 +228,8 @@
     }
     //simple weibo
     if (indexPath.row >= 3 && indexPath.row <= [_weiboData count] + 2) {
-        //
+        NSUInteger index = indexPath.row - 3;
+        return [[_weiboHeight objectAtIndex:index] floatValue];
     }
     //查看所有xx条微博
     if ((indexPath.row == [_weiboData count] + 3)) {
