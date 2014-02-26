@@ -34,13 +34,13 @@
 + (void)getWeibo:(NSString *)accessToken weiboId:(long long)weiboId;
 
 //批量获取某用户最新微博,默认kWeiboCount条
-+ (void)getWeibosByUid:(NSString *)accessToken uid:(NSString *)uid;
++ (void)getWeibosByAccessToken:(NSString *)accessToken uid:(NSString *)uid;
 
-//批量获取某用户最新微博,since
-+ (void)getWeibosByUid:(NSString *)accessToken uid:(NSString *)uid since:(NSString *)since;
+//批量获取某用户最新微博,比since更新的微博，默认kWeiboCount条
++ (void)getWeibosByAccessToken:(NSString *)accessToken uid:(NSString *)uid earlier:(NSString *)earlier;
 
-//批量获取某用户最新微博,max
-+ (void)getWeibosByUid:(NSString *)accessToken uid:(NSString *)uid max:(NSString *)max;
+//批量获取某用户最新微博,比max更旧的微博，默认kWeiboCount条
++ (void)getWeibosByAccessToken:(NSString *)accessToken uid:(NSString *)uid later:(NSString *)later;
 
 //批量获取最新微博，只有本地列表为空时才调用，【覆盖】当前用户weibo表，默认kWeiboCount条
 + (void)getLoginUserWeibos:(NSString *)accessToken;

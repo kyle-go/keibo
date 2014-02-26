@@ -132,6 +132,51 @@
     [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:params success:success failure:failure];
 }
 
++ (void)getWeibosByAccessToken:(NSString *)accessToken uid:(NSString *)uid earlier:(NSString *)earlier later:(NSString *)later notify:(NSString *)notify
+{
+    void (^success) (AFHTTPRequestOperation *operation, id responseObject) =
+    ^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSLog(@"JSON: %@", responseObject);
+        
+        NSError *error;
+        NSDictionary *json;
+        if ([responseObject isKindOfClass:[NSString class]]) {
+            NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+            json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        } else {
+            json = [responseObject objectForKey:@"statuses"];
+        }
+        
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSDictionary *each in json) {
+            DTWeibo *weibo = [WeiboNetWork getWeiboByJson:each];
+            if (weibo.isRepost) {
+                [WeiboNetWork getWeibo:accessToken weiboId:weibo.originalWeiboId];
+            }
+            [array addObject:weibo];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_UserWeibos" object:nil userInfo:@{@"type": notify, @"array":array}];
+    };
+    
+    void (^failure)(AFHTTPRequestOperation *operation, NSError *error) =
+    ^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"get Weibo Error: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeiboNetWork_UserWeibos" object:nil];
+    };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //[manager setResponseSerializer:[AFTextResponseSerializer serializer]];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:@{@"access_token":accessToken, @"trim_user":@"1", @"count":kWeiboCountString}];
+    if ([earlier length] > 0) {
+        [params setValue:earlier forKey:@"since_id"];
+    }
+    if ([later length] > 0) {
+        [params setValue:later forKey:@"max_id"];
+    }
+    [manager GET:@"https://api.weibo.com/2/statuses/user_timeline.json" parameters:params success:success failure:failure];
+}
+
 + (DTUser *)getDTUserByJson:(NSDictionary *)json
 {
     //解析数据
@@ -351,28 +396,29 @@
 }
 
 //批量获取某用户最新微博,默认kWeiboCount条
-+ (void)getWeibosByUid:(NSString *)accessToken uid:(NSString *)uid
++ (void)getWeibosByAccessToken:(NSString *)accessToken uid:(NSString *)uid
 {
-    
+    [WeiboNetWork getWeibosByAccessToken:accessToken uid:uid earlier:nil later:nil notify:@"latest"];
 }
 
-//批量获取某用户最新微博,since
-+ (void)getWeibosByUid:(NSString *)accessToken uid:(NSString *)uid since:(NSString *)since
+//批量获取某用户最新微博,,比since更新的微博，默认kWeiboCount条
++ (void)getWeibosByAccessToken:(NSString *)accessToken uid:(NSString *)uid earlier:(NSString *)earlier
 {
-    
+    [WeiboNetWork getWeibosByAccessToken:accessToken uid:uid earlier:earlier later:nil notify:@"earlier"];
 }
 
-//批量获取某用户最新微博,max
-+ (void)getWeibosByUid:(NSString *)accessToken uid:(NSString *)uid max:(NSString *)max
+//批量获取某用户最新微博,,比max更旧的微博，默认kWeiboCount条
++ (void)getWeibosByAccessToken:(NSString *)accessToken uid:(NSString *)uid later:(NSString *)later
 {
-    
+    [WeiboNetWork getWeibosByAccessToken:accessToken uid:uid earlier:nil later:later notify:@"later"];
 }
 
 //下载一个媒体(图片,音乐，视频）
 + (void)getOneMedia:(NSString *)url
 {
     if ([url length] == 0) {
-        abort();
+        //abort();
+        return;
     }
     
     NSString *uuid = [KUnits generateUuidString];

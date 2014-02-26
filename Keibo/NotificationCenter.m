@@ -38,6 +38,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_WbMedia:) name:@"WeiboNetWork_WbMedia" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_Media:) name:@"WeiboNetWork_Media" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_FollowingUsers:) name:@"WeiboNetWork_FollowingUsers" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WeiboNetWork_UserWeibos:) name:@"WeiboNetWork_UserWeibos" object:nil];
     }
     return self;
 }
@@ -126,6 +127,47 @@
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_LoginUserWeibos" object:nil userInfo:@{@"array": uiArray, @"type":type}];
+}
+
+- (void)WeiboNetWork_UserWeibos:(NSNotification *)notify
+{
+    NSDictionary *param = notify.userInfo;
+    if ([param count] == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_UserWeibos" object:nil];
+        return;
+    }
+    
+    NSString *type = [param objectForKey:@"type"];
+    NSArray *array = [param objectForKey:@"array"];
+    
+    if ([type isEqualToString:@"latest"]) {
+        //清空weibo表
+        [storageInstance deleteIndexWeibos];
+        //将数据写入数据库
+        [storageInstance addWeibos:array];
+    } else if ([type isEqualToString:@"earlier"]) {
+        //不清空表，直接添加数据库
+        //
+        [storageInstance addWeibos:array];
+    } else if ([type isEqualToString:@"later"]) {
+        //不添加数据库，只在内存中给UI使用
+        //这里需要去掉第一个，因为这个请求是闭区间
+        NSMutableArray *paramArray = [[NSMutableArray alloc] initWithArray:array];
+        if ([paramArray count] > 0) {
+            [paramArray removeObjectAtIndex:0];
+        }
+        array = paramArray;
+    } else {
+        //
+    }
+    
+    //转化格式给UI使用
+    NSMutableArray *uiArray = [[NSMutableArray alloc] init];
+    for (DTWeibo *weibo in array) {
+        [uiArray addObject:[DataAdapter WeiboAdapter:weibo]];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationCenter_UserWeibos" object:nil userInfo:@{@"array": uiArray, @"type":type}];
 }
 
 -(void)WeiboNetWork_WbMedia:(NSNotification *)notify

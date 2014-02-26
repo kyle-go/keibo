@@ -17,6 +17,7 @@
 //NotificationCenter_LoginUserWeibos    获取当前用户weibos通知
 //NotificationCenter_FollowingUsers     获取用户(s)
 //NotificationCenter_FanUsers           获取用户(s)
+//NotificationCenter_UserWeibos         获取某用户微博(s)\
 
 @interface NotificationCenter : NSObject
 

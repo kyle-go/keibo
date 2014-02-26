@@ -34,6 +34,17 @@
     UIActivityIndicatorView *_activeIndicator;
 }
 
+- (void)setWeiboData:(NSArray *)weibos
+{
+    [_weiboData setArray:weibos];
+    
+    NSUInteger count = [_weiboData count];
+    [_weiboHeight removeAllObjects];
+    for (NSUInteger i=0; i<count; i++) {
+        [_weiboHeight addObject:[[NSNumber alloc] initWithInt:150]];
+    }
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,6 +52,8 @@
         self.title = @"我";
         [self.tabBarItem setImage:[UIImage imageNamed:@"tabbar_me"]];
         _headerCellHeight = 78.0;
+        _weiboData  = [[NSMutableArray alloc] init];
+        _weiboHeight  = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -51,20 +64,20 @@
     
     //注册观察者
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfomation:) name:@"NotificationCenter_User" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserWeibos:) name:@"NotificationCenter_UserWeibos" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTableView:) name:@"freshTableView" object:nil];
     
     //************本地缓存************
     //1.获取个人基本信息
     _user = [DataAdapter UserAdapter:_uid];
-    //2.获取个人最新3条微博
-    _weiboData = [NSMutableArray arrayWithArray:[DataAdapter getWeibosByUid:_uid count:3 date:nil]];
     
     //************发起网络请求************
     //1.个人基本信息
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessToken];
     [WeiboNetWork getUser:accessToken uid:_uid];
     //2.个人最新3条微博
+    [WeiboNetWork getWeibosByAccessToken:accessToken uid:_uid];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,6 +113,32 @@
     
     [self.tView reloadData];
 }
+
+
+-(void)didGetUserWeibos:(NSNotification *)notify
+{
+    NSDictionary *param = notify.userInfo;
+    if ([param count] == 0) {
+        return;
+    }
+    
+    NSArray *array = [param objectForKey:@"array"];
+    NSString *type = [param objectForKey:@"type"];
+    
+    if ([type isEqualToString:@"latest"]) {
+        NSMutableArray *tmp = [[NSMutableArray alloc] init];
+        if (array.count > 3) {
+            [tmp addObject:[array objectAtIndex:0]];
+            [tmp addObject:[array objectAtIndex:1]];
+            [tmp addObject:[array objectAtIndex:2]];
+        } else {
+            tmp = [[NSMutableArray alloc] initWithArray: array];
+        }
+        [self setWeiboData:tmp];
+    }    
+    [self.tView reloadData];
+}
+
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
