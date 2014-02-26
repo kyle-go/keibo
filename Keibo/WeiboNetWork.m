@@ -350,6 +350,24 @@
     [WeiboNetWork getLoginUserWeibos:accessToken since:nil max:max_id notify:@"max"];
 }
 
+//批量获取某用户最新微博,默认kWeiboCount条
++ (void)getWeibosByUid:(NSString *)accessToken uid:(NSString *)uid
+{
+    
+}
+
+//批量获取某用户最新微博,since
++ (void)getWeibosByUid:(NSString *)accessToken uid:(NSString *)uid since:(NSString *)since
+{
+    
+}
+
+//批量获取某用户最新微博,max
++ (void)getWeibosByUid:(NSString *)accessToken uid:(NSString *)uid max:(NSString *)max
+{
+    
+}
+
 //下载一个媒体(图片,音乐，视频）
 + (void)getOneMedia:(NSString *)url
 {
